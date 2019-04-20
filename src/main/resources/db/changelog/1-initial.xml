@@ -14,9 +14,9 @@
             <column name="last_name" type="varchar(100)"/>
             <column name="birth_date" type="date"/>
             <column name="gender" type="varchar(10)"/>
-
-            <!--TODO add unique key (name, lastName)-->
         </createTable>
+
+        <addUniqueConstraint constraintName="unique_doctor" tableName="patient" columnNames="name, last_name"/>
     </changeSet>
 
     <changeSet id="add_doctor_table" author="neznaev">
@@ -30,7 +30,8 @@
             <column name="birth_date" type="date"/>
             <column name="specialty" type="varchar(50)"/>
             <column name="gender" type="varchar(10)"/>
-            <!--TODO add unique key (name, lastName)-->
         </createTable>
+
+        <addUniqueConstraint constraintName="unique_patient" tableName="doctor" columnNames="name, last_name"/>
     </changeSet>
 </databaseChangeLog>
