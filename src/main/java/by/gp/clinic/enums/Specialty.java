@@ -1,0 +1,15 @@
+package by.gp.clinic.enums;
+
+public enum Specialty {
+
+    PSYCHIATRIST,
+    CARDIOLOGIST,
+    DERMATOLOGIST,
+    ENDOCRINOLOGIST,
+    GASTROENTEROLOGIST,
+    OPHTHALMOLOGIST,
+    OTOLARYNGOLOGIST,
+    PULMONOLOGIST,
+    THERAPIST,
+    PATHOLOGYST
+}
