@@ -16,12 +16,22 @@ public class DoctorService {
     private final DoctorRepository repository;
 
     @Transactional
-    public void hireDoctor(final DoctorDto doctor) {
+    public Long hireDoctor(final DoctorDto doctor) {
         final DoctorDbo doctorDbo = converter.convertToDbo(doctor);
-        repository.save(doctorDbo);
+        return repository.save(doctorDbo).getId();
+    }
+
+    @Transactional
+    public void fireDoctor(final Long id) {
+        repository.deleteById(id);
     }
 
     public boolean isDoctorExists(final String name, final String lastName) {
         return repository.existsByNameAndLastName(name, lastName);
     }
+
+    public boolean isDoctorExists(final Long id) {
+        return repository.existsById(id);
+    }
+
 }
