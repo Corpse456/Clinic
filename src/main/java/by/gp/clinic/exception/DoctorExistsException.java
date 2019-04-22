@@ -1,8 +1,10 @@
 package by.gp.clinic.exception;
 
-public class DoctorExistsException extends Exception {
+import org.springframework.http.HttpStatus;
+
+public class DoctorExistsException extends HttpException {
 
     public DoctorExistsException(final String name, final String lastName) {
-        super("Doctor " + name + " " + lastName + " already exists");
+        super(HttpStatus.BAD_REQUEST, "Doctor " + name + " " + lastName + " already exists");
     }
 }

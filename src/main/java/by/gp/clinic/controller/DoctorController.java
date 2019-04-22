@@ -24,7 +24,5 @@ public class DoctorController {
     @ApiOperation(value = "Hire new doctor")
     public void getCompanyPreview(@RequestBody DoctorDto doctor) throws DoctorExistsException {
         doctorFacade.hireDoctor(doctor);
-
-        //TODO exception handling
     }
 }
