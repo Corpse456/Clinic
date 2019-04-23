@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,13 +25,26 @@ public class DoctorController {
 
     private final DoctorFacade doctorFacade;
 
-    @PostMapping(value = "/hire")
+    @PostMapping
     @ApiOperation(value = "Hire a new doctor")
     public String hireNewDoctor(@RequestBody DoctorDto doctor) throws DoctorExistsException {
         return new JSONObject().put("id", doctorFacade.hireDoctor(doctor)).toString();
     }
 
-    @DeleteMapping(value = "/fire/{id}")
+    @GetMapping(value = "/{id}")
+    @ApiOperation(value = "Get info about doctor")
+    public DoctorDto getDoctor(@PathVariable("id") Long id) throws DoctorNotExistsException {
+        return doctorFacade.getDoctor(id);
+    }
+
+    @GetMapping(value = "/search")
+    @ApiOperation(value = "Search doctors")
+    public String searchDoctor() {
+        //TODO add search request
+        return "Later";
+    }
+
+    @DeleteMapping(value = "/{id}")
     @ApiOperation(value = "Fire a bad doctor")
     public void fireDoctor(@PathVariable("id") Long id) throws DoctorNotExistsException {
         doctorFacade.fireDoctor(id);

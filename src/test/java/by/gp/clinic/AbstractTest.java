@@ -2,10 +2,13 @@ package by.gp.clinic;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -13,9 +16,9 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
 
 import static java.util.Objects.requireNonNull;
+import static org.junit.Assert.fail;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
@@ -23,12 +26,13 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest()
+@SpringBootTest(classes = ClinicApplication.class)
+@ActiveProfiles("test")
 public abstract class AbstractTest {
 
     @Autowired
     protected WebApplicationContext webApplicationContext;
-    protected MockMvc mockMvc;
+    private MockMvc mockMvc;
 
     @Before
     public void before() {
@@ -41,7 +45,8 @@ public abstract class AbstractTest {
                                        .content(requireNonNull(toJson(object)))
                                        .contentType(APPLICATION_JSON)).andReturn();
         } catch (final Exception e) {
-            throw new RuntimeException(e);
+            fail(e.getMessage());
+            return null;
         }
     }
 
@@ -49,7 +54,8 @@ public abstract class AbstractTest {
         try {
             return mockMvc.perform(post(url)).andReturn();
         } catch (final Exception e) {
-            throw new RuntimeException(e);
+            fail(e.getMessage());
+            return null;
         }
     }
 
@@ -59,7 +65,8 @@ public abstract class AbstractTest {
                                        .content(requireNonNull(toJson(object)))
                                        .contentType(APPLICATION_JSON)).andReturn();
         } catch (final Exception e) {
-            throw new RuntimeException(e);
+            fail(e.getMessage());
+            return null;
         }
     }
 
@@ -67,7 +74,8 @@ public abstract class AbstractTest {
         try {
             return mockMvc.perform(get(url)).andReturn();
         } catch (final Exception e) {
-            throw new RuntimeException(e);
+            fail(e.getMessage());
+            return null;
         }
     }
 
@@ -75,7 +83,8 @@ public abstract class AbstractTest {
         try {
             return result.getResponse().getContentAsString();
         } catch (final UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
+            fail(e.getMessage());
+            return null;
         }
     }
 
@@ -84,17 +93,34 @@ public abstract class AbstractTest {
         try {
             return objectMapper.writeValueAsString(object);
         } catch (final JsonProcessingException e) {
-            e.printStackTrace();
+            fail(e.getMessage());
             return null;
         }
     }
 
-    protected HashMap fromJson(final String object) {
-        final ObjectMapper objectMapper = new ObjectMapper();
+    protected <T> T getObjectFromResult(final MvcResult result, Class<T> clazz) {
         try {
-            return objectMapper.readValue(object.getBytes(), HashMap.class);
+            return new ObjectMapper().readValue(result.getResponse().getContentAsString(), clazz);
         } catch (final IOException e) {
-            e.printStackTrace();
+            fail(e.getMessage());
+            return null;
+        }
+    }
+
+    protected JSONObject getJsonFormString(final String object) {
+        try {
+            return new JSONObject(object);
+        } catch (final JSONException e) {
+            fail(e.getMessage());
+            return null;
+        }
+    }
+
+    protected Long getLongFromJson(final JSONObject object, final String key) {
+        try {
+            return object.getLong(key);
+        } catch (final JSONException e) {
+            fail(e.getMessage());
             return null;
         }
     }

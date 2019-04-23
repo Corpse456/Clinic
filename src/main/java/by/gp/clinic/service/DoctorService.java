@@ -16,13 +16,18 @@ public class DoctorService {
     private final DoctorRepository repository;
 
     @Transactional
-    public Long hireDoctor(final DoctorDto doctor) {
+    public Long createDoctor(final DoctorDto doctor) {
         final DoctorDbo doctorDbo = converter.convertToDbo(doctor);
         return repository.save(doctorDbo).getId();
     }
 
     @Transactional
-    public void fireDoctor(final Long id) {
+    public DoctorDto getDoctor(final Long id) {
+        return converter.convertToDto(repository.getOne(id));
+    }
+
+    @Transactional
+    public void deleteDoctor(final Long id) {
         repository.deleteById(id);
     }
 
@@ -33,5 +38,4 @@ public class DoctorService {
     public boolean isDoctorExists(final Long id) {
         return repository.existsById(id);
     }
-
 }
