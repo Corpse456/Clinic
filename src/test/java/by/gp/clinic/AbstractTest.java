@@ -20,6 +20,7 @@ import java.io.UnsupportedEncodingException;
 import static java.util.Objects.requireNonNull;
 import static org.junit.Assert.fail;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -73,6 +74,15 @@ public abstract class AbstractTest {
     protected MvcResult getQuery(final String url) {
         try {
             return mockMvc.perform(get(url)).andReturn();
+        } catch (final Exception e) {
+            fail(e.getMessage());
+            return null;
+        }
+    }
+
+    protected MvcResult deleteQuery(final String url) {
+        try {
+            return mockMvc.perform(delete(url)).andReturn();
         } catch (final Exception e) {
             fail(e.getMessage());
             return null;
