@@ -10,10 +10,12 @@ import java.time.format.DateTimeFormatter;
 
 public class ClinicDateTimeSerializer extends JsonSerializer<LocalDateTime> {
 
+    public static final String DATE_TIME_PATTERN = "yyyy.MM.dd'_'HH:mm:ss";
+
     @Override
     public void serialize(final LocalDateTime value, final JsonGenerator gen, final SerializerProvider serializers)
         throws IOException {
-        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'_'HH:mm:ss");
+        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_TIME_PATTERN);
         gen.writeString(formatter.format(value));
     }
 }

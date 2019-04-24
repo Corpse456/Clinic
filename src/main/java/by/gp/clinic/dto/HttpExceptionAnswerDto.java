@@ -1,4 +1,4 @@
-package by.gp.clinic.exception;
+package by.gp.clinic.dto;
 
 import by.gp.clinic.serializer.ClinicDateTimeSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;

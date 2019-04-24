@@ -8,11 +8,13 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import static by.gp.clinic.serializer.ClinicDateSerializer.DATE_PATTERN;
+
 public class ClinicDateDeserializer extends JsonDeserializer<LocalDate> {
 
     @Override
     public LocalDate deserialize(final JsonParser p, final DeserializationContext context)
         throws IOException {
-        return LocalDate.parse(p.getValueAsString(), DateTimeFormatter.ofPattern("yyyy.MM.dd"));
+        return LocalDate.parse(p.getValueAsString(), DateTimeFormatter.ofPattern(DATE_PATTERN));
     }
 }

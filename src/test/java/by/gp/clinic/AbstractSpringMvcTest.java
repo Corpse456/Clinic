@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -29,7 +30,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = ClinicApplication.class)
 @ActiveProfiles("test")
-public abstract class AbstractTest {
+public abstract class AbstractSpringMvcTest {
 
     @Autowired
     protected WebApplicationContext webApplicationContext;
@@ -129,6 +130,15 @@ public abstract class AbstractTest {
     protected Long getLongFromJson(final JSONObject object, final String key) {
         try {
             return object.getLong(key);
+        } catch (final JSONException e) {
+            fail(e.getMessage());
+            return null;
+        }
+    }
+
+    protected String getStringFromJson(final JSONObject object, final String key) {
+        try {
+            return object.getString(key);
         } catch (final JSONException e) {
             fail(e.getMessage());
             return null;

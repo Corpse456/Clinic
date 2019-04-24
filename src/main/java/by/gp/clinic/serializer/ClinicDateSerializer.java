@@ -11,13 +11,13 @@ import java.time.LocalDate;
 
 public class ClinicDateSerializer extends JsonSerializer<LocalDate> {
 
-    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
+    public static final String DATE_PATTERN = "yyyy.MM.dd";
 
     @Override
     public void serialize(final LocalDate value, final JsonGenerator gen, final SerializerProvider serializers)
         throws IOException {
         final Date date = Date.valueOf(value);
-        final String formattedDate = dateFormat.format(date);
+        final String formattedDate = new SimpleDateFormat(DATE_PATTERN).format(date);
         gen.writeString(formattedDate);
     }
 }

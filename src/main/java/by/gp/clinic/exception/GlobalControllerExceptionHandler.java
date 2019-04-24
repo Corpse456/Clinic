@@ -1,5 +1,6 @@
 package by.gp.clinic.exception;
 
+import by.gp.clinic.dto.HttpExceptionAnswerDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;

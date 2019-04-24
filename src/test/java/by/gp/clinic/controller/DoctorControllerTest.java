@@ -1,16 +1,20 @@
 package by.gp.clinic.controller;
 
-import by.gp.clinic.AbstractTest;
+import by.gp.clinic.AbstractSpringMvcTest;
 import by.gp.clinic.dto.DoctorDto;
 import org.json.JSONObject;
 import org.junit.Test;
 import org.springframework.test.web.servlet.MvcResult;
 
+import java.time.LocalDateTime;
+
 import static by.gp.clinic.mock.DoctorMock.getDoctorDtoMock;
+import static by.gp.clinic.serializer.ClinicDateTimeSerializer.DATE_TIME_PATTERN;
+import static java.time.format.DateTimeFormatter.ofPattern;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-public class DoctorControllerTest extends AbstractTest {
+public class DoctorControllerTest extends AbstractSpringMvcTest {
 
     private static final String DOCTOR_URL = "/doctor";
 
@@ -32,6 +36,19 @@ public class DoctorControllerTest extends AbstractTest {
     public void fireDoctorTest() {
         final Long id = hireDoctor(getDoctorDtoMock());
         deleteDoctor(id);
+    }
+
+    @Test
+    public void hireDoctorTwiceTest() {
+        final DoctorDto doctor = getDoctorDtoMock();
+        hireDoctor(doctor);
+
+        final MvcResult result = postQuery(DOCTOR_URL, doctor);
+        final JSONObject answer = getJsonFormString(getContent(result));
+
+        assertEquals(400, result.getResponse().getStatus());
+        assertNotNull(LocalDateTime.parse(getStringFromJson(answer, "time"), ofPattern(DATE_TIME_PATTERN)));
+        assertNotNull(getStringFromJson(answer, "message"));
     }
 
     private Long hireDoctor(final DoctorDto doctor) {
