@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/doctor")
@@ -39,9 +41,8 @@ public class DoctorController {
 
     @GetMapping(value = "/search")
     @ApiOperation(value = "Search doctors")
-    public String searchDoctor() {
-        //TODO add search request
-        return "Later";
+    public List<DoctorDto> searchDoctor() {
+        return doctorFacade.findAll();
     }
 
     @DeleteMapping(value = "/{id}")

@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @AllArgsConstructor
 public class AbstractService<Dbo extends AbstractDbo, Dto extends AbstractDto> {
 
@@ -27,6 +29,12 @@ public class AbstractService<Dbo extends AbstractDbo, Dto extends AbstractDto> {
     @Transactional
     public void delete(final Long id) {
         repository.deleteById(id);
+    }
+
+    @Transactional
+    public List<Dto> findAll() {
+        final List<Dbo> all = repository.findAll();
+        return converter.convertToDto(all);
     }
 
     public boolean isExists(final Long id) {

@@ -7,6 +7,8 @@ import by.gp.clinic.service.DoctorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class DoctorFacade {
@@ -34,5 +36,9 @@ public class DoctorFacade {
         if (!doctorService.isExists(id)) {
             throw new DoctorNotExistsException(id);
         }
+    }
+
+    public List<DoctorDto> findAll() {
+        return doctorService.findAll();
     }
 }
