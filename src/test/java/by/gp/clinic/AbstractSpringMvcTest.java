@@ -1,13 +1,13 @@
 package by.gp.clinic;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -17,6 +17,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.Assert.fail;
@@ -112,6 +113,16 @@ public abstract class AbstractSpringMvcTest {
     protected <T> T getObjectFromResult(final MvcResult result, Class<T> clazz) {
         try {
             return new ObjectMapper().readValue(result.getResponse().getContentAsString(), clazz);
+        } catch (final IOException e) {
+            fail(e.getMessage());
+            return null;
+        }
+    }
+
+    protected <T> List<T> getListOfObjectsFromResult(final MvcResult result,
+                                                     final TypeReference<List<T>> listTypeReference) {
+        try {
+            return new ObjectMapper().readValue(result.getResponse().getContentAsString(), listTypeReference);
         } catch (final IOException e) {
             fail(e.getMessage());
             return null;

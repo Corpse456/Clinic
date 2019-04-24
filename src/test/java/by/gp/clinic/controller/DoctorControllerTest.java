@@ -2,11 +2,13 @@ package by.gp.clinic.controller;
 
 import by.gp.clinic.AbstractSpringMvcTest;
 import by.gp.clinic.dto.DoctorDto;
+import com.fasterxml.jackson.core.type.TypeReference;
 import org.json.JSONObject;
 import org.junit.Test;
 import org.springframework.test.web.servlet.MvcResult;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static by.gp.clinic.mock.DoctorMock.getDoctorDtoMock;
 import static by.gp.clinic.serializer.ClinicDateTimeSerializer.DATE_TIME_PATTERN;
@@ -17,6 +19,7 @@ import static org.junit.Assert.assertNotNull;
 public class DoctorControllerTest extends AbstractSpringMvcTest {
 
     private static final String DOCTOR_URL = "/doctor";
+    private static final String SEARCH = "/search";
 
     @Test
     public void hireDoctorTest() {
@@ -36,6 +39,18 @@ public class DoctorControllerTest extends AbstractSpringMvcTest {
     public void fireDoctorTest() {
         final Long id = hireDoctor(getDoctorDtoMock());
         deleteDoctor(id);
+    }
+
+    @Test
+    public void findDoctorsTest() {
+        hireDoctor(getDoctorDtoMock());
+        hireDoctor(getDoctorDtoMock());
+        hireDoctor(getDoctorDtoMock());
+
+        final MvcResult result = getQuery(DOCTOR_URL + SEARCH);
+        final List<DoctorDto> list = getListOfObjectsFromResult(result, new TypeReference<List<DoctorDto>>() {
+        });
+        assertEquals(3, list.size());
     }
 
     @Test
