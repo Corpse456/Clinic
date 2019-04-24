@@ -32,14 +32,14 @@ public class DoctorFacadeTest {
 
     @Test(expected = DoctorNotExistsException.class)
     public void fireDoctor() throws DoctorNotExistsException {
-        doReturn(false).when(doctorService).isDoctorExists(anyLong());
+        doReturn(false).when(doctorService).isExists(anyLong());
 
         doctorFacade.fireDoctor(1L);
     }
 
     @Test(expected = DoctorNotExistsException.class)
     public void getDoctor() throws DoctorNotExistsException {
-        doReturn(false).when(doctorService).isDoctorExists(anyLong());
+        doReturn(false).when(doctorService).isExists(anyLong());
 
         doctorFacade.getDoctor(1L);
     }

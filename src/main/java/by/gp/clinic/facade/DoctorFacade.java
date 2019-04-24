@@ -17,21 +17,21 @@ public class DoctorFacade {
         if (doctorService.isDoctorExists(doctor.getName(), doctor.getLastName())) {
             throw new DoctorExistsException(doctor.getName(), doctor.getLastName());
         }
-        return doctorService.createDoctor(doctor);
+        return doctorService.post(doctor);
     }
 
     public void fireDoctor(final Long id) throws DoctorNotExistsException {
         checkDoctorExists(id);
-        doctorService.deleteDoctor(id);
+        doctorService.delete(id);
     }
 
     public DoctorDto getDoctor(final Long id) throws DoctorNotExistsException {
         checkDoctorExists(id);
-        return doctorService.getDoctor(id);
+        return doctorService.get(id);
     }
 
     private void checkDoctorExists(final Long id) throws DoctorNotExistsException {
-        if (!doctorService.isDoctorExists(id)) {
+        if (!doctorService.isExists(id)) {
             throw new DoctorNotExistsException(id);
         }
     }

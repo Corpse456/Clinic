@@ -10,7 +10,7 @@ import java.time.LocalDate;
 
 @Data
 @MappedSuperclass
-public class ManDbo extends AbstractEntityDbo {
+public class ManDbo extends AbstractDbo {
 
     private String name;
 

@@ -9,7 +9,7 @@ import javax.persistence.MappedSuperclass;
 
 @Data
 @MappedSuperclass
-public class AbstractEntityDbo {
+public class AbstractDbo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Data
-public class ManDto extends AbstractEntityDto {
+public class ManDto extends AbstractDto {
 
     @NotNull
     private String name;
