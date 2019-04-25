@@ -1,10 +1,12 @@
 package by.gp.clinic.controller;
 
-import by.gp.clinic.AbstractSpringMvcTest;
+import by.gp.clinic.dto.AbstractDto;
 import by.gp.clinic.dto.PatientDto;
+import by.gp.clinic.repository.PatientRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.json.JSONObject;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MvcResult;
 
 import java.time.LocalDateTime;
@@ -16,50 +18,38 @@ import static java.time.format.DateTimeFormatter.ofPattern;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-public class PatientControllerTest extends AbstractSpringMvcTest {
+public class PatientControllerTest extends AbstractControllerTest {
 
     private static final String PATIENT_URL = "/patient";
-    private static final String SEARCH = "/search";
+
+    @Autowired
+    private PatientRepository patientRepository;
 
     @Test
     public void createPatientTest() {
-        createPatient(getPatientDtoMock());
+        addEntityCheck();
     }
 
     @Test
     public void getPatientTest() {
-        final PatientDto patientMock = getPatientDtoMock();
-        final Long id = createPatient(patientMock);
-        final PatientDto savedPatient = getPatient(id);
-
-        assertEquals(patientMock, savedPatient);
+        getEntityTest(PatientDto.class);
     }
 
     @Test
     public void removePatientTest() {
-        final Long id = createPatient(getPatientDtoMock());
-        deletePatient(id);
+        removeEntityTest();
     }
 
     @Test
     public void findPatientsTest() {
-        MvcResult result = getQuery(PATIENT_URL + SEARCH);
-        final int beforeSize = getListOfObjectsFromResult(result, new TypeReference<List<PatientDto>>() {
-        }).size();
-        createPatient(getPatientDtoMock());
-        createPatient(getPatientDtoMock());
-        createPatient(getPatientDtoMock());
-
-        result = getQuery(PATIENT_URL + SEARCH);
-        final List<PatientDto> list = getListOfObjectsFromResult(result, new TypeReference<List<PatientDto>>() {
+        findEntitiesTest(new TypeReference<List<PatientDto>>() {
         });
-        assertEquals(beforeSize + 3, list.size());
     }
 
     @Test
     public void createPatientTwiceTest() {
         final PatientDto patient = getPatientDtoMock();
-        createPatient(patient);
+        addEntityCheck(patient);
 
         final MvcResult result = postQuery(PATIENT_URL, patient);
         final JSONObject answer = getJsonFormString(getContent(result));
@@ -69,29 +59,18 @@ public class PatientControllerTest extends AbstractSpringMvcTest {
         assertNotNull(getStringFromJson(answer, "message"));
     }
 
-    private Long createPatient(final PatientDto patient) {
-        final MvcResult result = postQuery(PATIENT_URL, patient);
-
-        final JSONObject answer = getJsonFormString(getContent(result));
-        final Long id = getLongFromJson(answer, "id");
-
-        assertNotNull(id);
-        assertEquals(200, result.getResponse().getStatus());
-        return id;
+    @Override
+    protected String getUrl() {
+        return PATIENT_URL;
     }
 
-    private PatientDto getPatient(final Long id) {
-        final MvcResult result = getQuery(PATIENT_URL + "/" + id);
-
-        final PatientDto patient = getObjectFromResult(result, PatientDto.class);
-        assertNotNull(patient);
-        assertEquals(200, result.getResponse().getStatus());
-        return patient;
+    @Override
+    protected PatientRepository getRepository() {
+        return patientRepository;
     }
 
-    private void deletePatient(final Long id) {
-        final MvcResult result = deleteQuery(PATIENT_URL + "/" + id);
-
-        assertEquals(200, result.getResponse().getStatus());
+    @Override
+    protected AbstractDto getDtoMock() {
+        return getPatientDtoMock();
     }
 }
