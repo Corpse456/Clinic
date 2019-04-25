@@ -43,14 +43,17 @@ public class DoctorControllerTest extends AbstractSpringMvcTest {
 
     @Test
     public void findDoctorsTest() {
+        MvcResult result = getQuery(DOCTOR_URL + SEARCH);
+        final int beforeSize = getListOfObjectsFromResult(result, new TypeReference<List<DoctorDto>>() {
+        }).size();
         hireDoctor(getDoctorDtoMock());
         hireDoctor(getDoctorDtoMock());
         hireDoctor(getDoctorDtoMock());
 
-        final MvcResult result = getQuery(DOCTOR_URL + SEARCH);
+        result = getQuery(DOCTOR_URL + SEARCH);
         final List<DoctorDto> list = getListOfObjectsFromResult(result, new TypeReference<List<DoctorDto>>() {
         });
-        assertEquals(3, list.size());
+        assertEquals(beforeSize + 3, list.size());
     }
 
     @Test

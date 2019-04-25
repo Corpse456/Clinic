@@ -41,7 +41,7 @@ public class DoctorController {
 
     @GetMapping(value = "/search")
     @ApiOperation(value = "Search doctors")
-    public List<DoctorDto> searchDoctor() {
+    public List<DoctorDto> searchDoctors() {
         return doctorFacade.findAll();
     }
 
