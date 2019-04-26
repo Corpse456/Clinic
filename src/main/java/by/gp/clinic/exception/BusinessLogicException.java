@@ -10,7 +10,7 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class HttpException extends Exception {
+public class BusinessLogicException extends Exception {
 
     private HttpStatus status;
     private String message;

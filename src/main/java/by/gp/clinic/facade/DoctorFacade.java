@@ -16,7 +16,7 @@ public class DoctorFacade {
     private final DoctorService doctorService;
 
     public Long hireDoctor(final DoctorDto doctor) throws DoctorExistsException {
-        if (doctorService.isDoctorExists(doctor.getName(), doctor.getLastName())) {
+        if (doctorService.isExistsByNameAndLastName(doctor.getName(), doctor.getLastName())) {
             throw new DoctorExistsException(doctor.getName(), doctor.getLastName());
         }
         return doctorService.post(doctor);

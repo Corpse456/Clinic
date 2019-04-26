@@ -9,15 +9,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class PatientService extends AbstractService<PatientDbo, PatientDto> {
 
-    private final PatientRepository repository;
-
     public PatientService(final PatientDboDtoConverter converter,
                           final PatientRepository repository) {
         super(converter, repository);
         this.repository = repository;
-    }
-
-    public boolean isPatientExists(final String name, final String lastName) {
-        return repository.existsByNameAndLastName(name, lastName);
     }
 }

@@ -15,8 +15,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class GlobalControllerExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(HttpException.class)
-    public ResponseEntity<HttpExceptionAnswerDto> handleMembershipConditionNotFound(final HttpException e) {
+    @ExceptionHandler(BusinessLogicException.class)
+    public ResponseEntity<HttpExceptionAnswerDto> handleMembershipConditionNotFound(final BusinessLogicException e) {
         return generateResponseWithStatus(e, e.getStatus());
     }
 

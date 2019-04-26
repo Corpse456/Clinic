@@ -16,7 +16,7 @@ public class PatientFacade {
     private final PatientService patientService;
 
     public Long createPatient(final PatientDto patient) throws PatientExistsException {
-        if (patientService.isPatientExists(patient.getName(), patient.getLastName())) {
+        if (patientService.isExistsByNameAndLastName(patient.getName(), patient.getLastName())) {
             throw new PatientExistsException(patient.getName(), patient.getLastName());
         }
         return patientService.post(patient);

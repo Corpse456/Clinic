@@ -25,7 +25,7 @@ public class PatientFacadeTest {
 
     @Test(expected = PatientExistsException.class)
     public void hireDoctor() throws PatientExistsException {
-        doReturn(true).when(patientService).isPatientExists(any(), any());
+        doReturn(true).when(patientService).isExistsByNameAndLastName(any(), any());
 
         patientFacade.createPatient(new PatientDto());
     }

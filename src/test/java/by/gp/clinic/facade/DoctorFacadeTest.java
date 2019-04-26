@@ -25,7 +25,7 @@ public class DoctorFacadeTest {
 
     @Test(expected = DoctorExistsException.class)
     public void hireDoctor() throws DoctorExistsException {
-        doReturn(true).when(doctorService).isDoctorExists(any(), any());
+        doReturn(true).when(doctorService).isExistsByNameAndLastName(any(), any());
 
         doctorFacade.hireDoctor(new DoctorDto());
     }
