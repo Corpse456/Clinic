@@ -1,5 +1,6 @@
 package by.gp.clinic.mock;
 
+import by.gp.clinic.dbo.PatientDbo;
 import by.gp.clinic.dto.PatientDto;
 import by.gp.clinic.enums.Gender;
 import net.bytebuddy.utility.RandomString;
@@ -15,6 +16,15 @@ public class PatientMock {
 
     public static PatientDto getPatientDtoMock() {
         final PatientDto patient = new PatientDto();
+        patient.setBirthDate(BIRTH_DATE);
+        patient.setGender(GENDER);
+        patient.setName(PATIENT_NAME + new RandomString(3).nextString());
+        patient.setLastName(PATIENT_LAST_NAME + new RandomString(3).nextString());
+        return patient;
+    }
+
+    public static PatientDbo getPatientDboMock() {
+        final PatientDbo patient = new PatientDbo();
         patient.setBirthDate(BIRTH_DATE);
         patient.setGender(GENDER);
         patient.setName(PATIENT_NAME + new RandomString(3).nextString());

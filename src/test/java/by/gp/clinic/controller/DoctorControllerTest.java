@@ -17,22 +17,22 @@ public class DoctorControllerTest extends AbstractControllerTest {
     private DoctorRepository doctorRepository;
 
     @Test
-    public void createPatientTest() {
+    public void createDoctorTest() {
         addEntityCheck();
     }
 
     @Test
-    public void getPatientTest() {
+    public void getDoctorTest() {
         getEntityTest(DoctorDto.class);
     }
 
     @Test
-    public void removePatientTest() {
+    public void removeDoctorTest() {
         removeEntityTest();
     }
 
     @Test
-    public void findPatientsTest() {
+    public void findDoctorsTest() {
         findEntitiesTest(new TypeReference<List<DoctorDto>>() {
         });
     }

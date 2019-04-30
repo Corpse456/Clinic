@@ -24,21 +24,21 @@ public class PatientFacadeTest {
     private PatientService patientService;
 
     @Test(expected = PatientExistsException.class)
-    public void hireDoctor() throws PatientExistsException {
+    public void hirePatient() throws PatientExistsException {
         doReturn(true).when(patientService).isExistsByNameAndLastName(any(), any());
 
         patientFacade.createPatient(new PatientDto());
     }
 
     @Test(expected = PatientNotExistsException.class)
-    public void fireDoctor() throws PatientNotExistsException {
+    public void firePatient() throws PatientNotExistsException {
         doReturn(false).when(patientService).isExists(anyLong());
 
         patientFacade.removePatient(1L);
     }
 
     @Test(expected = PatientNotExistsException.class)
-    public void getDoctor() throws PatientNotExistsException {
+    public void getPatient() throws PatientNotExistsException {
         doReturn(false).when(patientService).isExists(anyLong());
 
         patientFacade.getPatient(1L);
