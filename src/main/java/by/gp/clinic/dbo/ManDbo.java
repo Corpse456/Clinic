@@ -2,6 +2,7 @@ package by.gp.clinic.dbo;
 
 import by.gp.clinic.enums.Gender;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -10,6 +11,7 @@ import java.time.LocalDate;
 
 @Data
 @MappedSuperclass
+@EqualsAndHashCode(callSuper = true)
 public class ManDbo extends AbstractDbo {
 
     private String name;

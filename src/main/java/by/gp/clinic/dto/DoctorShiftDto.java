@@ -7,7 +7,7 @@ import lombok.ToString;
 import java.time.LocalDate;
 
 @Data
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = false)
 @ToString(callSuper = true)
 public class DoctorShiftDto extends AbstractDto {
 

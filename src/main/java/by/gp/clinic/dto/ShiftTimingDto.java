@@ -7,7 +7,7 @@ import lombok.ToString;
 import java.time.LocalTime;
 
 @Data
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = false)
 @ToString(callSuper = true)
 public class ShiftTimingDto extends AbstractDto {
 
