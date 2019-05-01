@@ -1,6 +1,8 @@
 package by.gp.clinic.facade;
 
 import by.gp.clinic.dto.PatientDto;
+import by.gp.clinic.exception.EntityExistsException;
+import by.gp.clinic.exception.EntityNotExistsException;
 import by.gp.clinic.exception.PatientExistsException;
 import by.gp.clinic.exception.PatientNotExistsException;
 import by.gp.clinic.service.PatientService;

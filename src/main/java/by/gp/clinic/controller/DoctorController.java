@@ -1,8 +1,8 @@
 package by.gp.clinic.controller;
 
 import by.gp.clinic.dto.DoctorDto;
-import by.gp.clinic.exception.DoctorExistsException;
-import by.gp.clinic.exception.DoctorNotExistsException;
+import by.gp.clinic.exception.EntityExistsException;
+import by.gp.clinic.exception.EntityNotExistsException;
 import by.gp.clinic.facade.DoctorFacade;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -29,13 +29,13 @@ public class DoctorController {
 
     @PostMapping
     @ApiOperation(value = "Hire a new doctor")
-    public String hireNewDoctor(@RequestBody DoctorDto doctor) throws DoctorExistsException {
+    public String hireNewDoctor(@RequestBody DoctorDto doctor) throws EntityExistsException {
         return new JSONObject().put("id", doctorFacade.hireDoctor(doctor)).toString();
     }
 
     @GetMapping(value = "/{id}")
     @ApiOperation(value = "Get info about doctor")
-    public DoctorDto getDoctor(@PathVariable("id") Long id) throws DoctorNotExistsException {
+    public DoctorDto getDoctor(@PathVariable("id") Long id) throws EntityNotExistsException {
         return doctorFacade.getDoctor(id);
     }
 
@@ -47,7 +47,7 @@ public class DoctorController {
 
     @DeleteMapping(value = "/{id}")
     @ApiOperation(value = "Fire a bad doctor")
-    public void fireDoctor(@PathVariable("id") Long id) throws DoctorNotExistsException {
+    public void fireDoctor(@PathVariable("id") Long id) throws EntityNotExistsException {
         doctorFacade.fireDoctor(id);
     }
 }

@@ -1,8 +1,8 @@
 package by.gp.clinic.controller;
 
 import by.gp.clinic.dto.PatientDto;
-import by.gp.clinic.exception.PatientExistsException;
-import by.gp.clinic.exception.PatientNotExistsException;
+import by.gp.clinic.exception.EntityExistsException;
+import by.gp.clinic.exception.EntityNotExistsException;
 import by.gp.clinic.facade.PatientFacade;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -29,13 +29,13 @@ public class PatientController {
 
     @PostMapping
     @ApiOperation(value = "Create a patient card")
-    public String createPatient(@RequestBody PatientDto patient) throws PatientExistsException {
+    public String createPatient(@RequestBody PatientDto patient) throws EntityExistsException {
         return new JSONObject().put("id", patientFacade.createPatient(patient)).toString();
     }
 
     @GetMapping(value = "/{id}")
     @ApiOperation(value = "Get info about patient")
-    public PatientDto getPatient(@PathVariable("id") Long id) throws PatientNotExistsException {
+    public PatientDto getPatient(@PathVariable("id") Long id) throws EntityNotExistsException {
         return patientFacade.getPatient(id);
     }
 
@@ -47,7 +47,7 @@ public class PatientController {
 
     @DeleteMapping(value = "/{id}")
     @ApiOperation(value = "Burn patient card")
-    public void removePatient(@PathVariable("id") Long id) throws PatientNotExistsException {
+    public void removePatient(@PathVariable("id") Long id) throws EntityNotExistsException {
         patientFacade.removePatient(id);
     }
 }
