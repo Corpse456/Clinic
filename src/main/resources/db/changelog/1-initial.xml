@@ -34,4 +34,39 @@
 
         <addUniqueConstraint constraintName="unique_patient" tableName="doctor" columnNames="name, last_name"/>
     </changeSet>
+
+    <changeSet id="shift_timing_table" author="neznaev">
+        <createTable tableName="shift_timing">
+            <column name="id" type="bigint(20)" autoIncrement="true">
+                <constraints primaryKeyName="shift_timing_pk"
+                             primaryKey="true"/>
+            </column>
+            <column name="start_time" type="time"/>
+            <column name="end_time" type="time"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="doctor_shift_table" author="neznaev">
+        <createTable tableName="doctor_shift">
+            <column name="id" type="bigint(20)" autoIncrement="true">
+                <constraints primaryKeyName="doctor_shift_pk"
+                             primaryKey="true"/>
+            </column>
+            <column name="doctor_id" type="bigint(20)">
+                <constraints
+                        referencedTableName="doctor"
+                        referencedColumnNames="id"
+                        foreignKeyName="doctor_shift_fk_doctor_id"
+                        deleteCascade="true"/>
+            </column>
+            <column name="shift_timing_id" type="bigint(20)">
+                <constraints
+                        referencedTableName="shift_timing"
+                        referencedColumnNames="id"
+                        foreignKeyName="doctor_shift_fk_shift_timing_id"
+                        deleteCascade="true"/>
+            </column>
+            <column name="date" type="date"/>
+        </createTable>
+    </changeSet>
 </databaseChangeLog>
