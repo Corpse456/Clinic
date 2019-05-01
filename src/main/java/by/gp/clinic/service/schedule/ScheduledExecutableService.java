@@ -1,4 +1,4 @@
-package by.gp.clinic.service;
+package by.gp.clinic.service.schedule;
 
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;

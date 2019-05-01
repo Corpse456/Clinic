@@ -4,4 +4,17 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
+    <changeSet id="insert_common_time_shift" author="neznaev">
+        <insert tableName="shift_timing">
+            <column name="id" value="1"/>
+            <column name="start_time" value="08:00:00"/>
+            <column name="end_time" value="13:00:00"/>
+        </insert>
+        <insert tableName="shift_timing">
+            <column name="id" value="2"/>
+            <column name="start_time" value="13:00:00"/>
+            <column name="end_time" value="18:00:00"/>
+        </insert>
+        <sql>ALTER TABLE shift_timing AUTO_INCREMENT = 100</sql>
+    </changeSet>
 </databaseChangeLog>

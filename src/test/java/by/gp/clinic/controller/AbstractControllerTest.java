@@ -3,9 +3,9 @@ package by.gp.clinic.controller;
 import by.gp.clinic.AbstractSpringMvcTest;
 import by.gp.clinic.dbo.AbstractDbo;
 import by.gp.clinic.dto.AbstractDto;
-import by.gp.clinic.repository.CustomRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.json.JSONObject;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.test.web.servlet.MvcResult;
 
 import java.util.List;
@@ -69,7 +69,7 @@ public abstract class AbstractControllerTest extends AbstractSpringMvcTest {
         assertEquals(beforeSize + 3, list.size());
     }
 
-    protected abstract CustomRepository<? extends AbstractDbo, Long> getRepository();
+    protected abstract JpaRepository<? extends AbstractDbo, Long> getRepository();
 
     protected abstract AbstractDto getDtoMock();
 

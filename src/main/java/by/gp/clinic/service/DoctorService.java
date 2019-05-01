@@ -9,9 +9,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class DoctorService extends AbstractService<DoctorDbo, DoctorDto> {
 
+    private DoctorRepository repository;
+
     public DoctorService(final DoctorDboDtoConverter converter,
                          final DoctorRepository repository) {
         super(converter, repository);
         this.repository = repository;
+    }
+
+    public boolean isExistsByNameAndLastName(final String name, final String lastName) {
+        return repository.existsByNameAndLastName(name, lastName);
     }
 }

@@ -1,8 +1,6 @@
 package by.gp.clinic.facade;
 
 import by.gp.clinic.dto.PatientDto;
-import by.gp.clinic.exception.EntityExistsException;
-import by.gp.clinic.exception.EntityNotExistsException;
 import by.gp.clinic.exception.PatientExistsException;
 import by.gp.clinic.exception.PatientNotExistsException;
 import by.gp.clinic.service.PatientService;
@@ -21,7 +19,7 @@ public class PatientFacade {
         if (patientService.isExistsByNameAndLastName(patient.getName(), patient.getLastName())) {
             throw new PatientExistsException(patient.getName(), patient.getLastName());
         }
-        return patientService.post(patient);
+        return patientService.post(patient).getId();
     }
 
     public void removePatient(final Long id) throws PatientNotExistsException {

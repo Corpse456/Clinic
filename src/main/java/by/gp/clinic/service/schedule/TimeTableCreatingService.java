@@ -1,4 +1,4 @@
-package by.gp.clinic.service;
+package by.gp.clinic.service.schedule;
 
 import by.gp.clinic.facade.DevelopmentFacade;
 import lombok.RequiredArgsConstructor;
