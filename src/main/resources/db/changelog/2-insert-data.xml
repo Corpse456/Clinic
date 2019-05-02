@@ -15,6 +15,9 @@
             <column name="start_time" value="13:00:00"/>
             <column name="end_time" value="18:00:00"/>
         </insert>
-        <sql>ALTER TABLE shift_timing AUTO_INCREMENT = 100</sql>
+    </changeSet>
+
+    <changeSet id="increase_id_in_timi_shifting" author="neznaev" context="prod">
+        <sql>alter table shift_timing auto_increment = 100</sql>
     </changeSet>
 </databaseChangeLog>
