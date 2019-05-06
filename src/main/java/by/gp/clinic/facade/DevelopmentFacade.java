@@ -3,7 +3,7 @@ package by.gp.clinic.facade;
 import by.gp.clinic.controller.DevelopmentController;
 import by.gp.clinic.dto.DoctorDto;
 import by.gp.clinic.enums.Gender;
-import by.gp.clinic.enums.Specialty;
+import by.gp.clinic.enums.Speciality;
 import by.gp.clinic.exception.DoctorExistsException;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -53,13 +52,13 @@ public class DevelopmentFacade {
 
 
     public void hireDoctors() {
-        for (final Specialty specialty : Specialty.values()) {
+        for (final Speciality speciality : Speciality.values()) {
             for (int i = 0; i < 10; i++) {
                 final DoctorDto doctor = new DoctorDto();
                 doctor.setGender(new Random().nextBoolean() ? Gender.FEMALE : MALE);
                 doctor.setName(doctor.getGender() == MALE ? getName(manNames) : getName(womanNames));
                 doctor.setLastName(getName(lastNames));
-                doctor.setSpecialty(specialty);
+                doctor.setSpeciality(speciality);
                 doctor.setBirthDate(LocalDate.now().minusYears((long) (Math.random() * 40) + 20));
 
                 try {

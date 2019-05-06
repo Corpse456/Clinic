@@ -20,7 +20,7 @@ public class DoctorDboDtoConverterTest extends AbstractSpringMvcTest {
         final DoctorDbo doctorDbo = converter.convertToDbo(doctorDto);
 
         assertEquals(doctorDto.getId(), doctorDbo.getId());
-        assertEquals(doctorDto.getSpecialty(), doctorDbo.getSpecialty());
+        assertEquals(doctorDto.getSpeciality(), doctorDbo.getSpeciality());
         assertEquals(doctorDto.getBirthDate(), doctorDbo.getBirthDate());
         assertEquals(doctorDto.getGender(), doctorDbo.getGender());
         assertEquals(doctorDto.getName(), doctorDbo.getName());
@@ -33,7 +33,7 @@ public class DoctorDboDtoConverterTest extends AbstractSpringMvcTest {
         final DoctorDto doctorDto = converter.convertToDto(doctorDbo);
 
         assertEquals(doctorDbo.getId(), doctorDto.getId());
-        assertEquals(doctorDbo.getSpecialty(), doctorDto.getSpecialty());
+        assertEquals(doctorDbo.getSpeciality(), doctorDto.getSpeciality());
         assertEquals(doctorDbo.getBirthDate(), doctorDto.getBirthDate());
         assertEquals(doctorDbo.getGender(), doctorDto.getGender());
         assertEquals(doctorDbo.getName(), doctorDto.getName());

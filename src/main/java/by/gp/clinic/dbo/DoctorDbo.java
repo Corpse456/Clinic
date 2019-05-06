@@ -1,6 +1,6 @@
 package by.gp.clinic.dbo;
 
-import by.gp.clinic.enums.Specialty;
+import by.gp.clinic.enums.Speciality;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -16,5 +16,5 @@ import javax.persistence.Table;
 public class DoctorDbo extends ManDbo {
 
     @Enumerated(EnumType.STRING)
-    private Specialty specialty;
+    private Speciality speciality;
 }

@@ -16,4 +16,9 @@ public class ShiftTimingDboDtoConverter extends AbstractDboDtoConverter<ShiftTim
     protected ShiftTimingDbo constructDbo() {
         return new ShiftTimingDbo();
     }
+
+    @Override
+    protected String[] getIgnoreProperties() {
+        return new String[]{"oppositeShift"};
+    }
 }

@@ -1,6 +1,6 @@
 package by.gp.clinic.enums;
 
-public enum Specialty {
+public enum Speciality {
 
     PSYCHIATRIST,
     CARDIOLOGIST,

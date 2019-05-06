@@ -9,12 +9,21 @@
             <column name="id" value="1"/>
             <column name="start_time" value="08:00:00"/>
             <column name="end_time" value="13:00:00"/>
+            <column name="shift_order" value="FIRST"/>
         </insert>
         <insert tableName="shift_timing">
             <column name="id" value="2"/>
             <column name="start_time" value="13:00:00"/>
             <column name="end_time" value="18:00:00"/>
+            <column name="shift_order" value="SECOND"/>
         </insert>
+    </changeSet>
+
+    <changeSet id="insert_opposite_shift" author="neznaev">
+        <update tableName="shift_timing">
+            <column name="opposite_shift_id" type="bigint(20)" value="2">where id = 1</column>
+            <column name="opposite_shift_id" type="bigint(20)" value="1">where id = 2</column>
+        </update>
     </changeSet>
 
     <changeSet id="increase_id_in_timi_shifting" author="neznaev" context="prod">

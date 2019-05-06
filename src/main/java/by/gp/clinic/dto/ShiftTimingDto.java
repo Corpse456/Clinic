@@ -1,5 +1,6 @@
 package by.gp.clinic.dto;
 
+import by.gp.clinic.enums.ShiftOrder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -14,4 +15,6 @@ public class ShiftTimingDto extends AbstractDto {
     private LocalTime startTime;
 
     private LocalTime endTime;
+
+    private ShiftOrder shiftOrder;
 }

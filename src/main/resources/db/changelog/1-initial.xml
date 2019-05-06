@@ -28,14 +28,14 @@
             <column name="name" type="varchar(100)"/>
             <column name="last_name" type="varchar(100)"/>
             <column name="birth_date" type="date"/>
-            <column name="specialty" type="varchar(50)"/>
+            <column name="speciality" type="varchar(50)"/>
             <column name="gender" type="varchar(10)"/>
         </createTable>
 
         <addUniqueConstraint constraintName="unique_patient" tableName="doctor" columnNames="name, last_name"/>
     </changeSet>
 
-    <changeSet id="shift_timing_table" author="neznaev">
+    <changeSet id="add_shift_timing_table" author="neznaev">
         <createTable tableName="shift_timing">
             <column name="id" type="bigint(20)" autoIncrement="true">
                 <constraints primaryKeyName="shift_timing_pk"
@@ -43,30 +43,57 @@
             </column>
             <column name="start_time" type="time"/>
             <column name="end_time" type="time"/>
+            <column name="opposite_shift_id" type="bigint(20)">
+                <constraints referencedTableName="shift_timing"
+                             referencedColumnNames="id"
+                             foreignKeyName="shift_timing_fk_shift_timing_id"
+                             deleteCascade="true"/>
+            </column>
         </createTable>
     </changeSet>
 
-    <changeSet id="doctor_shift_table" author="neznaev">
+    <changeSet id="add_doctor_shift_table" author="neznaev">
         <createTable tableName="doctor_shift">
             <column name="id" type="bigint(20)" autoIncrement="true">
                 <constraints primaryKeyName="doctor_shift_pk"
                              primaryKey="true"/>
             </column>
             <column name="doctor_id" type="bigint(20)">
-                <constraints
-                        referencedTableName="doctor"
-                        referencedColumnNames="id"
-                        foreignKeyName="doctor_shift_fk_doctor_id"
-                        deleteCascade="true"/>
+                <constraints referencedTableName="doctor"
+                             referencedColumnNames="id"
+                             foreignKeyName="doctor_shift_fk_doctor_id"
+                             deleteCascade="true"/>
             </column>
             <column name="shift_timing_id" type="bigint(20)">
-                <constraints
-                        referencedTableName="shift_timing"
-                        referencedColumnNames="id"
-                        foreignKeyName="doctor_shift_fk_shift_timing_id"
-                        deleteCascade="true"/>
+                <constraints referencedTableName="shift_timing"
+                             referencedColumnNames="id"
+                             foreignKeyName="doctor_shift_fk_shift_timing_id"
+                             deleteCascade="true"/>
             </column>
             <column name="date" type="date"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="add_special_doctor_shift_table" author="neznaev">
+        <createTable tableName="special_doctor_shift">
+            <column name="id" type="bigint(20)" autoIncrement="true">
+                <constraints primaryKeyName="special_doctor_shift_pk"
+                             primaryKey="true"/>
+            </column>
+            <column name="doctor_id" type="bigint(20)">
+                <constraints referencedTableName="doctor"
+                             referencedColumnNames="id"
+                             foreignKeyName="special_doctor_shift_fk_doctor_id"
+                             deleteCascade="true"/>
+            </column>
+            <column name="shift_timing_id" type="bigint(20)">
+                <constraints referencedTableName="shift_timing"
+                             referencedColumnNames="id"
+                             foreignKeyName="special_doctor_shift_fk_shift_timing_id"
+                             deleteCascade="true"/>
+            </column>
+            <column name="day" type="varchar(15)"/>
+            <column name="speciality" type="varchar(50)"/>
         </createTable>
     </changeSet>
 </databaseChangeLog>

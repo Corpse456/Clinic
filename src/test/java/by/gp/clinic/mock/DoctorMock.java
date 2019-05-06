@@ -3,7 +3,7 @@ package by.gp.clinic.mock;
 import by.gp.clinic.dbo.DoctorDbo;
 import by.gp.clinic.dto.DoctorDto;
 import by.gp.clinic.enums.Gender;
-import by.gp.clinic.enums.Specialty;
+import by.gp.clinic.enums.Speciality;
 import net.bytebuddy.utility.RandomString;
 
 import java.time.LocalDate;
@@ -14,11 +14,11 @@ public class DoctorMock {
     private static final String DOCTORS_NAME = "DoctorsName";
     private static final Gender GENDER = Gender.FEMALE;
     private static final LocalDate BIRTH_DATE = LocalDate.now().minusYears(18);
-    private static final Specialty SPECIALTY = Specialty.CARDIOLOGIST;
+    private static final Speciality SPECIALITY = Speciality.CARDIOLOGIST;
 
     public static DoctorDto getDoctorDtoMock() {
         final DoctorDto doctor = new DoctorDto();
-        doctor.setSpecialty(SPECIALTY);
+        doctor.setSpeciality(SPECIALITY);
         doctor.setBirthDate(BIRTH_DATE);
         doctor.setGender(GENDER);
         doctor.setName(DOCTORS_NAME + new RandomString(3).nextString());
@@ -28,7 +28,7 @@ public class DoctorMock {
 
     public static DoctorDbo getDoctorDboMock() {
         final DoctorDbo doctor = new DoctorDbo();
-        doctor.setSpecialty(SPECIALTY);
+        doctor.setSpeciality(SPECIALITY);
         doctor.setBirthDate(BIRTH_DATE);
         doctor.setGender(GENDER);
         doctor.setName(DOCTORS_NAME + new RandomString(3).nextString());
