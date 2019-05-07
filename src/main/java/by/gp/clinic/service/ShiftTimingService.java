@@ -4,6 +4,7 @@ import by.gp.clinic.converter.ShiftTimingDboDtoConverter;
 import by.gp.clinic.dbo.ShiftTimingDbo;
 import by.gp.clinic.dto.ShiftTimingDto;
 import by.gp.clinic.enums.ShiftOrder;
+import by.gp.clinic.exception.ShiftTimingNotExistsException;
 import by.gp.clinic.repository.ShiftTimingRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -32,38 +33,31 @@ public class ShiftTimingService extends AbstractService<ShiftTimingDbo, ShiftTim
         this.repository = repository;
     }
 
-    public ShiftTimingDbo getUsualFirstShiftTiming() {
-        return getShiftTimingDbo(firstShiftsStart, firstShiftsEnd, ShiftOrder.FIRST);
+    private ShiftTimingDbo getUsualFirstShiftTiming() throws ShiftTimingNotExistsException {
+        return getShiftTimingDbo(firstShiftsStart, firstShiftsEnd);
     }
 
-    public ShiftTimingDbo getUsualSecondShiftTiming() {
-        return getShiftTimingDbo(secondShiftsStart, secondShiftsEnd, ShiftOrder.SECOND);
+    private ShiftTimingDbo getUsualSecondShiftTiming() throws ShiftTimingNotExistsException {
+        return getShiftTimingDbo(secondShiftsStart, secondShiftsEnd);
     }
 
     @Transactional
     public ShiftTimingDbo getShiftTimingDbo(final LocalTime startTime,
-                                            final LocalTime endTime,
-                                            final ShiftOrder shiftOrder) {
-        return repository.findByStartTimeAndEndTime(startTime, endTime)
-            .orElseGet(() -> {
-                final ShiftTimingDbo shiftTimingDbo = new ShiftTimingDbo();
-                shiftTimingDbo.setStartTime(startTime);
-                shiftTimingDbo.setEndTime(endTime);
-                shiftTimingDbo.setShiftOrder(shiftOrder);
-                return save(shiftTimingDbo);
-            });
+                                            final LocalTime endTime) throws ShiftTimingNotExistsException {
+        return repository.getByStartTimeAndEndTime(startTime, endTime)
+            .orElseThrow(() -> new ShiftTimingNotExistsException(startTime, endTime));
     }
 
-    public ShiftTimingDbo getPreferredShift(final List<LocalTime> shiftsForDay) {
+    public ShiftTimingDbo getPreferredShift(final List<ShiftOrder> shiftsForDay) throws ShiftTimingNotExistsException {
         int firstShifts = 0, secondShifts = 0;
-        for (final LocalTime time : shiftsForDay) {
-            if (firstShiftsStart.equals(time)) {
+        for (final ShiftOrder shiftOrder : shiftsForDay) {
+            if (ShiftOrder.FIRST == shiftOrder) {
                 firstShifts++;
             }
-            if (secondShiftsStart.equals(time)) {
+            if (ShiftOrder.SECOND == shiftOrder) {
                 secondShifts++;
             }
         }
-        return firstShifts < secondShifts ? getUsualFirstShiftTiming() : getUsualSecondShiftTiming();
+        return firstShifts <= secondShifts ? getUsualFirstShiftTiming() : getUsualSecondShiftTiming();
     }
 }

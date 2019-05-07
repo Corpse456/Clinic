@@ -1,12 +1,15 @@
 package by.gp.clinic.service;
 
+import by.gp.clinic.dbo.DoctorDbo;
+import by.gp.clinic.dbo.ShiftTimingDbo;
 import by.gp.clinic.dbo.SpecialDoctorShiftDbo;
-import by.gp.clinic.enums.Speciality;
 import by.gp.clinic.repository.SpecialDoctorShiftRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.time.DayOfWeek;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -14,7 +17,9 @@ public class SpecialDoctorShiftService {
 
     private final SpecialDoctorShiftRepository repository;
 
-    public List<SpecialDoctorShiftDbo> findSpecialShifts(final Long id, final Speciality speciality) {
-        return repository.findAllByDoctorIdOrSpeciality(id, speciality);
+    public Map<DayOfWeek, ShiftTimingDbo> getSpecialShifts(final DoctorDbo doctor) {
+        return repository.findAllByDoctorIdOrSpeciality(doctor.getId(), doctor.getSpeciality())
+            .stream()
+            .collect(Collectors.toMap(SpecialDoctorShiftDbo::getDay, SpecialDoctorShiftDbo::getShiftTiming));
     }
 }

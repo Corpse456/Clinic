@@ -10,5 +10,5 @@ import java.util.Optional;
 @Transactional
 public interface ShiftTimingRepository extends JpaRepository<ShiftTimingDbo, Long> {
 
-    Optional<ShiftTimingDbo> findByStartTimeAndEndTime(final LocalTime startTime, final LocalTime endTime);
+    Optional<ShiftTimingDbo> getByStartTimeAndEndTime(final LocalTime startTime, final LocalTime endTime);
 }

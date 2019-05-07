@@ -3,6 +3,7 @@ package by.gp.clinic.controller;
 import by.gp.clinic.dto.DoctorDto;
 import by.gp.clinic.exception.EntityExistsException;
 import by.gp.clinic.exception.EntityNotExistsException;
+import by.gp.clinic.exception.ShiftTimingNotExistsException;
 import by.gp.clinic.facade.DoctorFacade;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -29,7 +30,8 @@ public class DoctorController {
 
     @PostMapping
     @ApiOperation(value = "Hire a new doctor")
-    public String hireNewDoctor(@RequestBody DoctorDto doctor) throws EntityExistsException {
+    public String hireNewDoctor(@RequestBody DoctorDto doctor)
+        throws EntityExistsException, ShiftTimingNotExistsException {
         return new JSONObject().put("id", doctorFacade.hireDoctor(doctor)).toString();
     }
 

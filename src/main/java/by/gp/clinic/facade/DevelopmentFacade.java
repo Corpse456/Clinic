@@ -5,6 +5,7 @@ import by.gp.clinic.dto.DoctorDto;
 import by.gp.clinic.enums.Gender;
 import by.gp.clinic.enums.Speciality;
 import by.gp.clinic.exception.DoctorExistsException;
+import by.gp.clinic.exception.ShiftTimingNotExistsException;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,8 +51,7 @@ public class DevelopmentFacade {
         return null;
     }
 
-
-    public void hireDoctors() {
+    public void hireDoctors() throws ShiftTimingNotExistsException {
         for (final Speciality speciality : Speciality.values()) {
             for (int i = 0; i < 10; i++) {
                 final DoctorDto doctor = new DoctorDto();

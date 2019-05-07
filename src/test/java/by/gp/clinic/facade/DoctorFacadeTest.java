@@ -3,6 +3,7 @@ package by.gp.clinic.facade;
 import by.gp.clinic.dto.DoctorDto;
 import by.gp.clinic.exception.DoctorExistsException;
 import by.gp.clinic.exception.DoctorNotExistsException;
+import by.gp.clinic.exception.ShiftTimingNotExistsException;
 import by.gp.clinic.service.DoctorService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +25,7 @@ public class DoctorFacadeTest {
     private DoctorService doctorService;
 
     @Test(expected = DoctorExistsException.class)
-    public void hireDoctor() throws DoctorExistsException {
+    public void hireDoctor() throws DoctorExistsException, ShiftTimingNotExistsException {
         doReturn(true).when(doctorService).isExistsByNameAndLastName(any(), any());
 
         doctorFacade.hireDoctor(new DoctorDto());

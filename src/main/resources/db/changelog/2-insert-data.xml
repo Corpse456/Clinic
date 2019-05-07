@@ -21,8 +21,12 @@
 
     <changeSet id="insert_opposite_shift" author="neznaev">
         <update tableName="shift_timing">
-            <column name="opposite_shift_id" type="bigint(20)" value="2">where id = 1</column>
-            <column name="opposite_shift_id" type="bigint(20)" value="1">where id = 2</column>
+            <column name="opposite_shift_id" type="bigint(20)" value="2"/>
+            <where>id = 1</where>
+        </update>
+        <update tableName="shift_timing">
+            <column name="opposite_shift_id" type="bigint(20)" value="1"/>
+            <where>id = 2</where>
         </update>
     </changeSet>
 

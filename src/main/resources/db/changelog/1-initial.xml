@@ -49,6 +49,7 @@
                              foreignKeyName="shift_timing_fk_shift_timing_id"
                              deleteCascade="true"/>
             </column>
+            <column name="shift_order" type="varchar(15)"/>
         </createTable>
     </changeSet>
 
@@ -95,5 +96,10 @@
             <column name="day" type="varchar(15)"/>
             <column name="speciality" type="varchar(50)"/>
         </createTable>
+
+        <addUniqueConstraint constraintName="unique_speciality" tableName="special_doctor_shift"
+                             columnNames="day, speciality"/>
+        <addUniqueConstraint constraintName="unique_doctor_id" tableName="special_doctor_shift"
+                             columnNames="day, doctor_id"/>
     </changeSet>
 </databaseChangeLog>
