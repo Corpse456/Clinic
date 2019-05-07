@@ -10,15 +10,12 @@ import by.gp.clinic.exception.ShiftTimingNotExistsException;
 import by.gp.clinic.service.DoctorService;
 import by.gp.clinic.service.DoctorShiftService;
 import by.gp.clinic.service.ShiftTimingService;
-import by.gp.clinic.service.SpecialDoctorShiftService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
 
 import static java.time.DayOfWeek.MONDAY;
 import static java.time.temporal.TemporalAdjusters.next;
@@ -30,7 +27,6 @@ public class DoctorFacade {
     private final DoctorService doctorService;
     private final DoctorShiftService doctorShiftService;
     private final ShiftTimingService shiftTimingService;
-    private final SpecialDoctorShiftService specialDoctorShiftService;
 
     @Transactional(rollbackOn = Exception.class)
     public Long hireDoctor(final DoctorDto doctor) throws DoctorExistsException, ShiftTimingNotExistsException {
@@ -63,11 +59,9 @@ public class DoctorFacade {
     }
 
     private void addNewDoctorToTimeTable(final DoctorDbo doctor) throws ShiftTimingNotExistsException {
-        final Map<DayOfWeek, ShiftTimingDbo> specialShifts = specialDoctorShiftService.getSpecialShifts(doctor);
         final LocalDate day = LocalDate.now();
-        doctorShiftService
-            .createTimeTableForNextWeek(doctor, day, specialShifts, getPreferredTiming(doctor, day.with(next(MONDAY))));
-        doctorShiftService.createTimeTableForWeekAfterNextWeek(doctor, specialShifts);
+        doctorShiftService.createTimeTableForNextWeek(doctor, day, getPreferredTiming(doctor, day.with(next(MONDAY))));
+        doctorShiftService.createTimeTableForWeekAfterNextWeek(doctor);
     }
 
     private ShiftTimingDbo getPreferredTiming(final DoctorDbo doctor, final LocalDate day)

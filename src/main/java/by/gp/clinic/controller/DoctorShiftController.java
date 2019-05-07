@@ -1,6 +1,6 @@
 package by.gp.clinic.controller;
 
-import by.gp.clinic.dto.DoctorShiftDto;
+import by.gp.clinic.dto.ShiftTimingDto;
 import by.gp.clinic.facade.DoctorShiftFacade;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import java.time.LocalDate;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -23,7 +24,7 @@ public class DoctorShiftController {
 
     @GetMapping(value = "/{id}")
     @ApiOperation(value = "Get doctor shifts")
-    public List<DoctorShiftDto> getDoctorShifts(@PathVariable("id") final Long id) {
+    public Map<LocalDate, ShiftTimingDto> getDoctorShifts(@PathVariable("id") final Long id) {
         return facade.getDoctorShift(id);
     }
 }

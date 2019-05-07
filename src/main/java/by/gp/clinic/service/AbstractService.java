@@ -42,6 +42,11 @@ public class AbstractService<Dbo extends AbstractDbo, Dto extends AbstractDto> {
         return converter.convertToDto(all);
     }
 
+    @Transactional
+    public List<Dbo> findAllDbo() {
+        return repository.findAll();
+    }
+
     public boolean isExists(final Long id) {
         return repository.existsById(id);
     }

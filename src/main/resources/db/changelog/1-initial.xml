@@ -102,4 +102,28 @@
         <addUniqueConstraint constraintName="unique_doctor_id" tableName="special_doctor_shift"
                              columnNames="day, doctor_id"/>
     </changeSet>
+
+
+    <changeSet id="add_ticket_table" author="neznaev">
+        <createTable tableName="ticket">
+            <column name="id" type="bigint(20)" autoIncrement="true">
+                <constraints primaryKeyName="ticket_pk"
+                             primaryKey="true"/>
+            </column>
+            <column name="doctor_id" type="bigint(20)">
+                <constraints referencedTableName="doctor"
+                             referencedColumnNames="id"
+                             foreignKeyName="ticket_fk_doctor_id"
+                             deleteCascade="true"/>
+            </column>
+            <column name="patient_id" type="bigint(20)">
+                <constraints referencedTableName="patient"
+                             referencedColumnNames="id"
+                             foreignKeyName="ticket_fk_patient_id"
+                             deleteCascade="true"/>
+            </column>
+            <column name="date_time" type="timestamp"/>
+            <column name="number" type="int"/>
+        </createTable>
+    </changeSet>
 </databaseChangeLog>

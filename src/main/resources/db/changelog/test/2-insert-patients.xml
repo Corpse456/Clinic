@@ -1,0 +1,709 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="insert-test-patients" author="neznaev" context="test">
+        <insert tableName="patient">
+            <column name="id" value="1"/>
+            <column name="birth_date" value="1995-05-06"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Theodore"/>
+            <column name="last_name" value="Aldridge"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="2"/>
+            <column name="birth_date" value="1983-05-07"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Candace"/>
+            <column name="last_name" value="Hawkins"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="3"/>
+            <column name="birth_date" value="1990-05-06"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Clement"/>
+            <column name="last_name" value="Mathews"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="4"/>
+            <column name="birth_date" value="1968-05-07"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Rufus"/>
+            <column name="last_name" value="Donovan"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="5"/>
+            <column name="birth_date" value="1991-05-07"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Henrietta"/>
+            <column name="last_name" value="Douglas"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="6"/>
+            <column name="birth_date" value="1974-05-07"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Myrtle"/>
+            <column name="last_name" value="Waller"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="7"/>
+            <column name="birth_date" value="1971-05-07"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Mitchell"/>
+            <column name="last_name" value="Gimson"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="8"/>
+            <column name="birth_date" value="1989-05-07"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Carlotta"/>
+            <column name="last_name" value="Hamphrey"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="9"/>
+            <column name="birth_date" value="1963-05-07"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Willard"/>
+            <column name="last_name" value="Walter"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="10"/>
+            <column name="birth_date" value="1987-05-07"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Trevor"/>
+            <column name="last_name" value="Quincy"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="11"/>
+            <column name="birth_date" value="1994-05-06"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Arabella"/>
+            <column name="last_name" value="Osborne"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="12"/>
+            <column name="birth_date" value="1994-05-06"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Xavier"/>
+            <column name="last_name" value="Vaughan"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="13"/>
+            <column name="birth_date" value="1986-05-07"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Stella"/>
+            <column name="last_name" value="Gilbert"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="14"/>
+            <column name="birth_date" value="1966-05-07"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Francine"/>
+            <column name="last_name" value="Berrington"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="15"/>
+            <column name="birth_date" value="1977-05-07"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Catherine"/>
+            <column name="last_name" value="Fraser"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="16"/>
+            <column name="birth_date" value="1983-05-07"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Christine"/>
+            <column name="last_name" value="MacAlister"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="17"/>
+            <column name="birth_date" value="1968-05-07"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Alvin"/>
+            <column name="last_name" value="Gimson"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="18"/>
+            <column name="birth_date" value="1962-05-07"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Imogen"/>
+            <column name="last_name" value="Clifford"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="19"/>
+            <column name="birth_date" value="1979-05-07"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Arlene"/>
+            <column name="last_name" value="Atcheson"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="20"/>
+            <column name="birth_date" value="1977-05-07"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Edmund"/>
+            <column name="last_name" value="Wainwright"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="21"/>
+            <column name="birth_date" value="1991-05-07"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Ophelia"/>
+            <column name="last_name" value="Dunce"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="22"/>
+            <column name="birth_date" value="1980-05-07"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Samuel"/>
+            <column name="last_name" value="Benson"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="23"/>
+            <column name="birth_date" value="1960-05-07"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Moira"/>
+            <column name="last_name" value="Page"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="24"/>
+            <column name="birth_date" value="1988-05-07"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Melinda"/>
+            <column name="last_name" value="Blare"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="25"/>
+            <column name="birth_date" value="1990-05-06"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Morgan"/>
+            <column name="last_name" value="Howard"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="26"/>
+            <column name="birth_date" value="1975-05-07"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Delia"/>
+            <column name="last_name" value="Simpson"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="27"/>
+            <column name="birth_date" value="1971-05-07"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Miriam"/>
+            <column name="last_name" value="Oakman"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="28"/>
+            <column name="birth_date" value="1994-05-06"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Wiley"/>
+            <column name="last_name" value="Dutton"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="29"/>
+            <column name="birth_date" value="1972-05-07"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Maynard"/>
+            <column name="last_name" value="Gilson"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="30"/>
+            <column name="birth_date" value="1976-05-07"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Clayton"/>
+            <column name="last_name" value="Richards"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="31"/>
+            <column name="birth_date" value="1979-05-07"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Matilda"/>
+            <column name="last_name" value="Nevill"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="32"/>
+            <column name="birth_date" value="1972-05-07"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Clive"/>
+            <column name="last_name" value="Larkins"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="33"/>
+            <column name="birth_date" value="1997-05-06"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Imogen"/>
+            <column name="last_name" value="Durham"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="34"/>
+            <column name="birth_date" value="1966-05-07"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Margaret"/>
+            <column name="last_name" value="Campbell"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="35"/>
+            <column name="birth_date" value="1996-05-06"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Dylan"/>
+            <column name="last_name" value="Saunder"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="36"/>
+            <column name="birth_date" value="1969-05-07"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Mitchell"/>
+            <column name="last_name" value="Shorter"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="37"/>
+            <column name="birth_date" value="1961-05-07"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Wilma"/>
+            <column name="last_name" value="Ellington"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="38"/>
+            <column name="birth_date" value="1968-05-07"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Candace"/>
+            <column name="last_name" value="Nash"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="39"/>
+            <column name="birth_date" value="1998-05-06"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Martha"/>
+            <column name="last_name" value="Roberts"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="40"/>
+            <column name="birth_date" value="1966-05-07"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Thomas"/>
+            <column name="last_name" value="Fane"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="41"/>
+            <column name="birth_date" value="1979-05-07"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Maureen"/>
+            <column name="last_name" value="Johnson"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="42"/>
+            <column name="birth_date" value="1979-05-07"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Logan"/>
+            <column name="last_name" value="Oliver"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="43"/>
+            <column name="birth_date" value="1976-05-07"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Amy"/>
+            <column name="last_name" value="Clifford"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="44"/>
+            <column name="birth_date" value="1995-05-06"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Ambrose"/>
+            <column name="last_name" value="Michaelson"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="45"/>
+            <column name="birth_date" value="1988-05-07"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Amelia"/>
+            <column name="last_name" value="Gibbs"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="46"/>
+            <column name="birth_date" value="1990-05-06"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Hannah"/>
+            <column name="last_name" value="Haig"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="47"/>
+            <column name="birth_date" value="1991-05-07"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Donna"/>
+            <column name="last_name" value="Kennedy"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="48"/>
+            <column name="birth_date" value="1967-05-07"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Ambrose"/>
+            <column name="last_name" value="Gardner"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="49"/>
+            <column name="birth_date" value="1971-05-07"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Kristina"/>
+            <column name="last_name" value="Aldridge"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="50"/>
+            <column name="birth_date" value="1975-05-07"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Isabel"/>
+            <column name="last_name" value="Parkinson"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="51"/>
+            <column name="birth_date" value="1978-05-07"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Laurence"/>
+            <column name="last_name" value="Creighton"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="52"/>
+            <column name="birth_date" value="1960-05-07"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Elisa"/>
+            <column name="last_name" value="Bradberry"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="53"/>
+            <column name="birth_date" value="1990-05-06"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Helen"/>
+            <column name="last_name" value="Osborne"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="54"/>
+            <column name="birth_date" value="1969-05-07"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Tracy"/>
+            <column name="last_name" value="Watson"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="55"/>
+            <column name="birth_date" value="1970-05-07"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Xavier"/>
+            <column name="last_name" value="Russel"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="56"/>
+            <column name="birth_date" value="1987-05-07"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Elwood"/>
+            <column name="last_name" value="Hoggarth"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="57"/>
+            <column name="birth_date" value="1975-05-07"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Frederica"/>
+            <column name="last_name" value="Dickinson"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="58"/>
+            <column name="birth_date" value="1997-05-06"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Paula"/>
+            <column name="last_name" value="Oldridge"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="59"/>
+            <column name="birth_date" value="1979-05-07"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Emma"/>
+            <column name="last_name" value="Pass"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="60"/>
+            <column name="birth_date" value="1977-05-07"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Lindsay"/>
+            <column name="last_name" value="Kennett"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="61"/>
+            <column name="birth_date" value="1998-05-06"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Zoe"/>
+            <column name="last_name" value="WifKinson"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="62"/>
+            <column name="birth_date" value="1986-05-07"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Hope"/>
+            <column name="last_name" value="Sherlock"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="63"/>
+            <column name="birth_date" value="1980-05-07"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Octavia"/>
+            <column name="last_name" value="Day"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="64"/>
+            <column name="birth_date" value="1992-05-06"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Olympia"/>
+            <column name="last_name" value="Dodson"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="65"/>
+            <column name="birth_date" value="1976-05-07"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Martin"/>
+            <column name="last_name" value="Charlson"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="66"/>
+            <column name="birth_date" value="1981-05-07"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Corey"/>
+            <column name="last_name" value="Farmer"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="67"/>
+            <column name="birth_date" value="1978-05-07"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Gina"/>
+            <column name="last_name" value="Haig"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="68"/>
+            <column name="birth_date" value="1969-05-07"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Mabel"/>
+            <column name="last_name" value="Carter"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="69"/>
+            <column name="birth_date" value="1995-05-06"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Brandon"/>
+            <column name="last_name" value="Hamphrey"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="70"/>
+            <column name="birth_date" value="1992-05-06"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Judson"/>
+            <column name="last_name" value="Miln"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="71"/>
+            <column name="birth_date" value="1973-05-07"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="David"/>
+            <column name="last_name" value="Philips"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="72"/>
+            <column name="birth_date" value="1997-05-06"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Ford"/>
+            <column name="last_name" value="Attwood"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="73"/>
+            <column name="birth_date" value="1989-05-07"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Belinda"/>
+            <column name="last_name" value="MacAdam"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="74"/>
+            <column name="birth_date" value="1994-05-06"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Keith"/>
+            <column name="last_name" value="Bargeman"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="75"/>
+            <column name="birth_date" value="1992-05-06"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Roger"/>
+            <column name="last_name" value="Jeff"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="76"/>
+            <column name="birth_date" value="1975-05-07"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Lancelot"/>
+            <column name="last_name" value="Birch"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="77"/>
+            <column name="birth_date" value="1984-05-07"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Stella"/>
+            <column name="last_name" value="Nyman"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="78"/>
+            <column name="birth_date" value="1984-05-07"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Nancy"/>
+            <column name="last_name" value="Dodson"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="79"/>
+            <column name="birth_date" value="1998-05-06"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Kyle"/>
+            <column name="last_name" value="Warren"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="80"/>
+            <column name="birth_date" value="1986-05-07"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Eustacia"/>
+            <column name="last_name" value="Holiday"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="81"/>
+            <column name="birth_date" value="1989-05-07"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Avery"/>
+            <column name="last_name" value="Mason"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="82"/>
+            <column name="birth_date" value="1982-05-07"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Dora"/>
+            <column name="last_name" value="Vance"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="83"/>
+            <column name="birth_date" value="1960-05-07"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Morgan"/>
+            <column name="last_name" value="Brooks"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="84"/>
+            <column name="birth_date" value="1992-05-06"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Clarice"/>
+            <column name="last_name" value="Taft"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="85"/>
+            <column name="birth_date" value="1973-05-07"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Anna"/>
+            <column name="last_name" value="MacDonald"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="86"/>
+            <column name="birth_date" value="1990-05-06"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Jerome"/>
+            <column name="last_name" value="Neal"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="87"/>
+            <column name="birth_date" value="1977-05-07"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Ella"/>
+            <column name="last_name" value="Stanley"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="88"/>
+            <column name="birth_date" value="1966-05-07"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Augustina"/>
+            <column name="last_name" value="Peterson"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="89"/>
+            <column name="birth_date" value="1986-05-07"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Roseanna"/>
+            <column name="last_name" value="Howard"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="90"/>
+            <column name="birth_date" value="1984-05-07"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Eugenia"/>
+            <column name="last_name" value="Walkman"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="91"/>
+            <column name="birth_date" value="1987-05-07"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Tyrone"/>
+            <column name="last_name" value="Boolman"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="92"/>
+            <column name="birth_date" value="1970-05-07"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Trenton"/>
+            <column name="last_name" value="Bradberry"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="93"/>
+            <column name="birth_date" value="1964-05-07"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Nell"/>
+            <column name="last_name" value="Fraser"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="94"/>
+            <column name="birth_date" value="1964-05-07"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Murray"/>
+            <column name="last_name" value="Black"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="95"/>
+            <column name="birth_date" value="1981-05-07"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Bret"/>
+            <column name="last_name" value="Parson"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="96"/>
+            <column name="birth_date" value="1992-05-06"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Adelaide"/>
+            <column name="last_name" value="Jerome"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="97"/>
+            <column name="birth_date" value="1987-05-07"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Justin"/>
+            <column name="last_name" value="Flannagan"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="98"/>
+            <column name="birth_date" value="1966-05-07"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="George"/>
+            <column name="last_name" value="Taft"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="99"/>
+            <column name="birth_date" value="1968-05-07"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Lyle"/>
+            <column name="last_name" value="Bradshaw"/>
+        </insert>
+        <insert tableName="patient">
+            <column name="id" value="100"/>
+            <column name="birth_date" value="1962-05-07"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Alva"/>
+            <column name="last_name" value="Backer"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

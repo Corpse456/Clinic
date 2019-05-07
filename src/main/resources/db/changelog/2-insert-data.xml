@@ -4,6 +4,8 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
+    <include file="test/insert-test-data.xml" relativeToChangelogFile="true"/>
+
     <changeSet id="insert_common_time_shift" author="neznaev">
         <insert tableName="shift_timing">
             <column name="id" value="1"/>
