@@ -32,6 +32,11 @@ public class AbstractService<Dbo extends AbstractDbo, Dto extends AbstractDto> {
     }
 
     @Transactional
+    public Dbo getDbo(final Long id) {
+        return repository.getOne(id);
+    }
+
+    @Transactional
     public void delete(final Long id) {
         repository.deleteById(id);
     }

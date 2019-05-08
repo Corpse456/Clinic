@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -90,11 +91,15 @@ public class DoctorShiftService extends AbstractService<DoctorShiftDbo, DoctorSh
         return repository.findShiftOrdersByDateAndSpeciality(date, speciality);
     }
 
-    private ShiftTimingDbo getShiftByDoctorIDAndDate(final Long id, final LocalDate date) {
+    public ShiftTimingDbo getShiftByDoctorIDAndDate(final Long id, final LocalDate date) {
         return repository.getShiftTimingByDoctorIdAndDate(id, date);
     }
 
     private boolean isDoctorShiftExists(final Long id, final LocalDate date) {
         return repository.existsByDoctorIdAndDate(id, date);
+    }
+
+    public boolean iaDoctorWorkingHours(final Long id, final LocalDateTime dateTime) {
+        return repository.existsByDoctorIdAndDateTime(id, dateTime.toLocalDate(), dateTime.toLocalTime()) > 0;
     }
 }

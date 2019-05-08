@@ -13,4 +13,7 @@ public interface TicketRepository extends JpaRepository<TicketDbo, Long> {
 
     @Query("select t.number from TicketDbo t where t.doctor.id = ?1 and t.dateTime > ?2 and t.dateTime < ?3")
     Optional<Integer> getLastTicketNumber(final Long id, final LocalDateTime from, final LocalDateTime to);
+
+    @Query("select count(t) from TicketDbo t where t.doctor.id = ?1 and t.dateTime = ?2")
+    int getByDoctorIdAndDateTime(final Long id, final LocalDateTime dateTime);
 }

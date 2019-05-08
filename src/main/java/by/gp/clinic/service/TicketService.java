@@ -24,16 +24,15 @@ public class TicketService extends AbstractService<TicketDbo, TicketDto> {
         return repository.getLastTicketNumber(id, getStartDay(dateTime), getEndDay(dateTime)).orElse(1);
     }
 
+    public boolean iaTimeBusy(final Long id, final LocalDateTime dateTime) {
+        return repository.getByDoctorIdAndDateTime(id, dateTime) > 0;
+    }
+
     private static LocalDateTime getEndDay(final LocalDateTime dateTime) {
         return LocalDateTime.of(dateTime.toLocalDate().plusDays(1), LocalTime.MIDNIGHT).minusSeconds(1);
     }
 
     private static LocalDateTime getStartDay(final LocalDateTime dateTime) {
         return LocalDateTime.of(dateTime.toLocalDate(), LocalTime.MIDNIGHT);
-    }
-
-    public static void main(String[] args) {
-        System.out.println(getStartDay(LocalDateTime.now()));
-        System.out.println(getEndDay(LocalDateTime.now()));
     }
 }

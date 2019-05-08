@@ -17,4 +17,10 @@ public class DoctorDbo extends ManDbo {
 
     @Enumerated(EnumType.STRING)
     private Speciality speciality;
+
+    public static DoctorDbo buildEmptyWithId(final Long id) {
+        final DoctorDbo patient = new DoctorDbo();
+        patient.setId(id);
+        return patient;
+    }
 }

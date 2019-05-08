@@ -11,4 +11,10 @@ import javax.persistence.Table;
 @Table(name = "patient")
 @EqualsAndHashCode(callSuper = true)
 public class PatientDbo extends ManDbo {
+
+    public static PatientDbo buildEmptyWithId(final Long id) {
+        final PatientDbo patient = new PatientDbo();
+        patient.setId(id);
+        return patient;
+    }
 }

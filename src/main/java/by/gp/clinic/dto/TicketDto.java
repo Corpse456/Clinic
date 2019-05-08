@@ -2,6 +2,7 @@ package by.gp.clinic.dto;
 
 import by.gp.clinic.serializer.ClinicDateTimeDeserializer;
 import by.gp.clinic.serializer.ClinicDateTimeSerializer;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
@@ -15,13 +16,14 @@ import java.time.LocalDateTime;
 @ToString(callSuper = true)
 public class TicketDto extends AbstractDto {
 
-    private PatientDto patient;
+    private Long patientId;
 
-    private DoctorDto doctor;
+    private Long doctorId;
 
     @JsonDeserialize(using = ClinicDateTimeDeserializer.class)
     @JsonSerialize(using = ClinicDateTimeSerializer.class)
     private LocalDateTime dateTime;
 
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private int number;
 }

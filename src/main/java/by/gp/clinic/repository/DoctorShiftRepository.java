@@ -9,6 +9,8 @@ import org.springframework.data.jpa.repository.Query;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 @Transactional
@@ -23,4 +25,10 @@ public interface DoctorShiftRepository extends JpaRepository<DoctorShiftDbo, Lon
     boolean existsByDoctorIdAndDate(final Long id, final LocalDate date);
 
     List<DoctorShiftDbo> getAllByDoctorId(final Long id);
+
+    @Query("select count(s) from DoctorShiftDbo s where s.date = ?2 " +
+           "and s.doctor.id = ?1 " +
+           "and s.shiftTiming.startTime < ?3 " +
+           "and s.shiftTiming.endTime > ?3")
+    int existsByDoctorIdAndDateTime(Long id, LocalDate date, LocalTime time);
 }

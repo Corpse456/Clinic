@@ -1,6 +1,8 @@
 package by.gp.clinic.controller;
 
 import by.gp.clinic.dto.TicketDto;
+import by.gp.clinic.exception.TicketAlreadyTakenException;
+import by.gp.clinic.exception.WrongWorkingHoursException;
 import by.gp.clinic.facade.TicketFacade;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -22,7 +24,8 @@ public class TicketController {
 
     @PostMapping
     @ApiOperation(value = "Add new ticket")
-    public String getDoctorShifts(@RequestBody final TicketDto ticket) {
-        return new JSONObject().put("number", facade.addTicket(ticket).getNumber()).toString();
+    public String addNewTicket(@RequestBody final TicketDto ticket)
+        throws WrongWorkingHoursException, TicketAlreadyTakenException {
+        return new JSONObject().put("id", facade.addTicket(ticket).getNumber()).toString();
     }
 }
