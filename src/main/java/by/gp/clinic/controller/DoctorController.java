@@ -9,6 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONObject;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,7 +31,7 @@ public class DoctorController {
 
     @PostMapping
     @ApiOperation(value = "Hire a new doctor")
-    public String hireNewDoctor(@RequestBody DoctorDto doctor)
+    public String hireNewDoctor(@RequestBody @Validated DoctorDto doctor)
         throws EntityExistsException, ShiftTimingNotExistsException {
         return new JSONObject().put("id", doctorFacade.hireDoctor(doctor)).toString();
     }

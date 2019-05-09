@@ -8,6 +8,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONObject;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,7 +30,7 @@ public class PatientController {
 
     @PostMapping
     @ApiOperation(value = "Create a patient card")
-    public String createPatient(@RequestBody PatientDto patient) throws EntityExistsException {
+    public String createPatient(@RequestBody @Validated PatientDto patient) throws EntityExistsException {
         return new JSONObject().put("id", patientFacade.createPatient(patient)).toString();
     }
 

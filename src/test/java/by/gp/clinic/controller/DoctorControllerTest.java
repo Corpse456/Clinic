@@ -23,12 +23,12 @@ public class DoctorControllerTest extends AbstractControllerTest {
 
     @Test
     public void getDoctorTest() {
-        getEntityTest(DoctorDto.class);
+        getEntityTest(DoctorDto.class, 2L);
     }
 
     @Test
     public void removeDoctorTest() {
-        removeEntityTest();
+        removeEntityTest(1L);
     }
 
     @Test

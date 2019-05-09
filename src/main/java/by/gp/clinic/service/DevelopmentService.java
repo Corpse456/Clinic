@@ -1,4 +1,4 @@
-package by.gp.clinic.facade;
+package by.gp.clinic.service;
 
 import by.gp.clinic.controller.DevelopmentController;
 import by.gp.clinic.dto.DoctorDto;
@@ -8,8 +8,8 @@ import by.gp.clinic.enums.Speciality;
 import by.gp.clinic.exception.DoctorExistsException;
 import by.gp.clinic.exception.PatientExistsException;
 import by.gp.clinic.exception.ShiftTimingNotExistsException;
-import by.gp.clinic.service.DoctorService;
-import by.gp.clinic.service.PatientService;
+import by.gp.clinic.facade.DoctorFacade;
+import by.gp.clinic.facade.PatientFacade;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,16 +28,20 @@ import static java.util.Objects.requireNonNull;
 
 @Service
 @RequiredArgsConstructor
-public class DevelopmentFacade {
+public class DevelopmentService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DevelopmentFacade.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DevelopmentService.class);
 
     private final static String ID = "ID";
+    private final static String DOCTOR_ID = "DOCTOR";
+    private final static String SHIFT_TIMING_ID = "SHIFT";
+    private final static String TIME = "TIME";
     private final static String BIRTH_DATE = "BIRTH_DATE";
     private final static String GENDER = "GENDER";
     private final static String NAME = "NAME";
     private final static String LAST_NAME = "LAST";
     private final static String SPECIALITY = "SPECIALITY";
+
     private final static String DOCTOR_TEMPLATE = "<insert tableName=\"doctor\">\n" +
                                                   "            <column name=\"id\" value=\"" + ID + "\"/>\n" +
                                                   "            <column name=\"birth_date\" value=\"" + BIRTH_DATE +
@@ -58,6 +62,15 @@ public class DevelopmentFacade {
                                                    "            <column name=\"last_name\" value=\"" + LAST_NAME +
                                                    "\"/>\n" +
                                                    "        </insert>\n";
+    private final static String SHIFT_TEMPLATE = "<insert tableName=\"doctor_shift\">\n" +
+                                                 "            <column name=\"id\" value=\"" + ID + "\"/>\n" +
+                                                 "            <column name=\"doctor_id\" value=\"" + DOCTOR_ID +
+                                                 "\"/>\n" +
+                                                 "            <column name=\"shift_timing_id\" value=\"" +
+                                                 SHIFT_TIMING_ID + "\"/>\n" +
+                                                 "            <column name=\"date\" valueDate=\"now() + " + TIME +
+                                                 "\"/>\n" +
+                                                 "        </insert>\n";
 
 
     private final DoctorFacade doctorFacade;
@@ -155,5 +168,27 @@ public class DevelopmentFacade {
                     .replace(GENDER, d.getGender().name()).replace(NAME, d.getName())
                     .replace(LAST_NAME, d.getLastName())));
         return stringBuilder.toString();
+    }
+
+    public static void getFormattedPDoctorShifts() {
+        final StringBuilder stringBuilder = new StringBuilder();
+        int id = 1;
+        int shiftTiming = 1;
+        for (int i = 1; i < 101; i++) {
+            for (int j = 1; j < 13; j++) {
+                stringBuilder.append(
+                    SHIFT_TEMPLATE.replace(ID, id++ + "").replace(DOCTOR_ID, i + "")
+                        .replace(SHIFT_TIMING_ID, shiftTiming + "").replace(TIME, j + ""));
+                shiftTiming = (shiftTiming % 2) + 1;
+                if (j == 5) {
+                    j += 2;
+                }
+            }
+        }
+        System.out.println(stringBuilder);
+    }
+
+    public static void main(String[] args) {
+        getFormattedPDoctorShifts();
     }
 }

@@ -16,25 +16,25 @@ public class PatientDboDtoConverterTest extends AbstractSpringMvcTest {
 
     @Test
     public void convertToDboTest() {
-        final PatientDto patientDto = PatientMock.getPatientDtoMock();
-        final PatientDbo patientDbo = converter.convertToDbo(patientDto);
+        final PatientDto dto = PatientMock.getPatientDtoMock();
+        final PatientDbo dbo = converter.convertToDbo(dto);
 
-        assertEquals(patientDto.getId(), patientDbo.getId());
-        assertEquals(patientDto.getBirthDate(), patientDbo.getBirthDate());
-        assertEquals(patientDto.getGender(), patientDbo.getGender());
-        assertEquals(patientDto.getName(), patientDbo.getName());
-        assertEquals(patientDto.getLastName(), patientDbo.getLastName());
+        assertEquals(dto.getId(), dbo.getId());
+        assertEquals(dto.getBirthDate(), dbo.getBirthDate());
+        assertEquals(dto.getGender(), dbo.getGender());
+        assertEquals(dto.getName(), dbo.getName());
+        assertEquals(dto.getLastName(), dbo.getLastName());
     }
 
     @Test
     public void convertToDtoTest() {
-        final PatientDbo patientDbo = PatientMock.getPatientDboMock();
-        final PatientDto patientDto = converter.convertToDto(patientDbo);
+        final PatientDbo dbo = PatientMock.getPatientDboMock();
+        final PatientDto dto = converter.convertToDto(dbo);
 
-        assertEquals(patientDbo.getId(), patientDto.getId());
-        assertEquals(patientDbo.getBirthDate(), patientDto.getBirthDate());
-        assertEquals(patientDbo.getGender(), patientDto.getGender());
-        assertEquals(patientDbo.getName(), patientDto.getName());
-        assertEquals(patientDbo.getLastName(), patientDto.getLastName());
+        assertEquals(dbo.getId(), dto.getId());
+        assertEquals(dbo.getBirthDate(), dto.getBirthDate());
+        assertEquals(dbo.getGender(), dto.getGender());
+        assertEquals(dbo.getName(), dto.getName());
+        assertEquals(dbo.getLastName(), dto.getLastName());
     }
 }

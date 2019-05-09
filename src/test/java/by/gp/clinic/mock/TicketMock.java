@@ -1,19 +1,33 @@
 package by.gp.clinic.mock;
 
+import by.gp.clinic.dbo.TicketDbo;
 import by.gp.clinic.dto.TicketDto;
 
-import java.time.DayOfWeek;
 import java.time.LocalDateTime;
-
-import static java.time.temporal.TemporalAdjusters.next;
 
 public class TicketMock {
 
     public static TicketDto getTicketDtoMock() {
-        final TicketDto ticketDto = new TicketDto();
-        ticketDto.setDoctorId(1L);
-        ticketDto.setPatientId(1L);
-        ticketDto.setDateTime(LocalDateTime.now().withHour(12).withMinute(15).with(next(DayOfWeek.MONDAY)));
-        return ticketDto;
+        final TicketDto ticket = new TicketDto();
+        ticket.setId(1L);
+        ticket.setDoctorId(1L);
+        ticket.setPatientId(1L);
+        ticket.setDateTime(getDateTime());
+        ticket.setDateTime(getDateTime());
+        return ticket;
+    }
+
+    private static LocalDateTime getDateTime() {
+        return LocalDateTime.now().plusDays(1).withHour(12).withMinute(15);
+    }
+
+    public static TicketDbo getTicketDboMock() {
+        final TicketDbo ticket = new TicketDbo();
+        ticket.setId(1L);
+        ticket.setNumber(1);
+        ticket.setDoctor(DoctorMock.getDoctorDboMock());
+        ticket.setPatient(PatientMock.getPatientDboMock());
+        ticket.setDateTime(getDateTime());
+        return ticket;
     }
 }

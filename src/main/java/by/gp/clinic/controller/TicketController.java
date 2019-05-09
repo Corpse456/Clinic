@@ -8,6 +8,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONObject;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +25,7 @@ public class TicketController {
 
     @PostMapping
     @ApiOperation(value = "Add new ticket")
-    public String addNewTicket(@RequestBody final TicketDto ticket)
+    public String addNewTicket(@RequestBody @Validated final TicketDto ticket)
         throws WrongWorkingHoursException, TicketAlreadyTakenException {
         return new JSONObject().put("id", facade.addTicket(ticket).getNumber()).toString();
     }

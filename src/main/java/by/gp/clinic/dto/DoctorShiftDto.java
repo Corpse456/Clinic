@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @ToString(callSuper = true)
 public class DoctorShiftDto extends AbstractDto {
 
-    private DoctorDto doctor;
+    private Long doctorId;
 
     private ShiftTimingDto shiftTiming;
 

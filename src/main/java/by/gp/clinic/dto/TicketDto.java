@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Data
@@ -16,14 +17,17 @@ import java.time.LocalDateTime;
 @ToString(callSuper = true)
 public class TicketDto extends AbstractDto {
 
+    @NotNull
     private Long patientId;
 
+    @NotNull
     private Long doctorId;
 
     @JsonDeserialize(using = ClinicDateTimeDeserializer.class)
     @JsonSerialize(using = ClinicDateTimeSerializer.class)
+    @NotNull
     private LocalDateTime dateTime;
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private int number;
+    private Integer number;
 }

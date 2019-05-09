@@ -1,23 +1,24 @@
 package by.gp.clinic.mock;
 
+import by.gp.clinic.dbo.DoctorShiftDbo;
 import by.gp.clinic.dto.DoctorShiftDto;
-import by.gp.clinic.enums.Gender;
-import by.gp.clinic.enums.Speciality;
 
 import java.time.LocalDate;
 
 public class DoctorShiftMock {
 
-    private static final String DOCTORS_LAST_NAME = "DoctorsLastName";
-    private static final String DOCTORS_NAME = "DoctorsName";
-    private static final Gender GENDER = Gender.FEMALE;
-    private static final LocalDate BIRTH_DATE = LocalDate.now().minusYears(18);
-    private static final Speciality SPECIALITY = Speciality.CARDIOLOGIST;
-
-    public static DoctorShiftDto getDoctorDtoMock() {
+    public static DoctorShiftDto getDoctorShiftDtoMock() {
         final DoctorShiftDto doctorShift = new DoctorShiftDto();
-        doctorShift.setDoctor(DoctorMock.getDoctorDtoMock());
-        doctorShift.setShiftTiming(ShiftTimingMock.getDoctorDtoMock());
+        doctorShift.setDoctorId(1L);
+        doctorShift.setShiftTiming(ShiftTimingMock.getShiftTImingDtoMock());
+        doctorShift.setDate(LocalDate.now());
+        return doctorShift;
+    }
+
+    public static DoctorShiftDbo getDoctorShiftDboMock() {
+        final DoctorShiftDbo doctorShift = new DoctorShiftDbo();
+        doctorShift.setDoctor(DoctorMock.getDoctorDboMock());
+        doctorShift.setShiftTiming(ShiftTimingMock.getShiftTImingDboMock());
         doctorShift.setDate(LocalDate.now());
         return doctorShift;
     }

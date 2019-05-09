@@ -35,20 +35,15 @@ public abstract class AbstractControllerTest extends AbstractSpringMvcTest {
         return id;
     }
 
-    void getEntityTest(Class<? extends AbstractDto> clazz) {
-        final AbstractDto dtoMock = getDtoMock();
-        final Long id = addEntityCheck(dtoMock);
-
+    void getEntityTest(Class<? extends AbstractDto> dtoClass, final Long id) {
         final MvcResult result = getQuery(getUrl() + "/" + id);
-        final AbstractDto savedEntity = getObjectFromResult(result, clazz);
+        final AbstractDto savedEntity = getObjectFromResult(result, dtoClass);
 
         assertNotNull(savedEntity);
         assertEquals(200, result.getResponse().getStatus());
-        assertEquals(dtoMock, savedEntity);
     }
 
-    void removeEntityTest() {
-        final Long id = addEntityCheck();
+    void removeEntityTest(final Long id) {
         final MvcResult result = deleteQuery(getUrl() + "/" + id);
 
         assertEquals(200, result.getResponse().getStatus());
@@ -59,14 +54,8 @@ public abstract class AbstractControllerTest extends AbstractSpringMvcTest {
 
     <N extends AbstractDto> void findEntitiesTest(final TypeReference<List<N>> typeReference) {
         MvcResult result = getQuery(getUrl() + SEARCH);
-        final int beforeSize = getListOfObjectsFromResult(result, typeReference).size();
-        addEntityCheck();
-        addEntityCheck();
-        addEntityCheck();
-
-        result = getQuery(getUrl() + SEARCH);
         final List<N> list = getListOfObjectsFromResult(result, typeReference);
-        assertEquals(beforeSize + 3, list.size());
+        assertNotNull(list);
     }
 
     protected abstract JpaRepository<? extends AbstractDbo, Long> getRepository();

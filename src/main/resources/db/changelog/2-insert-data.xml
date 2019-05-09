@@ -4,8 +4,6 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
-    <include file="test/insert-test-data.xml" relativeToChangelogFile="true"/>
-
     <changeSet id="insert_common_time_shift" author="neznaev">
         <insert tableName="shift_timing">
             <column name="id" value="1"/>
@@ -35,4 +33,6 @@
     <changeSet id="increase_id_in_timi_shifting" author="neznaev" context="prod">
         <sql>alter table shift_timing auto_increment = 100</sql>
     </changeSet>
+
+    <include file="test/insert-test-data.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

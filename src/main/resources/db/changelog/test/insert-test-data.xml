@@ -6,5 +6,6 @@
 
     <include file="1-insert-doctors.xml" relativeToChangelogFile="true"/>
     <include file="2-insert-patients.xml" relativeToChangelogFile="true"/>
+    <include file="3-insert-doctor-shifts.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

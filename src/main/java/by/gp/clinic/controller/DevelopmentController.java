@@ -1,7 +1,7 @@
 package by.gp.clinic.controller;
 
 import by.gp.clinic.exception.ShiftTimingNotExistsException;
-import by.gp.clinic.facade.DevelopmentFacade;
+import by.gp.clinic.service.DevelopmentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -17,29 +17,29 @@ import org.springframework.web.bind.annotation.RestController;
     description = "API methods for test setup")
 public class DevelopmentController {
 
-    private final DevelopmentFacade developmentFacade;
+    private final DevelopmentService developmentService;
 
     @PostMapping(value = "/doctors")
     @ApiOperation(value = "Hire doctors")
     public void hireDoctors() throws ShiftTimingNotExistsException {
-        developmentFacade.hireDoctors();
+        developmentService.hireDoctors();
     }
 
     @PostMapping(value = "/patients")
     @ApiOperation(value = "Create patients")
     public void createPatients() {
-        developmentFacade.addPatients();
+        developmentService.addPatients();
     }
 
     @GetMapping(value = "/doctors")
     @ApiOperation(value = "Get formatted doctors")
     public String getFormattedDoctors() {
-        return developmentFacade.getFormattedDoctors();
+        return developmentService.getFormattedDoctors();
     }
 
     @GetMapping(value = "/patients")
     @ApiOperation(value = "Get formatted patients")
     public String getFormattedPatients() {
-        return developmentFacade.getFormattedPAtients();
+        return developmentService.getFormattedPAtients();
     }
 }

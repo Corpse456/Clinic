@@ -32,12 +32,12 @@ public class PatientControllerTest extends AbstractControllerTest {
 
     @Test
     public void getPatientTest() {
-        getEntityTest(PatientDto.class);
+        getEntityTest(PatientDto.class, 2L);
     }
 
     @Test
     public void removePatientTest() {
-        removeEntityTest();
+        removeEntityTest(1L);
     }
 
     @Test
