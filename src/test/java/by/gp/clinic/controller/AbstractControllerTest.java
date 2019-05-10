@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.test.web.servlet.MvcResult;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,14 +21,21 @@ public abstract class AbstractControllerTest extends AbstractSpringMvcTest {
     private static final String SEARCH = "/search";
     private static final String ID = "id";
 
-    Long addEntityCheck() {
-        return addEntityCheck(getDtoMock());
+    Long addEntityWithStatus() {
+        return addEntityWithStatus(getDtoMock());
     }
 
-    Long addEntityCheck(final AbstractDto dto) {
+    void addEntityWithStatus(final AbstractDto dto, final int status, final String ErrorMessage) {
+        final MvcResult result = postQuery(getUrl(), dto);
+        assertEquals(status, result.getResponse().getStatus());
+        final HashMap answer = getObjectFromResult(getReplaced(result), HashMap.class);
+        assertEquals(ErrorMessage, answer.get("message"));
+    }
+
+    Long addEntityWithStatus(final AbstractDto dto) {
         final MvcResult result = postQuery(getUrl(), dto);
 
-        final JSONObject answer = getJsonFormString(getContent(result));
+        final JSONObject answer = getJsonFormString(getContentAsString(result));
         final Long id = getLongFromJson(answer, ID);
 
         assertNotNull(id);
@@ -56,6 +64,10 @@ public abstract class AbstractControllerTest extends AbstractSpringMvcTest {
         MvcResult result = getQuery(getUrl() + SEARCH);
         final List<N> list = getListOfObjectsFromResult(result, typeReference);
         assertNotNull(list);
+    }
+
+    private String getReplaced(final MvcResult result) {
+        return getContentAsString(result).replace("[", "").replace("]", "");
     }
 
     protected abstract JpaRepository<? extends AbstractDbo, Long> getRepository();

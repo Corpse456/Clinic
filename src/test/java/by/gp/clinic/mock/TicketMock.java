@@ -13,7 +13,6 @@ public class TicketMock {
         ticket.setDoctorId(1L);
         ticket.setPatientId(1L);
         ticket.setDateTime(getDateTime());
-        ticket.setDateTime(getDateTime());
         return ticket;
     }
 

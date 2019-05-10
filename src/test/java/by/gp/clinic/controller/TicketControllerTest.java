@@ -5,6 +5,8 @@ import by.gp.clinic.repository.TicketRepository;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.LocalDateTime;
+
 import static by.gp.clinic.mock.TicketMock.getTicketDtoMock;
 
 public class TicketControllerTest extends AbstractControllerTest {
@@ -16,7 +18,21 @@ public class TicketControllerTest extends AbstractControllerTest {
 
     @Test
     public void createTicketTest() {
-        addEntityCheck();
+        addEntityWithStatus();
+    }
+
+    @Test
+    public void addTicketInPast() {
+        final TicketDto ticketDtoMock = getDtoMock();
+        ticketDtoMock.setDateTime(LocalDateTime.now().minusHours(1).withMinute(15));
+        addEntityWithStatus(ticketDtoMock, 400, "Date must be in future");
+    }
+
+    @Test
+    public void addTicketWrongTime() {
+        final TicketDto ticketDtoMock = getDtoMock();
+        ticketDtoMock.setDateTime(ticketDtoMock.getDateTime().withMinute(13));
+        addEntityWithStatus(ticketDtoMock, 400, "Ticket date must be a multiple of 15");
     }
 
     @Override

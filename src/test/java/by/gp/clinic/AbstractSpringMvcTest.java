@@ -93,15 +93,6 @@ public abstract class AbstractSpringMvcTest {
         }
     }
 
-    protected String getContent(final MvcResult result) {
-        try {
-            return result.getResponse().getContentAsString();
-        } catch (final UnsupportedEncodingException e) {
-            fail(e.getMessage());
-            return null;
-        }
-    }
-
     protected String toJson(final Object object) {
         final ObjectMapper objectMapper = new ObjectMapper();
         try {
@@ -113,8 +104,21 @@ public abstract class AbstractSpringMvcTest {
     }
 
     protected <T> T getObjectFromResult(final MvcResult result, Class<T> clazz) {
+        return getObjectFromResult(getContentAsString(result), clazz);
+    }
+
+    protected String getContentAsString(final MvcResult result) {
         try {
-            return new ObjectMapper().readValue(result.getResponse().getContentAsString(), clazz);
+            return result.getResponse().getContentAsString();
+        } catch (UnsupportedEncodingException e) {
+            fail(e.getMessage());
+            return null;
+        }
+    }
+
+    protected <T> T getObjectFromResult(final String result, Class<T> clazz) {
+        try {
+            return new ObjectMapper().readValue(result, clazz);
         } catch (final IOException e) {
             fail(e.getMessage());
             return null;
@@ -124,7 +128,7 @@ public abstract class AbstractSpringMvcTest {
     protected <T> List<T> getListOfObjectsFromResult(final MvcResult result,
                                                      final TypeReference<List<T>> listTypeReference) {
         try {
-            return new ObjectMapper().readValue(result.getResponse().getContentAsString(), listTypeReference);
+            return new ObjectMapper().readValue(getContentAsString(result), listTypeReference);
         } catch (final IOException e) {
             fail(e.getMessage());
             return null;

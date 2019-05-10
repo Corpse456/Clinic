@@ -27,7 +27,7 @@ public class PatientControllerTest extends AbstractControllerTest {
 
     @Test
     public void createPatientTest() {
-        addEntityCheck();
+        addEntityWithStatus();
     }
 
     @Test
@@ -49,10 +49,10 @@ public class PatientControllerTest extends AbstractControllerTest {
     @Test
     public void createPatientTwiceTest() {
         final PatientDto patient = getPatientDtoMock();
-        addEntityCheck(patient);
+        addEntityWithStatus(patient);
 
         final MvcResult result = postQuery(PATIENT_URL, patient);
-        final JSONObject answer = getJsonFormString(getContent(result));
+        final JSONObject answer = getJsonFormString(getContentAsString(result));
 
         assertEquals(400, result.getResponse().getStatus());
         assertNotNull(LocalDateTime.parse(getStringFromJson(answer, "time"), ofPattern(DATE_TIME_PATTERN)));
