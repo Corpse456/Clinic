@@ -1,9 +1,16 @@
 package by.gp.clinic.dto;
 
+import by.gp.clinic.annotation.DateInFuture;
+import by.gp.clinic.annotation.ShiftTming;
+import by.gp.clinic.serializer.ClinicDateDeserializer;
+import by.gp.clinic.serializer.ClinicDateSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Data
@@ -11,9 +18,16 @@ import java.time.LocalDate;
 @ToString(callSuper = true)
 public class DoctorShiftDto extends AbstractDto {
 
+    @NotNull
     private Long doctorId;
 
+    @NotNull
+    @ShiftTming
     private ShiftTimingDto shiftTiming;
 
+    @NotNull
+    @DateInFuture
+    @JsonDeserialize(using = ClinicDateDeserializer.class)
+    @JsonSerialize(using = ClinicDateSerializer.class)
     private LocalDate date;
 }

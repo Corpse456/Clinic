@@ -1,5 +1,7 @@
 package by.gp.clinic.dto;
 
+import by.gp.clinic.annotation.DateInFuture;
+import by.gp.clinic.annotation.DateQuarter;
 import by.gp.clinic.serializer.ClinicDateTimeDeserializer;
 import by.gp.clinic.serializer.ClinicDateTimeSerializer;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -26,6 +28,8 @@ public class TicketDto extends AbstractDto {
     @JsonDeserialize(using = ClinicDateTimeDeserializer.class)
     @JsonSerialize(using = ClinicDateTimeSerializer.class)
     @NotNull
+    @DateInFuture
+    @DateQuarter
     private LocalDateTime dateTime;
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)

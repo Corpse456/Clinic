@@ -1,5 +1,6 @@
 package by.gp.clinic.facade;
 
+import by.gp.clinic.dto.DoctorShiftDto;
 import by.gp.clinic.dto.ShiftTimingDto;
 import by.gp.clinic.service.DoctorShiftService;
 import lombok.RequiredArgsConstructor;
@@ -16,5 +17,9 @@ public class DoctorShiftFacade {
 
     public Map<LocalDate, ShiftTimingDto> getDoctorShift(final Long id) {
         return doctorShiftService.getByDoctorId(id);
+    }
+
+    public void postSpecialShiftForDate(final DoctorShiftDto doctorShift) {
+
     }
 }

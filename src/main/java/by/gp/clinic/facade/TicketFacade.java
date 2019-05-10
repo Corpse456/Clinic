@@ -19,13 +19,8 @@ public class TicketFacade {
     private final TicketService ticketService;
     private final DoctorShiftService doctorShiftService;
 
-    @Value("${clinic.one.patient.minutes}")
-    private int onePatientTime;
-
     public TicketDbo addTicket(final TicketDto ticket) throws WrongWorkingHoursException, TicketAlreadyTakenException {
-        if (ticket.getDateTime().isBefore(LocalDateTime.now())
-            || ticket.getDateTime().getMinute() % onePatientTime != 0
-            || !doctorShiftService.iaDoctorWorkingHours(ticket.getDoctorId(), ticket.getDateTime())) {
+        if (!doctorShiftService.iaDoctorWorkingHours(ticket.getDoctorId(), ticket.getDateTime())) {
             throw new WrongWorkingHoursException(ticket.getDoctorId(), ticket.getDateTime());
         }
         if (ticketService.iaTimeBusy(ticket.getDoctorId(), ticket.getDateTime())) {
