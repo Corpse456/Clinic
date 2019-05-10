@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -38,6 +39,11 @@ public abstract class AbstractSpringMvcTest {
     @Autowired
     protected WebApplicationContext webApplicationContext;
     private MockMvc mockMvc;
+
+    @Autowired
+    protected Jackson2ObjectMapperBuilder objectMapperBuilder;
+
+    protected ObjectMapper objectMapper;
 
     @Before
     public void before() {
@@ -94,9 +100,8 @@ public abstract class AbstractSpringMvcTest {
     }
 
     protected String toJson(final Object object) {
-        final ObjectMapper objectMapper = new ObjectMapper();
         try {
-            return objectMapper.writeValueAsString(object);
+            return getObjectMapper().writeValueAsString(object);
         } catch (final JsonProcessingException e) {
             fail(e.getMessage());
             return null;
@@ -118,7 +123,7 @@ public abstract class AbstractSpringMvcTest {
 
     protected <T> T getObjectFromResult(final String result, Class<T> clazz) {
         try {
-            return new ObjectMapper().readValue(result, clazz);
+            return getObjectMapper().readValue(result, clazz);
         } catch (final IOException e) {
             fail(e.getMessage());
             return null;
@@ -128,7 +133,7 @@ public abstract class AbstractSpringMvcTest {
     protected <T> List<T> getListOfObjectsFromResult(final MvcResult result,
                                                      final TypeReference<List<T>> listTypeReference) {
         try {
-            return new ObjectMapper().readValue(getContentAsString(result), listTypeReference);
+            return getObjectMapper().readValue(getContentAsString(result), listTypeReference);
         } catch (final IOException e) {
             fail(e.getMessage());
             return null;
@@ -160,5 +165,9 @@ public abstract class AbstractSpringMvcTest {
             fail(e.getMessage());
             return null;
         }
+    }
+
+    private ObjectMapper getObjectMapper() {
+        return objectMapper == null ? objectMapperBuilder.build() : objectMapper;
     }
 }

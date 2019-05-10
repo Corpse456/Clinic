@@ -20,7 +20,7 @@ import java.util.List;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class GlobalControllerExceptionHandler {
 
-    private final ConstraintViolationMessageFactory mesageFactory;
+    private final ConstraintViolationMessageFactory messageFactory;
 
     @ExceptionHandler(BusinessLogicException.class)
     public ResponseEntity<HttpExceptionAnswerDto> handleBusinessLogicException(final BusinessLogicException e) {
@@ -29,12 +29,12 @@ public class GlobalControllerExceptionHandler {
 
     @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<List<ConstraintViolationDto>> handleConstraintViolationException(final ConstraintViolationException e) {
-        return ResponseEntity.badRequest().body(mesageFactory.build(e));
+        return ResponseEntity.badRequest().body(messageFactory.build(e));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<List<ConstraintViolationDto>> handleMethodArgumentNotValidException(final MethodArgumentNotValidException e) {
-        return ResponseEntity.badRequest().body(mesageFactory.build(e));
+        return ResponseEntity.badRequest().body(messageFactory.build(e));
     }
 
     private ResponseEntity<HttpExceptionAnswerDto> generateResponseWithStatus(final Exception e,

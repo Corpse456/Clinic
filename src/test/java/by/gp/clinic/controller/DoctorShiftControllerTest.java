@@ -4,6 +4,7 @@ import by.gp.clinic.dbo.AbstractDbo;
 import by.gp.clinic.dto.DoctorShiftDto;
 import by.gp.clinic.mock.DoctorShiftMock;
 import by.gp.clinic.repository.DoctorShiftRepository;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -23,10 +24,15 @@ public class DoctorShiftControllerTest extends AbstractControllerTest {
     private DoctorShiftRepository doctorShiftRepository;
 
     @Test
-    @SuppressWarnings("unchecked")
+    @Ignore
+    public void createDoctorTest() {
+        addEntityWithStatus();
+    }
+
+    @Test
     public void getDoctorShifts() {
         final MvcResult result = getQuery(getUrl() + "/" + 1L);
-        final Map<String, String> shifts = getObjectFromResult(result, HashMap.class);
+        final Map shifts = getObjectFromResult(result, HashMap.class);
 
         assertNotNull(shifts);
         assertEquals(10, shifts.size());
