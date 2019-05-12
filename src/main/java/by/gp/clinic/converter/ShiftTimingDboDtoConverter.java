@@ -21,4 +21,9 @@ public class ShiftTimingDboDtoConverter extends AbstractDboDtoConverter<ShiftTim
     protected String[] getIgnoreProperties() {
         return new String[]{"oppositeShift"};
     }
+
+    @Override
+    protected void convertComplexFieldsForDbo(final ShiftTimingDto sourceDto, final ShiftTimingDbo targetDbo) {
+
+    }
 }

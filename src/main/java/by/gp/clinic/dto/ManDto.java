@@ -20,8 +20,8 @@ public class ManDto extends AbstractDto {
     private String lastName;
 
     private Gender gender;
-
+/*
     @JsonDeserialize(using = ClinicDateDeserializer.class)
-    @JsonSerialize(using = ClinicDateSerializer.class)
+    @JsonSerialize(using = ClinicDateSerializer.class)*/
     private LocalDate birthDate;
 }

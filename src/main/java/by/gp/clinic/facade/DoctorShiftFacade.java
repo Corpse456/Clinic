@@ -19,7 +19,7 @@ public class DoctorShiftFacade {
         return doctorShiftService.getByDoctorId(id);
     }
 
-    public void postSpecialShiftForDate(final DoctorShiftDto doctorShift) {
-
+    public void postShiftForDate(final DoctorShiftDto doctorShift) {
+doctorShiftService.89
     }
 }
