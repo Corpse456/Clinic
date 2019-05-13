@@ -2,9 +2,11 @@ package by.gp.clinic.converter;
 
 import by.gp.clinic.dbo.ShiftTimingDbo;
 import by.gp.clinic.dto.ShiftTimingDto;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class ShiftTimingDboDtoConverter extends AbstractDboDtoConverter<ShiftTimingDbo, ShiftTimingDto> {
 
     @Override
@@ -20,10 +22,5 @@ public class ShiftTimingDboDtoConverter extends AbstractDboDtoConverter<ShiftTim
     @Override
     protected String[] getIgnoreProperties() {
         return new String[]{"oppositeShift"};
-    }
-
-    @Override
-    protected void convertComplexFieldsForDbo(final ShiftTimingDto sourceDto, final ShiftTimingDbo targetDbo) {
-
     }
 }

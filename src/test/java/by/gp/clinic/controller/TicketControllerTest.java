@@ -18,7 +18,7 @@ public class TicketControllerTest extends AbstractControllerTest {
 
     @Test
     public void createTicketTest() {
-        addEntityWithStatus();
+        addEntity();
     }
 
     @Test

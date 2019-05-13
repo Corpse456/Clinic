@@ -21,18 +21,16 @@ public abstract class AbstractControllerTest extends AbstractSpringMvcTest {
     private static final String SEARCH = "/search";
     private static final String ID = "id";
 
-    Long addEntityWithStatus() {
-        return addEntityWithStatus(getDtoMock());
+    Long addEntity() {
+        return addEntity(getDtoMock());
     }
 
-    void addEntityWithStatus(final AbstractDto dto, final int status, final String ErrorMessage) {
-        final MvcResult result = postQuery(getUrl(), dto);
-        assertEquals(status, result.getResponse().getStatus());
-        final HashMap answer = getObjectFromResult(getReplaced(result), HashMap.class);
-        assertEquals(ErrorMessage, answer.get("message"));
+    void addEntityWithoutAnswer() {
+        final MvcResult result = postQuery(getUrl(), getDtoMock());
+        assertEquals(200, result.getResponse().getStatus());
     }
 
-    Long addEntityWithStatus(final AbstractDto dto) {
+    Long addEntity(final AbstractDto dto) {
         final MvcResult result = postQuery(getUrl(), dto);
 
         final JSONObject answer = getJsonFormString(getContentAsString(result));
@@ -41,6 +39,13 @@ public abstract class AbstractControllerTest extends AbstractSpringMvcTest {
         assertNotNull(id);
         assertEquals(200, result.getResponse().getStatus());
         return id;
+    }
+
+    void addEntityWithStatus(final AbstractDto dto, final int status, final String ErrorMessage) {
+        final MvcResult result = postQuery(getUrl(), dto);
+        assertEquals(status, result.getResponse().getStatus());
+        final HashMap answer = getObjectFromResult(getReplaced(result), HashMap.class);
+        assertEquals(ErrorMessage, answer.get("message"));
     }
 
     void getEntityTest(Class<? extends AbstractDto> dtoClass, final Long id) {

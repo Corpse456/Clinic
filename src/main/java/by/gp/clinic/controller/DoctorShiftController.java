@@ -27,10 +27,16 @@ public class DoctorShiftController {
     private final DoctorShiftFacade facade;
 
     @PostMapping
-    @ApiOperation(value = "Post special doctor shift for date")
+    @ApiOperation(value = "Post doctor shift for date")
     public void getDoctorShifts(@RequestBody @Validated final DoctorShiftDto doctorShift) {
-        facade.postSpecialShiftForDate(doctorShift);
+        facade.postShiftForDate(doctorShift);
     }
+
+/*    @PostMapping(value = "/special")
+    @ApiOperation(value = "Post special doctor shift for date")
+    public void getSpecialDoctorShifts(@RequestBody @Validated final SpecialDoctorShiftDto doctorShift) {
+        facade.postSpecialShiftForDate(doctorShift);
+    }*/
 
     @GetMapping(value = "/{id}")
     @ApiOperation(value = "Get doctor shifts")

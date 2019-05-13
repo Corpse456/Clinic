@@ -58,7 +58,7 @@ public class DoctorFacade {
         return doctorService.findAll();
     }
 
-    public void addNewDoctorToTimeTable(final DoctorDbo doctor) throws ShiftTimingNotExistsException {
+    private void addNewDoctorToTimeTable(final DoctorDbo doctor) throws ShiftTimingNotExistsException {
         final LocalDate day = LocalDate.now();
         doctorShiftService.createTimeTableForNextWeek(doctor, day, getPreferredTiming(doctor, day.with(next(MONDAY))));
         doctorShiftService.createTimeTableForWeekAfterNextWeek(doctor);

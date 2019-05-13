@@ -4,7 +4,6 @@ import by.gp.clinic.dbo.AbstractDbo;
 import by.gp.clinic.dto.DoctorShiftDto;
 import by.gp.clinic.mock.DoctorShiftMock;
 import by.gp.clinic.repository.DoctorShiftRepository;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -24,9 +23,8 @@ public class DoctorShiftControllerTest extends AbstractControllerTest {
     private DoctorShiftRepository doctorShiftRepository;
 
     @Test
-    @Ignore
-    public void createDoctorTest() {
-        addEntityWithStatus();
+    public void postShiftForDateTest() {
+        addEntityWithoutAnswer();
     }
 
     @Test
@@ -46,7 +44,7 @@ public class DoctorShiftControllerTest extends AbstractControllerTest {
 
     @Override
     protected DoctorShiftDto getDtoMock() {
-        return DoctorShiftMock.getDoctorShiftDtoMock();
+        return DoctorShiftMock.getDoctorShiftNotExistsShiftTimingDtoMock();
     }
 
     @Override

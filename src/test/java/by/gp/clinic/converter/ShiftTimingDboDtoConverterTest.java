@@ -1,11 +1,8 @@
 package by.gp.clinic.converter;
 
 import by.gp.clinic.AbstractSpringMvcTest;
-import by.gp.clinic.dbo.DoctorShiftDbo;
 import by.gp.clinic.dbo.ShiftTimingDbo;
-import by.gp.clinic.dto.DoctorShiftDto;
 import by.gp.clinic.dto.ShiftTimingDto;
-import by.gp.clinic.mock.DoctorShiftMock;
 import by.gp.clinic.mock.ShiftTimingMock;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +16,7 @@ public class ShiftTimingDboDtoConverterTest extends AbstractSpringMvcTest {
 
     @Test
     public void convertToDboTest() {
-        final ShiftTimingDto dto = ShiftTimingMock.getShiftTImingDtoMock();
+        final ShiftTimingDto dto = ShiftTimingMock.getShiftTimingDtoMock();
         final ShiftTimingDbo dbo = converter.convertToDbo(dto);
 
         assertEquals(dto.getId(), dbo.getId());
@@ -30,7 +27,7 @@ public class ShiftTimingDboDtoConverterTest extends AbstractSpringMvcTest {
 
     @Test
     public void convertToDtoTest() {
-        final ShiftTimingDbo dbo = ShiftTimingMock.getShiftTImingDboMock();
+        final ShiftTimingDbo dbo = ShiftTimingMock.getShiftTimingDboMock();
         final ShiftTimingDto dto = converter.convertToDto(dbo);
 
         assertEquals(dbo.getId(), dto.getId());

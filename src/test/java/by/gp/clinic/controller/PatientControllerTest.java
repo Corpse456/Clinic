@@ -27,7 +27,7 @@ public class PatientControllerTest extends AbstractControllerTest {
 
     @Test
     public void createPatientTest() {
-        addEntityWithStatus();
+        addEntity();
     }
 
     @Test
@@ -49,7 +49,7 @@ public class PatientControllerTest extends AbstractControllerTest {
     @Test
     public void createPatientTwiceTest() {
         final PatientDto patient = getPatientDtoMock();
-        addEntityWithStatus(patient);
+        addEntity(patient);
 
         final MvcResult result = postQuery(PATIENT_URL, patient);
         final JSONObject answer = getJsonFormString(getContentAsString(result));

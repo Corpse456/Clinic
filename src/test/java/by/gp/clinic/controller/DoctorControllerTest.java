@@ -18,7 +18,7 @@ public class DoctorControllerTest extends AbstractControllerTest {
 
     @Test
     public void createDoctorTest() {
-        addEntityWithStatus();
+        addEntity();
     }
 
     @Test

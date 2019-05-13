@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Optional;
 
 @Transactional
 public interface DoctorShiftRepository extends JpaRepository<DoctorShiftDbo, Long> {
@@ -23,6 +24,8 @@ public interface DoctorShiftRepository extends JpaRepository<DoctorShiftDbo, Lon
     ShiftTimingDbo getShiftTimingByDoctorIdAndDate(final Long id, final LocalDate date);
 
     boolean existsByDoctorIdAndDate(final Long id, final LocalDate date);
+
+    Optional<DoctorShiftDbo> getByDoctorIdAndDate(final Long id, final LocalDate date);
 
     List<DoctorShiftDbo> getAllByDoctorId(final Long id);
 

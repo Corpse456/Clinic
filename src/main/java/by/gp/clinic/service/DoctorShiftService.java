@@ -18,6 +18,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static java.time.DayOfWeek.FRIDAY;
@@ -30,6 +31,7 @@ public class DoctorShiftService extends AbstractService<DoctorShiftDbo, DoctorSh
     private final DoctorShiftRepository repository;
 
     private final ShiftTimingDboDtoConverter shiftTimingConverter;
+    private final DoctorShiftDboDtoConverter doctorShiftConverter;
 
     private final SpecialDoctorShiftService specialDoctorShiftService;
     private final DoctorService doctorService;
@@ -41,6 +43,7 @@ public class DoctorShiftService extends AbstractService<DoctorShiftDbo, DoctorSh
                               final DoctorService doctorService) {
         super(doctorShiftConverter, repository);
         this.repository = repository;
+        this.doctorShiftConverter = doctorShiftConverter;
         this.shiftTimingConverter = shiftTimingConverter;
         this.specialDoctorShiftService = specialDoctorShiftService;
         this.doctorService = doctorService;
@@ -91,7 +94,19 @@ public class DoctorShiftService extends AbstractService<DoctorShiftDbo, DoctorSh
         return repository.findShiftOrdersByDateAndSpeciality(date, speciality);
     }
 
-    public ShiftTimingDbo getShiftByDoctorIDAndDate(final Long id, final LocalDate date) {
+    public void postShiftForDate(final DoctorShiftDto doctorShift) {
+        final DoctorShiftDbo doctorShiftDbo = doctorShiftConverter.convertToDbo(doctorShift);
+        final Optional<DoctorShiftDbo> savedShift =
+            repository.getByDoctorIdAndDate(doctorShift.getDoctorId(), doctorShift.getDate());
+        if (savedShift.isPresent()) {
+            savedShift.get().setShiftTiming(doctorShiftDbo.getShiftTiming());
+            save(savedShift.get());
+        } else {
+            save(doctorShiftDbo);
+        }
+    }
+
+    private ShiftTimingDbo getShiftByDoctorIDAndDate(final Long id, final LocalDate date) {
         return repository.getShiftTimingByDoctorIdAndDate(id, date);
     }
 

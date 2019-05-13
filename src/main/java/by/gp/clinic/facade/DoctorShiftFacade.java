@@ -3,6 +3,7 @@ package by.gp.clinic.facade;
 import by.gp.clinic.dto.DoctorShiftDto;
 import by.gp.clinic.dto.ShiftTimingDto;
 import by.gp.clinic.service.DoctorShiftService;
+import by.gp.clinic.service.ShiftTimingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,6 @@ public class DoctorShiftFacade {
     }
 
     public void postShiftForDate(final DoctorShiftDto doctorShift) {
-doctorShiftService.89
+        doctorShiftService.postShiftForDate(doctorShift);
     }
 }

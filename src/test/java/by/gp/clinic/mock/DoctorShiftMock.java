@@ -8,9 +8,20 @@ import java.time.LocalDate;
 public class DoctorShiftMock {
 
     public static DoctorShiftDto getDoctorShiftDtoMock() {
+        final DoctorShiftDto doctorShift = getDoctorShiftDto();
+        doctorShift.setShiftTiming(ShiftTimingMock.getShiftTimingDtoMock());
+        return doctorShift;
+    }
+
+    public static DoctorShiftDto getDoctorShiftNotExistsShiftTimingDtoMock() {
+        final DoctorShiftDto doctorShift = getDoctorShiftDto();
+        doctorShift.setShiftTiming(ShiftTimingMock.getNotExistsShiftTimingDtoMock());
+        return doctorShift;
+    }
+
+    private static DoctorShiftDto getDoctorShiftDto() {
         final DoctorShiftDto doctorShift = new DoctorShiftDto();
         doctorShift.setDoctorId(1L);
-        doctorShift.setShiftTiming(ShiftTimingMock.getShiftTImingDtoMock());
         doctorShift.setDate(getDate());
         return doctorShift;
     }
@@ -22,7 +33,7 @@ public class DoctorShiftMock {
     public static DoctorShiftDbo getDoctorShiftDboMock() {
         final DoctorShiftDbo doctorShift = new DoctorShiftDbo();
         doctorShift.setDoctor(DoctorMock.getDoctorDboMock());
-        doctorShift.setShiftTiming(ShiftTimingMock.getShiftTImingDboMock());
+        doctorShift.setShiftTiming(ShiftTimingMock.getShiftTimingDboMock());
         doctorShift.setDate(getDate());
         return doctorShift;
     }

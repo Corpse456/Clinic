@@ -48,6 +48,22 @@ public class ShiftTimingService extends AbstractService<ShiftTimingDbo, ShiftTim
             .orElseThrow(() -> new ShiftTimingNotExistsException(startTime, endTime));
     }
 
+    @Transactional
+    public ShiftTimingDbo getShiftTimingDboOrCreate(final LocalTime startTime,
+                                                    final LocalTime endTime,
+                                                    final ShiftOrder shiftOrder) {
+        return repository.getByStartTimeAndEndTime(startTime, endTime)
+            .orElseGet(() -> {
+                final ShiftTimingDbo shiftTimingDbo = new ShiftTimingDbo();
+                shiftTimingDbo.setStartTime(startTime);
+                shiftTimingDbo.setEndTime(endTime);
+                shiftTimingDbo.setShiftOrder(shiftOrder);
+                final ShiftTimingDbo saved = save(shiftTimingDbo);
+                saved.setOppositeShift(saved);
+                return saved;
+            });
+    }
+
     public ShiftTimingDbo getPreferredShift(final List<ShiftOrder> shiftsForDay) throws ShiftTimingNotExistsException {
         int firstShifts = 0, secondShifts = 0;
         for (final ShiftOrder shiftOrder : shiftsForDay) {
