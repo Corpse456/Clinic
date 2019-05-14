@@ -22,7 +22,7 @@ public class DoctorService extends AbstractService<DoctorDbo, DoctorDto> {
         return repository.existsByNameAndLastName(name, lastName);
     }
 
-    Speciality getSpeciality(final Long id) {
+    public Speciality getSpeciality(final Long id) {
         return repository.getSpecialityById(id);
     }
 }

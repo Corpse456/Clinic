@@ -1,6 +1,6 @@
 package by.gp.clinic.annotation;
 
-import by.gp.clinic.validation.ShiftTimingValidator;
+import by.gp.clinic.validation.SpecialDoctorShiftValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -18,10 +18,10 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Target({METHOD, CONSTRUCTOR, PARAMETER, FIELD, TYPE})
 @Retention(RUNTIME)
 @Documented
-@Constraint(validatedBy = {ShiftTimingValidator.class})
-public @interface ShiftTming {
+@Constraint(validatedBy = {SpecialDoctorShiftValidator.class})
+public @interface SpecialDoctorShift {
 
-    String message() default "Wrong shift timing";
+    String message() default "Wrong special shift";
 
     Class<?>[] groups() default {};
 

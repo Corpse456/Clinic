@@ -1,28 +1,29 @@
 package by.gp.clinic.converter;
 
 import by.gp.clinic.dbo.DoctorDbo;
-import by.gp.clinic.dbo.DoctorShiftDbo;
-import by.gp.clinic.dto.DoctorShiftDto;
+import by.gp.clinic.dbo.SpecialDoctorShiftDbo;
 import by.gp.clinic.dto.ShiftTimingDto;
+import by.gp.clinic.dto.SpecialDoctorShiftDto;
 import by.gp.clinic.service.ShiftTimingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class DoctorShiftDboDtoConverter extends AbstractDboDtoConverter<DoctorShiftDbo, DoctorShiftDto> {
+public class SpecialDoctorShiftDboDtoConverter
+    extends AbstractDboDtoConverter<SpecialDoctorShiftDbo, SpecialDoctorShiftDto> {
 
     private final ShiftTimingDboDtoConverter shiftTimingDboDtoConverter;
     private final ShiftTimingService shiftTimingService;
 
     @Override
-    protected DoctorShiftDto constructDto() {
-        return new DoctorShiftDto();
+    protected SpecialDoctorShiftDto constructDto() {
+        return new SpecialDoctorShiftDto();
     }
 
     @Override
-    protected DoctorShiftDbo constructDbo() {
-        return new DoctorShiftDbo();
+    protected SpecialDoctorShiftDbo constructDbo() {
+        return new SpecialDoctorShiftDbo();
     }
 
     @Override
@@ -31,13 +32,15 @@ public class DoctorShiftDboDtoConverter extends AbstractDboDtoConverter<DoctorSh
     }
 
     @Override
-    protected void convertComplexFieldsForDto(final DoctorShiftDbo sourceDbo, final DoctorShiftDto targetDto) {
+    protected void convertComplexFieldsForDto(final SpecialDoctorShiftDbo sourceDbo,
+                                              final SpecialDoctorShiftDto targetDto) {
         targetDto.setDoctorId(sourceDbo.getDoctor().getId());
         targetDto.setShiftTiming(shiftTimingDboDtoConverter.convertToDto(sourceDbo.getShiftTiming()));
     }
 
     @Override
-    protected void convertComplexFieldsForDbo(final DoctorShiftDto sourceDto, final DoctorShiftDbo targetDbo) {
+    protected void convertComplexFieldsForDbo(final SpecialDoctorShiftDto sourceDto,
+                                              final SpecialDoctorShiftDbo targetDbo) {
         targetDbo.setDoctor(DoctorDbo.buildEmptyWithId(sourceDto.getDoctorId()));
 
         final ShiftTimingDto shiftTiming = sourceDto.getShiftTiming();

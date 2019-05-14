@@ -1,12 +1,10 @@
 package by.gp.clinic.service;
 
 import by.gp.clinic.converter.DoctorShiftDboDtoConverter;
-import by.gp.clinic.converter.ShiftTimingDboDtoConverter;
 import by.gp.clinic.dbo.DoctorDbo;
 import by.gp.clinic.dbo.DoctorShiftDbo;
 import by.gp.clinic.dbo.ShiftTimingDbo;
 import by.gp.clinic.dto.DoctorShiftDto;
-import by.gp.clinic.dto.ShiftTimingDto;
 import by.gp.clinic.enums.ShiftOrder;
 import by.gp.clinic.enums.Speciality;
 import by.gp.clinic.repository.DoctorShiftRepository;
@@ -19,7 +17,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import static java.time.DayOfWeek.FRIDAY;
 import static java.time.DayOfWeek.MONDAY;
@@ -29,47 +26,31 @@ import static java.time.temporal.TemporalAdjusters.next;
 public class DoctorShiftService extends AbstractService<DoctorShiftDbo, DoctorShiftDto> {
 
     private final DoctorShiftRepository repository;
-
-    private final ShiftTimingDboDtoConverter shiftTimingConverter;
     private final DoctorShiftDboDtoConverter doctorShiftConverter;
 
-    private final SpecialDoctorShiftService specialDoctorShiftService;
-    private final DoctorService doctorService;
-
     public DoctorShiftService(final DoctorShiftDboDtoConverter doctorShiftConverter,
-                              final DoctorShiftRepository repository,
-                              final ShiftTimingDboDtoConverter shiftTimingConverter,
-                              final SpecialDoctorShiftService specialDoctorShiftService,
-                              final DoctorService doctorService) {
+                              final DoctorShiftRepository repository) {
         super(doctorShiftConverter, repository);
         this.repository = repository;
         this.doctorShiftConverter = doctorShiftConverter;
-        this.shiftTimingConverter = shiftTimingConverter;
-        this.specialDoctorShiftService = specialDoctorShiftService;
-        this.doctorService = doctorService;
     }
 
-    public Map<LocalDate, ShiftTimingDto> getByDoctorId(final Long id) {
-        final List<DoctorShiftDbo> allByDoctorId = repository.getAllByDoctorId(id);
-        final Map<DayOfWeek, ShiftTimingDbo> specialShifts
-            = specialDoctorShiftService.getSpecialShifts(id, doctorService.getSpeciality(id));
-
-        return allByDoctorId.stream().collect(Collectors.toMap(DoctorShiftDbo::getDate, d -> shiftTimingConverter
-            .convertToDto(specialShifts.getOrDefault(d.getDate().getDayOfWeek(), d.getShiftTiming()))));
+    public List<DoctorShiftDbo> getByDoctorId(final Long id) {
+        return repository.getAllByDoctorId(id);
     }
 
-    public void createTimeTableForWeekAfterNextWeek(final DoctorDbo doctor) {
+    public void createTimeTableForWeekAfterNextWeek(final DoctorDbo doctor,
+                                                    final Map<DayOfWeek, ShiftTimingDbo> specialShifts) {
         final LocalDate thisMonday = LocalDate.now().with(next(MONDAY));
         final ShiftTimingDbo shiftTiming = getShiftByDoctorIDAndDate(doctor.getId(), thisMonday.with(next(FRIDAY)));
-        createTimeTableForNextWeek(doctor, thisMonday, shiftTiming.getOppositeShift());
+        createTimeTableForNextWeek(doctor, thisMonday, shiftTiming.getOppositeShift(), specialShifts);
     }
 
     @Transactional(rollbackOn = Exception.class)
     public void createTimeTableForNextWeek(final DoctorDbo doctor,
                                            final LocalDate from,
-                                           ShiftTimingDbo preferredTiming) {
-        final Map<DayOfWeek, ShiftTimingDbo> specialShifts
-            = specialDoctorShiftService.getSpecialShifts(doctor.getId(), doctor.getSpeciality());
+                                           ShiftTimingDbo preferredTiming,
+                                           final Map<DayOfWeek, ShiftTimingDbo> specialShifts) {
         LocalDate day = from.with(next(MONDAY));
 
         while (day.getDayOfWeek() != DayOfWeek.SATURDAY) {

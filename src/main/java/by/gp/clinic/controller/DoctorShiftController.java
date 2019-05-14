@@ -2,6 +2,7 @@ package by.gp.clinic.controller;
 
 import by.gp.clinic.dto.DoctorShiftDto;
 import by.gp.clinic.dto.ShiftTimingDto;
+import by.gp.clinic.dto.SpecialDoctorShiftDto;
 import by.gp.clinic.facade.DoctorShiftFacade;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -28,15 +29,15 @@ public class DoctorShiftController {
 
     @PostMapping
     @ApiOperation(value = "Post doctor shift for date")
-    public void getDoctorShifts(@RequestBody @Validated final DoctorShiftDto doctorShift) {
+    public void postShiftForDate(@RequestBody @Validated final DoctorShiftDto doctorShift) {
         facade.postShiftForDate(doctorShift);
     }
 
-/*    @PostMapping(value = "/special")
+    @PostMapping(value = "/special")
     @ApiOperation(value = "Post special doctor shift for date")
-    public void getSpecialDoctorShifts(@RequestBody @Validated final SpecialDoctorShiftDto doctorShift) {
-        facade.postSpecialShiftForDate(doctorShift);
-    }*/
+    public void postSpecialShiftForDate(@RequestBody @Validated final SpecialDoctorShiftDto specialDoctorShiftDto) {
+        facade.postSpecialShiftForDate(specialDoctorShiftDto);
+    }
 
     @GetMapping(value = "/{id}")
     @ApiOperation(value = "Get doctor shifts")
