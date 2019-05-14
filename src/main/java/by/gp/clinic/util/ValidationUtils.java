@@ -19,6 +19,12 @@ public class ValidationUtils {
             .addConstraintViolation();
     }
 
+    public static void addMessageToContext(final String message,
+                                           final ConstraintValidatorContext context) {
+        context.buildConstraintViolationWithTemplate(message)
+            .addConstraintViolation();
+    }
+
     public static boolean checkNotNullFields(final Object someObject, final ConstraintValidatorContext context) {
         boolean flag = true;
         final Class<?> someObjectClass = someObject.getClass();
