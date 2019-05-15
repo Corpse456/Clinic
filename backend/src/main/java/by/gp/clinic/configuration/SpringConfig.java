@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
@@ -23,6 +24,13 @@ import java.time.LocalDateTime;
     @PropertySource("classpath:/properties/clinic.properties")
 })
 public class SpringConfig {
+
+    @Bean
+    public ResourceBundleMessageSource messageSourceResourceBundle() {
+         final ResourceBundleMessageSource messageSourceResourceBundle = new ResourceBundleMessageSource();
+        messageSourceResourceBundle.setBasenames("properties/enum");
+        return messageSourceResourceBundle;
+    }
 
     @Bean
     @Primary
