@@ -9,6 +9,10 @@
         <div>
             {{ dictionary }}
         </div>
+        <ul>
+            <li>first</li>
+            <li v-for="(value, key) in dictionary">{{ key }}: {{ value }}</li>
+        </ul>
     </div>
 </template>
 
@@ -21,7 +25,7 @@
                 dictionary: []
             };
         },
-        mounted() {
+        created() {
             axios
                 .get('http://localhost:8090/clinic/api/dictionary')
                 .then(response => (this.dictionary = response.data));

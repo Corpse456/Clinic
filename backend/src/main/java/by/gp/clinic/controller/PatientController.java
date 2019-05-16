@@ -23,7 +23,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/patient")
 @Api(tags = "Patient Controller",
-    description = "API methods to work with patients")
+    value = "API methods to work with patients")
 public class PatientController {
 
     private final PatientFacade patientFacade;

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("/development")
 @Api(tags = "Development Controller",
-    description = "API methods for test setup")
+    value = "API methods for test setup")
 public class DevelopmentController {
 
     private final DevelopmentService developmentService;

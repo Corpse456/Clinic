@@ -22,7 +22,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 @RequestMapping("/shift")
 @Api(tags = "Doctor shift Controller",
-    description = "API methods for work with doctor shifts")
+    value = "API methods for work with doctor shifts")
 public class DoctorShiftController {
 
     private final DoctorShiftFacade facade;

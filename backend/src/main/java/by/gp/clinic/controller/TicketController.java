@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("/ticket")
 @Api(tags = "Ticket Controller",
-    description = "API methods for work with tickets")
+    value = "API methods for work with tickets")
 public class TicketController {
 
     private final TicketFacade facade;
