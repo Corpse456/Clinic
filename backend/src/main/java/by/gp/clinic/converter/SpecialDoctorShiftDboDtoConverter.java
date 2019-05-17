@@ -34,15 +34,18 @@ public class SpecialDoctorShiftDboDtoConverter
     @Override
     protected void convertComplexFieldsForDto(final SpecialDoctorShiftDbo sourceDbo,
                                               final SpecialDoctorShiftDto targetDto) {
-        targetDto.setDoctorId(sourceDbo.getDoctor().getId());
+        if (sourceDbo.getDoctor() != null) {
+            targetDto.setDoctorId(sourceDbo.getDoctor().getId());
+        }
         targetDto.setShiftTiming(shiftTimingDboDtoConverter.convertToDto(sourceDbo.getShiftTiming()));
     }
 
     @Override
     protected void convertComplexFieldsForDbo(final SpecialDoctorShiftDto sourceDto,
                                               final SpecialDoctorShiftDbo targetDbo) {
-        targetDbo.setDoctor(DoctorDbo.buildEmptyWithId(sourceDto.getDoctorId()));
-
+        if (sourceDto.getDoctorId() != null) {
+            targetDbo.setDoctor(DoctorDbo.buildEmptyWithId(sourceDto.getDoctorId()));
+        }
         final ShiftTimingDto shiftTiming = sourceDto.getShiftTiming();
         targetDbo.setShiftTiming(shiftTimingService.getShiftTimingDboOrCreate(shiftTiming.getStartTime(),
                                                                               shiftTiming.getEndTime(),

@@ -16,27 +16,44 @@ public class DoctorDboDtoConverterTest extends AbstractSpringMvcTest {
 
     @Test
     public void convertToDboTest() {
-        final DoctorDto doctorDto = DoctorMock.getDoctorDtoMock();
-        final DoctorDbo doctorDbo = converter.convertToDbo(doctorDto);
-
-        assertEquals(doctorDto.getId(), doctorDbo.getId());
-        assertEquals(doctorDto.getSpeciality(), doctorDbo.getSpeciality());
-        assertEquals(doctorDto.getBirthDate(), doctorDbo.getBirthDate());
-        assertEquals(doctorDto.getGender(), doctorDbo.getGender());
-        assertEquals(doctorDto.getName(), doctorDbo.getName());
-        assertEquals(doctorDto.getLastName(), doctorDbo.getLastName());
+        convertToDbo(DoctorMock.getDoctorDtoMock());
     }
 
     @Test
     public void convertToDtoTest() {
-        final DoctorDbo doctorDbo = DoctorMock.getDoctorDboMock();
-        final DoctorDto doctorDto = converter.convertToDto(doctorDbo);
+        convertToDto(DoctorMock.getDoctorDboMock());
+    }
 
-        assertEquals(doctorDbo.getId(), doctorDto.getId());
-        assertEquals(doctorDbo.getSpeciality(), doctorDto.getSpeciality());
-        assertEquals(doctorDbo.getBirthDate(), doctorDto.getBirthDate());
-        assertEquals(doctorDbo.getGender(), doctorDto.getGender());
-        assertEquals(doctorDbo.getName(), doctorDto.getName());
-        assertEquals(doctorDbo.getLastName(), doctorDto.getLastName());
+    @Test
+    public void convertListToDboTest() {
+        DoctorMock.getListDoctorDtoMock().forEach(this::convertToDbo);
+    }
+
+    @Test
+    public void convertListToDtoTest() {
+        DoctorMock.getListDoctorDboMock().forEach(this::convertToDto);
+    }
+
+    private void convertListToDbo(final DoctorDto dto) {
+        converter.convertToDbo(DoctorMock.getListDoctorDboMock());
+    }
+
+    private void convertToDbo(final DoctorDto dto) {
+        final DoctorDbo dbo = converter.convertToDbo(dto);
+        checkConverting(dto, dbo);
+    }
+
+    private void convertToDto(final DoctorDbo dbo) {
+        final DoctorDto dto = converter.convertToDto(dbo);
+        checkConverting(dto, dbo);
+    }
+
+    private void checkConverting(final DoctorDto dto, final DoctorDbo dbo) {
+        assertEquals(dto.getId(), dbo.getId());
+        assertEquals(dto.getSpeciality(), dbo.getSpeciality());
+        assertEquals(dto.getBirthDate(), dbo.getBirthDate());
+        assertEquals(dto.getGender(), dbo.getGender());
+        assertEquals(dto.getName(), dbo.getName());
+        assertEquals(dto.getLastName(), dbo.getLastName());
     }
 }

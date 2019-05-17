@@ -17,7 +17,7 @@ public class ShiftTimingMock {
         return getShiftTimingDto(EXISTS_START_TIME, EXISTS_END_TIME);
     }
 
-    public static ShiftTimingDto getNotExistsShiftTimingDtoMock() {
+    static ShiftTimingDto getNotExistsShiftTimingDtoMock() {
         return getShiftTimingDto(START_TIME, END_TIME);
     }
 
@@ -31,10 +31,14 @@ public class ShiftTimingMock {
     }
 
     public static ShiftTimingDbo getShiftTimingDboMock() {
+        return getShiftTimingDboMock(EXISTS_START_TIME, EXISTS_END_TIME);
+    }
+
+    private static ShiftTimingDbo getShiftTimingDboMock(final LocalTime startTime, final LocalTime endTime) {
         final ShiftTimingDbo shiftTiming = new ShiftTimingDbo();
         shiftTiming.setId(1L);
-        shiftTiming.setStartTime(START_TIME);
-        shiftTiming.setEndTime(END_TIME);
+        shiftTiming.setStartTime(startTime);
+        shiftTiming.setEndTime(endTime);
         shiftTiming.setShiftOrder(ShiftOrder.FIRST);
         return shiftTiming;
     }

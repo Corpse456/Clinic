@@ -3,6 +3,7 @@ package by.gp.clinic.dbo;
 import by.gp.clinic.enums.Speciality;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -21,6 +22,7 @@ public class SpecialDoctorShiftDbo extends AbstractDbo {
 
     @OneToOne
     @JoinColumn(name = "doctor_id")
+    @Nullable
     private DoctorDbo doctor;
 
     @Enumerated(EnumType.STRING)

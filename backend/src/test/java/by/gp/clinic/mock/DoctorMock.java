@@ -7,6 +7,7 @@ import by.gp.clinic.enums.Speciality;
 import net.bytebuddy.utility.RandomString;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class DoctorMock {
 
@@ -15,6 +16,22 @@ public class DoctorMock {
     private static final Gender GENDER = Gender.FEMALE;
     private static final LocalDate BIRTH_DATE = LocalDate.now().minusYears(18);
     private static final Speciality SPECIALITY = Speciality.CARDIOLOGIST;
+
+    public static ArrayList<DoctorDto> getListDoctorDtoMock() {
+        final ArrayList<DoctorDto> doctors = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            doctors.add(getDoctorDtoMock());
+        }
+        return doctors;
+    }
+
+    public static ArrayList<DoctorDbo> getListDoctorDboMock() {
+        final ArrayList<DoctorDbo> doctors = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            doctors.add(getDoctorDboMock());
+        }
+        return doctors;
+    }
 
     public static DoctorDto getDoctorDtoMock() {
         final DoctorDto doctor = new DoctorDto();

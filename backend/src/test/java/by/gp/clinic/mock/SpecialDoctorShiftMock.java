@@ -1,5 +1,6 @@
 package by.gp.clinic.mock;
 
+import by.gp.clinic.dbo.SpecialDoctorShiftDbo;
 import by.gp.clinic.dto.SpecialDoctorShiftDto;
 import by.gp.clinic.enums.Speciality;
 
@@ -26,6 +27,25 @@ public class SpecialDoctorShiftMock {
     private static SpecialDoctorShiftDto getSpecialDoctorShiftDto() {
         final SpecialDoctorShiftDto specialShift = new SpecialDoctorShiftDto();
         specialShift.setShiftTiming(ShiftTimingMock.getNotExistsShiftTimingDtoMock());
+        specialShift.setDay(DAY);
+        return specialShift;
+    }
+
+    public static SpecialDoctorShiftDbo getSpecialDoctorShiftDoctorIdDboMock() {
+        final SpecialDoctorShiftDbo specialShift = getSpecialDoctorShiftDbo();
+        specialShift.setDoctor(DoctorMock.getDoctorDboMock());
+        return specialShift;
+    }
+
+    public static SpecialDoctorShiftDbo getSpecialDoctorShiftSpecialityDboMock() {
+        final SpecialDoctorShiftDbo specialShift = getSpecialDoctorShiftDbo();
+        specialShift.setSpeciality(SPECIALITY);
+        return specialShift;
+    }
+
+    private static SpecialDoctorShiftDbo getSpecialDoctorShiftDbo() {
+        final SpecialDoctorShiftDbo specialShift = new SpecialDoctorShiftDbo();
+        specialShift.setShiftTiming(ShiftTimingMock.getShiftTimingDboMock());
         specialShift.setDay(DAY);
         return specialShift;
     }

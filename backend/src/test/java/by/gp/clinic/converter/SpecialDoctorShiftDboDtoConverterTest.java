@@ -1,0 +1,62 @@
+package by.gp.clinic.converter;
+
+import by.gp.clinic.AbstractSpringMvcTest;
+import by.gp.clinic.dbo.SpecialDoctorShiftDbo;
+import by.gp.clinic.dto.SpecialDoctorShiftDto;
+import by.gp.clinic.mock.SpecialDoctorShiftMock;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import static org.junit.Assert.assertEquals;
+
+public class SpecialDoctorShiftDboDtoConverterTest extends AbstractSpringMvcTest {
+
+    @Autowired
+    private SpecialDoctorShiftDboDtoConverter converter;
+
+    @Test
+    public void convertToDboWithDoctorIdTest() {
+        covertToDbo(SpecialDoctorShiftMock.getSpecialDoctorShiftDoctorIdDtoMock());
+    }
+
+    @Test
+    public void convertToDboWithSpecialityTest() {
+        covertToDbo(SpecialDoctorShiftMock.getSpecialDoctorShiftSpecialityDtoMock());
+    }
+
+    @Test
+    public void convertToDtoWithDoctorIdTest() {
+        convertToDbo(SpecialDoctorShiftMock.getSpecialDoctorShiftDoctorIdDboMock());
+    }
+
+    @Test
+    public void convertToDtoWithSpecialityTest() {
+        convertToDbo(SpecialDoctorShiftMock.getSpecialDoctorShiftSpecialityDboMock());
+    }
+
+    private void covertToDbo(final SpecialDoctorShiftDto dto) {
+        final SpecialDoctorShiftDbo dbo = converter.convertToDbo(dto);
+
+        assertEquals(dto.getId(), dbo.getId());
+        assertEquals(dto.getSpeciality(), dbo.getSpeciality());
+        assertEquals(dto.getDay(), dbo.getDay());
+        if (dbo.getDoctor() != null) {
+            assertEquals(dto.getDoctorId(), dbo.getDoctor().getId());
+        }
+        assertEquals(dto.getShiftTiming().getStartTime(), dbo.getShiftTiming().getStartTime());
+        assertEquals(dto.getShiftTiming().getEndTime(), dbo.getShiftTiming().getEndTime());
+    }
+
+    private void convertToDbo(final SpecialDoctorShiftDbo dbo) {
+        final SpecialDoctorShiftDto dto = converter.convertToDto(dbo);
+
+        assertEquals(dbo.getId(), dto.getId());
+        assertEquals(dbo.getSpeciality(), dto.getSpeciality());
+        assertEquals(dbo.getDay(), dto.getDay());
+        if (dbo.getDoctor() != null) {
+            assertEquals(dbo.getDoctor().getId(), dto.getDoctorId());
+        }
+        assertEquals(dbo.getShiftTiming().getStartTime(), dto.getShiftTiming().getStartTime());
+        assertEquals(dbo.getShiftTiming().getEndTime(), dto.getShiftTiming().getEndTime());
+    }
+}
