@@ -2,9 +2,9 @@ package by.gp.clinic.dto;
 
 import by.gp.clinic.annotation.ShiftTming;
 import by.gp.clinic.annotation.SpecialDoctorShift;
-import by.gp.clinic.enumerated.Speciality;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.lang.Nullable;
 
 import javax.validation.constraints.NotNull;
 import java.time.DayOfWeek;
@@ -14,9 +14,11 @@ import java.time.DayOfWeek;
 @SpecialDoctorShift
 public class SpecialDoctorShiftDto extends AbstractDto {
 
+    @Nullable
     private Long doctorId;
 
-    private Speciality speciality;
+    @Nullable
+    private Long specialityId;
 
     @NotNull
     private DayOfWeek day;

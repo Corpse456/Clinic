@@ -2,7 +2,6 @@ package by.gp.clinic.mock;
 
 import by.gp.clinic.dbo.SpecialDoctorShiftDbo;
 import by.gp.clinic.dto.SpecialDoctorShiftDto;
-import by.gp.clinic.enumerated.Speciality;
 
 import java.time.DayOfWeek;
 
@@ -10,7 +9,6 @@ public class SpecialDoctorShiftMock {
 
     private static final DayOfWeek DAY = DayOfWeek.MONDAY;
     private static final long DOCTOR_ID = 1L;
-    private static final Speciality SPECIALITY = Speciality.ENDOCRINOLOGIST;
 
     public static SpecialDoctorShiftDto getSpecialDoctorShiftDoctorIdDtoMock() {
         final SpecialDoctorShiftDto specialShift = getSpecialDoctorShiftDto();
@@ -20,7 +18,7 @@ public class SpecialDoctorShiftMock {
 
     public static SpecialDoctorShiftDto getSpecialDoctorShiftSpecialityDtoMock() {
         final SpecialDoctorShiftDto specialShift = getSpecialDoctorShiftDto();
-        specialShift.setSpeciality(SPECIALITY);
+        specialShift.setSpecialityId(SpecialityMock.getSpecialityDtoMock().getId());
         return specialShift;
     }
 
@@ -39,7 +37,7 @@ public class SpecialDoctorShiftMock {
 
     public static SpecialDoctorShiftDbo getSpecialDoctorShiftSpecialityDboMock() {
         final SpecialDoctorShiftDbo specialShift = getSpecialDoctorShiftDbo();
-        specialShift.setSpeciality(SPECIALITY);
+        specialShift.setSpeciality(SpecialityMock.getSpecialityDboMock());
         return specialShift;
     }
 

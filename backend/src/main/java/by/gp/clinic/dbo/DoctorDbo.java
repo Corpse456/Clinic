@@ -1,12 +1,12 @@
 package by.gp.clinic.dbo;
 
-import by.gp.clinic.enumerated.Speciality;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Data
@@ -15,8 +15,9 @@ import javax.persistence.Table;
 @EqualsAndHashCode(callSuper = true)
 public class DoctorDbo extends ManDbo {
 
-    @Enumerated(EnumType.STRING)
-    private Speciality speciality;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "speciality_id")
+    private SpecialityDbo speciality;
 
     public static DoctorDbo buildEmptyWithId(final Long id) {
         final DoctorDbo patient = new DoctorDbo();

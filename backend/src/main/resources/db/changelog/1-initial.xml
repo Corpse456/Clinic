@@ -16,7 +16,17 @@
             <column name="gender" type="varchar(10)"/>
         </createTable>
 
-        <addUniqueConstraint constraintName="unique_doctor" tableName="patient" columnNames="name, last_name"/>
+        <addUniqueConstraint constraintName="unique_patient" tableName="patient" columnNames="name, last_name"/>
+    </changeSet>
+
+    <changeSet id="add_speciality_table" author="neznaev">
+        <createTable tableName="speciality">
+            <column name="id" type="bigint(20)" autoIncrement="true">
+                <constraints primaryKeyName="speciality_pk"
+                             primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(100)"/>
+        </createTable>
     </changeSet>
 
     <changeSet id="add_doctor_table" author="neznaev">
@@ -28,11 +38,16 @@
             <column name="name" type="varchar(100)"/>
             <column name="last_name" type="varchar(100)"/>
             <column name="birth_date" type="date"/>
-            <column name="speciality" type="varchar(50)"/>
+            <column name="speciality_id" type="bigint(20)">
+                <constraints referencedTableName="speciality"
+                             referencedColumnNames="id"
+                             foreignKeyName="doctor_fk_speciality_id"
+                             deleteCascade="true"/>
+            </column>
             <column name="gender" type="varchar(10)"/>
         </createTable>
 
-        <addUniqueConstraint constraintName="unique_patient" tableName="doctor" columnNames="name, last_name"/>
+        <addUniqueConstraint constraintName="unique_doctor" tableName="doctor" columnNames="name, last_name"/>
     </changeSet>
 
     <changeSet id="add_shift_timing_table" author="neznaev">
@@ -93,16 +108,20 @@
                              foreignKeyName="special_doctor_shift_fk_shift_timing_id"
                              deleteCascade="true"/>
             </column>
+            <column name="speciality_id" type="bigint(20)">
+                <constraints referencedTableName="speciality"
+                             referencedColumnNames="id"
+                             foreignKeyName="special_doctor_shift_fk_speciality_id"
+                             deleteCascade="true"/>
+            </column>
             <column name="day" type="varchar(15)"/>
-            <column name="speciality" type="varchar(50)"/>
         </createTable>
 
         <addUniqueConstraint constraintName="unique_speciality" tableName="special_doctor_shift"
-                             columnNames="day, speciality"/>
+                             columnNames="day, speciality_id"/>
         <addUniqueConstraint constraintName="unique_doctor_id" tableName="special_doctor_shift"
                              columnNames="day, doctor_id"/>
     </changeSet>
-
 
     <changeSet id="add_ticket_table" author="neznaev">
         <createTable tableName="ticket">

@@ -4,7 +4,6 @@ import by.gp.clinic.converter.SpecialDoctorShiftDboDtoConverter;
 import by.gp.clinic.dbo.ShiftTimingDbo;
 import by.gp.clinic.dbo.SpecialDoctorShiftDbo;
 import by.gp.clinic.dto.SpecialDoctorShiftDto;
-import by.gp.clinic.enumerated.Speciality;
 import by.gp.clinic.repository.SpecialDoctorShiftRepository;
 import org.springframework.stereotype.Service;
 
@@ -23,8 +22,8 @@ public class SpecialDoctorShiftService extends AbstractService<SpecialDoctorShif
         this.repository = repository;
     }
 
-    public Map<DayOfWeek, ShiftTimingDbo> getSpecialShifts(final Long id, final Speciality speciality) {
-        return repository.findAllByDoctorIdOrSpeciality(id, speciality)
+    public Map<DayOfWeek, ShiftTimingDbo> getSpecialShifts(final Long id, final Long specialityId) {
+        return repository.findAllByDoctorIdOrSpecialityId(id, specialityId)
             .stream()
             .collect(Collectors.toMap(SpecialDoctorShiftDbo::getDay, SpecialDoctorShiftDbo::getShiftTiming));
     }

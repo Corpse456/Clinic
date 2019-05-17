@@ -29,7 +29,7 @@ public class DoctorShiftFacade {
 
     public Map<LocalDate, ShiftTimingDto> getDoctorShift(final Long id) {
         final Map<DayOfWeek, ShiftTimingDbo> specialShifts =
-            specialDoctorShiftService.getSpecialShifts(id, doctorService.getSpeciality(id));
+            specialDoctorShiftService.getSpecialShifts(id, doctorService.getSpeciality(id).getId());
 
         return doctorShiftService.getByDoctorId(id).stream()
             .collect(Collectors.toMap(DoctorShiftDbo::getDate, d -> shiftTimingDboDtoConverter

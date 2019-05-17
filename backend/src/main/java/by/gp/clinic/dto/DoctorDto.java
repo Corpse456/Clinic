@@ -1,6 +1,5 @@
 package by.gp.clinic.dto;
 
-import by.gp.clinic.enumerated.Speciality;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -13,5 +12,5 @@ import javax.validation.constraints.NotNull;
 public class DoctorDto extends ManDto {
 
     @NotNull
-    private Speciality speciality;
+    private Long specialityId;
 }

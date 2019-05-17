@@ -30,7 +30,7 @@ public class TimeTableCreatingService implements WeeklyExecutable {
         allDoctors.forEach(d -> {
             try {
                 final Map<DayOfWeek, ShiftTimingDbo> specialShifts =
-                    specialDoctorShiftService.getSpecialShifts(d.getId(), d.getSpeciality());
+                    specialDoctorShiftService.getSpecialShifts(d.getId(), d.getSpeciality().getId());
                 doctorShiftService.createTimeTableForWeekAfterNextWeek(d, specialShifts);
             } catch (final Exception e) {
                 LOGGER.error("Error in Weekly executable", e);

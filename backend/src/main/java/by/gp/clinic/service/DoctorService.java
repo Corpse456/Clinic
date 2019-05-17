@@ -2,8 +2,8 @@ package by.gp.clinic.service;
 
 import by.gp.clinic.converter.DoctorDboDtoConverter;
 import by.gp.clinic.dbo.DoctorDbo;
+import by.gp.clinic.dbo.SpecialityDbo;
 import by.gp.clinic.dto.DoctorDto;
-import by.gp.clinic.enumerated.Speciality;
 import by.gp.clinic.repository.DoctorRepository;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +22,7 @@ public class DoctorService extends AbstractService<DoctorDbo, DoctorDto> {
         return repository.existsByNameAndLastName(name, lastName);
     }
 
-    public Speciality getSpeciality(final Long id) {
+    public SpecialityDbo getSpeciality(final Long id) {
         return repository.getSpecialityById(id);
     }
 }

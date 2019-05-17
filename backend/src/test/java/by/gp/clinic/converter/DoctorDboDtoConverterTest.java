@@ -78,7 +78,6 @@ public class DoctorDboDtoConverterTest extends AbstractSpringMvcTest {
 
     private void checkConverting(final DoctorDto dto, final DoctorDbo dbo) {
         assertEquals(dto.getId(), dbo.getId());
-        assertEquals(dto.getSpeciality(), dbo.getSpeciality());
         assertEquals(dto.getBirthDate(), dbo.getBirthDate());
         assertEquals(dto.getGender(), dbo.getGender());
         assertEquals(dto.getName(), dbo.getName());

@@ -6,7 +6,6 @@ import by.gp.clinic.dbo.DoctorShiftDbo;
 import by.gp.clinic.dbo.ShiftTimingDbo;
 import by.gp.clinic.dto.DoctorShiftDto;
 import by.gp.clinic.enumerated.ShiftOrder;
-import by.gp.clinic.enumerated.Speciality;
 import by.gp.clinic.repository.DoctorShiftRepository;
 import org.springframework.stereotype.Service;
 
@@ -71,8 +70,8 @@ public class DoctorShiftService extends AbstractService<DoctorShiftDbo, DoctorSh
         save(doctorShift);
     }
 
-    public List<ShiftOrder> getShiftsOrderForDay(final LocalDate date, final Speciality speciality) {
-        return repository.findShiftOrdersByDateAndSpeciality(date, speciality);
+    public List<ShiftOrder> getShiftsOrderForDay(final LocalDate date, final Long specialityId) {
+        return repository.findShiftOrdersByDateAndSpeciality(date, specialityId);
     }
 
     public void postShiftForDate(final DoctorShiftDto doctorShift) {

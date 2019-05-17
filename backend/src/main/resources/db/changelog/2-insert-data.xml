@@ -34,5 +34,48 @@
         <sql>alter table shift_timing auto_increment = 100</sql>
     </changeSet>
 
+    <changeSet id="insert_doctor_specialities" author="neznaev">
+        <insert tableName="speciality">
+            <column name="id" value="1"/>
+            <column name="name" value="Cardiologist"/>
+        </insert>
+        <insert tableName="speciality">
+            <column name="id" value="2"/>
+            <column name="name" value="Dermatologist"/>
+        </insert>
+        <insert tableName="speciality">
+            <column name="id" value="3"/>
+            <column name="name" value="Endocrinologist"/>
+        </insert>
+        <insert tableName="speciality">
+            <column name="id" value="4"/>
+            <column name="name" value="Gastroenterologist"/>
+        </insert>
+        <insert tableName="speciality">
+            <column name="id" value="5"/>
+            <column name="name" value="Ophthalmologist"/>
+        </insert>
+        <insert tableName="speciality">
+            <column name="id" value="6"/>
+            <column name="name" value="Otolaryngologist"/>
+        </insert>
+        <insert tableName="speciality">
+            <column name="id" value="7"/>
+            <column name="name" value="Pulmonologist"/>
+        </insert>
+        <insert tableName="speciality">
+            <column name="id" value="8"/>
+            <column name="name" value="Therapist"/>
+        </insert>
+        <insert tableName="speciality">
+            <column name="id" value="9"/>
+            <column name="name" value="Pathologyst"/>
+        </insert>
+        <insert tableName="speciality">
+            <column name="id" value="10"/>
+            <column name="name" value="Psychiatrist"/>
+        </insert>
+    </changeSet>
+
     <include file="test/insert-test-data.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

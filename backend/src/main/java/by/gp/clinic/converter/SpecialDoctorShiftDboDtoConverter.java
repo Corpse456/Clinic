@@ -2,6 +2,7 @@ package by.gp.clinic.converter;
 
 import by.gp.clinic.dbo.DoctorDbo;
 import by.gp.clinic.dbo.SpecialDoctorShiftDbo;
+import by.gp.clinic.dbo.SpecialityDbo;
 import by.gp.clinic.dto.ShiftTimingDto;
 import by.gp.clinic.dto.SpecialDoctorShiftDto;
 import by.gp.clinic.service.ShiftTimingService;
@@ -28,7 +29,7 @@ public class SpecialDoctorShiftDboDtoConverter
 
     @Override
     protected String[] getIgnoreProperties() {
-        return new String[]{"shiftTiming"};
+        return new String[]{"shiftTiming", "speciality"};
     }
 
     @Override
@@ -38,6 +39,9 @@ public class SpecialDoctorShiftDboDtoConverter
             targetDto.setDoctorId(sourceDbo.getDoctor().getId());
         }
         targetDto.setShiftTiming(shiftTimingDboDtoConverter.convertToDto(sourceDbo.getShiftTiming()));
+        if (sourceDbo.getSpeciality() != null) {
+            targetDto.setSpecialityId(sourceDbo.getSpeciality().getId());
+        }
     }
 
     @Override
@@ -50,5 +54,8 @@ public class SpecialDoctorShiftDboDtoConverter
         targetDbo.setShiftTiming(shiftTimingService.getShiftTimingDboOrCreate(shiftTiming.getStartTime(),
                                                                               shiftTiming.getEndTime(),
                                                                               shiftTiming.getShiftOrder()));
+        if (sourceDto.getSpecialityId() != null) {
+            targetDbo.setSpeciality(SpecialityDbo.buildEmptyWithId(sourceDto.getSpecialityId()));
+        }
     }
 }

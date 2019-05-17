@@ -1,6 +1,5 @@
 package by.gp.clinic.dbo;
 
-import by.gp.clinic.enumerated.Speciality;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.lang.Nullable;
@@ -8,6 +7,7 @@ import org.springframework.lang.Nullable;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -25,8 +25,10 @@ public class SpecialDoctorShiftDbo extends AbstractDbo {
     @Nullable
     private DoctorDbo doctor;
 
-    @Enumerated(EnumType.STRING)
-    private Speciality speciality;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "speciality_id")
+    @Nullable
+    private SpecialityDbo speciality;
 
     @Enumerated(EnumType.STRING)
     private DayOfWeek day;

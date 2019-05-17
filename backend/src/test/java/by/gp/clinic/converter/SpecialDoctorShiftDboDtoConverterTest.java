@@ -38,25 +38,19 @@ public class SpecialDoctorShiftDboDtoConverterTest extends AbstractSpringMvcTest
         final SpecialDoctorShiftDbo dbo = converter.convertToDbo(dto);
 
         assertEquals(dto.getId(), dbo.getId());
-        assertEquals(dto.getSpeciality(), dbo.getSpeciality());
         assertEquals(dto.getDay(), dbo.getDay());
         if (dbo.getDoctor() != null) {
             assertEquals(dto.getDoctorId(), dbo.getDoctor().getId());
         }
-        assertEquals(dto.getShiftTiming().getStartTime(), dbo.getShiftTiming().getStartTime());
-        assertEquals(dto.getShiftTiming().getEndTime(), dbo.getShiftTiming().getEndTime());
     }
 
     private void convertToDbo(final SpecialDoctorShiftDbo dbo) {
         final SpecialDoctorShiftDto dto = converter.convertToDto(dbo);
 
         assertEquals(dbo.getId(), dto.getId());
-        assertEquals(dbo.getSpeciality(), dto.getSpeciality());
         assertEquals(dbo.getDay(), dto.getDay());
         if (dbo.getDoctor() != null) {
             assertEquals(dbo.getDoctor().getId(), dto.getDoctorId());
         }
-        assertEquals(dbo.getShiftTiming().getStartTime(), dto.getShiftTiming().getStartTime());
-        assertEquals(dbo.getShiftTiming().getEndTime(), dto.getShiftTiming().getEndTime());
     }
 }

@@ -1,8 +1,11 @@
-package by.gp.clinic.service;
+package by.gp.clinic.facade;
 
 import by.gp.clinic.dto.DictionaryDto;
 import by.gp.clinic.dto.DictionaryEntryDto;
-import by.gp.clinic.enumerated.Speciality;
+import by.gp.clinic.enumerated.Gender;
+import by.gp.clinic.enumerated.ShiftOrder;
+import by.gp.clinic.service.MessagesService;
+import by.gp.clinic.service.SpecialityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,13 +16,16 @@ import static java.util.stream.Collectors.toList;
 
 @Service
 @RequiredArgsConstructor
-public class DictionaryService {
+public class DictionaryFacade {
 
+    private final SpecialityService specialityService;
     private final MessagesService messagesService;
 
     public DictionaryDto buildDictionaryData() {
         final DictionaryDto dictionary = new DictionaryDto();
-        dictionary.setSpecialities(buildSimpleDictionaries(Speciality.class));
+        dictionary.setGenders(buildSimpleDictionaries(Gender.class));
+        dictionary.setShiftOrders(buildSimpleDictionaries(ShiftOrder.class));
+        dictionary.setSpecialities(specialityService.findAll());
         return dictionary;
     }
 

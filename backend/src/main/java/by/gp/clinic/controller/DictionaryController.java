@@ -1,7 +1,7 @@
 package by.gp.clinic.controller;
 
 import by.gp.clinic.dto.DictionaryDto;
-import by.gp.clinic.service.DictionaryService;
+import by.gp.clinic.facade.DictionaryFacade;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class DictionaryController {
 
-    private final DictionaryService dictionaryService;
+    private final DictionaryFacade dictionaryFacade;
 
     @GetMapping
     public DictionaryDto getDictionaryData() {
-        return dictionaryService.buildDictionaryData();
+        return dictionaryFacade.buildDictionaryData();
     }
 }

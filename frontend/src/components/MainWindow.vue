@@ -26,9 +26,15 @@
             };
         },
         created() {
+
             axios
                 .get('http://localhost:8090/clinic/api/dictionary')
-                .then(response => (this.dictionary = response.data));
+                .then(response => {
+                    debugger;
+                    (this.dictionary = response.data);
+                }).catch(err => {
+                debugger;
+            });
         }
     }
 </script>
