@@ -43,8 +43,7 @@ public class ValidationUtils {
             field.setAccessible(true);
             return field.get(someObject) == null;
         } catch (final IllegalAccessException e) {
-            e.printStackTrace();
-            LOGGER.error("Can't execute field " + field.getName());
+            LOGGER.error("Can't execute field " + field.getName(), e);
             return true;
         }
     }
