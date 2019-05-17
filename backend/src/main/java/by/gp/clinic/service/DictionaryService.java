@@ -2,7 +2,7 @@ package by.gp.clinic.service;
 
 import by.gp.clinic.dto.DictionaryDto;
 import by.gp.clinic.dto.DictionaryEntryDto;
-import by.gp.clinic.enums.Speciality;
+import by.gp.clinic.enumerated.Speciality;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

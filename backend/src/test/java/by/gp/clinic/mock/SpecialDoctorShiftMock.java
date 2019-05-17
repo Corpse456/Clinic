@@ -2,7 +2,7 @@ package by.gp.clinic.mock;
 
 import by.gp.clinic.dbo.SpecialDoctorShiftDbo;
 import by.gp.clinic.dto.SpecialDoctorShiftDto;
-import by.gp.clinic.enums.Speciality;
+import by.gp.clinic.enumerated.Speciality;
 
 import java.time.DayOfWeek;
 

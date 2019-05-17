@@ -1,6 +1,6 @@
 package by.gp.clinic.dbo;
 
-import by.gp.clinic.enums.Speciality;
+import by.gp.clinic.enumerated.Speciality;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

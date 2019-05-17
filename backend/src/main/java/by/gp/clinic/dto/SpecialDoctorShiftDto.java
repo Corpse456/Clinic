@@ -2,7 +2,7 @@ package by.gp.clinic.dto;
 
 import by.gp.clinic.annotation.ShiftTming;
 import by.gp.clinic.annotation.SpecialDoctorShift;
-import by.gp.clinic.enums.Speciality;
+import by.gp.clinic.enumerated.Speciality;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

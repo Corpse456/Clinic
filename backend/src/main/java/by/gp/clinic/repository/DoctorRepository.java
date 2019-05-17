@@ -1,7 +1,7 @@
 package by.gp.clinic.repository;
 
 import by.gp.clinic.dbo.DoctorDbo;
-import by.gp.clinic.enums.Speciality;
+import by.gp.clinic.enumerated.Speciality;
 import org.springframework.data.jpa.repository.Query;
 
 import javax.transaction.Transactional;

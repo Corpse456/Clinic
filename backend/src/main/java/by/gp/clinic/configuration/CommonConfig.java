@@ -23,7 +23,7 @@ import java.time.LocalDateTime;
 @PropertySources({
     @PropertySource("classpath:/properties/clinic.properties")
 })
-public class SpringConfig {
+public class CommonConfig {
 
     @Bean
     public ResourceBundleMessageSource messageSourceResourceBundle() {

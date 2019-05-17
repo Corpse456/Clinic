@@ -2,7 +2,7 @@ package by.gp.clinic.mock;
 
 import by.gp.clinic.dbo.ShiftTimingDbo;
 import by.gp.clinic.dto.ShiftTimingDto;
-import by.gp.clinic.enums.ShiftOrder;
+import by.gp.clinic.enumerated.ShiftOrder;
 
 import java.time.LocalTime;
 

@@ -2,14 +2,13 @@ package by.gp.clinic.repository;
 
 import by.gp.clinic.dbo.DoctorShiftDbo;
 import by.gp.clinic.dbo.ShiftTimingDbo;
-import by.gp.clinic.enums.ShiftOrder;
-import by.gp.clinic.enums.Speciality;
+import by.gp.clinic.enumerated.ShiftOrder;
+import by.gp.clinic.enumerated.Speciality;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;

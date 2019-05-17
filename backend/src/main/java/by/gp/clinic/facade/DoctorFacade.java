@@ -3,7 +3,7 @@ package by.gp.clinic.facade;
 import by.gp.clinic.dbo.DoctorDbo;
 import by.gp.clinic.dbo.ShiftTimingDbo;
 import by.gp.clinic.dto.DoctorDto;
-import by.gp.clinic.enums.ShiftOrder;
+import by.gp.clinic.enumerated.ShiftOrder;
 import by.gp.clinic.exception.DoctorExistsException;
 import by.gp.clinic.exception.DoctorNotExistsException;
 import by.gp.clinic.exception.ShiftTimingNotExistsException;

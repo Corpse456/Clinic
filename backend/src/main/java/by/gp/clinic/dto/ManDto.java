@@ -1,10 +1,6 @@
 package by.gp.clinic.dto;
 
-import by.gp.clinic.enums.Gender;
-import by.gp.clinic.serializer.ClinicDateDeserializer;
-import by.gp.clinic.serializer.ClinicDateSerializer;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import by.gp.clinic.enumerated.Gender;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;

@@ -1,6 +1,6 @@
 package by.gp.clinic.dto;
 
-import by.gp.clinic.enums.ShiftOrder;
+import by.gp.clinic.enumerated.ShiftOrder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;

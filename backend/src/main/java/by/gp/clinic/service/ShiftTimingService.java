@@ -3,7 +3,7 @@ package by.gp.clinic.service;
 import by.gp.clinic.converter.ShiftTimingDboDtoConverter;
 import by.gp.clinic.dbo.ShiftTimingDbo;
 import by.gp.clinic.dto.ShiftTimingDto;
-import by.gp.clinic.enums.ShiftOrder;
+import by.gp.clinic.enumerated.ShiftOrder;
 import by.gp.clinic.exception.ShiftTimingNotExistsException;
 import by.gp.clinic.repository.ShiftTimingRepository;
 import org.springframework.beans.factory.annotation.Value;

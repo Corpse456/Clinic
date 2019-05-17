@@ -3,8 +3,8 @@ package by.gp.clinic.service;
 import by.gp.clinic.controller.DevelopmentController;
 import by.gp.clinic.dto.DoctorDto;
 import by.gp.clinic.dto.PatientDto;
-import by.gp.clinic.enums.Gender;
-import by.gp.clinic.enums.Speciality;
+import by.gp.clinic.enumerated.Gender;
+import by.gp.clinic.enumerated.Speciality;
 import by.gp.clinic.exception.DoctorExistsException;
 import by.gp.clinic.exception.PatientExistsException;
 import by.gp.clinic.exception.ShiftTimingNotExistsException;
@@ -23,7 +23,7 @@ import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static by.gp.clinic.enums.Gender.MALE;
+import static by.gp.clinic.enumerated.Gender.MALE;
 import static java.util.Objects.requireNonNull;
 
 @Service

@@ -2,8 +2,8 @@ package by.gp.clinic.mock;
 
 import by.gp.clinic.dbo.DoctorDbo;
 import by.gp.clinic.dto.DoctorDto;
-import by.gp.clinic.enums.Gender;
-import by.gp.clinic.enums.Speciality;
+import by.gp.clinic.enumerated.Gender;
+import by.gp.clinic.enumerated.Speciality;
 import net.bytebuddy.utility.RandomString;
 
 import java.time.LocalDate;

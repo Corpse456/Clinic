@@ -1,6 +1,6 @@
 package by.gp.clinic.dbo;
 
-import by.gp.clinic.enums.Gender;
+import by.gp.clinic.enumerated.Gender;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

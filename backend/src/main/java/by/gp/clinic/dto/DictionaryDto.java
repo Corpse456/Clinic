@@ -1,6 +1,6 @@
 package by.gp.clinic.dto;
 
-import by.gp.clinic.enums.Speciality;
+import by.gp.clinic.enumerated.Speciality;
 import lombok.Data;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package by.gp.clinic.enums;
+package by.gp.clinic.enumerated;
 
 public enum Speciality {
 

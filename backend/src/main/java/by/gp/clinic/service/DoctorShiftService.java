@@ -5,8 +5,8 @@ import by.gp.clinic.dbo.DoctorDbo;
 import by.gp.clinic.dbo.DoctorShiftDbo;
 import by.gp.clinic.dbo.ShiftTimingDbo;
 import by.gp.clinic.dto.DoctorShiftDto;
-import by.gp.clinic.enums.ShiftOrder;
-import by.gp.clinic.enums.Speciality;
+import by.gp.clinic.enumerated.ShiftOrder;
+import by.gp.clinic.enumerated.Speciality;
 import by.gp.clinic.repository.DoctorShiftRepository;
 import org.springframework.stereotype.Service;
 
