@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import javax.transaction.Transactional;
 
 @Transactional
-public interface DoctorRepository extends CustomRepository<DoctorDbo, Long> {
+public interface DoctorRepository extends NamedRepository<DoctorDbo, Long> {
 
     @Query("select d.speciality from DoctorDbo d where d.id = ?1")
     SpecialityDbo getSpecialityById(final Long id);

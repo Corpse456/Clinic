@@ -1,8 +1,10 @@
 package by.gp.clinic.controller;
 
 import by.gp.clinic.dto.AbstractDto;
+import by.gp.clinic.dto.PageDto;
 import by.gp.clinic.dto.PatientDto;
 import by.gp.clinic.repository.PatientRepository;
+import by.gp.clinic.search.PatientSearchRequest;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.json.JSONObject;
 import org.junit.Test;
@@ -10,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MvcResult;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import static by.gp.clinic.mock.PatientMock.getPatientDtoMock;
 import static by.gp.clinic.serializer.ClinicDateTimeSerializer.DATE_TIME_PATTERN;
@@ -42,7 +43,7 @@ public class PatientControllerTest extends AbstractControllerTest {
 
     @Test
     public void findPatientsTest() {
-        findEntitiesTest(new TypeReference<List<PatientDto>>() {
+        findEntitiesTest(new PatientSearchRequest(), new TypeReference<PageDto<PatientDto>>() {
         });
     }
 

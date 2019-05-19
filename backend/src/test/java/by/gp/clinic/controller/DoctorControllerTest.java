@@ -2,7 +2,9 @@ package by.gp.clinic.controller;
 
 import by.gp.clinic.dto.AbstractDto;
 import by.gp.clinic.dto.DoctorDto;
+import by.gp.clinic.dto.PageDto;
 import by.gp.clinic.repository.DoctorRepository;
+import by.gp.clinic.search.DoctorSearchRequest;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +35,7 @@ public class DoctorControllerTest extends AbstractControllerTest {
 
     @Test
     public void findDoctorsTest() {
-        findEntitiesTest(new TypeReference<List<DoctorDto>>() {
+        findEntitiesTest(new DoctorSearchRequest(), new TypeReference<PageDto<DoctorDto>>() {
         });
     }
 

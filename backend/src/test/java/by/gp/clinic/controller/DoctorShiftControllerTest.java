@@ -2,12 +2,15 @@ package by.gp.clinic.controller;
 
 import by.gp.clinic.dbo.AbstractDbo;
 import by.gp.clinic.dto.DoctorShiftDto;
+import by.gp.clinic.dto.PageDto;
 import by.gp.clinic.dto.SpecialDoctorShiftDto;
 import by.gp.clinic.mock.DoctorShiftMock;
+import by.gp.clinic.repository.CustomRepository;
 import by.gp.clinic.repository.DoctorShiftRepository;
+import by.gp.clinic.search.DoctorShiftSearchRequest;
+import com.fasterxml.jackson.core.type.TypeReference;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.test.web.servlet.MvcResult;
 
 import java.util.HashMap;
@@ -21,7 +24,7 @@ public class DoctorShiftControllerTest extends AbstractControllerTest {
 
     private static final String SHIFT_URL = "/shift";
     private static final String SPECIAL_URL = "/special";
-    public static final String ERROR_MESSAGE = "one of property must be not null (doctorId / speciality)";
+    private static final String ERROR_MESSAGE = "one of property must be not null (doctorId / speciality)";
 
     @Autowired
     private DoctorShiftRepository doctorShiftRepository;
@@ -53,8 +56,14 @@ public class DoctorShiftControllerTest extends AbstractControllerTest {
         addEntityWithStatus(specialShift, 400, ERROR_MESSAGE, SPECIAL_URL);
     }
 
+    @Test
+    public void searchDoctorShifts() {
+        findEntitiesTest(new DoctorShiftSearchRequest(), new TypeReference<PageDto<DoctorShiftDto>>() {
+        });
+    }
+
     @Override
-    protected JpaRepository<? extends AbstractDbo, Long> getRepository() {
+    protected CustomRepository<? extends AbstractDbo, Long> getRepository() {
         return doctorShiftRepository;
     }
 

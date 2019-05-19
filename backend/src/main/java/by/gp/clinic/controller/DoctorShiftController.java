@@ -1,9 +1,11 @@
 package by.gp.clinic.controller;
 
 import by.gp.clinic.dto.DoctorShiftDto;
+import by.gp.clinic.dto.PageDto;
 import by.gp.clinic.dto.ShiftTimingDto;
 import by.gp.clinic.dto.SpecialDoctorShiftDto;
 import by.gp.clinic.facade.DoctorShiftFacade;
+import by.gp.clinic.search.DoctorShiftSearchRequest;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -40,8 +42,15 @@ public class DoctorShiftController {
     }
 
     @GetMapping(value = "/{id}")
-    @ApiOperation(value = "Get doctor shifts")
-    public Map<LocalDate, ShiftTimingDto> getDoctorShifts(@PathVariable("id") final Long id) {
+    @ApiOperation(value = "Get doctor shifts by doctor id")
+    public Map<LocalDate, ShiftTimingDto> getDoctorShiftsByDoctorId(@PathVariable("id") final Long id) {
         return facade.getDoctorShift(id);
+    }
+
+    @PostMapping(value = "/search")
+    @ApiOperation(value = "Get doctor shifts by doctor id")
+    public PageDto<DoctorShiftDto> getDoctorShifts(
+        @RequestBody @Validated final DoctorShiftSearchRequest searchRequest) {
+        return facade.getDoctorShifts(searchRequest);
     }
 }

@@ -28,4 +28,10 @@ public class DevelopmentController {
     public void createPatients() {
         developmentService.addPatients();
     }
+
+    @PostMapping(value = "/tickets")
+    @ApiOperation(value = "Create random tickets")
+    public void createTickets() {
+        developmentService.addTickets();
+    }
 }

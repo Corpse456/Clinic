@@ -4,19 +4,22 @@ import by.gp.clinic.converter.TicketDboDtoConverter;
 import by.gp.clinic.dbo.TicketDbo;
 import by.gp.clinic.dto.TicketDto;
 import by.gp.clinic.repository.TicketRepository;
+import by.gp.clinic.search.TicketSearchRequest;
+import by.gp.clinic.factory.predicateFactory.TicketPredicateFactory;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Service
-public class TicketService extends AbstractService<TicketDbo, TicketDto> {
+public class TicketService extends AbstractSearchService<TicketDbo, TicketDto, TicketSearchRequest> {
 
     private final TicketRepository repository;
 
-    public TicketService(final TicketDboDtoConverter converter,
+    public TicketService(final TicketPredicateFactory predicateFactory,
+                         final TicketDboDtoConverter converter,
                          final TicketRepository repository) {
-        super(converter, repository);
+        super(predicateFactory, converter, repository);
         this.repository = repository;
     }
 
@@ -24,7 +27,7 @@ public class TicketService extends AbstractService<TicketDbo, TicketDto> {
         return repository.getLastTicketNumber(id, getStartDay(dateTime), getEndDay(dateTime)).orElse(1);
     }
 
-    public boolean iaTimeBusy(final Long id, final LocalDateTime dateTime) {
+    public boolean isTimeBusy(final Long id, final LocalDateTime dateTime) {
         return repository.getByDoctorIdAndDateTime(id, dateTime) > 0;
     }
 

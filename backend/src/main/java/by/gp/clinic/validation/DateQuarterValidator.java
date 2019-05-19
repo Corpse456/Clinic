@@ -34,6 +34,6 @@ public class DateQuarterValidator implements ConstraintValidator<DateQuarter, Lo
     }
 
     private boolean isMultiple(final LocalDateTime value) {
-        return value.getMinute() % onePatientTime == 0;
+        return value.getMinute() % onePatientTime == 0 && value.getSecond() == 0;
     }
 }

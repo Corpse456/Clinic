@@ -5,14 +5,11 @@ import by.gp.clinic.exception.TicketAlreadyTakenException;
 import by.gp.clinic.exception.WrongWorkingHoursException;
 import by.gp.clinic.service.DoctorShiftService;
 import by.gp.clinic.service.TicketService;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-
-import java.time.LocalDateTime;
 
 import static by.gp.clinic.mock.TicketMock.getTicketDtoMock;
 import static org.mockito.ArgumentMatchers.any;
@@ -31,14 +28,14 @@ public class TicketFacadeTest {
     @Test(expected = WrongWorkingHoursException.class)
     public void addTicketWrongDoctorHours() throws WrongWorkingHoursException, TicketAlreadyTakenException {
         final TicketDto ticket = getTicketDtoMock();
-        doReturn(false).when(doctorShiftService).iaDoctorWorkingHours(any(), any());
+        doReturn(false).when(doctorShiftService).isDoctorWorkingHours(any(), any());
         ticketFacade.addTicket(ticket);
     }
 
     @Test(expected = TicketAlreadyTakenException.class)
     public void addTicketTimeBusy() throws WrongWorkingHoursException, TicketAlreadyTakenException {
-        doReturn(true).when(doctorShiftService).iaDoctorWorkingHours(any(), any());
-        doReturn(true).when(ticketService).iaTimeBusy(any(), any());
+        doReturn(true).when(doctorShiftService).isDoctorWorkingHours(any(), any());
+        doReturn(true).when(ticketService).isTimeBusy(any(), any());
         ticketFacade.addTicket(getTicketDtoMock());
     }
 }

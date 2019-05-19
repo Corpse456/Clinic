@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Transactional
-public interface DoctorShiftRepository extends JpaRepository<DoctorShiftDbo, Long> {
+public interface DoctorShiftRepository extends CustomRepository<DoctorShiftDbo, Long> {
 
     @Query("select s.shiftTiming.shiftOrder from DoctorShiftDbo s where s.date = ?1 and s.doctor.speciality.id = ?2")
     List<ShiftOrder> findShiftOrdersByDateAndSpeciality(final LocalDate date, final Long specialityId);

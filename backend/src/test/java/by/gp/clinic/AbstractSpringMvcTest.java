@@ -1,5 +1,6 @@
 package by.gp.clinic;
 
+import by.gp.clinic.dto.PageDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,7 +20,6 @@ import org.springframework.web.context.WebApplicationContext;
 import javax.transaction.Transactional;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.List;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.Assert.fail;
@@ -130,8 +130,8 @@ public abstract class AbstractSpringMvcTest {
         }
     }
 
-    protected <T> List<T> getListOfObjectsFromResult(final MvcResult result,
-                                                     final TypeReference<List<T>> listTypeReference) {
+    protected <T> PageDto<T> getListOfObjectsFromResult(final MvcResult result,
+                                                        final TypeReference<PageDto<T>> listTypeReference) {
         try {
             return getObjectMapper().readValue(getContentAsString(result), listTypeReference);
         } catch (final IOException e) {

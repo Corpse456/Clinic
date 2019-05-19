@@ -3,10 +3,12 @@ package by.gp.clinic.facade;
 import by.gp.clinic.dbo.DoctorDbo;
 import by.gp.clinic.dbo.ShiftTimingDbo;
 import by.gp.clinic.dto.DoctorDto;
+import by.gp.clinic.dto.PageDto;
 import by.gp.clinic.enumerated.ShiftOrder;
 import by.gp.clinic.exception.DoctorExistsException;
 import by.gp.clinic.exception.DoctorNotExistsException;
 import by.gp.clinic.exception.ShiftTimingNotExistsException;
+import by.gp.clinic.search.DoctorSearchRequest;
 import by.gp.clinic.service.DoctorService;
 import by.gp.clinic.service.DoctorShiftService;
 import by.gp.clinic.service.ShiftTimingService;
@@ -58,8 +60,8 @@ public class DoctorFacade {
         }
     }
 
-    public List<DoctorDto> findAll() {
-        return doctorService.findAll();
+    public PageDto<DoctorDto> search(final DoctorSearchRequest searchRequest) {
+        return doctorService.search(searchRequest);
     }
 
     private void addNewDoctorToTimeTable(final DoctorDbo doctor) throws ShiftTimingNotExistsException {

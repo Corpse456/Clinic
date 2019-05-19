@@ -1,13 +1,13 @@
 package by.gp.clinic.facade;
 
+import by.gp.clinic.dto.PageDto;
 import by.gp.clinic.dto.PatientDto;
 import by.gp.clinic.exception.PatientExistsException;
 import by.gp.clinic.exception.PatientNotExistsException;
+import by.gp.clinic.search.PatientSearchRequest;
 import by.gp.clinic.service.PatientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -38,7 +38,7 @@ public class PatientFacade {
         }
     }
 
-    public List<PatientDto> findAll() {
-        return patientService.findAll();
+    public PageDto<PatientDto> search(final PatientSearchRequest searchRequest) {
+        return patientService.search(searchRequest);
     }
 }

@@ -1,18 +1,21 @@
 <template>
     <div class="hello">
         <h1>Welcome to Clinic Application</h1>
-        <!--<select>
-            <option v-for="speciality in dictionary.specialities" v-bind:value="speciality.value">
-                {{ speciality.label }}
+        <div>Choose doctor speciality:</div>
+        <br/>
+        <select v-model="selectedSpeciality" v-on:change="addNameSelect">
+            <option v-for="speciality in specialities" v-bind:key="speciality.id">
+                {{ speciality.name }}
             </option>
-        </select>-->
-        <div>
-            {{ dictionary }}
-        </div>
-        <ul>
-            <li>first</li>
-            <li v-for="(value, key) in dictionary">{{ key }}: {{ value }}</li>
-        </ul>
+        </select>
+        <br/><br/><br/>
+        <select v-model="selectedDoctor" v-if="show" v-on:change="addDoctorInfo">
+            <option v-for="doctor in doctors" v-bind:value="doctor" v-bind:key="doctor.id">
+                {{ doctor.name + " " + doctor.lastName}}
+            </option>
+        </select>
+        <br/><br/><br/>
+        <div>{{doctorInfo}}</div>
     </div>
 </template>
 
@@ -22,19 +25,37 @@
     export default {
         data() {
             return {
-                dictionary: []
+                dictionary: [],
+                specialities: [],
+                genders: [],
+                shiftOrder: [],
+                doctors: [],
+                selectedSpeciality: "",
+                selectedDoctor: "",
+                doctorInfo: "",
+                show: false
             };
         },
         created() {
-
-            axios
-                .get('http://localhost:8090/clinic/api/dictionary')
+            axios.get('/backend/dictionary')
                 .then(response => {
-                    debugger;
-                    (this.dictionary = response.data);
-                }).catch(err => {
-                debugger;
-            });
+                    this.dictionary = response.data;
+                    this.specialities = this.dictionary.specialities;
+                    this.genders = this.dictionary.genders;
+                    this.shiftOrder = this.dictionary.shiftOrder;
+                });
+        },
+        methods: {
+            addNameSelect: function () {
+                this.show = true;
+                axios.get('/backend/doctor/search')
+                    .then(response => (this.doctors = response.data));
+            },
+            addDoctorInfo: function () {
+                let year = new Date(this.selectedDoctor.birthDate);
+                this.doctorInfo = "Age: " + (new Date().getFullYear() - year.getFullYear())
+                    + ", " + this.selectedDoctor.gender;
+            }
         }
     }
 </script>

@@ -3,13 +3,14 @@ package by.gp.clinic.controller;
 import by.gp.clinic.AbstractSpringMvcTest;
 import by.gp.clinic.dbo.AbstractDbo;
 import by.gp.clinic.dto.AbstractDto;
+import by.gp.clinic.dto.PageDto;
+import by.gp.clinic.repository.CustomRepository;
+import by.gp.clinic.search.PageableSearchRequest;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.json.JSONObject;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.test.web.servlet.MvcResult;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
@@ -80,9 +81,9 @@ public abstract class AbstractControllerTest extends AbstractSpringMvcTest {
         assertFalse(byId.isPresent());
     }
 
-    <N extends AbstractDto> void findEntitiesTest(final TypeReference<List<N>> typeReference) {
-        MvcResult result = getQuery(getUrl() + SEARCH);
-        final List<N> list = getListOfObjectsFromResult(result, typeReference);
+    <N extends AbstractDto> void findEntitiesTest(final PageableSearchRequest searchRequest, final TypeReference<PageDto<N>> typeReference) {
+        MvcResult result = postQuery(getUrl() + SEARCH, searchRequest);
+        final PageDto<N> list = getListOfObjectsFromResult(result, typeReference);
         assertNotNull(list);
     }
 
@@ -90,7 +91,7 @@ public abstract class AbstractControllerTest extends AbstractSpringMvcTest {
         return getContentAsString(result).replace("[", "").replace("]", "");
     }
 
-    protected abstract JpaRepository<? extends AbstractDbo, Long> getRepository();
+    protected abstract CustomRepository<? extends AbstractDbo, Long> getRepository();
 
     protected abstract AbstractDto getDtoMock();
 

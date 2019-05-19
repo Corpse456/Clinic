@@ -7,6 +7,8 @@ import by.gp.clinic.dbo.ShiftTimingDbo;
 import by.gp.clinic.dto.DoctorShiftDto;
 import by.gp.clinic.enumerated.ShiftOrder;
 import by.gp.clinic.repository.DoctorShiftRepository;
+import by.gp.clinic.search.DoctorShiftSearchRequest;
+import by.gp.clinic.factory.predicateFactory.DoctorShiftPredicateFactory;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -22,14 +24,16 @@ import static java.time.DayOfWeek.MONDAY;
 import static java.time.temporal.TemporalAdjusters.next;
 
 @Service
-public class DoctorShiftService extends AbstractService<DoctorShiftDbo, DoctorShiftDto> {
+public class DoctorShiftService
+    extends AbstractSearchService<DoctorShiftDbo, DoctorShiftDto, DoctorShiftSearchRequest> {
 
     private final DoctorShiftRepository repository;
     private final DoctorShiftDboDtoConverter doctorShiftConverter;
 
-    public DoctorShiftService(final DoctorShiftDboDtoConverter doctorShiftConverter,
+    public DoctorShiftService(final DoctorShiftPredicateFactory predicateFactory,
+                              final DoctorShiftDboDtoConverter doctorShiftConverter,
                               final DoctorShiftRepository repository) {
-        super(doctorShiftConverter, repository);
+        super(predicateFactory, doctorShiftConverter, repository);
         this.repository = repository;
         this.doctorShiftConverter = doctorShiftConverter;
     }
@@ -94,7 +98,7 @@ public class DoctorShiftService extends AbstractService<DoctorShiftDbo, DoctorSh
         return repository.existsByDoctorIdAndDate(id, date);
     }
 
-    public boolean iaDoctorWorkingHours(final Long id, final LocalDateTime dateTime) {
+    public boolean isDoctorWorkingHours(final Long id, final LocalDateTime dateTime) {
         return repository.existsByDoctorIdAndDateTime(id, dateTime.toLocalDate(), dateTime.toLocalTime()) > 0;
     }
 }

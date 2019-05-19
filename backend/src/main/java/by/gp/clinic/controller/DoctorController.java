@@ -1,10 +1,12 @@
 package by.gp.clinic.controller;
 
 import by.gp.clinic.dto.DoctorDto;
+import by.gp.clinic.dto.PageDto;
 import by.gp.clinic.exception.EntityExistsException;
 import by.gp.clinic.exception.EntityNotExistsException;
 import by.gp.clinic.exception.ShiftTimingNotExistsException;
 import by.gp.clinic.facade.DoctorFacade;
+import by.gp.clinic.search.DoctorSearchRequest;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -17,8 +19,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -42,10 +42,10 @@ public class DoctorController {
         return doctorFacade.getDoctor(id);
     }
 
-    @GetMapping(value = "/search")
+    @PostMapping(value = "/search")
     @ApiOperation(value = "Search doctors")
-    public List<DoctorDto> searchDoctors() {
-        return doctorFacade.findAll();
+    public PageDto<DoctorDto> searchDoctors(@RequestBody final DoctorSearchRequest searchRequest) {
+        return doctorFacade.search(searchRequest);
     }
 
     @DeleteMapping(value = "/{id}")

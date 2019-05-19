@@ -144,5 +144,8 @@
             <column name="date_time" type="timestamp"/>
             <column name="number" type="int"/>
         </createTable>
+
+        <addUniqueConstraint constraintName="unique_ticket" tableName="ticket"
+                             columnNames="doctor_id, patient_id, date_time"/>
     </changeSet>
 </databaseChangeLog>

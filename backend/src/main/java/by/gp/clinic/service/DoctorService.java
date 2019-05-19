@@ -5,16 +5,19 @@ import by.gp.clinic.dbo.DoctorDbo;
 import by.gp.clinic.dbo.SpecialityDbo;
 import by.gp.clinic.dto.DoctorDto;
 import by.gp.clinic.repository.DoctorRepository;
+import by.gp.clinic.search.DoctorSearchRequest;
+import by.gp.clinic.factory.predicateFactory.DoctorPredicateFactory;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DoctorService extends AbstractService<DoctorDbo, DoctorDto> {
+public class DoctorService extends AbstractSearchService<DoctorDbo, DoctorDto, DoctorSearchRequest> {
 
     private DoctorRepository repository;
 
-    public DoctorService(final DoctorDboDtoConverter converter,
+    public DoctorService(final DoctorPredicateFactory predicateFactory,
+                         final DoctorDboDtoConverter converter,
                          final DoctorRepository repository) {
-        super(converter, repository);
+        super(predicateFactory, converter, repository);
         this.repository = repository;
     }
 

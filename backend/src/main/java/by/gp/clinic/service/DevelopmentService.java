@@ -4,12 +4,16 @@ import by.gp.clinic.controller.DevelopmentController;
 import by.gp.clinic.dto.DoctorDto;
 import by.gp.clinic.dto.PatientDto;
 import by.gp.clinic.dto.SpecialityDto;
+import by.gp.clinic.dto.TicketDto;
 import by.gp.clinic.enumerated.Gender;
 import by.gp.clinic.exception.DoctorExistsException;
 import by.gp.clinic.exception.PatientExistsException;
 import by.gp.clinic.exception.ShiftTimingNotExistsException;
 import by.gp.clinic.facade.DoctorFacade;
 import by.gp.clinic.facade.PatientFacade;
+import by.gp.clinic.facade.TicketFacade;
+import by.gp.clinic.search.DoctorSearchRequest;
+import by.gp.clinic.search.PatientSearchRequest;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,12 +22,14 @@ import org.springframework.stereotype.Service;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static by.gp.clinic.enumerated.Gender.MALE;
+import static java.time.LocalDateTime.now;
 import static java.util.Objects.requireNonNull;
 
 @Service
@@ -35,6 +41,7 @@ public class DevelopmentService {
     private final SpecialityService specialityService;
     private final PatientFacade patientFacade;
     private final DoctorFacade doctorFacade;
+    private final TicketFacade ticketFacade;
 
     private List<String> manNames;
     private List<String> womanNames;
@@ -77,6 +84,24 @@ public class DevelopmentService {
         all.forEach(this::addDoctors);
     }
 
+    public void addTickets() {
+        final Collection<PatientDto> patients = patientFacade.search(new PatientSearchRequest()).getElements();
+        final List<DoctorDto> doctors = (List<DoctorDto>) doctorFacade.search(new DoctorSearchRequest()).getElements();
+
+        patients.forEach(p -> {
+            for (int i = 0; i < 10; i++) {
+                final TicketDto ticketDto = new TicketDto();
+                ticketDto.setDoctorId(doctors.get((int) (doctors.size() * Math.random())).getId());
+                ticketDto.setPatientId(p.getId());
+                ticketDto.setDateTime(now().plusHours((long) (Math.random() * 200) + 2).withMinute(15).withSecond(0));
+                try {
+                    ticketFacade.addTicket(ticketDto);
+                } catch (Exception ignore) {
+                }
+            }
+        });
+    }
+
     private void addDoctors(final SpecialityDto speciality) {
         for (int i = 0; i < 10; i++) {
             final DoctorDto doctor = new DoctorDto();
@@ -107,4 +132,5 @@ public class DevelopmentService {
     private String getName(final List<String> names) {
         return names.get((int) (Math.random() * names.size()));
     }
+
 }
