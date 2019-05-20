@@ -1,9 +1,11 @@
 package by.gp.clinic.facade;
 
 import by.gp.clinic.dbo.TicketDbo;
+import by.gp.clinic.dto.PageDto;
 import by.gp.clinic.dto.TicketDto;
 import by.gp.clinic.exception.TicketAlreadyTakenException;
 import by.gp.clinic.exception.WrongWorkingHoursException;
+import by.gp.clinic.search.TicketSearchRequest;
 import by.gp.clinic.service.DoctorShiftService;
 import by.gp.clinic.service.TicketService;
 import lombok.RequiredArgsConstructor;
@@ -25,5 +27,9 @@ public class TicketFacade {
         }
         ticket.setNumber(ticketService.getNextNumber(ticket.getDoctorId(), ticket.getDateTime()));
         return ticketService.post(ticket);
+    }
+
+    public PageDto<TicketDto> search(final TicketSearchRequest searchRequest) {
+        return ticketService.search(searchRequest);
     }
 }

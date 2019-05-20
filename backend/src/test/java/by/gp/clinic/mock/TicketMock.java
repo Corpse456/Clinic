@@ -5,6 +5,8 @@ import by.gp.clinic.dto.TicketDto;
 
 import java.time.LocalDateTime;
 
+import static java.time.LocalDateTime.now;
+
 public class TicketMock {
 
     public static TicketDto getTicketDtoMock() {
@@ -17,7 +19,7 @@ public class TicketMock {
     }
 
     private static LocalDateTime getDateTime() {
-        return LocalDateTime.now().plusDays(1).withHour(12).withMinute(15);
+        return now().plusDays(1).withHour(12).withMinute(15).withSecond(0);
     }
 
     public static TicketDbo getTicketDboMock() {

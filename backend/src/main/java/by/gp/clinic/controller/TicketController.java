@@ -1,9 +1,11 @@
 package by.gp.clinic.controller;
 
+import by.gp.clinic.dto.PageDto;
 import by.gp.clinic.dto.TicketDto;
 import by.gp.clinic.exception.TicketAlreadyTakenException;
 import by.gp.clinic.exception.WrongWorkingHoursException;
 import by.gp.clinic.facade.TicketFacade;
+import by.gp.clinic.search.TicketSearchRequest;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -28,5 +30,11 @@ public class TicketController {
     public String addNewTicket(@RequestBody @Validated final TicketDto ticket)
         throws WrongWorkingHoursException, TicketAlreadyTakenException {
         return new JSONObject().put("id", facade.addTicket(ticket).getNumber()).toString();
+    }
+
+    @PostMapping(value = "/search")
+    @ApiOperation(value = "Search tickets")
+    public PageDto<TicketDto> searchTickets(@RequestBody final TicketSearchRequest searchRequest) {
+        return facade.search(searchRequest);
     }
 }
