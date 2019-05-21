@@ -148,4 +148,16 @@
         <addUniqueConstraint constraintName="unique_ticket" tableName="ticket"
                              columnNames="doctor_id, patient_id, date_time"/>
     </changeSet>
+
+    <changeSet id="add_user_table" author="neznaev">
+        <createTable tableName="user">
+            <column name="id" type="bigint(20)" autoIncrement="true">
+                <constraints primaryKeyName="user_pk"
+                             primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(255)"/>
+            <column name="password" type="varchar(255)"/>
+            <column name="role" type="varchar(30)"/>
+        </createTable>
+    </changeSet>
 </databaseChangeLog>
