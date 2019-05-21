@@ -42,6 +42,11 @@
                     this.dictionary = response.data;
                     this.specialities = this.dictionary.specialities;
                     this.genders = this.dictionary.genders;
+                    const tempGenders = {};
+                    this.genders = this.genders.forEach(g => {
+                        tempGenders[g.value] = g.label;
+                    });
+                    this.genders = tempGenders;
                     this.shiftOrder = this.dictionary.shiftOrder;
                 });
         },
@@ -53,8 +58,19 @@
             },
             addDoctorInfo: function () {
                 let year = new Date(this.selectedDoctor.birthDate);
+
+                function getGenderLabel(gender) {
+                    var label = "";
+                    this.genders.forEach(g => {
+                        if (g.value === gender) {
+                            label = g.label;
+                        }
+                    })
+                    return label;
+                }
+
                 this.doctorInfo = "Age: " + (new Date().getFullYear() - year.getFullYear())
-                    + ", " + this.selectedDoctor.gender;
+                    + ", " + getGenderLabel(this.selectedDoctor.gender);
             }
         }
     }
