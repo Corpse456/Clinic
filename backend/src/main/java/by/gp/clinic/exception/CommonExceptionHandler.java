@@ -12,7 +12,6 @@ import java.util.Arrays;
 @RequiredArgsConstructor
 public class CommonExceptionHandler {
 
-    //Common exception
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleCommonException(final Exception ex) {
         ex.printStackTrace();
@@ -55,5 +54,4 @@ public class CommonExceptionHandler {
                   System.lineSeparator() + "\"" + text + "\"}");
 
     }
-    //endregion
 }

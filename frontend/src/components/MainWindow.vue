@@ -4,7 +4,7 @@
         <div>Choose doctor speciality:</div>
         <br/>
         <select v-model="selectedSpeciality" v-on:change="addNameSelect">
-            <option v-for="speciality in specialities" v-bind:key="speciality.id">
+            <option v-for="speciality in specialities" v-bind:value="speciality" v-bind:key="speciality.id">
                 {{ speciality.name }}
             </option>
         </select>
@@ -28,7 +28,9 @@
                 dictionary: [],
                 specialities: [],
                 genders: [],
+                gendersMap: {},
                 shiftOrder: [],
+                shiftOrderMap: {},
                 doctors: [],
                 selectedSpeciality: "",
                 selectedDoctor: "",
@@ -41,36 +43,26 @@
                 .then(response => {
                     this.dictionary = response.data;
                     this.specialities = this.dictionary.specialities;
+
                     this.genders = this.dictionary.genders;
-                    const tempGenders = {};
-                    this.genders = this.genders.forEach(g => {
-                        tempGenders[g.value] = g.label;
-                    });
-                    this.genders = tempGenders;
+                    this.gendersMap = new Map(this.genders.map(el => [el.value, el.label]));
+
                     this.shiftOrder = this.dictionary.shiftOrder;
+                    this.shiftOrderMap = new Map(this.genders.map(el => [el.value, el.label]));
                 });
         },
         methods: {
             addNameSelect: function () {
                 this.show = true;
-                axios.get('/backend/doctor/search')
-                    .then(response => (this.doctors = response.data));
+                let searchRequest = {};
+                searchRequest.specialityId = this.selectedSpeciality.id;
+                axios.post('/backend/doctor/search', searchRequest)
+                    .then(response => (this.doctors = response.data.elements));
             },
             addDoctorInfo: function () {
                 let year = new Date(this.selectedDoctor.birthDate);
-
-                function getGenderLabel(gender) {
-                    var label = "";
-                    this.genders.forEach(g => {
-                        if (g.value === gender) {
-                            label = g.label;
-                        }
-                    })
-                    return label;
-                }
-
                 this.doctorInfo = "Age: " + (new Date().getFullYear() - year.getFullYear())
-                    + ", " + getGenderLabel(this.selectedDoctor.gender);
+                    + ", " + this.gendersMap.get(this.selectedDoctor.gender);
             }
         }
     }
