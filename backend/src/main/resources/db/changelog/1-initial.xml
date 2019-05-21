@@ -155,9 +155,15 @@
                 <constraints primaryKeyName="user_pk"
                              primaryKey="true"/>
             </column>
-            <column name="name" type="varchar(255)"/>
-            <column name="password" type="varchar(255)"/>
-            <column name="role" type="varchar(30)"/>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role" type="varchar(30)">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
 </databaseChangeLog>

@@ -43,7 +43,7 @@ public abstract class AbstractSpringMvcTest {
     @Autowired
     protected Jackson2ObjectMapperBuilder objectMapperBuilder;
 
-    protected ObjectMapper objectMapper;
+    private ObjectMapper objectMapper;
 
     @Before
     public void before() {
@@ -168,6 +168,6 @@ public abstract class AbstractSpringMvcTest {
     }
 
     private ObjectMapper getObjectMapper() {
-        return objectMapper == null ? objectMapperBuilder.build() : objectMapper;
+        return objectMapper == null ? objectMapper = objectMapperBuilder.build() : objectMapper;
     }
 }
