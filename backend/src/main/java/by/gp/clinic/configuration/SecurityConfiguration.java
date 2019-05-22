@@ -1,16 +1,21 @@
 package by.gp.clinic.configuration;
 
 import by.gp.clinic.enumerated.UserRole;
+import by.gp.clinic.filter.AuthenticationFilter;
+import by.gp.clinic.filter.LoginFilter;
+import by.gp.clinic.service.TokenAuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.sql.DataSource;
 
@@ -19,23 +24,26 @@ import javax.sql.DataSource;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final DataSource dataSource;
+    private final TokenAuthenticationService tokenAuthenticationService;
+    private final Jackson2ObjectMapperBuilder objectMapperBuilder;
 
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
-        //http.csrf().disable().authorizeRequests().anyRequest().permitAll();
         http.cors().and().csrf().disable().authorizeRequests()
             .antMatchers(HttpMethod.POST, "/login").permitAll()
             .antMatchers(HttpMethod.GET, "/swagger-ui.html").permitAll()
+            .antMatchers(HttpMethod.GET, "/v2/api-docs").permitAll()
             .antMatchers(HttpMethod.GET, "/webjars/springfox-swagger-ui/**").permitAll()
             .antMatchers(HttpMethod.GET, "/swagger-resources/**").permitAll()
-            .antMatchers("/**").access(hasRole(UserRole.USER))
-            .antMatchers("/admin").access(hasRole(UserRole.ADMIN))
+            .antMatchers("/admin/**").hasAuthority(UserRole.ADMIN.name())
+            .antMatchers("/**").hasAnyAuthority(UserRole.USER.name(), UserRole.ADMIN.name())
+//            .antMatchers("/**").access(hasRole(UserRole.USER))
             .anyRequest().authenticated()
-            .and();
-    }
-
-    private String hasRole(final UserRole role) {
-        return "hasRole('" + role + "')";
+            .and()
+            .addFilterBefore(new LoginFilter(tokenAuthenticationService, authenticationManager(), objectMapperBuilder),
+                             UsernamePasswordAuthenticationFilter.class)
+            .addFilterBefore(new AuthenticationFilter(tokenAuthenticationService),
+                             UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean
@@ -52,7 +60,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().dataSource(dataSource)
-            .usersByUsernameQuery("select name, password from user where email=?")
-            .authoritiesByUsernameQuery("select email, role from user where email=?");
+            .usersByUsernameQuery("select name, password, enabled from user where name=?")
+            .authoritiesByUsernameQuery("select name, role from user where name=?");
     }
 }

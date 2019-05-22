@@ -46,7 +46,7 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter {
         final CredentialsDto credentials = getObjectMapper().readValue(request.getInputStream(), CredentialsDto.class);
 
         return getAuthenticationManager().authenticate(new UsernamePasswordAuthenticationToken(
-            credentials.getEmail(), credentials.getPassword(), Collections.emptyList()));
+            credentials.getName(), credentials.getPassword(), Collections.emptyList()));
     }
 
     @Override

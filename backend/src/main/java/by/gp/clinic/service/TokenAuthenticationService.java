@@ -1,10 +1,9 @@
 package by.gp.clinic.service;
 
-import com.worldtravelnation.server.dbo.profile.UserDbo;
-import com.worldtravelnation.server.dbo.profile.VerificationTokenDbo;
-import com.worldtravelnation.server.repository.profile.VerificationTokenRepository;
-import com.worldtravelnation.server.user.repository.UserRepository;
-import com.worldtravelnation.server.util.Messages;
+import by.gp.clinic.dbo.UserDbo;
+import by.gp.clinic.dbo.VerificationTokenDbo;
+import by.gp.clinic.repository.UserRepository;
+import by.gp.clinic.repository.VerificationTokenRepository;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.SignatureException;
@@ -35,11 +34,10 @@ public class TokenAuthenticationService {
 
     private final UserRepository userRepository;
     private final VerificationTokenRepository tokenRepository;
-    private final Messages messages;
 
-    public void addAuthentication(final HttpServletResponse res, final String email, final String roles) {
-        final UserDbo.UuidContainer uuidContainer = userRepository.findShortByEmail(email);
-        final String JWT = encode(EXPIRATION_TIME, email, uuidContainer.getUuid(), roles);
+    public void addAuthentication(final HttpServletResponse res, final String name, final String roles) {
+        final UserDbo user = userRepository.getByName(name);
+        final String JWT = encode(EXPIRATION_TIME, name, user.getId().toString(), roles);
         res.addHeader(HEADER_STRING, JWT);
     }
 
@@ -62,7 +60,7 @@ public class TokenAuthenticationService {
         final String token = request.getHeader(HEADER_STRING);
         if (token != null) {
             if (isTokenExpired(token)) {
-                throw new SignatureException(messages.get("exception.message.token.can.not.trusted.marked.logged.out"));
+                throw new SignatureException("This token can't be trusted as it was marked as logged out");
             }
             // parse the token.
             final String subject = decode(token);

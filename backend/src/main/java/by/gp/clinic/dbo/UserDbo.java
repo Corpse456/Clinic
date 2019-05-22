@@ -23,4 +23,7 @@ public class UserDbo extends AbstractDbo {
     @NotNull
     @Enumerated(EnumType.STRING)
     private UserRole role;
+
+    @NotNull
+    private boolean enabled;
 }

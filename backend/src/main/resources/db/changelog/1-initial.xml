@@ -164,6 +164,20 @@
             <column name="role" type="varchar(30)">
                 <constraints nullable="false"/>
             </column>
+            <column name="enabled" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create_token_table" author="neznaev">
+        <createTable tableName="verification_token">
+            <column name="id" type="bigint(20)" autoIncrement="true">
+                <constraints primaryKeyName="verification_token_pk"
+                             primaryKey="true"/>
+            </column>
+            <column name="token" type="VARCHAR(500)"/>
+            <column name="expiry_date" type="timestamp"/>
         </createTable>
     </changeSet>
 </databaseChangeLog>
