@@ -1,17 +1,18 @@
 <template>
     <div id="app">
         <img alt="Vue logo" src="./assets/Clinic.png">
-        <MainWindow/>
+        <router-view></router-view>
+        <button v-on:click="login">login</button>
     </div>
 </template>
 
 <script>
-    import MainWindow from './components/MainWindow.vue'
-
     export default {
         name: 'app',
-        components: {
-            MainWindow
+        methods: {
+            login: function () {
+                this.$router.push('Login');
+            }
         }
     }
 </script>

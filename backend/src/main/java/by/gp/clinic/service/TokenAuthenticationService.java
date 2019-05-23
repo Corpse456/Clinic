@@ -1,7 +1,6 @@
 package by.gp.clinic.service;
 
 import by.gp.clinic.dbo.UserDbo;
-import by.gp.clinic.dbo.VerificationTokenDbo;
 import by.gp.clinic.repository.UserRepository;
 import by.gp.clinic.repository.VerificationTokenRepository;
 import io.jsonwebtoken.Jwts;
@@ -15,9 +14,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.time.LocalDate;
 import java.util.Arrays;
-import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,8 +23,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class TokenAuthenticationService {
 
-    public static final long EXPIRATION_TIME = 2_592_000_000L; // Month
-    public static final long EXPIRATION_TIME_SMALL = 45_000_000L; // ~12 hours
+    private static final long EXPIRATION_TIME = 2_592_000_000L; // Month
     private static final String SECRET = "D90#11%fhBpP";
     private static final String TOKEN_PREFIX = "Bearer";
     public static final String HEADER_STRING = "Authorization";
@@ -35,25 +31,17 @@ public class TokenAuthenticationService {
     private final UserRepository userRepository;
     private final VerificationTokenRepository tokenRepository;
 
-    public void addAuthentication(final HttpServletResponse res, final String name, final String roles) {
+    public void addAuthentication(final HttpServletResponse response, final String name, final String roles) {
         final UserDbo user = userRepository.getByName(name);
-        final String JWT = encode(EXPIRATION_TIME, name, user.getId().toString(), roles);
-        res.addHeader(HEADER_STRING, JWT);
+        final String JWT = encode(name, user.getId().toString(), roles);
+        response.addHeader(HEADER_STRING, JWT);
     }
 
-    public static String encode(final long expirationTime, final String... fields) {
+    private static String encode(final String... fields) {
         return TOKEN_PREFIX + " " + Jwts.builder()
             .setSubject(String.join(":", fields))
-            .setExpiration(new Date(System.currentTimeMillis() + expirationTime))
+            .setExpiration(new Date(System.currentTimeMillis() + TokenAuthenticationService.EXPIRATION_TIME))
             .signWith(SignatureAlgorithm.HS512, SECRET).compact();
-    }
-
-    public String getUserIdFromAuthorizationToken(final String token) {
-        final String[] splitToken = token.split("\\.");
-
-        final String encodedTokenPayload = splitToken[1];
-        final String decodedTokenPayload = new String(Base64.getDecoder().decode(encodedTokenPayload));
-        return decodedTokenPayload.split(":")[2];
     }
 
     public Authentication getAuthentication(final HttpServletRequest request) {
@@ -75,33 +63,12 @@ public class TokenAuthenticationService {
         return null;
     }
 
-    public static String decode(final String token) {
+    private static String decode(final String token) {
         return Jwts.parser()
             .setSigningKey(SECRET)
             .parseClaimsJws(token.replace(TOKEN_PREFIX, ""))
             .getBody()
             .getSubject();
-    }
-
-    public static Date getExpiration(final String token) {
-        try {
-            return Jwts.parser()
-                .setSigningKey(SECRET)
-                .parseClaimsJws(token.replace(TOKEN_PREFIX, ""))
-                .getBody()
-                .getExpiration();
-        } catch (final Exception ignore) {
-        }
-        return null;
-    }
-
-    public void invalidateToken(final String token) {
-        if (!isTokenExpired(token)) {
-            final VerificationTokenDbo verificationTokenDbo = new VerificationTokenDbo();
-            verificationTokenDbo.setToken(token);
-            verificationTokenDbo.setExpiryDate(LocalDate.now().plusMonths(1L));
-            tokenRepository.save(verificationTokenDbo);
-        }
     }
 
     private boolean isTokenExpired(final String token) {
