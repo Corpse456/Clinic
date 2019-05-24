@@ -1,5 +1,6 @@
 <template>
     <div class="hello">
+        <img alt="Vue logo" src="../assets/Clinic.png">
         <h1>Welcome to Clinic Application</h1>
         <div>Please, login:</div>
         <br/>
@@ -28,7 +29,7 @@
             };
         },
         methods: {
-            login: function () {
+            login() {
                 let credentials = {};
                 credentials.name = this.name;
                 credentials.password = this.password;
@@ -39,14 +40,13 @@
                         VueCookies.set('authorization', this.token);
                     })
             },
-            dictionary: function () {
+            dictionary() {
                 axios.get('/backend/dictionary', {
                     headers: {
                         "Authorization": this.token
                     }
                 }).then(response => {
                     this.dictionaryData = response.data;
-                    this.$router.push('MainWindow');
                 })
             }
         }

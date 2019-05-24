@@ -1,6 +1,5 @@
 <template>
     <div class="hello">
-        <h1>Welcome to Clinic Application</h1>
         <div>Choose doctor speciality:</div>
         <br/>
         <select v-model="selectedSpeciality" v-on:change="addNameSelect">

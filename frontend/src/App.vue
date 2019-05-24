@@ -1,18 +1,37 @@
 <template>
     <div id="app">
-        <img alt="Vue logo" src="./assets/Clinic.png">
-        <router-view></router-view>
-        <button v-on:click="login">login</button>
+        <Login v-if='!auth'/>
+        <MainWindow v-else/>
     </div>
 </template>
 
 <script>
+    import MainWindow from './components/MainWindow.vue'
+    import Login from './components/Login.vue'
+    import axios from 'axios';
+    import VueCookies from 'vue-cookies';
+
     export default {
         name: 'app',
-        methods: {
-            login: function () {
-                this.$router.push('Login');
+        components: {
+            MainWindow, Login
+        },
+        data() {
+            return {
+                auth: false
             }
+        },
+        created() {
+            axios.get('/backend/dictionary', {
+                headers: {
+                    "Authorization": VueCookies.get('authorization')
+                }
+            }).then(response => {
+                if (response.status === 200) {
+                    this.auth = true;
+                    this.dictionaryData = response.data;
+                }
+            });
         }
     }
 </script>
