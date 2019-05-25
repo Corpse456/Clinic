@@ -1,37 +1,32 @@
 <template>
     <div id="app">
-        <Login v-if='!auth'/>
-        <MainWindow v-else/>
+        <router-view/>
     </div>
 </template>
 
 <script>
-    import MainWindow from './components/MainWindow.vue'
-    import Login from './components/Login.vue'
     import axios from 'axios';
+    import Vue from 'vue';
+    import Vuex from 'vuex';
     import VueCookies from 'vue-cookies';
+
+    Vue.use(Vuex);
 
     export default {
         name: 'app',
-        components: {
-            MainWindow, Login
-        },
-        data() {
-            return {
-                auth: false
-            }
-        },
-        created() {
+        beforeCreate() {
             axios.get('/backend/dictionary', {
                 headers: {
-                    "Authorization": VueCookies.get('authorization')
+                    Authorization: VueCookies.get('authorization')
                 }
             }).then(response => {
                 if (response.status === 200) {
-                    this.auth = true;
-                    this.dictionaryData = response.data;
+                    this.$store.commit('dictionary/init', response.data);
+                    this.$router.push({name: 'MainWindow'});
+                } else {
+                    this.$router.push({name: 'Login'});
                 }
-            });
+            }).catch(() => this.$router.push({name: 'Login'}));
         }
     }
 </script>

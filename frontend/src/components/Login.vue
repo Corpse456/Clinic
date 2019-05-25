@@ -9,9 +9,6 @@
         <input v-model="password" placeholder="password"/>
         <br/>
         <button v-on:click="login">Login</button>
-        <br/>
-        <button v-on:click="dictionary">Dictionary</button>
-        <div>{{dictionaryData}}</div>
     </div>
 </template>
 
@@ -22,7 +19,6 @@
     export default {
         data() {
             return {
-                token: "",
                 name: "",
                 password: "",
                 dictionaryData: {}
@@ -35,19 +31,20 @@
                 credentials.password = this.password;
                 axios.post('/backend/login', credentials)
                     .then(response => {
-                        this.token = response.headers.authorization;
-                        VueCookies.config('7d');
-                        VueCookies.set('authorization', this.token);
+                        if (response.status === 200) {
+                            VueCookies.config('7d');
+                            VueCookies.set('authorization', response.headers.authorization);
+
+                            axios.get('/backend/dictionary', {
+                                headers: {
+                                    Authorization: response.headers.authorization
+                                }
+                            }).then(response => {
+                                this.$store.commit('dictionary/init', response.data);
+                                this.$router.push({name: 'MainWindow'});
+                            });
+                        }
                     })
-            },
-            dictionary() {
-                axios.get('/backend/dictionary', {
-                    headers: {
-                        "Authorization": this.token
-                    }
-                }).then(response => {
-                    this.dictionaryData = response.data;
-                })
             }
         }
     }

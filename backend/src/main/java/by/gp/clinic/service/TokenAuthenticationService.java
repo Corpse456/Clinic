@@ -4,8 +4,10 @@ import by.gp.clinic.dbo.UserDbo;
 import by.gp.clinic.repository.UserRepository;
 import by.gp.clinic.repository.VerificationTokenRepository;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.SignatureException;
+import liquibase.util.StringUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -46,12 +48,17 @@ public class TokenAuthenticationService {
 
     public Authentication getAuthentication(final HttpServletRequest request) {
         final String token = request.getHeader(HEADER_STRING);
-        if (token != null) {
+        if (StringUtils.isNotEmpty(token)) {
             if (isTokenExpired(token)) {
                 throw new SignatureException("This token can't be trusted as it was marked as logged out");
             }
             // parse the token.
-            final String subject = decode(token);
+            final String subject;
+            try {
+                subject = decode(token);
+            } catch (MalformedJwtException e) {
+                throw new SignatureException("Wrong token format");
+            }
             final String user = subject.split(":")[0];
             final List<String> roles = Arrays.asList(subject.substring(subject.lastIndexOf(':') + 1).split(","));
 

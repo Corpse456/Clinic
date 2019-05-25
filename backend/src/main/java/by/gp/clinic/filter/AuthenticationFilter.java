@@ -24,8 +24,12 @@ public class AuthenticationFilter extends GenericFilterBean {
     public void doFilter(final ServletRequest request,
                          final ServletResponse response,
                          final FilterChain chain) throws IOException, ServletException {
-        final Authentication authentication =
-            tokenAuthenticationService.getAuthentication((HttpServletRequest) request);
+        Authentication authentication;
+        try {
+            authentication = tokenAuthenticationService.getAuthentication((HttpServletRequest) request);
+        } catch (Exception e) {
+            authentication = null;
+        }
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 

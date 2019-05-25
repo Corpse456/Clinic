@@ -3,7 +3,8 @@
         <div>Choose doctor speciality:</div>
         <br/>
         <select v-model="selectedSpeciality" v-on:change="addNameSelect">
-            <option v-for="speciality in specialities" v-bind:value="speciality" v-bind:key="speciality.id">
+            <option v-for="speciality in this.$store.state.dictionary.specialities" v-bind:value="speciality"
+                    v-bind:key="speciality.id">
                 {{ speciality.name }}
             </option>
         </select>
@@ -24,13 +25,8 @@
     export default {
         data() {
             return {
-                dictionary: [],
-                specialities: [],
-                genders: [],
-                gendersMap: {},
-                shiftOrder: [],
-                shiftOrderMap: {},
                 doctors: [],
+                specialities: {},
                 selectedSpeciality: "",
                 selectedDoctor: "",
                 doctorInfo: "",
@@ -38,32 +34,23 @@
             };
         },
         created() {
-            axios.get('/backend/dictionary')
-                .then(response => {
-                    this.dictionary = response.data;
-                    this.specialities = this.dictionary.specialities;
-
-                    this.genders = this.dictionary.genders;
-                    this.gendersMap = new Map(this.genders.map(el => [el.value, el.label]));
-
-                    this.shiftOrder = this.dictionary.shiftOrder;
-                    this.shiftOrderMap = new Map(this.genders.map(el => [el.value, el.label]));
-                });
+            console.log(this.$store.state.dictionary.specialities)
         },
         methods: {
-            addNameSelect: function () {
+            addNameSelect() {
                 this.show = true;
                 let searchRequest = {};
                 searchRequest.specialityId = this.selectedSpeciality.id;
                 axios.post('/backend/doctor/search', searchRequest)
                     .then(response => (this.doctors = response.data.elements));
             },
-            addDoctorInfo: function () {
+            addDoctorInfo() {
                 let year = new Date(this.selectedDoctor.birthDate);
                 this.doctorInfo = "Age: " + (new Date().getFullYear() - year.getFullYear())
-                    + ", " + this.gendersMap.get(this.selectedDoctor.gender);
+                    + ", " + this.$store.state.dictionary.genders.get(this.selectedDoctor.gender);
             }
-        }
+        },
+
     }
 </script>
 
