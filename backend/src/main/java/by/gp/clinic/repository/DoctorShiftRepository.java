@@ -3,7 +3,6 @@ package by.gp.clinic.repository;
 import by.gp.clinic.dbo.DoctorShiftDbo;
 import by.gp.clinic.dbo.ShiftTimingDbo;
 import by.gp.clinic.enumerated.ShiftOrder;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import javax.transaction.Transactional;
@@ -29,7 +28,7 @@ public interface DoctorShiftRepository extends CustomRepository<DoctorShiftDbo, 
 
     @Query("select count(s) from DoctorShiftDbo s where s.date = ?2 " +
            "and s.doctor.id = ?1 " +
-           "and s.shiftTiming.startTime < ?3 " +
+           "and s.shiftTiming.startTime <= ?3 " +
            "and s.shiftTiming.endTime > ?3")
     int existsByDoctorIdAndDateTime(Long id, LocalDate date, LocalTime time);
 }

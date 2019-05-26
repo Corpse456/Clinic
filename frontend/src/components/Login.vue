@@ -6,7 +6,7 @@
         <br/>
         <input v-model="name" placeholder="name"/>
         <br/>
-        <input v-model="password" placeholder="password"/>
+        <input type="password" v-model="password" placeholder="password"/>
         <br/>
         <button v-on:click="login">Login</button>
     </div>
