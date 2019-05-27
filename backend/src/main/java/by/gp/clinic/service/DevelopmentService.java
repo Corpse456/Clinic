@@ -89,7 +89,7 @@ public class DevelopmentService {
         final List<DoctorDto> doctors = (List<DoctorDto>) doctorFacade.search(new DoctorSearchRequest()).getElements();
 
         patients.forEach(p -> {
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 50; i++) {
                 final TicketDto ticketDto = new TicketDto();
                 ticketDto.setDoctorId(doctors.get((int) (doctors.size() * Math.random())).getId());
                 ticketDto.setPatientId(p.getId());

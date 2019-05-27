@@ -36,6 +36,7 @@
 <script>
     import axios from 'axios';
     import VueCookies from 'vue-cookies';
+    import {mapState} from 'vuex';
 
     export default {
         data() {
@@ -43,7 +44,6 @@
                 doctors: [],
                 shifts: [],
                 freeTimes: [],
-                specialities: {},
                 selectedSpeciality: "",
                 selectedDoctor: "",
                 selectedDay: "",
@@ -51,16 +51,14 @@
                 doctorInfo: "",
             };
         },
-        created() {
-            axios.get('/backend/dictionary', {
-                headers: {
-                    Authorization: VueCookies.get('authorization')
-                }
-            }).then(response => {
-                this.specialities = response.data.specialities;
-            });
+        computed: {
+            ...mapState({
+                specialities: state => state.dictionary.specialities,
+                genders: state => state.dictionary.genders
+            })
         },
         methods: {
+
             getTwoZeroes(value) {
                 return value < 10 ? '0' + value : value;
             },
@@ -82,7 +80,7 @@
                 this.freeTimes = [];
                 let year = new Date(this.selectedDoctor.birthDate);
                 this.doctorInfo = "Age: " + (new Date().getFullYear() - year.getFullYear())
-                    + ", " + this.$store.genders.get(this.selectedDoctor.gender);
+                    + ", " + this.genders.get(this.selectedDoctor.gender);
                 let searchRequest = {
                     doctorId: this.selectedDoctor.id
                 };
