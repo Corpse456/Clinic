@@ -1,5 +1,6 @@
 package by.gp.clinic.controller;
 
+import by.gp.clinic.dbo.DoctorDbo;
 import by.gp.clinic.dto.DoctorDto;
 import by.gp.clinic.dto.PageDto;
 import by.gp.clinic.exception.EntityExistsException;
@@ -33,7 +34,11 @@ public class DoctorController {
     @ApiOperation(value = "Hire a new doctor")
     public String hireNewDoctor(@RequestBody @Validated DoctorDto doctor)
         throws EntityExistsException, ShiftTimingNotExistsException {
-        return new JSONObject().put("id", doctorFacade.hireDoctor(doctor)).toString();
+        final DoctorDbo saveDoctor = doctorFacade.hireDoctor(doctor);
+        final JSONObject jsonObject = new JSONObject();
+        jsonObject.put("id", saveDoctor.getId());
+        jsonObject.put("specialIdentifier", saveDoctor.getSpecialIdentifier());
+        return jsonObject.toString();
     }
 
     @GetMapping(value = "/{id}")

@@ -14,6 +14,7 @@ import by.gp.clinic.service.DoctorShiftService;
 import by.gp.clinic.service.ShiftTimingService;
 import by.gp.clinic.service.SpecialDoctorShiftService;
 import lombok.RequiredArgsConstructor;
+import net.bytebuddy.utility.RandomString;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -35,13 +36,14 @@ public class DoctorFacade {
     private final ShiftTimingService shiftTimingService;
 
     @Transactional(rollbackOn = Exception.class)
-    public Long hireDoctor(final DoctorDto doctor) throws DoctorExistsException, ShiftTimingNotExistsException {
+    public DoctorDbo hireDoctor(final DoctorDto doctor) throws DoctorExistsException, ShiftTimingNotExistsException {
         if (doctorService.isExistsByNameAndLastName(doctor.getName(), doctor.getLastName())) {
             throw new DoctorExistsException(doctor.getName(), doctor.getLastName());
         }
+        doctor.setSpecialIdentifier(new RandomString(10).nextString());
         final DoctorDbo savedDoctor = doctorService.post(doctor);
         addNewDoctorToTimeTable(savedDoctor);
-        return savedDoctor.getId();
+        return savedDoctor;
     }
 
     public void fireDoctor(final Long id) throws DoctorNotExistsException {

@@ -7,803 +7,903 @@
     <changeSet id="insert-test-doctors" author="neznaev" context="test">
         <insert tableName="doctor">
             <column name="id" value="1"/>
-            <column name="birth_date" value="1961-05-07"/>
+            <column name="birth_date" value="1978-05-28"/>
             <column name="gender" value="FEMALE"/>
-            <column name="name" value="Nettie"/>
-            <column name="last_name" value="Oswald"/>
+            <column name="name" value="Nora"/>
+            <column name="last_name" value="Ramacey"/>
             <column name="speciality_id" value="1"/>
+            <column name="special_identifier" value="5hfFx3uWbB"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="2"/>
-            <column name="birth_date" value="1975-05-07"/>
+            <column name="birth_date" value="1966-05-28"/>
             <column name="gender" value="MALE"/>
-            <column name="name" value="Jeffrey"/>
-            <column name="last_name" value="Hamphrey"/>
+            <column name="name" value="Kenneth"/>
+            <column name="last_name" value="Ward"/>
             <column name="speciality_id" value="1"/>
+            <column name="special_identifier" value="4oZyKC663L"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="3"/>
-            <column name="birth_date" value="1968-05-07"/>
-            <column name="gender" value="FEMALE"/>
-            <column name="name" value="Vida"/>
-            <column name="last_name" value="Eddington"/>
+            <column name="birth_date" value="1977-05-28"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Austin"/>
+            <column name="last_name" value="Alsopp"/>
             <column name="speciality_id" value="1"/>
+            <column name="special_identifier" value="wi3Ka4T0JH"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="4"/>
-            <column name="birth_date" value="1977-05-07"/>
-            <column name="gender" value="MALE"/>
-            <column name="name" value="Fabian"/>
-            <column name="last_name" value="Chapman"/>
+            <column name="birth_date" value="1988-05-28"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Lottie"/>
+            <column name="last_name" value="Reynolds"/>
             <column name="speciality_id" value="1"/>
+            <column name="special_identifier" value="v1yEkfzjAg"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="5"/>
-            <column name="birth_date" value="1960-05-07"/>
+            <column name="birth_date" value="1997-05-28"/>
             <column name="gender" value="FEMALE"/>
-            <column name="name" value="Josephine"/>
-            <column name="last_name" value="Cramer"/>
+            <column name="name" value="Alexis"/>
+            <column name="last_name" value="Jeff"/>
             <column name="speciality_id" value="1"/>
+            <column name="special_identifier" value="bocJ0B2cCZ"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="6"/>
-            <column name="birth_date" value="1981-05-07"/>
-            <column name="gender" value="MALE"/>
-            <column name="name" value="Raphael"/>
-            <column name="last_name" value="Cook"/>
+            <column name="birth_date" value="1972-05-28"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Shirley"/>
+            <column name="last_name" value="WifKinson"/>
             <column name="speciality_id" value="1"/>
+            <column name="special_identifier" value="BBtVHiEkr2"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="7"/>
-            <column name="birth_date" value="1979-05-07"/>
-            <column name="gender" value="MALE"/>
-            <column name="name" value="Bernard"/>
-            <column name="last_name" value="Russel"/>
+            <column name="birth_date" value="1981-05-28"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Verna"/>
+            <column name="last_name" value="Milton"/>
             <column name="speciality_id" value="1"/>
+            <column name="special_identifier" value="p5m0Z632NK"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="8"/>
-            <column name="birth_date" value="1960-05-07"/>
-            <column name="gender" value="MALE"/>
-            <column name="name" value="Derek"/>
-            <column name="last_name" value="Watson"/>
+            <column name="birth_date" value="1995-05-28"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Nina"/>
+            <column name="last_name" value="Dodson"/>
             <column name="speciality_id" value="1"/>
+            <column name="special_identifier" value="6L6O6I3BBc"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="9"/>
-            <column name="birth_date" value="1976-05-07"/>
+            <column name="birth_date" value="1990-05-28"/>
             <column name="gender" value="FEMALE"/>
-            <column name="name" value="Elsie"/>
-            <column name="last_name" value="Baldwin"/>
+            <column name="name" value="Glenda"/>
+            <column name="last_name" value="Morrison"/>
             <column name="speciality_id" value="1"/>
+            <column name="special_identifier" value="M5YzMW71qA"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="10"/>
-            <column name="birth_date" value="1992-05-06"/>
-            <column name="gender" value="MALE"/>
-            <column name="name" value="Kent"/>
-            <column name="last_name" value="Carrington"/>
+            <column name="birth_date" value="1997-05-28"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Mary"/>
+            <column name="last_name" value="Donaldson"/>
             <column name="speciality_id" value="1"/>
+            <column name="special_identifier" value="cGXzUJ7PZM"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="11"/>
-            <column name="birth_date" value="1960-05-07"/>
+            <column name="birth_date" value="1970-05-28"/>
             <column name="gender" value="FEMALE"/>
-            <column name="name" value="Pearl"/>
-            <column name="last_name" value="Walkman"/>
+            <column name="name" value="Myrtle"/>
+            <column name="last_name" value="Fisher"/>
             <column name="speciality_id" value="2"/>
+            <column name="special_identifier" value="TOqZ15st9y"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="12"/>
-            <column name="birth_date" value="1961-05-07"/>
-            <column name="gender" value="MALE"/>
-            <column name="name" value="Ethan"/>
-            <column name="last_name" value="Fleming"/>
+            <column name="birth_date" value="1991-05-28"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Sidney"/>
+            <column name="last_name" value="Gardner"/>
             <column name="speciality_id" value="2"/>
+            <column name="special_identifier" value="KapjUTrwoo"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="13"/>
-            <column name="birth_date" value="1973-05-07"/>
-            <column name="gender" value="MALE"/>
-            <column name="name" value="Douglas"/>
-            <column name="last_name" value="Duncan"/>
+            <column name="birth_date" value="1968-05-28"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Jane"/>
+            <column name="last_name" value="Lamberts"/>
             <column name="speciality_id" value="2"/>
+            <column name="special_identifier" value="P4Mu8hHFtf"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="14"/>
-            <column name="birth_date" value="1989-05-07"/>
+            <column name="birth_date" value="1980-05-28"/>
             <column name="gender" value="FEMALE"/>
-            <column name="name" value="Marion"/>
-            <column name="last_name" value="Osborne"/>
+            <column name="name" value="Victoria"/>
+            <column name="last_name" value="Carrington"/>
             <column name="speciality_id" value="2"/>
+            <column name="special_identifier" value="z9zWqrj12I"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="15"/>
-            <column name="birth_date" value="1990-05-06"/>
+            <column name="birth_date" value="1988-05-28"/>
             <column name="gender" value="FEMALE"/>
-            <column name="name" value="Doris"/>
-            <column name="last_name" value="Salomon"/>
+            <column name="name" value="Prudence"/>
+            <column name="last_name" value="Marshman"/>
             <column name="speciality_id" value="2"/>
+            <column name="special_identifier" value="HIPCJzaA1L"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="16"/>
-            <column name="birth_date" value="1987-05-07"/>
+            <column name="birth_date" value="1973-05-28"/>
             <column name="gender" value="MALE"/>
-            <column name="name" value="Wilson"/>
-            <column name="last_name" value="Carrington"/>
+            <column name="name" value="Alister"/>
+            <column name="last_name" value="Neal"/>
             <column name="speciality_id" value="2"/>
+            <column name="special_identifier" value="l4EAVeCJwv"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="17"/>
-            <column name="birth_date" value="1973-05-07"/>
+            <column name="birth_date" value="1967-05-28"/>
             <column name="gender" value="MALE"/>
-            <column name="name" value="Vincent"/>
-            <column name="last_name" value="Allford"/>
+            <column name="name" value="Clement"/>
+            <column name="last_name" value="Barnes"/>
             <column name="speciality_id" value="2"/>
+            <column name="special_identifier" value="pN6SngSdEu"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="18"/>
-            <column name="birth_date" value="1969-05-07"/>
+            <column name="birth_date" value="1995-05-28"/>
             <column name="gender" value="MALE"/>
-            <column name="name" value="Randall"/>
-            <column name="last_name" value="Creighton"/>
+            <column name="name" value="Benjamin"/>
+            <column name="last_name" value="Ferguson"/>
             <column name="speciality_id" value="2"/>
+            <column name="special_identifier" value="X5fvWCABOo"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="19"/>
-            <column name="birth_date" value="1965-05-07"/>
+            <column name="birth_date" value="1983-05-28"/>
             <column name="gender" value="FEMALE"/>
-            <column name="name" value="Eleanor"/>
-            <column name="last_name" value="Ellington"/>
+            <column name="name" value="Thelma"/>
+            <column name="last_name" value="Turner"/>
             <column name="speciality_id" value="2"/>
+            <column name="special_identifier" value="TAkjcrSa1D"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="20"/>
-            <column name="birth_date" value="1993-05-06"/>
-            <column name="gender" value="FEMALE"/>
-            <column name="name" value="Alexis"/>
-            <column name="last_name" value="Paterson"/>
+            <column name="birth_date" value="1977-05-28"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Ellis"/>
+            <column name="last_name" value="Dunce"/>
             <column name="speciality_id" value="2"/>
+            <column name="special_identifier" value="OWbk37Pfiy"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="21"/>
-            <column name="birth_date" value="1989-05-07"/>
-            <column name="gender" value="FEMALE"/>
-            <column name="name" value="Claudia"/>
-            <column name="last_name" value="Erickson"/>
+            <column name="birth_date" value="1977-05-28"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Osmond"/>
+            <column name="last_name" value="Oliver"/>
             <column name="speciality_id" value="3"/>
+            <column name="special_identifier" value="w2G5KJQLIQ"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="22"/>
-            <column name="birth_date" value="1967-05-07"/>
-            <column name="gender" value="FEMALE"/>
-            <column name="name" value="Diana"/>
-            <column name="last_name" value="Ellington"/>
+            <column name="birth_date" value="1978-05-28"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Gabriel"/>
+            <column name="last_name" value="Fisher"/>
             <column name="speciality_id" value="3"/>
+            <column name="special_identifier" value="LAfxsgSs5d"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="23"/>
-            <column name="birth_date" value="1961-05-07"/>
-            <column name="gender" value="FEMALE"/>
-            <column name="name" value="Henrietta"/>
-            <column name="last_name" value="Miln"/>
+            <column name="birth_date" value="1968-05-28"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Herman"/>
+            <column name="last_name" value="Bush"/>
             <column name="speciality_id" value="3"/>
+            <column name="special_identifier" value="QCkl9xBIck"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="24"/>
-            <column name="birth_date" value="1988-05-07"/>
-            <column name="gender" value="FEMALE"/>
-            <column name="name" value="Yvonne"/>
-            <column name="last_name" value="Lawman"/>
+            <column name="birth_date" value="1963-05-28"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Nigel"/>
+            <column name="last_name" value="Dyson"/>
             <column name="speciality_id" value="3"/>
+            <column name="special_identifier" value="hJluUYNBd3"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="25"/>
-            <column name="birth_date" value="1999-05-06"/>
+            <column name="birth_date" value="1988-05-28"/>
             <column name="gender" value="FEMALE"/>
-            <column name="name" value="Dinah"/>
-            <column name="last_name" value="Ryder"/>
+            <column name="name" value="Wilhelmina"/>
+            <column name="last_name" value="Bradberry"/>
             <column name="speciality_id" value="3"/>
+            <column name="special_identifier" value="1WgOP2Igdd"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="26"/>
-            <column name="birth_date" value="1986-05-07"/>
-            <column name="gender" value="FEMALE"/>
-            <column name="name" value="Clemency"/>
-            <column name="last_name" value="Marshman"/>
+            <column name="birth_date" value="1962-05-28"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Carl"/>
+            <column name="last_name" value="Bradberry"/>
             <column name="speciality_id" value="3"/>
+            <column name="special_identifier" value="PsAfjeVgQp"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="27"/>
-            <column name="birth_date" value="1988-05-07"/>
+            <column name="birth_date" value="1973-05-28"/>
             <column name="gender" value="FEMALE"/>
-            <column name="name" value="Stella"/>
-            <column name="last_name" value="Webster"/>
+            <column name="name" value="Sonia"/>
+            <column name="last_name" value="Ogden"/>
             <column name="speciality_id" value="3"/>
+            <column name="special_identifier" value="qy6bgbO52q"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="28"/>
-            <column name="birth_date" value="1964-05-07"/>
-            <column name="gender" value="MALE"/>
-            <column name="name" value="Marion"/>
-            <column name="last_name" value="Morrison"/>
+            <column name="birth_date" value="1985-05-28"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Nicki"/>
+            <column name="last_name" value="Mercer"/>
             <column name="speciality_id" value="3"/>
+            <column name="special_identifier" value="pk0ms5vzPj"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="29"/>
-            <column name="birth_date" value="1995-05-06"/>
+            <column name="birth_date" value="1990-05-28"/>
             <column name="gender" value="MALE"/>
-            <column name="name" value="Patrick"/>
-            <column name="last_name" value="Addington"/>
+            <column name="name" value="Ferdinand"/>
+            <column name="last_name" value="Gibbs"/>
             <column name="speciality_id" value="3"/>
+            <column name="special_identifier" value="s1os8mxiDh"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="30"/>
-            <column name="birth_date" value="1974-05-07"/>
-            <column name="gender" value="MALE"/>
-            <column name="name" value="Drew"/>
-            <column name="last_name" value="Reynolds"/>
+            <column name="birth_date" value="1990-05-28"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Diana"/>
+            <column name="last_name" value="Carey"/>
             <column name="speciality_id" value="3"/>
+            <column name="special_identifier" value="OvjITzDUa2"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="31"/>
-            <column name="birth_date" value="1970-05-07"/>
-            <column name="gender" value="FEMALE"/>
-            <column name="name" value="Pansy"/>
-            <column name="last_name" value="Chesterton"/>
+            <column name="birth_date" value="1964-05-28"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Winfred"/>
+            <column name="last_name" value="Alsopp"/>
             <column name="speciality_id" value="4"/>
+            <column name="special_identifier" value="g0mtI55WxV"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="32"/>
-            <column name="birth_date" value="1974-05-07"/>
+            <column name="birth_date" value="1962-05-28"/>
             <column name="gender" value="FEMALE"/>
-            <column name="name" value="Veronica"/>
-            <column name="last_name" value="Becker"/>
+            <column name="name" value="Anthea"/>
+            <column name="last_name" value="Donovan"/>
             <column name="speciality_id" value="4"/>
+            <column name="special_identifier" value="SYdGhUxtcE"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="33"/>
-            <column name="birth_date" value="1988-05-07"/>
-            <column name="gender" value="MALE"/>
-            <column name="name" value="Rupert"/>
-            <column name="last_name" value="Carrington"/>
+            <column name="birth_date" value="1999-05-28"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Louise"/>
+            <column name="last_name" value="Taylor"/>
             <column name="speciality_id" value="4"/>
+            <column name="special_identifier" value="06AUGQPih5"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="34"/>
-            <column name="birth_date" value="1979-05-07"/>
-            <column name="gender" value="FEMALE"/>
-            <column name="name" value="Ulrica"/>
-            <column name="last_name" value="Timmons"/>
+            <column name="birth_date" value="1978-05-28"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Solomon"/>
+            <column name="last_name" value="Nelson"/>
             <column name="speciality_id" value="4"/>
+            <column name="special_identifier" value="eMhcf9s4Zy"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="35"/>
-            <column name="birth_date" value="1994-05-06"/>
+            <column name="birth_date" value="1986-05-28"/>
             <column name="gender" value="FEMALE"/>
-            <column name="name" value="Charity"/>
-            <column name="last_name" value="MacDonald"/>
+            <column name="name" value="Lora"/>
+            <column name="last_name" value="Waller"/>
             <column name="speciality_id" value="4"/>
+            <column name="special_identifier" value="b2kGYnC2Cq"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="36"/>
-            <column name="birth_date" value="1991-05-07"/>
+            <column name="birth_date" value="1998-05-28"/>
             <column name="gender" value="FEMALE"/>
-            <column name="name" value="Pamela"/>
-            <column name="last_name" value="Addington"/>
+            <column name="name" value="Kimberly"/>
+            <column name="last_name" value="Philips"/>
             <column name="speciality_id" value="4"/>
+            <column name="special_identifier" value="r5ttQqqOP9"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="37"/>
-            <column name="birth_date" value="1963-05-07"/>
+            <column name="birth_date" value="1992-05-28"/>
             <column name="gender" value="MALE"/>
-            <column name="name" value="Warren"/>
-            <column name="last_name" value="Dowman"/>
+            <column name="name" value="Kristopher"/>
+            <column name="last_name" value="Mathews"/>
             <column name="speciality_id" value="4"/>
+            <column name="special_identifier" value="1bI47GaWqd"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="38"/>
-            <column name="birth_date" value="1994-05-06"/>
+            <column name="birth_date" value="1974-05-28"/>
             <column name="gender" value="FEMALE"/>
-            <column name="name" value="Gloria"/>
-            <column name="last_name" value="Murphy"/>
+            <column name="name" value="Kelly"/>
+            <column name="last_name" value="Holiday"/>
             <column name="speciality_id" value="4"/>
+            <column name="special_identifier" value="vudV2JTiTc"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="39"/>
-            <column name="birth_date" value="1985-05-07"/>
-            <column name="gender" value="MALE"/>
-            <column name="name" value="Stacy"/>
-            <column name="last_name" value="Croftoon"/>
+            <column name="birth_date" value="1980-05-28"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Carol"/>
+            <column name="last_name" value="Goodman"/>
             <column name="speciality_id" value="4"/>
+            <column name="special_identifier" value="frvTzalwBn"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="40"/>
-            <column name="birth_date" value="1989-05-07"/>
+            <column name="birth_date" value="1966-05-28"/>
             <column name="gender" value="FEMALE"/>
-            <column name="name" value="Ernestine"/>
-            <column name="last_name" value="Leman"/>
+            <column name="name" value="Tabitha"/>
+            <column name="last_name" value="Richards"/>
             <column name="speciality_id" value="4"/>
+            <column name="special_identifier" value="F6Y6VQfNci"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="41"/>
-            <column name="birth_date" value="1978-05-07"/>
-            <column name="gender" value="FEMALE"/>
-            <column name="name" value="Amy"/>
-            <column name="last_name" value="Nyman"/>
+            <column name="birth_date" value="1965-05-28"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Mitchell"/>
+            <column name="last_name" value="Stephen"/>
             <column name="speciality_id" value="5"/>
+            <column name="special_identifier" value="A6sIgkVd1P"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="42"/>
-            <column name="birth_date" value="1974-05-07"/>
+            <column name="birth_date" value="1990-05-28"/>
             <column name="gender" value="FEMALE"/>
-            <column name="name" value="Nell"/>
-            <column name="last_name" value="Stephen"/>
+            <column name="name" value="Jean"/>
+            <column name="last_name" value="Milton"/>
             <column name="speciality_id" value="5"/>
+            <column name="special_identifier" value="OwVCYEv9Hm"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="43"/>
-            <column name="birth_date" value="1974-05-07"/>
+            <column name="birth_date" value="1982-05-28"/>
             <column name="gender" value="MALE"/>
-            <column name="name" value="Ivor"/>
-            <column name="last_name" value="Stanley"/>
+            <column name="name" value="Christian"/>
+            <column name="last_name" value="Miers"/>
             <column name="speciality_id" value="5"/>
+            <column name="special_identifier" value="uXj1pFNEKv"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="44"/>
-            <column name="birth_date" value="1986-05-07"/>
-            <column name="gender" value="MALE"/>
-            <column name="name" value="Bradford"/>
-            <column name="last_name" value="Brown"/>
+            <column name="birth_date" value="1962-05-28"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Lottie"/>
+            <column name="last_name" value="Gustman"/>
             <column name="speciality_id" value="5"/>
+            <column name="special_identifier" value="1Ag9rCcIgp"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="45"/>
-            <column name="birth_date" value="1979-05-07"/>
+            <column name="birth_date" value="1984-05-28"/>
             <column name="gender" value="FEMALE"/>
-            <column name="name" value="Eve"/>
-            <column name="last_name" value="Larkins"/>
+            <column name="name" value="Alice"/>
+            <column name="last_name" value="Oliver"/>
             <column name="speciality_id" value="5"/>
+            <column name="special_identifier" value="JPvBPNzPFy"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="46"/>
-            <column name="birth_date" value="1992-05-06"/>
-            <column name="gender" value="FEMALE"/>
-            <column name="name" value="Minnie"/>
-            <column name="last_name" value="Walkman"/>
+            <column name="birth_date" value="1998-05-28"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Ferdinand"/>
+            <column name="last_name" value="Kirk"/>
             <column name="speciality_id" value="5"/>
+            <column name="special_identifier" value="kPRDAEMufg"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="47"/>
-            <column name="birth_date" value="1967-05-07"/>
+            <column name="birth_date" value="1980-05-28"/>
             <column name="gender" value="FEMALE"/>
-            <column name="name" value="Sylvia"/>
-            <column name="last_name" value="Anderson"/>
+            <column name="name" value="Kimberly"/>
+            <column name="last_name" value="Adrian"/>
             <column name="speciality_id" value="5"/>
+            <column name="special_identifier" value="Gl4NgJrzXr"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="48"/>
-            <column name="birth_date" value="1989-05-07"/>
+            <column name="birth_date" value="1990-05-28"/>
             <column name="gender" value="MALE"/>
-            <column name="name" value="Montgomery"/>
-            <column name="last_name" value="Oldman"/>
+            <column name="name" value="Nathan"/>
+            <column name="last_name" value="Sheldon"/>
             <column name="speciality_id" value="5"/>
+            <column name="special_identifier" value="snFKjT9HqH"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="49"/>
-            <column name="birth_date" value="1968-05-07"/>
+            <column name="birth_date" value="1990-05-28"/>
             <column name="gender" value="MALE"/>
-            <column name="name" value="Rudolph"/>
-            <column name="last_name" value="Johnson"/>
+            <column name="name" value="Edwin"/>
+            <column name="last_name" value="Cramer"/>
             <column name="speciality_id" value="5"/>
+            <column name="special_identifier" value="bMavdUVHRu"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="50"/>
-            <column name="birth_date" value="1988-05-07"/>
+            <column name="birth_date" value="1983-05-28"/>
             <column name="gender" value="MALE"/>
-            <column name="name" value="Wilbur"/>
-            <column name="last_name" value="Keat"/>
+            <column name="name" value="Lee"/>
+            <column name="last_name" value="Wesley"/>
             <column name="speciality_id" value="5"/>
+            <column name="special_identifier" value="AEZ5IHfW53"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="51"/>
-            <column name="birth_date" value="1965-05-07"/>
+            <column name="birth_date" value="1986-05-28"/>
             <column name="gender" value="FEMALE"/>
-            <column name="name" value="Kelly"/>
-            <column name="last_name" value="Nevill"/>
+            <column name="name" value="Henrietta"/>
+            <column name="last_name" value="Donovan"/>
             <column name="speciality_id" value="6"/>
+            <column name="special_identifier" value="uXIBvkKEji"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="52"/>
-            <column name="birth_date" value="1971-05-07"/>
-            <column name="gender" value="MALE"/>
-            <column name="name" value="Humphrey"/>
-            <column name="last_name" value="Mathews"/>
+            <column name="birth_date" value="1973-05-28"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Estella"/>
+            <column name="last_name" value="White"/>
             <column name="speciality_id" value="6"/>
+            <column name="special_identifier" value="g93T291kow"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="53"/>
-            <column name="birth_date" value="1990-05-06"/>
-            <column name="gender" value="MALE"/>
-            <column name="name" value="Orson"/>
-            <column name="last_name" value="Stevenson"/>
+            <column name="birth_date" value="1989-05-28"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Hazel"/>
+            <column name="last_name" value="Allford"/>
             <column name="speciality_id" value="6"/>
+            <column name="special_identifier" value="QHZOjsnqph"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="54"/>
-            <column name="birth_date" value="1966-05-07"/>
-            <column name="gender" value="FEMALE"/>
-            <column name="name" value="Daphne"/>
-            <column name="last_name" value="Brown"/>
+            <column name="birth_date" value="1986-05-28"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Errol"/>
+            <column name="last_name" value="Thorndike"/>
             <column name="speciality_id" value="6"/>
+            <column name="special_identifier" value="ClOl71V4UM"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="55"/>
-            <column name="birth_date" value="1979-05-07"/>
+            <column name="birth_date" value="1991-05-28"/>
             <column name="gender" value="FEMALE"/>
-            <column name="name" value="Melanie"/>
-            <column name="last_name" value="Stephen"/>
+            <column name="name" value="Morgan"/>
+            <column name="last_name" value="Parkinson"/>
             <column name="speciality_id" value="6"/>
+            <column name="special_identifier" value="RIig6sBCEY"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="56"/>
-            <column name="birth_date" value="1994-05-06"/>
-            <column name="gender" value="FEMALE"/>
-            <column name="name" value="Noel"/>
+            <column name="birth_date" value="1970-05-28"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Homer"/>
             <column name="last_name" value="Walkman"/>
             <column name="speciality_id" value="6"/>
+            <column name="special_identifier" value="GV3CsOXZqs"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="57"/>
-            <column name="birth_date" value="1979-05-07"/>
+            <column name="birth_date" value="1988-05-28"/>
             <column name="gender" value="MALE"/>
-            <column name="name" value="Wilson"/>
-            <column name="last_name" value="Parkinson"/>
+            <column name="name" value="Chester"/>
+            <column name="last_name" value="Gilson"/>
             <column name="speciality_id" value="6"/>
+            <column name="special_identifier" value="gHsUPJ14Qf"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="58"/>
-            <column name="birth_date" value="1976-05-07"/>
-            <column name="gender" value="MALE"/>
-            <column name="name" value="Carl"/>
-            <column name="last_name" value="Addington"/>
+            <column name="birth_date" value="1981-05-28"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Hope"/>
+            <column name="last_name" value="Simpson"/>
             <column name="speciality_id" value="6"/>
+            <column name="special_identifier" value="fo7cOo1O3j"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="59"/>
-            <column name="birth_date" value="1987-05-07"/>
-            <column name="gender" value="MALE"/>
-            <column name="name" value="Humphrey"/>
-            <column name="last_name" value="Gardner"/>
+            <column name="birth_date" value="1984-05-28"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Sophia"/>
+            <column name="last_name" value="Clifford"/>
             <column name="speciality_id" value="6"/>
+            <column name="special_identifier" value="WrZKND7bmg"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="60"/>
-            <column name="birth_date" value="1983-05-07"/>
-            <column name="gender" value="MALE"/>
-            <column name="name" value="Calvin"/>
-            <column name="last_name" value="Salisburry"/>
+            <column name="birth_date" value="1968-05-28"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Alison"/>
+            <column name="last_name" value="Simon"/>
             <column name="speciality_id" value="6"/>
+            <column name="special_identifier" value="EJMSbWksOZ"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="61"/>
-            <column name="birth_date" value="1969-05-07"/>
+            <column name="birth_date" value="1963-05-28"/>
             <column name="gender" value="MALE"/>
-            <column name="name" value="Everett"/>
-            <column name="last_name" value="Eddington"/>
+            <column name="name" value="Claude"/>
+            <column name="last_name" value="Oldman"/>
             <column name="speciality_id" value="7"/>
+            <column name="special_identifier" value="yyUAHqVAxH"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="62"/>
-            <column name="birth_date" value="1994-05-06"/>
-            <column name="gender" value="FEMALE"/>
-            <column name="name" value="Janet"/>
-            <column name="last_name" value="Gerald"/>
+            <column name="birth_date" value="1980-05-28"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Howard"/>
+            <column name="last_name" value="Leman"/>
             <column name="speciality_id" value="7"/>
+            <column name="special_identifier" value="jvBCqE60CT"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="63"/>
-            <column name="birth_date" value="1975-05-07"/>
-            <column name="gender" value="FEMALE"/>
-            <column name="name" value="Delia"/>
-            <column name="last_name" value="Becker"/>
+            <column name="birth_date" value="1966-05-28"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Alva"/>
+            <column name="last_name" value="Albertson"/>
             <column name="speciality_id" value="7"/>
+            <column name="special_identifier" value="OkgleSwyoo"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="64"/>
-            <column name="birth_date" value="1984-05-07"/>
-            <column name="gender" value="MALE"/>
-            <column name="name" value="Alexander"/>
-            <column name="last_name" value="Fane"/>
+            <column name="birth_date" value="1973-05-28"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Alvina"/>
+            <column name="last_name" value="Dutton"/>
             <column name="speciality_id" value="7"/>
+            <column name="special_identifier" value="Qba1FLJBH8"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="65"/>
-            <column name="birth_date" value="1973-05-07"/>
-            <column name="gender" value="MALE"/>
-            <column name="name" value="Ervin"/>
-            <column name="last_name" value="Donaldson"/>
+            <column name="birth_date" value="1980-05-28"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Leona"/>
+            <column name="last_name" value="Gilbert"/>
             <column name="speciality_id" value="7"/>
+            <column name="special_identifier" value="2STutqKrP3"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="66"/>
-            <column name="birth_date" value="1967-05-07"/>
+            <column name="birth_date" value="1968-05-28"/>
             <column name="gender" value="FEMALE"/>
-            <column name="name" value="Nell"/>
-            <column name="last_name" value="Raleigh"/>
+            <column name="name" value="Laverne"/>
+            <column name="last_name" value="Dutton"/>
             <column name="speciality_id" value="7"/>
+            <column name="special_identifier" value="8nTdlpOMrU"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="67"/>
-            <column name="birth_date" value="1979-05-07"/>
-            <column name="gender" value="MALE"/>
-            <column name="name" value="Garrett"/>
-            <column name="last_name" value="Farrell"/>
+            <column name="birth_date" value="1987-05-28"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Clarice"/>
+            <column name="last_name" value="Clapton"/>
             <column name="speciality_id" value="7"/>
+            <column name="special_identifier" value="r4y7RUJOlX"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="68"/>
-            <column name="birth_date" value="1993-05-06"/>
+            <column name="birth_date" value="1999-05-28"/>
             <column name="gender" value="FEMALE"/>
-            <column name="name" value="Cecilia"/>
-            <column name="last_name" value="Evans"/>
+            <column name="name" value="Evangeline"/>
+            <column name="last_name" value="Garrison"/>
             <column name="speciality_id" value="7"/>
+            <column name="special_identifier" value="kllUMHMAde"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="69"/>
-            <column name="birth_date" value="1980-05-07"/>
-            <column name="gender" value="MALE"/>
-            <column name="name" value="Norman"/>
-            <column name="last_name" value="Wainwright"/>
+            <column name="birth_date" value="1993-05-28"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Jemima"/>
+            <column name="last_name" value="Higgins"/>
             <column name="speciality_id" value="7"/>
+            <column name="special_identifier" value="awY1f0HNRG"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="70"/>
-            <column name="birth_date" value="1980-05-07"/>
-            <column name="gender" value="MALE"/>
-            <column name="name" value="Leonard"/>
-            <column name="last_name" value="Shackley"/>
+            <column name="birth_date" value="1979-05-28"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Una"/>
+            <column name="last_name" value="Hodges"/>
             <column name="speciality_id" value="7"/>
+            <column name="special_identifier" value="OaztyQRRCf"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="71"/>
-            <column name="birth_date" value="1982-05-07"/>
-            <column name="gender" value="MALE"/>
-            <column name="name" value="Morton"/>
-            <column name="last_name" value="Carroll"/>
+            <column name="birth_date" value="1974-05-28"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Jemima"/>
+            <column name="last_name" value="Haig"/>
             <column name="speciality_id" value="8"/>
+            <column name="special_identifier" value="840cZOlPHd"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="72"/>
-            <column name="birth_date" value="1966-05-07"/>
-            <column name="gender" value="FEMALE"/>
-            <column name="name" value="Louise"/>
-            <column name="last_name" value="Russel"/>
+            <column name="birth_date" value="1974-05-28"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Ernest"/>
+            <column name="last_name" value="Francis"/>
             <column name="speciality_id" value="8"/>
+            <column name="special_identifier" value="SyTKrfdqED"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="73"/>
-            <column name="birth_date" value="1993-05-06"/>
-            <column name="gender" value="FEMALE"/>
-            <column name="name" value="Louise"/>
-            <column name="last_name" value="Dickinson"/>
+            <column name="birth_date" value="1978-05-28"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Fabian"/>
+            <column name="last_name" value="Harrison"/>
             <column name="speciality_id" value="8"/>
+            <column name="special_identifier" value="D7EqW8UQz4"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="74"/>
-            <column name="birth_date" value="1981-05-07"/>
-            <column name="gender" value="MALE"/>
-            <column name="name" value="Isaac"/>
-            <column name="last_name" value="Youmans"/>
+            <column name="birth_date" value="1971-05-28"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Evangeline"/>
+            <column name="last_name" value="Attwood"/>
             <column name="speciality_id" value="8"/>
+            <column name="special_identifier" value="YFNpEO1UTj"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="75"/>
-            <column name="birth_date" value="1989-05-07"/>
+            <column name="birth_date" value="1991-05-28"/>
             <column name="gender" value="MALE"/>
-            <column name="name" value="Egbert"/>
-            <column name="last_name" value="Hancock"/>
+            <column name="name" value="Angus"/>
+            <column name="last_name" value="Bradberry"/>
             <column name="speciality_id" value="8"/>
+            <column name="special_identifier" value="zeLpGqeKsH"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="76"/>
-            <column name="birth_date" value="1964-05-07"/>
-            <column name="gender" value="MALE"/>
-            <column name="name" value="Emil"/>
-            <column name="last_name" value="Wainwright"/>
+            <column name="birth_date" value="1978-05-28"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Vida"/>
+            <column name="last_name" value="Harrison"/>
             <column name="speciality_id" value="8"/>
+            <column name="special_identifier" value="Onp0KRUb1X"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="77"/>
-            <column name="birth_date" value="1978-05-07"/>
-            <column name="gender" value="MALE"/>
-            <column name="name" value="Fergus"/>
-            <column name="last_name" value="Chesterton"/>
+            <column name="birth_date" value="1993-05-28"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="April"/>
+            <column name="last_name" value="Pass"/>
             <column name="speciality_id" value="8"/>
+            <column name="special_identifier" value="1qyAzBoVcf"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="78"/>
-            <column name="birth_date" value="1967-05-07"/>
-            <column name="gender" value="MALE"/>
-            <column name="name" value="Vincent"/>
-            <column name="last_name" value="Barrington"/>
+            <column name="birth_date" value="1974-05-28"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Wanda"/>
+            <column name="last_name" value="Marlow"/>
             <column name="speciality_id" value="8"/>
+            <column name="special_identifier" value="Cr6IJvR9sT"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="79"/>
-            <column name="birth_date" value="1976-05-07"/>
+            <column name="birth_date" value="1989-05-28"/>
             <column name="gender" value="FEMALE"/>
-            <column name="name" value="Dorothy"/>
-            <column name="last_name" value="Adderiy"/>
+            <column name="name" value="Gloria"/>
+            <column name="last_name" value="Freeman"/>
             <column name="speciality_id" value="8"/>
+            <column name="special_identifier" value="8NIMtL6s27"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="80"/>
-            <column name="birth_date" value="1963-05-07"/>
+            <column name="birth_date" value="1997-05-28"/>
             <column name="gender" value="FEMALE"/>
-            <column name="name" value="Danielle"/>
-            <column name="last_name" value="Samuels"/>
+            <column name="name" value="Josephine"/>
+            <column name="last_name" value="Osborne"/>
             <column name="speciality_id" value="8"/>
+            <column name="special_identifier" value="aL244l0dWV"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="81"/>
-            <column name="birth_date" value="1973-05-07"/>
-            <column name="gender" value="FEMALE"/>
-            <column name="name" value="Charity"/>
-            <column name="last_name" value="Derrick"/>
+            <column name="birth_date" value="1987-05-28"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="John"/>
+            <column name="last_name" value="Black"/>
             <column name="speciality_id" value="9"/>
+            <column name="special_identifier" value="CO3ASrXhwj"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="82"/>
-            <column name="birth_date" value="1987-05-07"/>
-            <column name="gender" value="FEMALE"/>
-            <column name="name" value="Megan"/>
-            <column name="last_name" value="Barnes"/>
+            <column name="birth_date" value="1993-05-28"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Franklin"/>
+            <column name="last_name" value="Foster"/>
             <column name="speciality_id" value="9"/>
+            <column name="special_identifier" value="lgkqyQ0K1H"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="83"/>
-            <column name="birth_date" value="1996-05-06"/>
+            <column name="birth_date" value="1963-05-28"/>
             <column name="gender" value="FEMALE"/>
-            <column name="name" value="Winifred"/>
-            <column name="last_name" value="James"/>
+            <column name="name" value="Regina"/>
+            <column name="last_name" value="Farmer"/>
             <column name="speciality_id" value="9"/>
+            <column name="special_identifier" value="DB88xF49sC"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="84"/>
-            <column name="birth_date" value="1975-05-07"/>
-            <column name="gender" value="FEMALE"/>
-            <column name="name" value="Rhonda"/>
-            <column name="last_name" value="Brooks"/>
+            <column name="birth_date" value="1966-05-28"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Errol"/>
+            <column name="last_name" value="Donaldson"/>
             <column name="speciality_id" value="9"/>
+            <column name="special_identifier" value="ERDhqsPk8N"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="85"/>
-            <column name="birth_date" value="1964-05-07"/>
-            <column name="gender" value="FEMALE"/>
-            <column name="name" value="Diana"/>
-            <column name="last_name" value="Benson"/>
+            <column name="birth_date" value="1963-05-28"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Cody"/>
+            <column name="last_name" value="Porter"/>
             <column name="speciality_id" value="9"/>
+            <column name="special_identifier" value="tA88jo43kC"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="86"/>
-            <column name="birth_date" value="1979-05-07"/>
-            <column name="gender" value="MALE"/>
-            <column name="name" value="Llewellyn"/>
-            <column name="last_name" value="Archibald"/>
+            <column name="birth_date" value="1965-05-28"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Gloria"/>
+            <column name="last_name" value="Richards"/>
             <column name="speciality_id" value="9"/>
+            <column name="special_identifier" value="wwdgDBjzng"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="87"/>
-            <column name="birth_date" value="1967-05-07"/>
+            <column name="birth_date" value="1969-05-28"/>
             <column name="gender" value="FEMALE"/>
-            <column name="name" value="Lydia"/>
-            <column name="last_name" value="Dowman"/>
+            <column name="name" value="Anthea"/>
+            <column name="last_name" value="Gustman"/>
             <column name="speciality_id" value="9"/>
+            <column name="special_identifier" value="FWeaktrLxO"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="88"/>
-            <column name="birth_date" value="1977-05-07"/>
-            <column name="gender" value="MALE"/>
-            <column name="name" value="Ron"/>
-            <column name="last_name" value="Kendal"/>
+            <column name="birth_date" value="1997-05-28"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Annabel"/>
+            <column name="last_name" value="Flatcher"/>
             <column name="speciality_id" value="9"/>
+            <column name="special_identifier" value="f9EQLYqsaN"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="89"/>
-            <column name="birth_date" value="1970-05-07"/>
+            <column name="birth_date" value="1984-05-28"/>
             <column name="gender" value="FEMALE"/>
-            <column name="name" value="Deborah"/>
-            <column name="last_name" value="Marshman"/>
+            <column name="name" value="Brenda"/>
+            <column name="last_name" value="Carroll"/>
             <column name="speciality_id" value="9"/>
+            <column name="special_identifier" value="rt4EGsEAO9"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="90"/>
-            <column name="birth_date" value="1970-05-07"/>
+            <column name="birth_date" value="1993-05-28"/>
             <column name="gender" value="MALE"/>
-            <column name="name" value="Cody"/>
-            <column name="last_name" value="Keat"/>
+            <column name="name" value="Joel"/>
+            <column name="last_name" value="Russel"/>
             <column name="speciality_id" value="9"/>
+            <column name="special_identifier" value="Ogpe2V08qx"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="91"/>
-            <column name="birth_date" value="1967-05-07"/>
+            <column name="birth_date" value="1982-05-28"/>
             <column name="gender" value="FEMALE"/>
-            <column name="name" value="Goldie"/>
-            <column name="last_name" value="Farmer"/>
+            <column name="name" value="Mildred"/>
+            <column name="last_name" value="Oldman"/>
             <column name="speciality_id" value="10"/>
+            <column name="special_identifier" value="XTBMyDCktO"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="92"/>
-            <column name="birth_date" value="1971-05-07"/>
-            <column name="gender" value="FEMALE"/>
-            <column name="name" value="Leona"/>
-            <column name="last_name" value="Otis"/>
+            <column name="birth_date" value="1984-05-28"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Mortimer"/>
+            <column name="last_name" value="Audley"/>
             <column name="speciality_id" value="10"/>
+            <column name="special_identifier" value="M3pE87R5RH"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="93"/>
-            <column name="birth_date" value="1983-05-07"/>
+            <column name="birth_date" value="1974-05-28"/>
             <column name="gender" value="FEMALE"/>
-            <column name="name" value="Nicki"/>
-            <column name="last_name" value="Roberts"/>
+            <column name="name" value="Lisa"/>
+            <column name="last_name" value="Philips"/>
             <column name="speciality_id" value="10"/>
+            <column name="special_identifier" value="2XPf3UeJXS"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="94"/>
-            <column name="birth_date" value="1967-05-07"/>
-            <column name="gender" value="MALE"/>
-            <column name="name" value="Adelbert"/>
-            <column name="last_name" value="Hamphrey"/>
+            <column name="birth_date" value="1965-05-28"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="name" value="Blythe"/>
+            <column name="last_name" value="Barnes"/>
             <column name="speciality_id" value="10"/>
+            <column name="special_identifier" value="15TKNYMoTi"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="95"/>
-            <column name="birth_date" value="1960-05-07"/>
-            <column name="gender" value="FEMALE"/>
-            <column name="name" value="Molly"/>
-            <column name="last_name" value="Nicholson"/>
+            <column name="birth_date" value="1965-05-28"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Cody"/>
+            <column name="last_name" value="Atcheson"/>
             <column name="speciality_id" value="10"/>
+            <column name="special_identifier" value="NV1tZtywCm"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="96"/>
-            <column name="birth_date" value="1985-05-07"/>
+            <column name="birth_date" value="1978-05-28"/>
             <column name="gender" value="MALE"/>
-            <column name="name" value="Berthold"/>
-            <column name="last_name" value="Dunce"/>
+            <column name="name" value="Alan"/>
+            <column name="last_name" value="Laird"/>
             <column name="speciality_id" value="10"/>
+            <column name="special_identifier" value="oQhIakYOtJ"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="97"/>
-            <column name="birth_date" value="1980-05-07"/>
-            <column name="gender" value="FEMALE"/>
-            <column name="name" value="Tanya"/>
-            <column name="last_name" value="Smith"/>
+            <column name="birth_date" value="1995-05-28"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Manuel"/>
+            <column name="last_name" value="Hancock"/>
             <column name="speciality_id" value="10"/>
+            <column name="special_identifier" value="8Vqgjm2Cyw"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="98"/>
-            <column name="birth_date" value="1962-05-07"/>
+            <column name="birth_date" value="1981-05-28"/>
             <column name="gender" value="MALE"/>
-            <column name="name" value="Benedict"/>
-            <column name="last_name" value="Clapton"/>
+            <column name="name" value="Elvis"/>
+            <column name="last_name" value="Gilson"/>
             <column name="speciality_id" value="10"/>
+            <column name="special_identifier" value="YZhd05P8xf"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="99"/>
-            <column name="birth_date" value="1983-05-07"/>
-            <column name="gender" value="FEMALE"/>
-            <column name="name" value="Natalie"/>
-            <column name="last_name" value="Owen"/>
+            <column name="birth_date" value="1978-05-28"/>
+            <column name="gender" value="MALE"/>
+            <column name="name" value="Tony"/>
+            <column name="last_name" value="Durham"/>
             <column name="speciality_id" value="10"/>
+            <column name="special_identifier" value="xuBka6JVul"/>
         </insert>
         <insert tableName="doctor">
             <column name="id" value="100"/>
-            <column name="birth_date" value="1977-05-07"/>
+            <column name="birth_date" value="1979-05-28"/>
             <column name="gender" value="FEMALE"/>
-            <column name="name" value="Faith"/>
-            <column name="last_name" value="Murphy"/>
+            <column name="name" value="Adele"/>
+            <column name="last_name" value="Babcock"/>
             <column name="speciality_id" value="10"/>
+            <column name="special_identifier" value="YQEIcNZik9"/>
         </insert>
     </changeSet>
 </databaseChangeLog>

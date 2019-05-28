@@ -46,7 +46,7 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter {
         final CredentialsDto credentials = getObjectMapper().readValue(request.getInputStream(), CredentialsDto.class);
 
         return getAuthenticationManager().authenticate(new UsernamePasswordAuthenticationToken(
-            credentials.getName(), credentials.getPassword(), Collections.emptyList()));
+            credentials.getAlias(), credentials.getPassword(), Collections.emptyList()));
     }
 
     @Override
@@ -55,10 +55,10 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter {
                                             final FilterChain chain,
                                             final Authentication authResult) {
         // Write Authorization to Headers of Response.
-        final String name = authResult.getName();
+        final String alias = authResult.getName();
         final String roles = authResult.getAuthorities().stream().map(GrantedAuthority::getAuthority)
             .collect(Collectors.joining(","));
-        tokenAuthenticationService.addAuthentication(response, name, roles);
+        tokenAuthenticationService.addAuthentication(response, alias, roles);
     }
 
     private ObjectMapper getObjectMapper() {

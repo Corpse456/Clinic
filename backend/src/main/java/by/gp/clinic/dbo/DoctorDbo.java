@@ -19,6 +19,8 @@ public class DoctorDbo extends ManDbo {
     @JoinColumn(name = "speciality_id")
     private SpecialityDbo speciality;
 
+    private String specialIdentifier;
+
     public static DoctorDbo buildEmptyWithId(final Long id) {
         final DoctorDbo patient = new DoctorDbo();
         patient.setId(id);

@@ -4,6 +4,7 @@ import by.gp.clinic.serializer.ClinicDateDeserializer;
 import by.gp.clinic.serializer.ClinicDateSerializer;
 import by.gp.clinic.serializer.ClinicDateTimeDeserializer;
 import by.gp.clinic.serializer.ClinicDateTimeSerializer;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.context.annotation.Bean;
@@ -27,7 +28,7 @@ public class CommonConfig {
 
     @Bean
     public ResourceBundleMessageSource messageSourceResourceBundle() {
-         final ResourceBundleMessageSource messageSourceResourceBundle = new ResourceBundleMessageSource();
+        final ResourceBundleMessageSource messageSourceResourceBundle = new ResourceBundleMessageSource();
         messageSourceResourceBundle.setBasenames("properties/enum");
         return messageSourceResourceBundle;
     }
@@ -43,5 +44,11 @@ public class CommonConfig {
         simpleModule.addDeserializer(LocalDate.class, new ClinicDateDeserializer());
         simpleModule.addDeserializer(LocalDateTime.class, new ClinicDateTimeDeserializer());
         return builder.modulesToInstall(new JavaTimeModule());
+    }
+
+    @Bean
+    @Primary
+    public ObjectMapper objectMapper() {
+        return objectMapperBuilder().build();
     }
 }

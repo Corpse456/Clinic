@@ -33,9 +33,9 @@ public class TokenAuthenticationService {
     private final UserRepository userRepository;
     private final VerificationTokenRepository tokenRepository;
 
-    public void addAuthentication(final HttpServletResponse response, final String name, final String roles) {
-        final UserDbo user = userRepository.getByName(name);
-        final String JWT = encode(name, user.getId().toString(), roles);
+    public void addAuthentication(final HttpServletResponse response, final String alias, final String roles) {
+        final UserDbo user = userRepository.getByAlias(alias);
+        final String JWT = encode(alias, user.getId().toString(), roles);
         response.addHeader(HEADER_STRING, JWT);
     }
 

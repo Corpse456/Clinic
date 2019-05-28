@@ -38,6 +38,7 @@
             <column name="name" type="varchar(100)"/>
             <column name="last_name" type="varchar(100)"/>
             <column name="birth_date" type="date"/>
+            <column name="special_identifier" type="varchar(10)"/>
             <column name="speciality_id" type="bigint(20)">
                 <constraints referencedTableName="speciality"
                              referencedColumnNames="id"
@@ -155,19 +156,37 @@
                 <constraints primaryKeyName="user_pk"
                              primaryKey="true"/>
             </column>
-            <column name="name" type="varchar(255)">
+            <column name="alias" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
             <column name="password" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
+            <column name="name" type="varchar(255)"/>
+            <column name="last_name" type="varchar(255)"/>
             <column name="role" type="varchar(30)">
                 <constraints nullable="false"/>
             </column>
             <column name="enabled" type="boolean">
                 <constraints nullable="false"/>
             </column>
+            <column name="doctor_id" type="bigint(20)">
+                <constraints referencedTableName="doctor"
+                             referencedColumnNames="id"
+                             foreignKeyName="user_fk_doctor_id"
+                             deleteCascade="true"/>
+            </column>
+            <column name="patient_id" type="bigint(20)">
+                <constraints referencedTableName="patient"
+                             referencedColumnNames="id"
+                             foreignKeyName="user_patient_id"
+                             deleteCascade="true"/>
+            </column>
         </createTable>
+
+        <addUniqueConstraint constraintName="unique_user_alias" tableName="user" columnNames="alias"/>
+        <addUniqueConstraint constraintName="unique_user_patient" tableName="user" columnNames="patient_id"/>
+        <addUniqueConstraint constraintName="unique_user_doctor" tableName="ticket" columnNames="doctor_id"/>
     </changeSet>
 
     <changeSet id="create_token_table" author="neznaev">

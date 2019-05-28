@@ -10,7 +10,6 @@ import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -41,8 +40,6 @@ public abstract class AbstractSpringMvcTest {
     private MockMvc mockMvc;
 
     @Autowired
-    protected Jackson2ObjectMapperBuilder objectMapperBuilder;
-
     private ObjectMapper objectMapper;
 
     @Before
@@ -101,7 +98,7 @@ public abstract class AbstractSpringMvcTest {
 
     protected String toJson(final Object object) {
         try {
-            return getObjectMapper().writeValueAsString(object);
+            return objectMapper.writeValueAsString(object);
         } catch (final JsonProcessingException e) {
             fail(e.getMessage());
             return null;
@@ -123,7 +120,7 @@ public abstract class AbstractSpringMvcTest {
 
     protected <T> T getObjectFromResult(final String result, Class<T> clazz) {
         try {
-            return getObjectMapper().readValue(result, clazz);
+            return objectMapper.readValue(result, clazz);
         } catch (final IOException e) {
             fail(e.getMessage());
             return null;
@@ -133,7 +130,7 @@ public abstract class AbstractSpringMvcTest {
     protected <T> PageDto<T> getListOfObjectsFromResult(final MvcResult result,
                                                         final TypeReference<PageDto<T>> listTypeReference) {
         try {
-            return getObjectMapper().readValue(getContentAsString(result), listTypeReference);
+            return objectMapper.readValue(getContentAsString(result), listTypeReference);
         } catch (final IOException e) {
             fail(e.getMessage());
             return null;
@@ -165,9 +162,5 @@ public abstract class AbstractSpringMvcTest {
             fail(e.getMessage());
             return null;
         }
-    }
-
-    private ObjectMapper getObjectMapper() {
-        return objectMapper == null ? objectMapper = objectMapperBuilder.build() : objectMapper;
     }
 }

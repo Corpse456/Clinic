@@ -31,13 +31,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(final HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().authorizeRequests()
             .antMatchers(HttpMethod.POST, "/login").permitAll()
+            .antMatchers("/development/**").permitAll()
+            .antMatchers("/public/**").permitAll()
             .antMatchers(HttpMethod.GET, "/swagger-ui.html").permitAll()
             .antMatchers(HttpMethod.GET, "/v2/api-docs").permitAll()
             .antMatchers(HttpMethod.GET, "/webjars/springfox-swagger-ui/**").permitAll()
             .antMatchers(HttpMethod.GET, "/swagger-resources/**").permitAll()
             .antMatchers("/admin/**").hasAuthority(UserRole.ADMIN.name())
-            .antMatchers("/**").hasAnyAuthority(UserRole.USER.name(), UserRole.ADMIN.name())
-//            .antMatchers("/**").access(hasRole(UserRole.USER))
+            .antMatchers("/**").hasAnyAuthority(UserRole.USER.name(), UserRole.DOCTOR.name(), UserRole.ADMIN.name())
             .anyRequest().authenticated()
             .and()
             .addFilterBefore(new LoginFilter(tokenAuthenticationService, authenticationManager(), objectMapperBuilder),
@@ -60,7 +61,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().dataSource(dataSource)
-            .usersByUsernameQuery("select name, password, enabled from user where name=?")
-            .authoritiesByUsernameQuery("select name, role from user where name=?");
+            .usersByUsernameQuery("select alias, password, enabled from user where alias=?")
+            .authoritiesByUsernameQuery("select alias, role from user where alias=?");
     }
 }

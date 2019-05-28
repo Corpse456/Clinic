@@ -2,13 +2,19 @@
     <div class="hello">
         <img alt="Vue logo" src="../assets/Clinic.png">
         <h1>Welcome to Clinic Application</h1>
-        <div>Please, login:</div>
+        <div>Please, {{buttonName().toLowerCase()}} or
+            <button v-on:click="signUp">{{buttonReverseName()}}</button>
+        </div>
         <br/>
-        <input v-model="name" placeholder="name"/>
+        <input v-model="alias" placeholder="nick name"/>
         <br/>
         <input type="password" v-model="password" placeholder="password"/>
         <br/>
-        <button v-on:click="login">Login</button>
+        <input v-if="!isLogin" v-model="name" placeholder="name"/>
+        <br/>
+        <input v-if="!isLogin" type="password" v-model="lastName" placeholder="last name"/>
+        <br/><br/>
+        <button v-on:click="login">{{buttonName()}}</button>
     </div>
 </template>
 
@@ -19,32 +25,62 @@
     export default {
         data() {
             return {
-                name: "",
+                alias: "",
                 password: "",
+                name: "",
+                lastName: "",
+                isLogin: true,
                 dictionaryData: {}
             };
         },
         methods: {
             login() {
-                let credentials = {};
-                credentials.name = this.name;
-                credentials.password = this.password;
-                axios.post('/backend/login', credentials)
-                    .then(response => {
-                        if (response.status === 200) {
-                            VueCookies.config('7d');
-                            VueCookies.set('authorization', response.headers.authorization);
+                let credentials = {
+                    alias: this.alias,
+                    password: this.password,
+                    name: this.name,
+                    lastName: this.lastName
+                };
 
-                            axios.get('/backend/dictionary', {
-                                headers: {
-                                    Authorization: response.headers.authorization
-                                }
-                            }).then(response => {
-                                this.$store.commit('dictionary/init', response.data);
-                                this.$router.push({name: 'MainWindow'});
-                            });
+                function addAuthorization(response) {
+                    let authorization = response.headers.authorization;
+
+                    VueCookies.config('7d');
+                    VueCookies.set('authorization', authorization);
+
+                    axios.get('/backend/dictionary', {
+                        headers: {
+                            Authorization: authorization
                         }
-                    })
+                    }).then(response => {
+                        this.$store.commit('dictionary/init', response.data);
+                    });
+                }
+
+                if (this.isLogin) {
+                    axios.post('/backend/login', credentials)
+                        .then(response => {
+                            if (response.status === 200) {
+                                addAuthorization(response);
+                            }
+                        })
+                } else {
+                    axios.post('/backend/public/user', credentials)
+                        .then(response => {
+                            if (response.status === 200) {
+                                addAuthorization(response);
+                            }
+                        })
+                }
+            },
+            signUp() {
+                this.isLogin = !this.isLogin;
+            },
+            buttonName() {
+                return this.isLogin ? "Login" : "SignUp";
+            },
+            buttonReverseName() {
+                return this.isLogin ? "SignUp" : "Login";
             }
         }
     }

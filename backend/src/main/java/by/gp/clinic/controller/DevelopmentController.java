@@ -34,4 +34,12 @@ public class DevelopmentController {
     public void createTickets() {
         developmentService.addTickets();
     }
+
+    @PostMapping(value = "/fill")
+    @ApiOperation(value = "Fill the data")
+    public void fillData() {
+        developmentService.hireDoctors();
+        developmentService.addPatients();
+        developmentService.addTickets();
+    }
 }

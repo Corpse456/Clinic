@@ -4,5 +4,7 @@ import by.gp.clinic.dbo.UserDbo;
 
 public interface UserRepository extends CustomRepository<UserDbo, Long> {
 
-    UserDbo getByName(final String name);
+    UserDbo getByAlias(final String name);
+
+    boolean existsByAlias(final String alias);
 }

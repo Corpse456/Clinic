@@ -3,17 +3,22 @@ package by.gp.clinic.dto;
 import by.gp.clinic.enumerated.UserRole;
 import lombok.Data;
 
-import javax.validation.constraints.NotNull;
-
 @Data
 public class UserDto extends AbstractDto {
 
-    @NotNull
-    private String name;
+    private String alias;
 
-    @NotNull
     private String password;
 
-    @NotNull
+    private String name;
+
+    private String lastName;
+
+    private Long patientId;
+
+    private Long doctorId;
+
     private UserRole role;
+
+    private boolean enabled;
 }

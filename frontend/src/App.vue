@@ -1,19 +1,60 @@
 <template>
     <div id="app">
-        <router-view/>
+        <Login v-if='page() === login'/>
+        <UserPage v-if='page() === user'/>
+        <DoctorPage v-if='page() === doctor'/>
+        <AdminPage v-if='page() === admin'/>
     </div>
 </template>
 
 <script>
     import axios from 'axios';
     import Vue from 'vue';
-    import Vuex from 'vuex';
+    import Vuex, {mapState} from 'vuex';
     import VueCookies from 'vue-cookies';
+    import Login from './components/Login.vue'
+    import UserPage from './components/UserPage.vue'
+    import DoctorPage from './components/DoctorPage.vue'
+    import AdminPage from './components/AdminPage.vue'
 
     Vue.use(Vuex);
 
     export default {
         name: 'app',
+        components: {
+            Login, UserPage, DoctorPage, AdminPage
+        },
+        data() {
+            return {
+                user: "user",
+                doctor: "doctor",
+                admin: "admin",
+                login: "login",
+            };
+        },
+        computed: {
+            ...mapState({
+                userRole: state => state.dictionary.userRole
+            })
+        },
+        methods: {
+            page() {
+                switch (this.userRole) {
+                    case "USER" : {
+                        return this.user;
+                    }
+                    case "DOCTOR" : {
+                        return this.doctor;
+                    }
+                    case "ADMIN" : {
+                        return this.admin;
+                    }
+                    default : {
+                        return this.login;
+                    }
+                }
+            }
+        },
         beforeCreate() {
             axios.get('/backend/dictionary', {
                 headers: {
@@ -22,11 +63,8 @@
             }).then(response => {
                 if (response.status === 200) {
                     this.$store.commit('dictionary/init', response.data);
-                    this.$router.push({name: 'MainWindow'});
-                } else {
-                    this.$router.push({name: 'Login'});
                 }
-            }).catch(() => this.$router.push({name: 'Login'}));
+            });
         }
     }
 </script>
