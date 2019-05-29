@@ -1,6 +1,7 @@
 package by.gp.clinic.service;
 
 import by.gp.clinic.dbo.UserDbo;
+import by.gp.clinic.dbo.VerificationTokenDbo;
 import by.gp.clinic.repository.UserRepository;
 import by.gp.clinic.repository.VerificationTokenRepository;
 import io.jsonwebtoken.Jwts;
@@ -16,6 +17,8 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -36,6 +39,8 @@ public class TokenAuthenticationService {
     public void addAuthentication(final HttpServletResponse response, final String alias, final String roles) {
         final UserDbo user = userRepository.getByAlias(alias);
         final String JWT = encode(alias, user.getId().toString(), roles);
+
+        updateToken(JWT);
         response.addHeader(HEADER_STRING, JWT);
     }
 
@@ -78,7 +83,18 @@ public class TokenAuthenticationService {
             .getSubject();
     }
 
+    @Transactional
+    public void updateToken(final String JWT) {
+        final VerificationTokenDbo verificationToken = tokenRepository.findByToken(JWT).orElseGet(() -> {
+            final VerificationTokenDbo verificationTokenDbo = new VerificationTokenDbo();
+            verificationTokenDbo.setToken(JWT);
+            return verificationTokenDbo;
+        });
+        verificationToken.setExpiryDate(LocalDate.now().plusMonths(1));
+        tokenRepository.save(verificationToken);
+    }
+
     private boolean isTokenExpired(final String token) {
-        return tokenRepository.existsByToken(token);
+        return !tokenRepository.existsByToken(token);
     }
 }

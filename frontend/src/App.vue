@@ -1,9 +1,9 @@
 <template>
     <div id="app">
-        <UserPage v-if='this.userRole === "USER"'/>
-        <DoctorPage v-else-if='this.userRole === "DOCTOR"'/>
-        <AdminPage v-else-if='this.userRole === "ADMIN"'/>
-        <UserPage v-else/>
+        <UserPage v-if='userCheck'/>
+        <DoctorPage v-else-if='doctorCheck'/>
+        <AdminPage v-else-if='adminCheck'/>
+        <Login v-else/>
     </div>
 </template>
 
@@ -24,7 +24,16 @@
         computed: {
             ...mapState({
                 userRole: state => state.dictionary.userRole
-            })
+            }),
+            userCheck() {
+                return this.userRole === "USER";
+            },
+            doctorCheck() {
+                return this.userRole === "DOCTOR";
+            },
+            adminCheck() {
+                return this.userRole === "ADMIN";
+            }
         },
         beforeCreate() {
             axios.get('/backend/dictionary', {

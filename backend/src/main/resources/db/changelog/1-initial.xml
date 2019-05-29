@@ -194,7 +194,7 @@
                              primaryKey="true"/>
             </column>
             <column name="token" type="VARCHAR(500)"/>
-            <column name="expiry_date" type="timestamp"/>
+            <column name="expiry_date" type="date"/>
         </createTable>
     </changeSet>
 </databaseChangeLog>
