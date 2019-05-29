@@ -23,4 +23,12 @@ public class UserService extends AbstractSearchService<UserDbo, UserDto, UserSea
     public boolean existsByAlias(final String alias) {
         return repository.existsByAlias(alias);
     }
+
+    public boolean existsByDoctorId(final Long id) {
+        return repository.existsByDoctorId(id);
+    }
+
+    public boolean existsByPatientId(final Long id) {
+        return repository.existsByPatientId(id);
+    }
 }

@@ -42,12 +42,18 @@ public class UserFacade {
                 .getDoctor(credentials.getName(), credentials.getLastName(), credentials.getSpecialIdentifier())
                 .orElseThrow(() -> new DoctorNotExistsException(credentials.getName(), credentials.getLastName(),
                                                                 credentials.getSpecialIdentifier()));
+            if (userService.existsByDoctorId(doctor.getId())) {
+                throw new UserExistsException(doctor.getName() + " " + doctor.getLastName());
+            }
             userDbo.setDoctor(doctor);
             userDbo.setRole(UserRole.DOCTOR);
         } else {
             final PatientDbo patient = patientService
                 .getPatient(credentials.getName(), credentials.getLastName())
                 .orElseThrow(() -> new PatientNotExistsException(credentials.getName(), credentials.getLastName()));
+            if (userService.existsByPatientId(patient.getId())) {
+                throw new UserExistsException(patient.getName() + " " + patient.getLastName());
+            }
             userDbo.setPatient(patient);
             userDbo.setRole(UserRole.USER);
         }

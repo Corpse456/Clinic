@@ -8,7 +8,11 @@ const state = {
     auth: false,
     userId: "",
     patientId: "",
-    doctorId: ""
+    doctorId: "",
+    admin: "",
+    user: "",
+    doctor: "",
+    login: true
 };
 
 const getters = {};
@@ -29,6 +33,22 @@ const mutations = {
         let strings = tokenSub.split(":");
         state.userId = strings[1];
         state.userRole = strings[2];
+
+        state.login = false;
+        switch (state.userRole) {
+            case("USER"): {
+                state.user = true;
+                break;
+            }
+            case("ADMIN"): {
+                state.admin = true;
+                break;
+            }
+            case("DOCTOR"): {
+                state.doctor = true;
+                break;
+            }
+        }
 
         axios.get('/backend/user/' + state.userId, {
             headers: {

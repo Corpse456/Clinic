@@ -1,9 +1,9 @@
 <template>
     <div id="app">
-        <UserPage v-if='userCheck'/>
-        <DoctorPage v-else-if='doctorCheck'/>
-        <AdminPage v-else-if='adminCheck'/>
-        <Login v-else/>
+        <UserPage v-if='user'/>
+        <DoctorPage v-if='doctorUser'/>
+        <AdminPage v-if='admin'/>
+        <Login v-if="login"/>
     </div>
 </template>
 
@@ -23,17 +23,11 @@
         },
         computed: {
             ...mapState({
-                userRole: state => state.dictionary.userRole
-            }),
-            userCheck() {
-                return this.userRole === "USER";
-            },
-            doctorCheck() {
-                return this.userRole === "DOCTOR";
-            },
-            adminCheck() {
-                return this.userRole === "ADMIN";
-            }
+                user: state => state.dictionary.user,
+                admin: state => state.dictionary.admin,
+                doctorUser: state => state.dictionary.doctor,
+                login: state => state.dictionary.login,
+            })
         },
         beforeCreate() {
             axios.get('/backend/dictionary', {
