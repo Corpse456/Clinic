@@ -1,17 +1,22 @@
 package by.gp.clinic.service;
 
 import by.gp.clinic.controller.DevelopmentController;
+import by.gp.clinic.dto.CredentialsDto;
 import by.gp.clinic.dto.DoctorDto;
 import by.gp.clinic.dto.PatientDto;
 import by.gp.clinic.dto.SpecialityDto;
 import by.gp.clinic.dto.TicketDto;
 import by.gp.clinic.enumerated.Gender;
 import by.gp.clinic.exception.DoctorExistsException;
+import by.gp.clinic.exception.DoctorNotExistsException;
 import by.gp.clinic.exception.PatientExistsException;
+import by.gp.clinic.exception.PatientNotExistsException;
 import by.gp.clinic.exception.ShiftTimingNotExistsException;
+import by.gp.clinic.exception.UserExistsException;
 import by.gp.clinic.facade.DoctorFacade;
 import by.gp.clinic.facade.PatientFacade;
 import by.gp.clinic.facade.TicketFacade;
+import by.gp.clinic.facade.UserFacade;
 import by.gp.clinic.search.DoctorSearchRequest;
 import by.gp.clinic.search.PatientSearchRequest;
 import lombok.RequiredArgsConstructor;
@@ -42,6 +47,7 @@ public class DevelopmentService {
     private final PatientFacade patientFacade;
     private final DoctorFacade doctorFacade;
     private final TicketFacade ticketFacade;
+    private final UserFacade userFacade;
 
     private List<String> manNames;
     private List<String> womanNames;
@@ -117,6 +123,17 @@ public class DevelopmentService {
         }
     }
 
+    public void addUser() throws PatientNotExistsException, DoctorNotExistsException, UserExistsException {
+        final PatientDto patient = patientFacade.getPatient(17L);
+        final CredentialsDto user = new CredentialsDto();
+        user.setName(patient.getName());
+        user.setLastName(patient.getLastName());
+        user.setAlias("user");
+        user.setPassword("password");
+
+        userFacade.createUser(user);
+    }
+
     private String getName(final Gender gender) {
         return gender == MALE ? getName(manNames) : getName(womanNames);
     }
@@ -132,5 +149,4 @@ public class DevelopmentService {
     private String getName(final List<String> names) {
         return names.get((int) (Math.random() * names.size()));
     }
-
 }

@@ -162,8 +162,6 @@
             <column name="password" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="name" type="varchar(255)"/>
-            <column name="last_name" type="varchar(255)"/>
             <column name="role" type="varchar(30)">
                 <constraints nullable="false"/>
             </column>
@@ -186,7 +184,7 @@
 
         <addUniqueConstraint constraintName="unique_user_alias" tableName="user" columnNames="alias"/>
         <addUniqueConstraint constraintName="unique_user_patient" tableName="user" columnNames="patient_id"/>
-        <addUniqueConstraint constraintName="unique_user_doctor" tableName="ticket" columnNames="doctor_id"/>
+        <addUniqueConstraint constraintName="unique_user_doctor" tableName="user" columnNames="doctor_id"/>
     </changeSet>
 
     <changeSet id="create_token_table" author="neznaev">

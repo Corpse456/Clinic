@@ -1,5 +1,5 @@
 <template>
-    <div class="hello">
+    <div class="user_page">
         <div>Choose doctor:</div>
         <br/>
         <select v-model="selectedSpeciality" v-on:change="addNameSelect">
@@ -133,7 +133,7 @@
                 }
 
                 let ticket = {
-                    patientId: 1, //TODO temporary
+                    patientId: this.$store.state.dictionary.patientId,
                     doctorId: this.selectedDoctor.id,
                     dateTime: this.selectedDay.date
                         + " " + getTwoZeroes(this.selectedTime.getHours())

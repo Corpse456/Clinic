@@ -1,59 +1,30 @@
 <template>
     <div id="app">
-        <Login v-if='page() === login'/>
-        <UserPage v-if='page() === user'/>
-        <DoctorPage v-if='page() === doctor'/>
-        <AdminPage v-if='page() === admin'/>
+        <UserPage v-if='this.userRole === "USER"'/>
+        <DoctorPage v-else-if='this.userRole === "DOCTOR"'/>
+        <AdminPage v-else-if='this.userRole === "ADMIN"'/>
+        <UserPage v-else/>
     </div>
 </template>
 
 <script>
     import axios from 'axios';
-    import Vue from 'vue';
-    import Vuex, {mapState} from 'vuex';
+    import {mapState} from 'vuex';
     import VueCookies from 'vue-cookies';
     import Login from './components/Login.vue'
     import UserPage from './components/UserPage.vue'
     import DoctorPage from './components/DoctorPage.vue'
     import AdminPage from './components/AdminPage.vue'
 
-    Vue.use(Vuex);
-
     export default {
         name: 'app',
         components: {
             Login, UserPage, DoctorPage, AdminPage
         },
-        data() {
-            return {
-                user: "user",
-                doctor: "doctor",
-                admin: "admin",
-                login: "login",
-            };
-        },
         computed: {
             ...mapState({
                 userRole: state => state.dictionary.userRole
             })
-        },
-        methods: {
-            page() {
-                switch (this.userRole) {
-                    case "USER" : {
-                        return this.user;
-                    }
-                    case "DOCTOR" : {
-                        return this.doctor;
-                    }
-                    case "ADMIN" : {
-                        return this.admin;
-                    }
-                    default : {
-                        return this.login;
-                    }
-                }
-            }
         },
         beforeCreate() {
             axios.get('/backend/dictionary', {

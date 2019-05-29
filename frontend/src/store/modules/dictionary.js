@@ -1,4 +1,5 @@
 import VueCookies from 'vue-cookies';
+import axios from 'axios';
 
 const state = {
     specialities: [],
@@ -6,7 +7,8 @@ const state = {
     shiftOrders: {},
     auth: false,
     userId: "",
-    userRole: ""
+    patientId: "",
+    doctorId: ""
 };
 
 const getters = {};
@@ -27,6 +29,15 @@ const mutations = {
         let strings = tokenSub.split(":");
         state.userId = strings[1];
         state.userRole = strings[2];
+
+        axios.get('/backend/user/' + state.userId, {
+            headers: {
+                Authorization: authorizationToken
+            }
+        }).then(response => {
+            state.patientId = response.data.patientId;
+            state.doctorId = response.data.doctorId;
+        });
     }
 };
 

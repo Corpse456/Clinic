@@ -1,5 +1,5 @@
 <template>
-    <div class="hello">
+    <div class="login">
         <img alt="Vue logo" src="../assets/Clinic.png">
         <h1>Welcome to Clinic Application</h1>
         <div>Please, {{buttonName().toLowerCase()}} or

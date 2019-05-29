@@ -85,13 +85,6 @@
             <column name="role" value="ADMIN"/>
             <column name="enabled" valueBoolean="true"/>
         </insert>
-        <insert tableName="user">
-            <column name="id" value="2"/>
-            <column name="alias" value="user"/>
-            <column name="password" value="$2a$10$7F9cVdVuEbjUmYHHHdfhMeaTjltNtOKM0Zz0sEh05FO59q87gm8sS"/>
-            <column name="role" value="USER"/>
-            <column name="enabled" valueBoolean="true"/>
-        </insert>
     </changeSet>
 
     <include file="test/insert-test-data.xml" relativeToChangelogFile="true"/>

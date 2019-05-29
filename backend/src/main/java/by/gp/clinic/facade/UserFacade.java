@@ -4,16 +4,20 @@ import by.gp.clinic.dbo.DoctorDbo;
 import by.gp.clinic.dbo.PatientDbo;
 import by.gp.clinic.dbo.UserDbo;
 import by.gp.clinic.dto.CredentialsDto;
+import by.gp.clinic.dto.UserDto;
 import by.gp.clinic.enumerated.UserRole;
 import by.gp.clinic.exception.DoctorNotExistsException;
 import by.gp.clinic.exception.PatientNotExistsException;
 import by.gp.clinic.exception.UserExistsException;
+import by.gp.clinic.exception.UserNotExistsException;
 import by.gp.clinic.service.DoctorService;
 import by.gp.clinic.service.PatientService;
 import by.gp.clinic.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import javax.persistence.EntityNotFoundException;
 
 @Service
 @RequiredArgsConstructor
@@ -49,5 +53,13 @@ public class UserFacade {
         }
 
         return userService.save(userDbo);
+    }
+
+    public UserDto getUser(final Long id) throws UserNotExistsException {
+        try {
+            return userService.get(id);
+        } catch (final EntityNotFoundException e) {
+            throw new UserNotExistsException(id);
+        }
     }
 }

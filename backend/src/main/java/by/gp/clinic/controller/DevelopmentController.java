@@ -1,5 +1,8 @@
 package by.gp.clinic.controller;
 
+import by.gp.clinic.exception.DoctorNotExistsException;
+import by.gp.clinic.exception.PatientNotExistsException;
+import by.gp.clinic.exception.UserExistsException;
 import by.gp.clinic.service.DevelopmentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -37,9 +40,10 @@ public class DevelopmentController {
 
     @PostMapping(value = "/fill")
     @ApiOperation(value = "Fill the data")
-    public void fillData() {
+    public void fillData() throws PatientNotExistsException, DoctorNotExistsException, UserExistsException {
         developmentService.hireDoctors();
         developmentService.addPatients();
         developmentService.addTickets();
+        developmentService.addUser();
     }
 }
