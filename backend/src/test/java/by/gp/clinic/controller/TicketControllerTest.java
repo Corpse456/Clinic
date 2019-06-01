@@ -11,13 +11,15 @@ import by.gp.clinic.search.TicketSearchRequest;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.web.servlet.MvcResult;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static by.gp.clinic.mock.TicketMock.getTicketDtoMock;
+import static by.gp.clinic.serializer.ClinicDateTimeSerializer.DATE_TIME_PATTERN;
 import static java.time.LocalDateTime.now;
+import static org.junit.Assert.assertEquals;
 
 public class TicketControllerTest extends AbstractControllerTest {
 
@@ -33,6 +35,26 @@ public class TicketControllerTest extends AbstractControllerTest {
     @Test
     public void createTicketTest() {
         addEntity();
+    }
+
+    @Test
+    public void createTicketCheckNumberTest() {
+        final TicketDto ticket = getTicketDtoMock();
+        final long number = addEntity(ticket);
+
+        ticket.setDateTime(ticket.getDateTime().plusMinutes(15L));
+        final long nextNumber = addEntity(ticket);
+
+        assertEquals(number + 1, nextNumber);
+    }
+
+    @Test
+    public void createTicketTwiceTest() {
+        final TicketDto ticket = getTicketDtoMock();
+        final String time = DateTimeFormatter.ofPattern(DATE_TIME_PATTERN).format(ticket.getDateTime());
+
+        addEntity(ticket);
+        addEntityWithStatus(ticket, 400, "Ticket for time " + time + " already taken");
     }
 
     @Test

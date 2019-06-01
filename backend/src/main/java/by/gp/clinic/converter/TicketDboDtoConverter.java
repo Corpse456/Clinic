@@ -31,5 +31,7 @@ public class TicketDboDtoConverter extends AbstractDboDtoConverter<TicketDbo, Ti
     protected void convertComplexFieldsForDto(final TicketDbo sourceDbo, final TicketDto targetDto) {
         targetDto.setDoctorId(sourceDbo.getDoctor().getId());
         targetDto.setPatientId(sourceDbo.getPatient().getId());
+        targetDto.setPatientName(sourceDbo.getPatient().getName());
+        targetDto.setPatientLastName(sourceDbo.getPatient().getLastName());
     }
 }

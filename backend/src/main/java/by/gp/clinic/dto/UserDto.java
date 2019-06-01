@@ -8,8 +8,6 @@ public class UserDto extends AbstractDto {
 
     private String alias;
 
-    private String password;
-
     private String name;
 
     private String lastName;

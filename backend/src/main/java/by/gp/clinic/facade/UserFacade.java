@@ -13,6 +13,7 @@ import by.gp.clinic.exception.UserNotExistsException;
 import by.gp.clinic.service.DoctorService;
 import by.gp.clinic.service.PatientService;
 import by.gp.clinic.service.UserService;
+import liquibase.util.StringUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -37,7 +38,7 @@ public class UserFacade {
         userDbo.setAlias(credentials.getAlias());
         userDbo.setPassword(passwordEncoder.encode(credentials.getPassword()));
 
-        if (credentials.getSpecialIdentifier() != null) {
+        if (StringUtils.isNotEmpty(credentials.getSpecialIdentifier())) {
             final DoctorDbo doctor = doctorService
                 .getDoctor(credentials.getName(), credentials.getLastName(), credentials.getSpecialIdentifier())
                 .orElseThrow(() -> new DoctorNotExistsException(credentials.getName(), credentials.getLastName(),

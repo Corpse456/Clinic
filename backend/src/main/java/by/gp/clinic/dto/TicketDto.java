@@ -22,6 +22,10 @@ public class TicketDto extends AbstractDto {
     @NotNull
     private Long patientId;
 
+    private String patientName;
+
+    private String patientLastName;
+
     @NotNull
     private Long doctorId;
 

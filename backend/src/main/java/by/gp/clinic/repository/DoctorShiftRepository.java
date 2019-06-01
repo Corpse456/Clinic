@@ -26,7 +26,8 @@ public interface DoctorShiftRepository extends CustomRepository<DoctorShiftDbo, 
 
     List<DoctorShiftDbo> getAllByDoctorId(final Long id);
 
-    @Query("select count(s) from DoctorShiftDbo s where s.date = ?2 " +
+    @Query("select count(s) from DoctorShiftDbo s " +
+           "where s.date = ?2 " +
            "and s.doctor.id = ?1 " +
            "and s.shiftTiming.startTime <= ?3 " +
            "and s.shiftTiming.endTime > ?3")

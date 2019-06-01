@@ -12,8 +12,15 @@
         <br/>
         <input v-if="!isLogin" v-model="name" placeholder="name"/>
         <br/>
-        <input v-if="!isLogin" type="password" v-model="lastName" placeholder="last name"/>
+        <input v-if="!isLogin" v-model="lastName" placeholder="last name"/>
+        <br/>
+        <span v-if="!isLogin">
+            <input type="checkbox" v-model="checked"><label>As a doctor</label>
+        </span>
+        <br/>
+        <input v-if="checked" v-model="doctorIdentifier" placeholder="Doctor identifier"/>
         <br/><br/>
+
         <button v-on:click="login">{{buttonName()}}</button>
     </div>
 </template>
@@ -25,10 +32,12 @@
     export default {
         data() {
             return {
+                checked: false,
                 alias: "",
                 password: "",
                 name: "",
                 lastName: "",
+                doctorIdentifier: "",
                 isLogin: true,
                 dictionaryData: {}
             };
@@ -39,7 +48,8 @@
                     alias: this.alias,
                     password: this.password,
                     name: this.name,
-                    lastName: this.lastName
+                    lastName: this.lastName,
+                    specialIdentifier: this.doctorIdentifier
                 };
 
                 function addAuthorization(response) {
