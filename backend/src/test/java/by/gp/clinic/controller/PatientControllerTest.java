@@ -28,7 +28,7 @@ public class PatientControllerTest extends AbstractControllerTest {
 
     @Test
     public void createPatientTest() {
-        addEntity();
+        addEntity(getDtoMock(), "/admin" + getUrl());
     }
 
     @Test
@@ -50,9 +50,9 @@ public class PatientControllerTest extends AbstractControllerTest {
     @Test
     public void createPatientTwiceTest() {
         final PatientDto patient = getPatientDtoMock();
-        addEntity(patient);
+        addEntity(patient, "/admin" + getUrl());
 
-        final MvcResult result = postQuery(PATIENT_URL, patient);
+        final MvcResult result = postQuery("/admin" + getUrl(), patient);
         final JSONObject answer = getJsonFormString(getContentAsString(result));
 
         assertEquals(400, result.getResponse().getStatus());

@@ -36,11 +36,11 @@ public abstract class AbstractControllerTest extends AbstractSpringMvcTest {
     }
 
     Long addEntity(final AbstractDto dto) {
-        return addEntity(dto, "");
+        return addEntity(dto, getUrl() + "");
     }
 
     Long addEntity(final AbstractDto dto, final String url) {
-        final MvcResult result = postQuery(getUrl() + url, dto);
+        final MvcResult result = postQuery(url, dto);
 
         final JSONObject answer = getJsonFormString(getContentAsString(result));
         final Long id = getLongFromJson(answer, ID);

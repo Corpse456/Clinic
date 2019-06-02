@@ -9,8 +9,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.List;
-
 import static by.gp.clinic.mock.DoctorMock.getDoctorDtoMock;
 
 public class DoctorControllerTest extends AbstractControllerTest {
@@ -20,7 +18,7 @@ public class DoctorControllerTest extends AbstractControllerTest {
 
     @Test
     public void createDoctorTest() {
-        addEntity();
+        addEntity(getDtoMock(), "/admin" + getUrl());
     }
 
     @Test
