@@ -37,7 +37,14 @@ public class UserController {
         throws DoctorNotExistsException, PatientNotExistsException, UserExistsException {
         final UserDbo user = userFacade.createUser(credentials);
         tokenAuthenticationService.addAuthentication(response, user.getAlias(), user.getRole().name());
-        return new JSONObject().put("id", user).toString();
+        return new JSONObject().put("id", user.getId()).toString();
+    }
+
+    @PostMapping(value = "/admin/user")
+    @ApiOperation(value = "Create a new admin")
+    public String createAdmin(@RequestBody @Validated CredentialsDto credentials) throws UserExistsException {
+        final UserDbo user = userFacade.createAdmin(credentials);
+        return new JSONObject().put("id", user.getId()).toString();
     }
 
     @GetMapping(value = "/user/{id}")

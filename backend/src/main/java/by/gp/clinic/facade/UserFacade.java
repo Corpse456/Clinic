@@ -15,10 +15,12 @@ import by.gp.clinic.service.PatientService;
 import by.gp.clinic.service.UserService;
 import liquibase.util.StringUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -29,6 +31,7 @@ public class UserFacade {
     private final PatientService patientService;
     private final PasswordEncoder passwordEncoder;
 
+    @Transactional
     public UserDbo createUser(final CredentialsDto credentials) throws DoctorNotExistsException,
                                                                        PatientNotExistsException, UserExistsException {
         if (userService.existsByAlias(credentials.getAlias())) {
@@ -68,5 +71,18 @@ public class UserFacade {
         } catch (final EntityNotFoundException e) {
             throw new UserNotExistsException(id);
         }
+    }
+
+    @Transactional
+    public UserDbo createAdmin(final CredentialsDto credentials) throws UserExistsException {
+        if (userService.existsByAlias(credentials.getAlias())) {
+            throw new UserExistsException(credentials.getAlias());
+        }
+        final UserDbo user = new UserDbo();
+        BeanUtils.copyProperties(credentials, user, "password");
+        user.setPassword(passwordEncoder.encode(credentials.getPassword()));
+        user.setRole(UserRole.ADMIN);
+
+        return userService.save(user);
     }
 }

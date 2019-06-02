@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 
 public class ClinicDateTimeSerializer extends JsonSerializer<LocalDateTime> {
 
-    public static final String DATE_TIME_PATTERN = "yyyy.MM.dd HH:mm:ss";
+    public static final String DATE_TIME_PATTERN = "yyyy.MM.dd HH:mm";
 
     @Override
     public void serialize(final LocalDateTime value, final JsonGenerator gen, final SerializerProvider serializers)

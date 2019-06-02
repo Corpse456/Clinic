@@ -1,5 +1,6 @@
 package by.gp.clinic.dto;
 
+import by.gp.clinic.annotation.Password;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
@@ -11,6 +12,7 @@ public class CredentialsDto {
     private String alias;
 
     @NotNull
+    @Password
     private String password;
 
     @NotNull
