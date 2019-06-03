@@ -9,6 +9,6 @@ public class EntityNotExistsException extends BusinessLogicException {
     }
 
     public EntityNotExistsException(final String name) {
-        super(HttpStatus.BAD_REQUEST, name + " are not exists");
+        super(HttpStatus.NOT_FOUND, name + " are not exists");
     }
 }

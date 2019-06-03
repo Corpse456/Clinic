@@ -2,12 +2,14 @@ package by.gp.clinic.controller;
 
 import by.gp.clinic.dbo.UserDbo;
 import by.gp.clinic.dto.CredentialsDto;
+import by.gp.clinic.dto.PageDto;
 import by.gp.clinic.dto.UserDto;
 import by.gp.clinic.exception.DoctorNotExistsException;
 import by.gp.clinic.exception.PatientNotExistsException;
 import by.gp.clinic.exception.UserExistsException;
 import by.gp.clinic.exception.UserNotExistsException;
 import by.gp.clinic.facade.UserFacade;
+import by.gp.clinic.search.UserSearchRequest;
 import by.gp.clinic.service.TokenAuthenticationService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -51,5 +53,11 @@ public class UserController {
     @ApiOperation(value = "Create a new user")
     public UserDto getUser(@PathVariable("id") final Long id) throws UserNotExistsException {
         return userFacade.getUser(id);
+    }
+
+    @PostMapping(value = "/user/search")
+    @ApiOperation(value = "Search users")
+    public PageDto<UserDto> searchUser(@RequestBody final UserSearchRequest searchRequest) {
+        return userFacade.searchUsers(searchRequest);
     }
 }

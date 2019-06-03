@@ -30,16 +30,16 @@ public abstract class AbstractControllerTest extends AbstractSpringMvcTest {
         addEntityWithoutAnswer(getDtoMock(), "");
     }
 
-    void addEntityWithoutAnswer(final AbstractDto dto, final String url) {
+    void addEntityWithoutAnswer(final Object dto, final String url) {
         final MvcResult result = postQuery(getUrl() + url, dto);
         assertEquals(200, result.getResponse().getStatus());
     }
 
-    Long addEntity(final AbstractDto dto) {
+    Long addEntity(final Object dto) {
         return addEntity(dto, getUrl() + "");
     }
 
-    Long addEntity(final AbstractDto dto, final String url) {
+    Long addEntity(final Object dto, final String url) {
         final MvcResult result = postQuery(url, dto);
 
         final JSONObject answer = getJsonFormString(getContentAsString(result));
@@ -81,7 +81,8 @@ public abstract class AbstractControllerTest extends AbstractSpringMvcTest {
         assertFalse(byId.isPresent());
     }
 
-    <N extends AbstractDto> void findEntitiesTest(final PageableSearchRequest searchRequest, final TypeReference<PageDto<N>> typeReference) {
+    <N extends AbstractDto> void findEntitiesTest(final PageableSearchRequest searchRequest,
+                                                  final TypeReference<PageDto<N>> typeReference) {
         MvcResult result = postQuery(getUrl() + SEARCH, searchRequest);
         final PageDto<N> list = getListOfObjectsFromResult(result, typeReference);
         assertNotNull(list);

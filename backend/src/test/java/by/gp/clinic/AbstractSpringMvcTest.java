@@ -14,6 +14,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.web.context.WebApplicationContext;
 
 import javax.transaction.Transactional;
@@ -51,7 +52,7 @@ public abstract class AbstractSpringMvcTest {
         try {
             return mockMvc.perform(post(url)
                                        .content(requireNonNull(toJson(object)))
-                                       .contentType(APPLICATION_JSON)).andReturn();
+                                       .contentType(APPLICATION_JSON)).andDo(MockMvcResultHandlers.print()).andReturn();
         } catch (final Exception e) {
             fail(e.getMessage());
             return null;
@@ -60,7 +61,7 @@ public abstract class AbstractSpringMvcTest {
 
     protected MvcResult postQuery(final String url) {
         try {
-            return mockMvc.perform(post(url)).andReturn();
+            return mockMvc.perform(post(url)).andDo(MockMvcResultHandlers.print()).andReturn();
         } catch (final Exception e) {
             fail(e.getMessage());
             return null;
@@ -71,7 +72,7 @@ public abstract class AbstractSpringMvcTest {
         try {
             return mockMvc.perform(patch(url)
                                        .content(requireNonNull(toJson(object)))
-                                       .contentType(APPLICATION_JSON)).andReturn();
+                                       .contentType(APPLICATION_JSON)).andDo(MockMvcResultHandlers.print()).andReturn();
         } catch (final Exception e) {
             fail(e.getMessage());
             return null;
@@ -80,7 +81,7 @@ public abstract class AbstractSpringMvcTest {
 
     protected MvcResult getQuery(final String url) {
         try {
-            return mockMvc.perform(get(url)).andReturn();
+            return mockMvc.perform(get(url)).andDo(MockMvcResultHandlers.print()).andReturn();
         } catch (final Exception e) {
             fail(e.getMessage());
             return null;
@@ -89,7 +90,7 @@ public abstract class AbstractSpringMvcTest {
 
     protected MvcResult deleteQuery(final String url) {
         try {
-            return mockMvc.perform(delete(url)).andReturn();
+            return mockMvc.perform(delete(url)).andDo(MockMvcResultHandlers.print()).andReturn();
         } catch (final Exception e) {
             fail(e.getMessage());
             return null;
