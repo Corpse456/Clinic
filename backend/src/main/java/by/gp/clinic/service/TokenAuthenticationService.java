@@ -4,6 +4,8 @@ import by.gp.clinic.dbo.UserDbo;
 import by.gp.clinic.dbo.VerificationTokenDbo;
 import by.gp.clinic.repository.UserRepository;
 import by.gp.clinic.repository.VerificationTokenRepository;
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -22,6 +24,8 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @Service
@@ -35,6 +39,11 @@ public class TokenAuthenticationService {
 
     private final UserRepository userRepository;
     private final VerificationTokenRepository tokenRepository;
+
+    private final Cache<String, VerificationTokenDbo> cache = CacheBuilder
+        .newBuilder()
+        .expireAfterWrite(120, TimeUnit.MINUTES)
+        .build();
 
     public void addAuthentication(final HttpServletResponse response, final String alias, final String roles) {
         final UserDbo user = userRepository.getByAlias(alias);
@@ -54,7 +63,7 @@ public class TokenAuthenticationService {
     public Authentication getAuthentication(final HttpServletRequest request) {
         final String token = request.getHeader(HEADER_STRING);
         if (StringUtils.isNotEmpty(token)) {
-            if (isTokenExpired(token)) {
+            if (getVerificationTokenDbo(token) == null) {
                 throw new SignatureException("This token can't be trusted as it was marked as logged out");
             }
             // parse the token.
@@ -92,9 +101,21 @@ public class TokenAuthenticationService {
         });
         verificationToken.setExpiryDate(LocalDate.now().plusMonths(1));
         tokenRepository.save(verificationToken);
+        cache.put(JWT, verificationToken);
     }
 
-    private boolean isTokenExpired(final String token) {
-        return !tokenRepository.existsByToken(token);
+    private VerificationTokenDbo getVerificationTokenDbo(final String token) {
+        return getFromCache(token).orElseGet(() -> {
+            final Optional<VerificationTokenDbo> byToken = tokenRepository.findByToken(token);
+            if (byToken.isPresent()) {
+                cache.put(token, byToken.get());
+                return byToken.get();
+            }
+            return null;
+        });
+    }
+
+    private Optional<VerificationTokenDbo> getFromCache(final String token) {
+        return Optional.ofNullable(cache.getIfPresent(token));
     }
 }

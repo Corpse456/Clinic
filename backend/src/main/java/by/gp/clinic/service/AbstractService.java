@@ -36,6 +36,14 @@ public class AbstractService<Dbo extends AbstractDbo, Dto extends AbstractDto> {
         return repository.getOne(id);
     }
 
+    public Dbo convertToDbo(final Dto dto) {
+        return converter.convertToDbo(dto);
+    }
+
+    public Dto convertToDto(final Dbo dbo) {
+        return converter.convertToDto(dbo);
+    }
+
     @Transactional
     public void delete(final Long id) {
         repository.deleteById(id);
