@@ -14,6 +14,7 @@ import by.gp.clinic.exception.UserNotExistsException;
 import by.gp.clinic.search.UserSearchRequest;
 import by.gp.clinic.service.DoctorService;
 import by.gp.clinic.service.PatientService;
+import by.gp.clinic.service.TokenAuthenticationService;
 import by.gp.clinic.service.UserService;
 import liquibase.util.StringUtils;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +32,8 @@ public class UserFacade {
     private final UserService userService;
     private final DoctorService doctorService;
     private final PatientService patientService;
+    private final TokenAuthenticationService authenticationService;
+
     private final PasswordEncoder passwordEncoder;
 
     @Transactional
@@ -90,5 +93,9 @@ public class UserFacade {
         user.setRole(UserRole.ADMIN);
 
         return userService.save(user);
+    }
+
+    public void logout(final String token) {
+        authenticationService.logout(token);
     }
 }

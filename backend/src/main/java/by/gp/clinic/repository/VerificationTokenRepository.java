@@ -8,4 +8,6 @@ import java.util.Optional;
 public interface VerificationTokenRepository extends JpaRepository<VerificationTokenDbo, Long> {
 
     Optional<VerificationTokenDbo> findByToken(String token);
+
+    void deleteByToken(String token);
 }

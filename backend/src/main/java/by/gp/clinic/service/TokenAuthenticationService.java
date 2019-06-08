@@ -1,6 +1,5 @@
 package by.gp.clinic.service;
 
-import by.gp.clinic.dbo.UserDbo;
 import by.gp.clinic.dbo.VerificationTokenDbo;
 import by.gp.clinic.repository.UserRepository;
 import by.gp.clinic.repository.VerificationTokenRepository;
@@ -46,18 +45,11 @@ public class TokenAuthenticationService {
         .build();
 
     public void addAuthentication(final HttpServletResponse response, final String alias, final String roles) {
-        final UserDbo user = userRepository.getByAlias(alias);
-        final String JWT = encode(alias, user.getId().toString(), roles);
+        final Long userID = userRepository.getIdByAlias(alias);
+        final String JWT = encode(alias, userID.toString(), roles);
 
         updateToken(JWT);
         response.addHeader(HEADER_STRING, JWT);
-    }
-
-    private static String encode(final String... fields) {
-        return TOKEN_PREFIX + " " + Jwts.builder()
-            .setSubject(String.join(":", fields))
-            .setExpiration(new Date(System.currentTimeMillis() + TokenAuthenticationService.EXPIRATION_TIME))
-            .signWith(SignatureAlgorithm.HS512, SECRET).compact();
     }
 
     public Authentication getAuthentication(final HttpServletRequest request) {
@@ -84,12 +76,10 @@ public class TokenAuthenticationService {
         return null;
     }
 
-    private static String decode(final String token) {
-        return Jwts.parser()
-            .setSigningKey(SECRET)
-            .parseClaimsJws(token.replace(TOKEN_PREFIX, ""))
-            .getBody()
-            .getSubject();
+    @Transactional
+    public void logout(final String token) {
+        tokenRepository.deleteByToken(token);
+        cache.invalidate(token);
     }
 
     @Transactional
@@ -102,6 +92,21 @@ public class TokenAuthenticationService {
         verificationToken.setExpiryDate(LocalDate.now().plusMonths(1));
         tokenRepository.save(verificationToken);
         cache.put(JWT, verificationToken);
+    }
+
+    private static String encode(final String... fields) {
+        return TOKEN_PREFIX + " " + Jwts.builder()
+            .setSubject(String.join(":", fields))
+            .setExpiration(new Date(System.currentTimeMillis() + TokenAuthenticationService.EXPIRATION_TIME))
+            .signWith(SignatureAlgorithm.HS512, SECRET).compact();
+    }
+
+    private static String decode(final String token) {
+        return Jwts.parser()
+            .setSigningKey(SECRET)
+            .parseClaimsJws(token.replace(TOKEN_PREFIX, ""))
+            .getBody()
+            .getSubject();
     }
 
     private VerificationTokenDbo getVerificationTokenDbo(final String token) {
