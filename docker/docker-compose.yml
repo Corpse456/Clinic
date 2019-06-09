@@ -2,13 +2,46 @@ version: "3.7"
 services:
     mysql:
         build:
-            context: ./init
+            context: ./mysql
             dockerfile: Dockerfile
+        container_name: clinic_db
         restart: always
         ports:
-            - 3307:3306
+        - 3306:3306
         volumes:
-            - c:\Users\Corpse\docker-volumes\clinic\mysql:/var/lib/mysql
+        - /opt/docker-volumes/clinic/mysql:/var/lib/mysql
         environment:
             MYSQL_ROOT_PASSWORD: root
-
+    frontend:
+        build:
+            context: ../frontend
+            dockerfile: Dockerfile
+        container_name: clinic_frontend
+        command: npm run start
+        ports:
+        - '8091:8091'
+        volumes:
+        - /opt/docker-volumes/clinic/frontend:/usr/front
+        - /usr/front/node_modules
+        depends_on:
+        - backend
+    backend:
+        build:
+            context: ../
+            dockerfile: backend/Dockerfile
+        container_name: clinic_backend
+        links:
+        -   mysql: db
+        ports:
+        - '8090:8090'
+        depends_on:
+        - mysql
+    nginx:
+        build:
+            context: ./nginx
+            dockerfile: Dockerfile
+        container_name: clinic_nginx
+        volumes:
+        - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+        ports:
+        - 8080:80

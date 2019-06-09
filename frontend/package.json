@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "vue-cli-service serve --port 8091",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build --port 8091",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
