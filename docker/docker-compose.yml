@@ -1,0 +1,14 @@
+version: "3.7"
+services:
+    mysql:
+        build:
+            context: ./init
+            dockerfile: Dockerfile
+        restart: always
+        ports:
+            - 3307:3306
+        volumes:
+            - c:\Users\Corpse\docker-volumes\clinic\mysql:/var/lib/mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+
