@@ -7,7 +7,7 @@ services:
         container_name: clinic_db
         restart: always
         ports:
-        - 3306:3306
+        - 3307:3306
         volumes:
         - /opt/docker-volumes/clinic/mysql:/var/lib/mysql
         environment:
