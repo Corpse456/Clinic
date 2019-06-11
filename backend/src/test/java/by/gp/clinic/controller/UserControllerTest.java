@@ -2,6 +2,7 @@ package by.gp.clinic.controller;
 
 import by.gp.clinic.dbo.AbstractDbo;
 import by.gp.clinic.dto.AbstractDto;
+import by.gp.clinic.dto.CredentialsDto;
 import by.gp.clinic.dto.PageDto;
 import by.gp.clinic.dto.UserDto;
 import by.gp.clinic.mock.CredentialsMock;
@@ -26,6 +27,13 @@ public class UserControllerTest extends AbstractControllerTest {
     }
 
     @Test
+    public void createUserPatientTwiceTest() {
+        final CredentialsDto credentials = CredentialsMock.getCredentialsPatientDtoMock();
+        addEntity(credentials, "/public" + getUrl());
+        addEntityWithStatus(credentials, 400, "User Alias already exists", "/public" + getUrl());
+    }
+
+    @Test
     public void createUserDoctorTest() {
         addEntity(CredentialsMock.getCredentialsDoctorDtoMock(), "/public" + getUrl());
     }
@@ -38,6 +46,11 @@ public class UserControllerTest extends AbstractControllerTest {
     @Test
     public void getUserTest() {
         getEntityTest(UserDto.class, 1L);
+    }
+
+    @Test
+    public void getUserNotExistsTest() {
+        getEntityTest(UserDto.class, 10000L);
     }
 
     @Test

@@ -54,7 +54,7 @@ public abstract class AbstractControllerTest extends AbstractSpringMvcTest {
         addEntityWithStatus(dto, status, errorMessage, "");
     }
 
-    void addEntityWithStatus(final AbstractDto dto,
+    void addEntityWithStatus(final Object dto,
                              final int status,
                              final String errorMessage,
                              final String url) {
