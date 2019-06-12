@@ -65,7 +65,7 @@ public class UserController {
     }
 
     @PostMapping(value = "/user/logout")
-    @ApiOperation(value = "Search users")
+    @ApiOperation(value = "Logout user")
     public void logoutUser(@RequestHeader(HEADER_STRING) final String token) {
         userFacade.logout(token);
     }
