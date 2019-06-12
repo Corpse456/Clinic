@@ -22,7 +22,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 
 @Service
@@ -71,11 +70,10 @@ public class UserFacade {
     }
 
     public UserDto getUser(final Long id) throws UserNotExistsException {
-        try {
-            return userService.get(id);
-        } catch (final EntityNotFoundException e) {
+        if (!userService.isExists(id)) {
             throw new UserNotExistsException(id);
         }
+        return userService.get(id);
     }
 
     public PageDto<UserDto> searchUsers(final UserSearchRequest searchRequest) {

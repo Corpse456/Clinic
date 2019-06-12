@@ -13,10 +13,17 @@ import by.gp.clinic.search.UserSearchRequest;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.web.servlet.MvcResult;
+
+import static org.junit.Assert.assertEquals;
 
 public class UserControllerTest extends AbstractControllerTest {
 
     private static final String USER_URL = "/user";
+    private static final long EXISTS_ID = 1L;
+    private static final long NOT_EXISTS_ID = 10000L;
+    private static final String ALIAS = "admin";
+    private static final String PASSWORD = "password";
 
     @Autowired
     private UserRepository repository;
@@ -45,12 +52,13 @@ public class UserControllerTest extends AbstractControllerTest {
 
     @Test
     public void getUserTest() {
-        getEntityTest(UserDto.class, 1L);
+        getEntityTest(UserDto.class, EXISTS_ID);
     }
 
     @Test
     public void getUserNotExistsTest() {
-        getEntityTest(UserDto.class, 10000L);
+        final MvcResult result = getQuery(getUrl() + "/" + NOT_EXISTS_ID);
+        assertEquals(404, result.getResponse().getStatus());
     }
 
     @Test

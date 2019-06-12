@@ -50,6 +50,14 @@ public class UserService extends AbstractSearchService<UserDbo, UserDto, UserSea
         return Optional.ofNullable(cache.getIfPresent(id));
     }
 
+    public boolean isExists(final Long id) {
+        final UserDto user = cache.getIfPresent(id);
+        if (user != null) {
+            return true;
+        }
+        return super.isExists(id);
+    }
+
     public boolean existsByAlias(final String alias) {
         return repository.existsByAlias(alias);
     }

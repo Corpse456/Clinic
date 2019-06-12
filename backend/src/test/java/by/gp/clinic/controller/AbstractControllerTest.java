@@ -51,14 +51,13 @@ public abstract class AbstractControllerTest extends AbstractSpringMvcTest {
     }
 
     void addEntityWithStatus(final AbstractDto dto, final int status, final String errorMessage) {
-        addEntityWithStatus(dto, status, errorMessage, "");
+        addEntityWithStatus(dto, status, errorMessage, getUrl() + "");
     }
 
     void addEntityWithStatus(final Object dto,
                              final int status,
-                             final String errorMessage,
-                             final String url) {
-        final MvcResult result = postQuery(getUrl() + url, dto);
+                             final String errorMessage, final String url) {
+        final MvcResult result = postQuery(url, dto);
         assertEquals(status, result.getResponse().getStatus());
         final HashMap answer = getObjectFromResult(getReplaced(result), HashMap.class);
         assertEquals(errorMessage, answer.get("message"));

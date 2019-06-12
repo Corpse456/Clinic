@@ -53,7 +53,7 @@ public class DoctorShiftControllerTest extends AbstractControllerTest {
     public void addSpecialShiftWithEmptyDoctorAndSpecialityTest() {
         final SpecialDoctorShiftDto specialShift = getSpecialDoctorShiftSpecialityDtoMock();
         specialShift.setSpecialityId(null);
-        addEntityWithStatus(specialShift, 400, ERROR_MESSAGE, SPECIAL_URL);
+        addEntityWithStatus(specialShift, 400, ERROR_MESSAGE, getUrl() + SPECIAL_URL);
     }
 
     @Test
