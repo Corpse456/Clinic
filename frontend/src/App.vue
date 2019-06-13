@@ -50,6 +50,7 @@
                         Authorization: VueCookies.get('authorization')
                     }
                 }).then(VueCookies.remove('authorization'));
+                this.$store.commit('dictionary/logout');
             }
         }
     }

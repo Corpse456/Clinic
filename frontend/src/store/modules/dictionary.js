@@ -58,6 +58,12 @@ const mutations = {
             state.patientId = response.data.patientId;
             state.doctorId = response.data.doctorId;
         });
+    },
+    logout() {
+        state.login = true;
+        state.user = false;
+        state.admin = false;
+        state.doctor = false;
     }
 };
 

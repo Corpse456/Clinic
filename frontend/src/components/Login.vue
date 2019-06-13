@@ -52,36 +52,35 @@
                     specialIdentifier: this.doctorIdentifier
                 };
 
-                function addAuthorization(response) {
-                    let authorization = response.headers.authorization;
-
-                    VueCookies.config('7d');
-                    VueCookies.set('authorization', authorization);
-
-                    axios.get('/backend/dictionary', {
-                        headers: {
-                            Authorization: authorization
-                        }
-                    }).then(response => {
-                        this.$store.commit('dictionary/init', response.data);
-                    });
-                }
-
                 if (this.isLogin) {
                     axios.post('/backend/login', credentials)
                         .then(response => {
                             if (response.status === 200) {
-                                addAuthorization(response);
+                                this.addAuthorization(response);
                             }
                         })
                 } else {
                     axios.post('/backend/public/user', credentials)
                         .then(response => {
                             if (response.status === 200) {
-                                addAuthorization(response);
+                                this.addAuthorization(response);
                             }
                         })
                 }
+            },
+            addAuthorization(response) {
+                let authorization = response.headers.authorization;
+
+                VueCookies.config('7d');
+                VueCookies.set('authorization', authorization);
+
+                axios.get('/backend/dictionary', {
+                    headers: {
+                        Authorization: authorization
+                    }
+                }).then(response => {
+                    this.$store.commit('dictionary/init', response.data);
+                });
             },
             signUp() {
                 this.isLogin = !this.isLogin;
