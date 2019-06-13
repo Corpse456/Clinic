@@ -1,6 +1,7 @@
 package selenium;
 
 import net.bytebuddy.utility.RandomString;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.time.LocalDate;
@@ -16,6 +17,7 @@ public class LoginTest extends AbstractUITest {
     private static final String SEX = new Random().nextBoolean() ? "Male" : "Female";
 
     @Test
+    @Ignore
     public void createUser() {
         loginAsAdmin();
         createPatientLikeAdmin(FIRST_NAME, LAST_NAME, BIRTH_DATE, SEX);

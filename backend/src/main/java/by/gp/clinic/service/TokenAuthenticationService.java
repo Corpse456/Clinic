@@ -54,26 +54,27 @@ public class TokenAuthenticationService {
 
     public Authentication getAuthentication(final HttpServletRequest request) {
         final String token = request.getHeader(HEADER_STRING);
-        if (StringUtils.isNotEmpty(token)) {
-            if (getVerificationTokenDbo(token) == null) {
-                throw new SignatureException("This token can't be trusted as it was marked as logged out");
-            }
-            // parse the token.
-            final String subject;
-            try {
-                subject = decode(token);
-            } catch (MalformedJwtException e) {
-                throw new SignatureException("Wrong token format");
-            }
-            final String user = subject.split(":")[0];
-            final List<String> roles = Arrays.asList(subject.substring(subject.lastIndexOf(':') + 1).split(","));
-
-            return user != null
-                   ? new UsernamePasswordAuthenticationToken(user, null, roles.stream()
-                .map(SimpleGrantedAuthority::new).collect(Collectors.toList()))
-                   : null;
+        if (StringUtils.isEmpty(token)) {
+            return null;
         }
-        return null;
+
+        if (getVerificationTokenDbo(token) == null) {
+            throw new SignatureException("This token can't be trusted as it was marked as logged out");
+        }
+        // parse the token.
+        final String subject;
+        try {
+            subject = decode(token);
+        } catch (MalformedJwtException e) {
+            throw new SignatureException("Wrong token format");
+        }
+        final String user = subject.split(":")[0];
+        final List<String> roles = Arrays.asList(subject.substring(subject.lastIndexOf(':') + 1).split(","));
+
+        return user != null
+               ? new UsernamePasswordAuthenticationToken(user, null, roles.stream()
+            .map(SimpleGrantedAuthority::new).collect(Collectors.toList()))
+               : null;
     }
 
     @Transactional

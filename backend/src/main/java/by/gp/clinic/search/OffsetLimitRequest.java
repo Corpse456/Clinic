@@ -78,9 +78,4 @@ public class OffsetLimitRequest implements Pageable {
     public long getOffset() {
         return offset;
     }
-
-    public static void main(String[] args) {
-        final OffsetLimitRequest offsetLimitRequest = new OffsetLimitRequest(new PageableSearchRequest());
-        System.out.println("offsetLimitRequest = " + offsetLimitRequest.getPageNumber());
-    }
 }
