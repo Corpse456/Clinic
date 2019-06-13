@@ -81,7 +81,7 @@
         <insert tableName="user">
             <column name="id" value="1"/>
             <column name="alias" value="admin"/>
-            <column name="password" value="$2a$10$7F9cVdVuEbjUmYHHHdfhMeaTjltNtOKM0Zz0sEh05FO59q87gm8sS"/>
+            <column name="password" value="$2a$10$CKGTrguYaLEEA.dxS/7d6Oj6W1LnOsMZdP.4ulAArySgfkFlqHpBW"/>
             <column name="role" value="ADMIN"/>
             <column name="enabled" valueBoolean="true"/>
         </insert>
