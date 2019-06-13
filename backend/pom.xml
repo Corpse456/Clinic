@@ -8,7 +8,6 @@
         <artifactId>clinic</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-
     <artifactId>backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
@@ -127,6 +126,19 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-ehcache</artifactId>
             <version>5.3.5.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>3.141.59</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>27.1-jre</version>
         </dependency>
     </dependencies>
 
