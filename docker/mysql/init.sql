@@ -1,3 +1,3 @@
-create user 'testuser'@'localhost' identified by 'testpass';
-grant all privileges on *.* to 'testuser'@'localhost';
+create user 'testuser' identified by 'testpass';
+grant all privileges on *.* to 'testuser';
 flush privileges;

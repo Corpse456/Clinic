@@ -1,6 +1,5 @@
 package by.gp.clinic.service;
 
-import by.gp.clinic.controller.DevelopmentController;
 import by.gp.clinic.dto.CredentialsDto;
 import by.gp.clinic.dto.DoctorDto;
 import by.gp.clinic.dto.PatientDto;
@@ -20,22 +19,20 @@ import by.gp.clinic.facade.UserFacade;
 import by.gp.clinic.search.DoctorSearchRequest;
 import by.gp.clinic.search.PatientSearchRequest;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static by.gp.clinic.enumerated.Gender.MALE;
 import static java.time.LocalDateTime.now;
-import static java.util.Objects.requireNonNull;
 
 @Service
 @RequiredArgsConstructor
@@ -53,17 +50,10 @@ public class DevelopmentService {
     private List<String> womanNames;
     private List<String> lastNames;
 
-    {
-        manNames = getNames("static/EngMan.txt");
-        womanNames = getNames("static/EngWoman.txt");
-        lastNames = getNames("static/EngLastNames.txt");
-    }
-
     private List<String> getNames(final String fileName) {
-        try (Stream<String> lines = Files
-            .lines(Paths.get(requireNonNull(DevelopmentController.class.getClassLoader().getResource(fileName))
-                                 .toURI()))) {
-            return lines.collect(Collectors.toList());
+        BufferedReader in = new BufferedReader(new InputStreamReader(getClass().getClassLoader().getResourceAsStream(fileName)));
+        try {
+            return IOUtils.readLines(in);
         } catch (Exception e) {
             LOGGER.error("Error collecting names from " + fileName, e);
         }
@@ -113,7 +103,7 @@ public class DevelopmentService {
             final DoctorDto doctor = new DoctorDto();
             doctor.setGender(getGender());
             doctor.setName(getName(doctor.getGender()));
-            doctor.setLastName(getName(lastNames));
+            doctor.setLastName(getName(getLastNames()));
             doctor.setSpecialityId(speciality.getId());
             doctor.setBirthDate(getBirthDate());
             try {
@@ -135,7 +125,7 @@ public class DevelopmentService {
     }
 
     private String getName(final Gender gender) {
-        return gender == MALE ? getName(manNames) : getName(womanNames);
+        return gender == MALE ? getName(getManNames()) : getName(getWomanNames());
     }
 
     private Gender getGender() {
@@ -148,5 +138,26 @@ public class DevelopmentService {
 
     private String getName(final List<String> names) {
         return names.get((int) (Math.random() * names.size()));
+    }
+
+    private List<String> getManNames() {
+        if (manNames == null) {
+            manNames = getNames("static/EngMan.txt");
+        }
+        return manNames;
+    }
+
+    private List<String> getWomanNames() {
+        if (womanNames == null) {
+            womanNames = getNames("static/EngWoman.txt");
+        }
+        return womanNames;
+    }
+
+    private List<String> getLastNames() {
+        if (lastNames == null) {
+            lastNames = getNames("static/EngLastNames.txt");
+        }
+        return lastNames;
     }
 }

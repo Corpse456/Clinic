@@ -18,11 +18,26 @@ public class LoginTest extends AbstractUITest {
 
     @Test
     @Ignore
+    public void LoginAsAdmin() {
+        loginAsAdmin();
+        logout();
+    }
+
+    @Test
+    @Ignore
     public void createUser() {
         loginAsAdmin();
         createPatientLikeAdmin(FIRST_NAME, LAST_NAME, BIRTH_DATE, SEX);
-
         logout();
+    }
+
+    @Test
+    @Ignore
+    public void sighUpAsUser() {
+        loginAsAdmin();
+        createPatientLikeAdmin(FIRST_NAME, LAST_NAME, BIRTH_DATE, SEX);
+        logout();
+
         signUp(ALIAS, PASSWORD, FIRST_NAME, LAST_NAME);
         logout();
     }

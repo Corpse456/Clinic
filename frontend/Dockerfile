@@ -7,3 +7,5 @@ COPY package.json /front/package.json
 COPY package-lock.json /front/package-lock.json
 RUN npm install
 COPY . .
+
+ENTRYPOINT ["npm", "run", "start"]
