@@ -18,7 +18,7 @@ public class LoginTest extends AbstractUITest {
 
     @Test
     @Ignore
-    public void LoginAsAdmin() {
+    public void loginAsAdmin() {
         loginAsAdmin();
         logout();
     }
