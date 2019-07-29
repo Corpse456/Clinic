@@ -7,7 +7,6 @@ import org.junit.Test;
 public class DevelopmentControllerTest extends AbstractSpringMvcTest {
 
     @Test
-    @Ignore
     public void fillData() {
         postQuery("/development/fill");
     }
