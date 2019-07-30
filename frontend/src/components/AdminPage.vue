@@ -148,9 +148,7 @@
                     }
                 }).then(response => {
                     this.doctors = response.data.elements;
-                    this.patients = {};
-                    this.tickets = {};
-                    this.fieldVisibility()
+                    this.fieldVisibility("showDoctors")
                 }).catch(error => this.toast(error.response.data));
             },
             fillPatientsTable() {
@@ -160,9 +158,7 @@
                     }
                 }).then(response => {
                     this.patients = response.data.elements;
-                    this.doctors = {};
-                    this.tickets = {};
-                    this.fieldVisibility()
+                    this.fieldVisibility("showPatients")
                 }).catch(error => this.toast(error.response.data));
             },
             fillTicketsTable() {
@@ -172,15 +168,22 @@
                     }
                 }).then(response => {
                     this.tickets = response.data.elements;
-                    this.doctors = {};
-                    this.patients = {};
-                    this.fieldVisibility()
+                    this.fieldVisibility("showTickets")
                 }).catch(error => this.toast(error.response.data));
             },
             fieldVisibility(button) {
                 this.isCreateDoctor = button === "createDoctor";
                 this.isCreatePatient = button === "createPatient";
                 this.isCreateAdmin = button === "createAdmin";
+                if (button !== "showDoctors") {
+                    this.doctors = [];
+                }
+                if (button !== "showPatients") {
+                    this.patients = [];
+                }
+                if (button !== "showTickets") {
+                    this.tickets = [];
+                }
             },
             submit() {
                 function getTwoZeroes(value) {
@@ -189,7 +192,7 @@
 
                 if (this.isCreateDoctor) {
                     let date = new Date(this.birthDate);
-                    if (!date.getValue || !this.name.getValue || !this.lastName.getValue || !this.gender.getValue || !this.selectedSpeciality.getValue) {
+                    if (date.length === 0 || this.name === 0 || this.lastName === 0 || this.gender === 0 || this.selectedSpeciality === 0) {
                         this.toast("Form is not ready");
                         return;
                     }
@@ -210,7 +213,7 @@
                     }).catch(error => this.toast(error.response.data));
                 } else if (this.isCreatePatient) {
                     let date = new Date(this.birthDate);
-                    if (!date.getValue || !this.name.getValue || !this.lastName.getValue || !this.gender.getValue) {
+                    if (date.length === 0 || this.name === 0 || this.lastName === 0 || this.gender === 0) {
                         this.toast("Form is not ready");
                         return;
                     }
@@ -229,7 +232,7 @@
                         this.fieldVisibility()
                     }).catch(error => this.toast(error.response.data));
                 } else if (this.isCreateAdmin) {
-                    if (!this.name.getValue || !this.lastName.getValue || !this.alias.getValue || !this.password.getValue) {
+                    if (this.alias.length === 0 || this.password === 0 || this.lastName === 0 || this.lastName === 0) {
                         this.toast("Form is not ready");
                         return;
                     }
