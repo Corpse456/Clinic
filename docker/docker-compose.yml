@@ -17,9 +17,6 @@ services:
         container_name: clinic_frontend
         ports:
             - '8091:8091'
-        volumes:
-            - /opt/docker-volumes/clinic/frontend:/front
-            - /front/node_modules
         depends_on:
             - backend
     backend:

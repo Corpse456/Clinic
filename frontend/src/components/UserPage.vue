@@ -24,7 +24,7 @@
         </select>
         <br/>
         <select v-model="selectedTime" v-if="freeTimes.length > 0">
-            <option v-for="time in freeTimes" v-bind:value="time">
+            <option v-for="time in freeTimes" v-bind:value="time" v-bind:key="time">
                 {{ time.getHours() + ":" + getTwoZeroes(time.getMinutes()) + ":" + getTwoZeroes(time.getSeconds())}}
             </option>
         </select>

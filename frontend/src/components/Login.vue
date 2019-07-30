@@ -28,6 +28,10 @@
 <script>
     import axios from 'axios';
     import VueCookies from 'vue-cookies';
+    import Toasted from 'vue-toasted';
+    import Vue from 'vue';
+
+    Vue.use(Toasted);
 
     export default {
         data() {
@@ -43,6 +47,17 @@
             };
         },
         methods: {
+            toast(message) {
+                if (Array.isArray(message)) {
+                    message.forEach(m => this.toast(m))
+                } else {
+                    this.$toasted.show(message.message ? message.message : message, {
+                        theme: "outline",
+                        position: "top-right",
+                        duration: 5000
+                    })
+                }
+            },
             login() {
                 let credentials = {
                     alias: this.alias,
@@ -58,14 +73,15 @@
                             if (response.status === 200) {
                                 this.addAuthorization(response);
                             }
-                        })
+                        }).catch(() => this.toast("Bad credentials"));
                 } else {
                     axios.post('/backend/public/user', credentials)
                         .then(response => {
                             if (response.status === 200) {
                                 this.addAuthorization(response);
+                                this.toast("Done");
                             }
-                        })
+                        }).catch(error => this.toast(error.response.data));
                 }
             },
             addAuthorization(response) {

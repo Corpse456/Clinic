@@ -1,8 +1,8 @@
 <template>
     <div class="admin">
-        <button v-on:click="createDoctor">Hire doctor</button>
-        <button v-on:click="createPatient">Create patient card</button>
-        <button v-on:click="createAdmin">Create new administrator</button>
+        <button v-on:click="fieldVisibility('createDoctor')">Hire doctor</button>
+        <button v-on:click="fieldVisibility('createPatient')">Create patient card</button>
+        <button v-on:click="fieldVisibility('createAdmin')">Create new administrator</button>
         <br/>
         <button v-on:click="fillDoctorsTable()">Show all doctors</button>
         <button v-on:click="fillPatientsTable()">Show all aptient</button>
@@ -127,6 +127,17 @@
             })
         },
         methods: {
+            toast(message) {
+                if (Array.isArray(message)) {
+                    message.forEach(m => this.toast(m))
+                } else {
+                    this.$toasted.show(message.message ? message.message : message, {
+                        theme: "outline",
+                        position: "top-right",
+                        duration: 5000
+                    })
+                }
+            },
             getSpecialityName(specialityId) {
                 return new Map(this.specialities.map(el => [el.id, el.name])).get(specialityId);
             },
@@ -135,36 +146,41 @@
                     headers: {
                         Authorization: VueCookies.get('authorization')
                     }
-                }).then(response => this.doctors = response.data.elements);
+                }).then(response => {
+                    this.doctors = response.data.elements;
+                    this.patients = {};
+                    this.tickets = {};
+                    this.fieldVisibility()
+                }).catch(error => this.toast(error.response.data));
             },
             fillPatientsTable() {
                 axios.post('/backend/patient/search', {}, {
                     headers: {
                         Authorization: VueCookies.get('authorization')
                     }
-                }).then(response => this.patients = response.data.elements);
+                }).then(response => {
+                    this.patients = response.data.elements;
+                    this.doctors = {};
+                    this.tickets = {};
+                    this.fieldVisibility()
+                }).catch(error => this.toast(error.response.data));
             },
             fillTicketsTable() {
                 axios.post('/backend/ticket/search', {}, {
                     headers: {
                         Authorization: VueCookies.get('authorization')
                     }
-                }).then(response => this.tickets = response.data.elements);
+                }).then(response => {
+                    this.tickets = response.data.elements;
+                    this.doctors = {};
+                    this.patients = {};
+                    this.fieldVisibility()
+                }).catch(error => this.toast(error.response.data));
             },
-            createDoctor() {
-                this.isCreateDoctor = true;
-                this.isCreatePatient = false;
-                this.isCreateAdmin = false;
-            },
-            createPatient() {
-                this.isCreateDoctor = false;
-                this.isCreatePatient = true;
-                this.isCreateAdmin = false;
-            },
-            createAdmin() {
-                this.isCreateDoctor = false;
-                this.isCreatePatient = false;
-                this.isCreateAdmin = true;
+            fieldVisibility(button) {
+                this.isCreateDoctor = button === "createDoctor";
+                this.isCreatePatient = button === "createPatient";
+                this.isCreateAdmin = button === "createAdmin";
             },
             submit() {
                 function getTwoZeroes(value) {
@@ -173,6 +189,10 @@
 
                 if (this.isCreateDoctor) {
                     let date = new Date(this.birthDate);
+                    if (!date.getValue || !this.name.getValue || !this.lastName.getValue || !this.gender.getValue || !this.selectedSpeciality.getValue) {
+                        this.toast("Form is not ready");
+                        return;
+                    }
                     let newDoctor = {
                         name: this.name,
                         lastName: this.lastName,
@@ -184,9 +204,16 @@
                         headers: {
                             Authorization: VueCookies.get('authorization')
                         }
-                    });
+                    }).then(() => {
+                        this.toast("Done");
+                        this.fieldVisibility()
+                    }).catch(error => this.toast(error.response.data));
                 } else if (this.isCreatePatient) {
                     let date = new Date(this.birthDate);
+                    if (!date.getValue || !this.name.getValue || !this.lastName.getValue || !this.gender.getValue) {
+                        this.toast("Form is not ready");
+                        return;
+                    }
                     let newPatient = {
                         name: this.name,
                         lastName: this.lastName,
@@ -197,8 +224,15 @@
                         headers: {
                             Authorization: VueCookies.get('authorization')
                         }
-                    });
+                    }).then(() => {
+                        this.toast("Done");
+                        this.fieldVisibility()
+                    }).catch(error => this.toast(error.response.data));
                 } else if (this.isCreateAdmin) {
+                    if (!this.name.getValue || !this.lastName.getValue || !this.alias.getValue || !this.password.getValue) {
+                        this.toast("Form is not ready");
+                        return;
+                    }
                     let newAdmin = {
                         alias: this.alias,
                         password: this.password,
@@ -209,7 +243,10 @@
                         headers: {
                             Authorization: VueCookies.get('authorization')
                         }
-                    });
+                    }).then(() => {
+                        this.toast("Done");
+                        this.fieldVisibility()
+                    }).catch(error => this.toast(error.response.data));
                 }
             }
         }
