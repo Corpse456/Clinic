@@ -5,7 +5,7 @@
         <button v-on:click="fieldVisibility('createAdmin')">Create new administrator</button>
         <br/>
         <button v-on:click="fillDoctorsTable()">Show all doctors</button>
-        <button v-on:click="fillPatientsTable()">Show all aptient</button>
+        <button v-on:click="fillPatientsTable()">Show all patient</button>
         <button v-on:click="fillTicketsTable()">Show all tickets</button>
 
         <input v-if="isCreateAdmin" v-model="alias" type="text" placeholder="alias"/>
