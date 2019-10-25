@@ -28,6 +28,7 @@ public class AuthenticationFilter extends GenericFilterBean {
         try {
             authentication = tokenAuthenticationService.getAuthentication((HttpServletRequest) request);
         } catch (Exception e) {
+            //TODO add handler
             authentication = null;
         }
 
