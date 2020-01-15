@@ -35,7 +35,7 @@ services:
             db:
                 condition: "service_healthy"
         environment:
-            SPRING_DATASOURCE_URL: "jdbc:mysql://docker_mysql_latest:3306/clinic?createDatabaseIfNotExist=true&useSSL=false&useUnicode=yes&characterEncoding=UTF-8&allowPublicKeyRetrieval=true&serverTimezone=Europe/Minsk"
+            mysql_host: "docker_mysql_latest"
         ports:
             - '8090:8090'
         links:
