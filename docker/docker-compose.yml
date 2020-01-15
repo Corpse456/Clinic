@@ -4,12 +4,13 @@ services:
         build:
             context: ./mysql
             dockerfile: Dockerfile
-        container_name: clinic_mysql
+        container_name: docker_mysql_latest
         command: --default-authentication-plugin=mysql_native_password
         ports:
             - '3307:3306'
         environment:
             MYSQL_ROOT_PASSWORD: root
+            MYSQL_HOST: localhost
         healthcheck:
             test: "/usr/bin/mysql --user=testuser --password=testpass --execute \"SHOW DATABASES;\""
             interval: 10s
@@ -33,6 +34,8 @@ services:
         depends_on:
             db:
                 condition: "service_healthy"
+        environment:
+            SPRING_DATASOURCE_URL: "jdbc:mysql://docker_mysql_latest:3306/clinic?createDatabaseIfNotExist=true&useSSL=false&useUnicode=yes&characterEncoding=UTF-8&allowPublicKeyRetrieval=true&serverTimezone=Europe/Minsk"
         ports:
             - '8090:8090'
         links:

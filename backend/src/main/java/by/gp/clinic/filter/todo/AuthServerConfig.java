@@ -1,3 +1,4 @@
+/*
 package by.gp.clinic.filter.todo;
 
 import com.sumtravel.api.auth.service.security.AuthSimpleUserDetailsService;
@@ -83,4 +84,4 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
             .scopes("read", "write") // Scopes of tasks, user can do in system via token
             .secret(passwordEncoder.encode("password")); // Set client secret, hashed via password encoder
     }
-}
+}*/
