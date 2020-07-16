@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public abstract class AbstractSearchService<Dbo extends AbstractDbo, Dto extends AbstractDto, T extends PageableSearchRequest>
     extends AbstractService<Dbo, Dto> {
 
-    private AbstractSearchRequestPredicateFactory<T> predicateFactory;
+    private final AbstractSearchRequestPredicateFactory<T> predicateFactory;
 
     AbstractSearchService(AbstractSearchRequestPredicateFactory<T> predicateFactory,
                           final AbstractDboDtoConverter<Dbo, Dto> converter,

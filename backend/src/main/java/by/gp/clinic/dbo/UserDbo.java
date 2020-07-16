@@ -2,6 +2,7 @@ package by.gp.clinic.dbo;
 
 import by.gp.clinic.enumerated.UserRole;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -12,6 +13,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
 @Table(name = "user")
