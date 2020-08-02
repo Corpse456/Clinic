@@ -39,7 +39,7 @@ public abstract class AbstractSearchRequestPredicateFactory<T extends PageableSe
         }
     }
 
-    void addExpression(final NumberPath<Long> field, final Long value) {
+    <N extends Number & Comparable<?>> void addExpression(final NumberPath<N> field, final N value) {
         if (value != null) {
             booleanBuilder.and(field.eq(value));
         }
