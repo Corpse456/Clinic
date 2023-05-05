@@ -4,7 +4,7 @@ services:
         build:
             context: ./mysql
             dockerfile: Dockerfile
-        container_name: docker_mysql_latest
+        container_name: clinic_mysql
         command: --default-authentication-plugin=mysql_native_password
         ports:
             - '3307:3306'
@@ -35,6 +35,7 @@ services:
                 condition: "service_healthy"
         environment:
             mysql_host: "docker_mysql_latest"
+            mysql_port: '3306'
         ports:
             - '8090:8090'
         links:
