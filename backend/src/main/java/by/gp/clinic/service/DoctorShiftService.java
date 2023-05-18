@@ -1,27 +1,26 @@
 package by.gp.clinic.service;
 
+import static java.time.DayOfWeek.FRIDAY;
+import static java.time.DayOfWeek.MONDAY;
+import static java.time.temporal.TemporalAdjusters.next;
+
 import by.gp.clinic.converter.DoctorShiftDboDtoConverter;
 import by.gp.clinic.dbo.DoctorDbo;
 import by.gp.clinic.dbo.DoctorShiftDbo;
 import by.gp.clinic.dbo.ShiftTimingDbo;
 import by.gp.clinic.dto.DoctorShiftDto;
 import by.gp.clinic.enumerated.ShiftOrder;
+import by.gp.clinic.factory.predicateFactory.DoctorShiftPredicateFactory;
 import by.gp.clinic.repository.DoctorShiftRepository;
 import by.gp.clinic.search.DoctorShiftSearchRequest;
-import by.gp.clinic.factory.predicateFactory.DoctorShiftPredicateFactory;
-import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
-import static java.time.DayOfWeek.FRIDAY;
-import static java.time.DayOfWeek.MONDAY;
-import static java.time.temporal.TemporalAdjusters.next;
+import javax.transaction.Transactional;
+import org.springframework.stereotype.Service;
 
 @Service
 public class DoctorShiftService
@@ -99,6 +98,6 @@ public class DoctorShiftService
     }
 
     public boolean isDoctorWorkingHours(final Long id, final LocalDateTime dateTime) {
-        return repository.existsByDoctorIdAndDateTime(id, dateTime.toLocalDate(), dateTime.toLocalTime()) > 0;
+        return repository.countByDoctorIdAndDateTime(id, dateTime.toLocalDate(), dateTime.toLocalTime()) > 0;
     }
 }
