@@ -34,7 +34,7 @@ services:
             db:
                 condition: "service_healthy"
         environment:
-            mysql_host: "docker_mysql_latest"
+            mysql_host: "clinic_mysql"
             mysql_port: '3306'
         ports:
             - '8090:8090'
