@@ -1,6 +1,6 @@
 package by.gp.clinic.dto;
 
-import by.gp.clinic.annotation.ShiftTming;
+import by.gp.clinic.annotation.ShiftTiming;
 import by.gp.clinic.annotation.SpecialDoctorShift;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -24,7 +24,7 @@ public class SpecialDoctorShiftDto extends AbstractDto {
     private DayOfWeek day;
 
     @NotNull
-    @ShiftTming
+    @ShiftTiming
     private ShiftTimingDto shiftTiming;
 }
 

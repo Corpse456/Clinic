@@ -19,7 +19,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Retention(RUNTIME)
 @Documented
 @Constraint(validatedBy = {ShiftTimingValidator.class})
-public @interface ShiftTming {
+public @interface ShiftTiming {
 
     String message() default "Wrong shift timing";
 

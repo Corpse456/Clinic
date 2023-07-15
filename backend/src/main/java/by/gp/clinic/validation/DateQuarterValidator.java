@@ -11,16 +11,13 @@ import java.time.LocalDateTime;
 public class DateQuarterValidator implements ConstraintValidator<DateQuarter, LocalDateTime> {
 
     private DateQuarter constraintAnnotation;
+
+    @Value("${clinic.one.patient.minutes}")
     private int onePatientTime;
 
     @Override
     public void initialize(final DateQuarter constraintAnnotation) {
         this.constraintAnnotation = constraintAnnotation;
-    }
-
-    @Autowired
-    public DateQuarterValidator(@Value("${clinic.one.patient.minutes}") final int onePatientTime) {
-        this.onePatientTime = onePatientTime;
     }
 
     @Override

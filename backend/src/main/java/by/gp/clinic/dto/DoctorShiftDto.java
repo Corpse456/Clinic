@@ -1,7 +1,7 @@
 package by.gp.clinic.dto;
 
 import by.gp.clinic.annotation.DateInFuture;
-import by.gp.clinic.annotation.ShiftTming;
+import by.gp.clinic.annotation.ShiftTiming;
 import by.gp.clinic.serializer.ClinicDateDeserializer;
 import by.gp.clinic.serializer.ClinicDateSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -22,7 +22,7 @@ public class DoctorShiftDto extends AbstractDto {
     private Long doctorId;
 
     @NotNull
-    @ShiftTming
+    @ShiftTiming
     private ShiftTimingDto shiftTiming;
 
     @NotNull
