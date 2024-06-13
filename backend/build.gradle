@@ -1,0 +1,56 @@
+plugins {
+    id "java"
+    id "org.springframework.boot" version "$springBootVersion"
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly "org.projectlombok:lombok:$lombokVersion"
+    annotationProcessor "org.projectlombok:lombok:$lombokVersion"
+
+    implementation "org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion"
+    implementation "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
+    implementation "org.springframework.boot:spring-boot-starter-actuator:$springBootVersion"
+    implementation "org.springframework.boot:spring-boot-starter-security:$springBootVersion"
+    implementation "org.springframework.security.oauth:spring-security-oauth2:$springOauth2Version"
+    implementation "com.auth0:auth0-spring-security-api:$auth0SpringVersion"
+    implementation "io.jsonwebtoken:jjwt:$jjwtVersion"
+    implementation "org.liquibase:liquibase-core:$liquibaseVersion"
+
+    implementation "mysql:mysql-connector-java:$mysqlVersion"
+    implementation "io.springfox:springfox-swagger-ui:$springfoxVersion"
+    implementation "io.springfox:springfox-swagger2:$springfoxVersion"
+    implementation "org.json:json:$jsonVersion"
+    implementation "com.querydsl:querydsl-apt:$querydslVersion"
+    implementation "com.querydsl:querydsl-jpa:$querydslVersion"
+    implementation "net.sf.ehcache:ehcache:$ehcacheVersion"
+    implementation "org.hibernate:hibernate-ehcache:$hibernateEhcacheVersion"
+    implementation "com.google.guava:guava:$guavaVersion"
+
+    testAnnotationProcessor "org.projectlombok:lombok:$lombokVersion"
+    testCompileOnly "org.projectlombok:lombok:$lombokVersion"
+
+    testImplementation "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
+    testImplementation "org.springframework.security:spring-security-test:$springSecurityTestVersion"
+    testImplementation "com.h2database:h2:$h2Version"
+    testImplementation "org.seleniumhq.selenium:selenium-java:$seleniumVersion"
+}
+
+test {
+    useJUnitPlatform()
+}
+
+bootJar {
+    enabled = true
+}
+
+jar {
+    enabled = true
+}
