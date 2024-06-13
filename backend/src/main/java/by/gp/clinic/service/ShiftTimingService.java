@@ -1,20 +1,29 @@
 package by.gp.clinic.service;
 
+import by.gp.clinic.annotation.ShiftTiming;
 import by.gp.clinic.converter.ShiftTimingDboDtoConverter;
 import by.gp.clinic.dbo.ShiftTimingDbo;
 import by.gp.clinic.dto.ShiftTimingDto;
 import by.gp.clinic.enumerated.ShiftOrder;
 import by.gp.clinic.exception.ShiftTimingNotExistsException;
 import by.gp.clinic.repository.ShiftTimingRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.TimeZone;
 
 @Service
 public class ShiftTimingService extends AbstractService<ShiftTimingDbo, ShiftTimingDto> {
+
+    private static final Logger log = LoggerFactory.getLogger(ShiftTimingService.class);
 
     @Value("#{T(java.time.LocalTime).parse(\"${clinic.first.shifts.start}\")}")
     private LocalTime firstShiftsStart;
@@ -43,25 +52,35 @@ public class ShiftTimingService extends AbstractService<ShiftTimingDbo, ShiftTim
 
     @Transactional
     public ShiftTimingDbo getShiftTimingDbo(final LocalTime startTime,
-                                            final LocalTime endTime) throws ShiftTimingNotExistsException {
+            final LocalTime endTime) throws ShiftTimingNotExistsException {
+        log.info("startTime: {}", startTime);
+        log.info("endTime: {}", endTime);
+        log.info("repository.findAll().toString(): {}", repository.findAll());
+        log.info("country: {}, language: {}", System.getProperty("user.country"), System.getProperty("user.language"));
+        log.info("TimeZone.getDefault(): {}", TimeZone.getDefault());
+        // Пример проверки времени
+        LocalDateTime localDateTime = LocalDateTime.now();
+        ZonedDateTime zonedDateTime = localDateTime.atZone(ZoneId.systemDefault());
+        log.info("Local DateTime: {}", localDateTime);
+        log.info("Zoned DateTime: {}", zonedDateTime);
         return repository.getByStartTimeAndEndTime(startTime, endTime)
-            .orElseThrow(() -> new ShiftTimingNotExistsException(startTime, endTime));
+                .orElseThrow(() -> new ShiftTimingNotExistsException(startTime, endTime));
     }
 
     @Transactional
     public ShiftTimingDbo getShiftTimingDboOrCreate(final LocalTime startTime,
-                                                    final LocalTime endTime,
-                                                    final ShiftOrder shiftOrder) {
+            final LocalTime endTime,
+            final ShiftOrder shiftOrder) {
         return repository.getByStartTimeAndEndTime(startTime, endTime)
-            .orElseGet(() -> {
-                final ShiftTimingDbo shiftTimingDbo = new ShiftTimingDbo();
-                shiftTimingDbo.setStartTime(startTime);
-                shiftTimingDbo.setEndTime(endTime);
-                shiftTimingDbo.setShiftOrder(shiftOrder);
-                final ShiftTimingDbo saved = save(shiftTimingDbo);
-                saved.setOppositeShift(saved);
-                return saved;
-            });
+                .orElseGet(() -> {
+                    final ShiftTimingDbo shiftTimingDbo = new ShiftTimingDbo();
+                    shiftTimingDbo.setStartTime(startTime);
+                    shiftTimingDbo.setEndTime(endTime);
+                    shiftTimingDbo.setShiftOrder(shiftOrder);
+                    final ShiftTimingDbo saved = save(shiftTimingDbo);
+                    saved.setOppositeShift(saved);
+                    return saved;
+                });
     }
 
     public ShiftTimingDbo getPreferredShift(final List<ShiftOrder> shiftsForDay) throws ShiftTimingNotExistsException {

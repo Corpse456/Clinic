@@ -1,6 +1,7 @@
 <template>
     <div class="admin">
         <button v-on:click="fieldVisibility('createDoctor')">Hire doctor</button>
+        <button v-on:click="fieldVisibility('deleteDoctor')">Fire doctor</button>
         <button v-on:click="fieldVisibility('createPatient')">Create patient card</button>
         <button v-on:click="fieldVisibility('createAdmin')">Create new administrator</button>
         <br/>
@@ -10,6 +11,7 @@
 
         <input v-if="isCreateAdmin" v-model="alias" type="text" placeholder="alias"/>
         <input v-if="isCreateAdmin" v-model="password" type="password" placeholder="password"/>
+        <input v-if="isDeleteDoctor" v-model="id" type="text" placeholder="id"/>
         <input v-if="isCreateDoctor || isCreatePatient || isCreateAdmin" v-model="name" type="text" placeholder="name"/>
         <input v-if="isCreateDoctor || isCreatePatient || isCreateAdmin" v-model="lastName" type="text"
                placeholder="last name"/>
@@ -25,7 +27,7 @@
                 {{ speciality.name }}
             </option>
         </select>
-        <button v-if="isCreateDoctor || isCreatePatient || isCreateAdmin" v-on:click="submit">Submit</button>
+        <button v-if="isCreateDoctor || isDeleteDoctor || isCreatePatient || isCreateAdmin" v-on:click="submit">Submit</button>
 
         <table v-if="doctors.length > 0">
             <thead>
@@ -106,6 +108,7 @@
         data() {
             return {
                 isCreateDoctor: false,
+                isDeleteDoctor: false,
                 isCreatePatient: false,
                 isCreateAdmin: false,
                 selectedGender: "",
@@ -113,6 +116,7 @@
                 doctors: [],
                 patients: [],
                 tickets: [],
+                id: "",
                 name: "",
                 lastName: "",
                 birthDate: "",
@@ -172,6 +176,7 @@
                 }).catch(error => this.toast(error.response.data));
             },
             fieldVisibility(button) {
+                this.isDeleteDoctor = button === "deleteDoctor";
                 this.isCreateDoctor = button === "createDoctor";
                 this.isCreatePatient = button === "createPatient";
                 this.isCreateAdmin = button === "createAdmin";
@@ -190,7 +195,16 @@
                     return value < 10 ? '0' + value : value;
                 }
 
-                if (this.isCreateDoctor) {
+                if (this.isDeleteDoctor) {
+                  axios.delete('/backend/doctor/' + this.id, {
+                    headers: {
+                      Authorization: VueCookies.get('authorization')
+                    }
+                  }).then(() => {
+                    this.toast("Done");
+                    this.fieldVisibility()
+                  }).catch(error => this.toast(error.response.data));
+                } else if (this.isCreateDoctor) {
                     let date = new Date(this.birthDate);
                     if (date.length === 0 || this.name === 0 || this.lastName === 0 || this.gender === 0 || this.selectedSpeciality === 0) {
                         this.toast("Form is not ready");

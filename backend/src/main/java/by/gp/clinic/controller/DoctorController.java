@@ -28,7 +28,7 @@ public class DoctorController {
 
     private final DoctorFacade doctorFacade;
 
-    @PostMapping("admin/doctor")
+    @PostMapping("/admin/doctor")
     @ApiOperation(value = "Hire a new doctor")
     public String hireNewDoctor(@RequestBody @Validated DoctorDto doctor)
         throws EntityExistsException, ShiftTimingNotExistsException {
