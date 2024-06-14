@@ -16,7 +16,7 @@ public abstract class AbstractValidator<A extends Annotation, Dto> implements Co
             addMessageToContext(getClassName() + " must be not null", context);
             return false;
         }
-        boolean valid = checkNotNullFields(value, context);
+        var valid = checkNotNullFields(value, context);
 
         if (valid) {
             valid = checkValid(value, context);

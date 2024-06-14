@@ -13,7 +13,7 @@ public class PasswordValidator extends AbstractValidator<Password, String> {
 
     @Override
     protected boolean checkValid(final String value, final ConstraintValidatorContext context) {
-        boolean valid = true;
+        var valid = true;
         if (!value.matches(".*\\d.*")) {
             addMessageToContext(getClassName() + " must contains at least one digit", context);
             valid = false;

@@ -6,11 +6,13 @@ import by.gp.clinic.serializer.ClinicDateSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class ManDto extends AbstractDto {
 
     @NotNull

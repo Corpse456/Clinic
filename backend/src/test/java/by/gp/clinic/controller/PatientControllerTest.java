@@ -6,18 +6,16 @@ import by.gp.clinic.dto.PatientDto;
 import by.gp.clinic.repository.PatientRepository;
 import by.gp.clinic.search.PatientSearchRequest;
 import com.fasterxml.jackson.core.type.TypeReference;
-import org.json.JSONObject;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.web.servlet.MvcResult;
 
 import java.time.LocalDateTime;
 
 import static by.gp.clinic.mock.PatientMock.getPatientDtoMock;
 import static by.gp.clinic.serializer.ClinicDateTimeSerializer.DATE_TIME_PATTERN;
 import static java.time.format.DateTimeFormatter.ofPattern;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class PatientControllerTest extends AbstractControllerTest {
 
@@ -49,11 +47,11 @@ public class PatientControllerTest extends AbstractControllerTest {
 
     @Test
     public void createPatientTwiceTest() {
-        final PatientDto patient = getPatientDtoMock();
+        final var patient = getPatientDtoMock();
         addEntity(patient, "/admin" + getUrl());
 
-        final MvcResult result = postQuery("/admin" + getUrl(), patient);
-        final JSONObject answer = getJsonFormString(getContentAsString(result));
+        final var result = postQuery("/admin" + getUrl(), patient);
+        final var answer = getJsonFormString(getContentAsString(result));
 
         assertEquals(400, result.getResponse().getStatus());
         assertNotNull(LocalDateTime.parse(getStringFromJson(answer, "time"), ofPattern(DATE_TIME_PATTERN)));

@@ -1,11 +1,10 @@
 package by.gp.clinic.controller;
 
 import by.gp.clinic.AbstractSpringMvcTest;
-import org.junit.Test;
-import org.springframework.test.web.servlet.MvcResult;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class DictionaryControllerTest extends AbstractSpringMvcTest {
 
@@ -13,8 +12,8 @@ public class DictionaryControllerTest extends AbstractSpringMvcTest {
 
     @Test
     public void getDictionaryDataTest() {
-        final MvcResult result = getQuery(URL);
-        final String answer = getContentAsString(result);
+        final var result = getQuery(URL);
+        final var answer = getContentAsString(result);
 
         assertEquals(200, result.getResponse().getStatus());
         assertNotNull(answer);

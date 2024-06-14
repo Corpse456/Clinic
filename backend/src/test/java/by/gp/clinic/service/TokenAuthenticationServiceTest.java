@@ -6,26 +6,22 @@ import by.gp.clinic.repository.VerificationTokenRepository;
 import com.google.common.cache.Cache;
 import io.jsonwebtoken.SignatureException;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.security.core.Authentication;
 
-import java.lang.reflect.Field;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class TokenAuthenticationServiceTest {
 
     private static final String ALIAS = "alias";
@@ -50,31 +46,31 @@ public class TokenAuthenticationServiceTest {
 
     @Test
     public void getAuthenticationEmptyHeaderTest() {
-        final MockHttpServletRequest request = new MockHttpServletRequest();
+        final var request = new MockHttpServletRequest();
         assertNull(service.getAuthentication(request));
     }
 
     @Test(expected = SignatureException.class)
     public void getAuthenticationWrongTokenTest() {
-        final MockHttpServletRequest request = new MockHttpServletRequest();
+        final var request = new MockHttpServletRequest();
         request.addHeader(AUTHORIZATION, "wrong");
         assertNull(service.getAuthentication(request));
     }
 
     @Test
     public void getAuthenticationTest() {
-        final String token = addAuthentication();
-        final MockHttpServletRequest request = new MockHttpServletRequest();
+        final var token = addAuthentication();
+        final var request = new MockHttpServletRequest();
         request.addHeader(AUTHORIZATION, token);
 
-        Authentication authentication = service.getAuthentication(request);
+        var authentication = service.getAuthentication(request);
         assertNotNull(authentication);
         checkCache(1);
     }
 
     @Test
     public void logoutTest() {
-        final String token = addAuthentication();
+        final var token = addAuthentication();
         checkCache(1);
 
         service.logout(token);
@@ -83,9 +79,9 @@ public class TokenAuthenticationServiceTest {
     }
 
     private String addAuthentication() {
-        final MockHttpServletResponse response = new MockHttpServletResponse();
+        final var response = new MockHttpServletResponse();
         service.addAuthentication(response, ALIAS, "USER");
-        final String token = response.getHeader(AUTHORIZATION);
+        final var token = response.getHeader(AUTHORIZATION);
 
         assertNotNull(token);
         verify(repository, times(1)).findByToken(token);
@@ -94,11 +90,11 @@ public class TokenAuthenticationServiceTest {
 
     @SuppressWarnings("unchecked")
     private void checkCache(final int size) {
-        final Class<? extends TokenAuthenticationService> serviceClass = service.getClass();
+        final var serviceClass = service.getClass();
         try {
-            final Field cacheField = serviceClass.getDeclaredField("cache");
+            final var cacheField = serviceClass.getDeclaredField("cache");
             cacheField.setAccessible(true);
-            final Cache<String, VerificationTokenDbo> cache =
+            final var cache =
                 (Cache<String, VerificationTokenDbo>) cacheField.get(service);
             assertEquals(cache.size(), size);
         } catch (final Exception e) {

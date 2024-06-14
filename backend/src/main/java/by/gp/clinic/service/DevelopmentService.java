@@ -27,8 +27,8 @@ import org.springframework.stereotype.Service;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.time.LocalDate;
-import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 import static by.gp.clinic.enumerated.Gender.MALE;
@@ -51,18 +51,19 @@ public class DevelopmentService {
     private List<String> lastNames;
 
     private List<String> getNames(final String fileName) {
-        BufferedReader in = new BufferedReader(new InputStreamReader(getClass().getClassLoader().getResourceAsStream(fileName)));
+        var in = new BufferedReader(new InputStreamReader(
+                Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream(fileName))));
         try {
             return IOUtils.readLines(in);
         } catch (Exception e) {
-            LOGGER.error("Error collecting names from " + fileName, e);
+            LOGGER.error("Error collecting names from {}", fileName, e);
         }
         return null;
     }
 
     public void addPatients() {
-        for (int i = 1; i < 101; i++) {
-            final PatientDto patient = new PatientDto();
+        for (var i = 1; i < 101; i++) {
+            final var patient = new PatientDto();
             patient.setBirthDate(getBirthDate());
             patient.setGender(getGender());
             patient.setName(getName(patient.getGender()));
@@ -76,17 +77,17 @@ public class DevelopmentService {
     }
 
     public void hireDoctors() {
-        final List<SpecialityDto> all = specialityService.findAll();
+        final var all = specialityService.findAll();
         all.forEach(this::addDoctors);
     }
 
     public void addTickets() {
-        final Collection<PatientDto> patients = patientFacade.search(new PatientSearchRequest()).getElements();
-        final List<DoctorDto> doctors = (List<DoctorDto>) doctorFacade.search(new DoctorSearchRequest()).getElements();
+        final var patients = patientFacade.search(new PatientSearchRequest()).getElements();
+        final var doctors = (List<DoctorDto>) doctorFacade.search(new DoctorSearchRequest()).getElements();
 
         patients.forEach(p -> {
-            for (int i = 0; i < 50; i++) {
-                final TicketDto ticketDto = new TicketDto();
+            for (var i = 0; i < 50; i++) {
+                final var ticketDto = new TicketDto();
                 ticketDto.setDoctorId(doctors.get((int) (doctors.size() * Math.random())).getId());
                 ticketDto.setPatientId(p.getId());
                 ticketDto.setDateTime(now().plusHours((long) (Math.random() * 200) + 2).withMinute(15).withSecond(0));
@@ -99,8 +100,8 @@ public class DevelopmentService {
     }
 
     private void addDoctors(final SpecialityDto speciality) {
-        for (int i = 0; i < 10; i++) {
-            final DoctorDto doctor = new DoctorDto();
+        for (var i = 0; i < 10; i++) {
+            final var doctor = new DoctorDto();
             doctor.setGender(getGender());
             doctor.setName(getName(doctor.getGender()));
             doctor.setLastName(getName(getLastNames()));
@@ -114,8 +115,8 @@ public class DevelopmentService {
     }
 
     public void addUser() throws PatientNotExistsException, DoctorNotExistsException, UserExistsException {
-        final PatientDto patient = patientFacade.getPatient(17L);
-        final CredentialsDto user = new CredentialsDto();
+        final var patient = patientFacade.getPatient(17L);
+        final var user = new CredentialsDto();
         user.setName(patient.getName());
         user.setLastName(patient.getLastName());
         user.setAlias("user");

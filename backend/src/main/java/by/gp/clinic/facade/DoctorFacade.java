@@ -4,7 +4,6 @@ import by.gp.clinic.dbo.DoctorDbo;
 import by.gp.clinic.dbo.ShiftTimingDbo;
 import by.gp.clinic.dto.DoctorDto;
 import by.gp.clinic.dto.PageDto;
-import by.gp.clinic.enumerated.ShiftOrder;
 import by.gp.clinic.exception.DoctorExistsException;
 import by.gp.clinic.exception.DoctorNotExistsException;
 import by.gp.clinic.exception.ShiftTimingNotExistsException;
@@ -18,10 +17,7 @@ import net.bytebuddy.utility.RandomString;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Map;
 
 import static java.time.DayOfWeek.MONDAY;
 import static java.time.temporal.TemporalAdjusters.next;
@@ -41,7 +37,7 @@ public class DoctorFacade {
             throw new DoctorExistsException(doctor.getName(), doctor.getLastName());
         }
         doctor.setSpecialIdentifier(new RandomString(10).nextString());
-        final DoctorDbo savedDoctor = doctorService.post(doctor);
+        final var savedDoctor = doctorService.post(doctor);
         addNewDoctorToTimeTable(savedDoctor);
         return savedDoctor;
     }
@@ -67,10 +63,10 @@ public class DoctorFacade {
     }
 
     private void addNewDoctorToTimeTable(final DoctorDbo doctor) throws ShiftTimingNotExistsException {
-        final LocalDate day = LocalDate.now();
-        final Map<DayOfWeek, ShiftTimingDbo> specialShifts =
+        final var day = LocalDate.now();
+        final var specialShifts =
             specialDoctorShiftService.getSpecialShifts(doctor.getId(), doctor.getSpeciality().getId());
-        final ShiftTimingDbo preferredTiming = getPreferredTiming(doctor, day.with(next(MONDAY)));
+        final var preferredTiming = getPreferredTiming(doctor, day.with(next(MONDAY)));
 
         doctorShiftService.createTimeTableForNextWeek(doctor, day, preferredTiming, specialShifts);
         doctorShiftService.createTimeTableForWeekAfterNextWeek(doctor, specialShifts);
@@ -78,7 +74,7 @@ public class DoctorFacade {
 
     private ShiftTimingDbo getPreferredTiming(final DoctorDbo doctor, final LocalDate day)
         throws ShiftTimingNotExistsException {
-        final List<ShiftOrder> shiftsForDay =
+        final var shiftsForDay =
             doctorShiftService.getShiftsOrderForDay(day, doctor.getSpeciality().getId());
         return shiftTimingService.getPreferredShift(shiftsForDay);
     }

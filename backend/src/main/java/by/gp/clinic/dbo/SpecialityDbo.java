@@ -15,7 +15,7 @@ public class SpecialityDbo extends AbstractDbo {
     private String name;
 
     public static SpecialityDbo buildEmptyWithId(final Long id) {
-        final SpecialityDbo speciality = new SpecialityDbo();
+        final var speciality = new SpecialityDbo();
         speciality.setId(id);
         return speciality;
     }

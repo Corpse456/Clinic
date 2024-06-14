@@ -2,7 +2,7 @@ package selenium;
 
 import net.bytebuddy.utility.RandomString;
 import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.util.Random;

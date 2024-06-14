@@ -10,7 +10,7 @@ import static java.time.LocalDateTime.now;
 public class TicketMock {
 
     public static TicketDto getTicketDtoMock() {
-        final TicketDto ticket = new TicketDto();
+        final var ticket = new TicketDto();
         ticket.setId(1L);
         ticket.setDoctorId(1L);
         ticket.setPatientId(1L);
@@ -23,7 +23,7 @@ public class TicketMock {
     }
 
     public static TicketDbo getTicketDboMock() {
-        final TicketDbo ticket = new TicketDbo();
+        final var ticket = new TicketDbo();
         ticket.setId(1L);
         ticket.setNumber(1);
         ticket.setDoctor(DoctorMock.getDoctorDboMock());

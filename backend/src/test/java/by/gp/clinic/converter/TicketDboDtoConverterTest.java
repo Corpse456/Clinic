@@ -1,16 +1,11 @@
 package by.gp.clinic.converter;
 
 import by.gp.clinic.AbstractSpringMvcTest;
-import by.gp.clinic.dbo.DoctorDbo;
-import by.gp.clinic.dbo.TicketDbo;
-import by.gp.clinic.dto.DoctorDto;
-import by.gp.clinic.dto.TicketDto;
-import by.gp.clinic.mock.DoctorMock;
 import by.gp.clinic.mock.TicketMock;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TicketDboDtoConverterTest extends AbstractSpringMvcTest {
 
@@ -19,8 +14,8 @@ public class TicketDboDtoConverterTest extends AbstractSpringMvcTest {
 
     @Test
     public void convertToDboTest() {
-        final TicketDto dto = TicketMock.getTicketDtoMock();
-        final TicketDbo dbo = converter.convertToDbo(dto);
+        final var dto = TicketMock.getTicketDtoMock();
+        final var dbo = converter.convertToDbo(dto);
 
         assertEquals(dto.getId(), dbo.getId());
         assertEquals(dto.getNumber(), dbo.getNumber());
@@ -31,8 +26,8 @@ public class TicketDboDtoConverterTest extends AbstractSpringMvcTest {
 
     @Test
     public void convertToDtoTest() {
-        final TicketDbo dbo = TicketMock.getTicketDboMock();
-        final TicketDto dto = converter.convertToDto(dbo);
+        final var dbo = TicketMock.getTicketDboMock();
+        final var dto = converter.convertToDto(dbo);
 
         assertEquals(dbo.getId(), dto.getId());
         assertEquals(dbo.getNumber(), dto.getNumber());

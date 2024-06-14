@@ -1,7 +1,5 @@
 package by.gp.clinic.facade;
 
-import by.gp.clinic.dbo.DoctorDbo;
-import by.gp.clinic.dbo.PatientDbo;
 import by.gp.clinic.dbo.UserDbo;
 import by.gp.clinic.dto.CredentialsDto;
 import by.gp.clinic.dto.PageDto;
@@ -16,7 +14,7 @@ import by.gp.clinic.service.DoctorService;
 import by.gp.clinic.service.PatientService;
 import by.gp.clinic.service.TokenAuthenticationService;
 import by.gp.clinic.service.UserService;
-import liquibase.util.StringUtils;
+import io.micrometer.common.util.StringUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -41,12 +39,12 @@ public class UserFacade {
         if (userService.existsByAlias(credentials.getAlias())) {
             throw new UserExistsException(credentials.getAlias());
         }
-        final UserDbo userDbo = new UserDbo();
+        final var userDbo = new UserDbo();
         userDbo.setAlias(credentials.getAlias());
         userDbo.setPassword(passwordEncoder.encode(credentials.getPassword()));
 
         if (StringUtils.isNotEmpty(credentials.getSpecialIdentifier())) {
-            final DoctorDbo doctor = doctorService
+            final var doctor = doctorService
                 .getDoctor(credentials.getName(), credentials.getLastName(), credentials.getSpecialIdentifier())
                 .orElseThrow(() -> new DoctorNotExistsException(credentials.getName(), credentials.getLastName(),
                                                                 credentials.getSpecialIdentifier()));
@@ -56,7 +54,7 @@ public class UserFacade {
             userDbo.setDoctor(doctor);
             userDbo.setRole(UserRole.DOCTOR);
         } else {
-            final PatientDbo patient = patientService
+            final var patient = patientService
                 .getPatient(credentials.getName(), credentials.getLastName())
                 .orElseThrow(() -> new PatientNotExistsException(credentials.getName(), credentials.getLastName()));
             if (userService.existsByPatientId(patient.getId())) {
@@ -85,7 +83,8 @@ public class UserFacade {
         if (userService.existsByAlias(credentials.getAlias())) {
             throw new UserExistsException(credentials.getAlias());
         }
-        final UserDbo user = new UserDbo();
+        final var user = new UserDbo();
+        //TODO update with mapstruct
         BeanUtils.copyProperties(credentials, user, "password");
         user.setPassword(passwordEncoder.encode(credentials.getPassword()));
         user.setRole(UserRole.ADMIN);

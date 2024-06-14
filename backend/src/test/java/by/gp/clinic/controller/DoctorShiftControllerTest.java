@@ -3,22 +3,20 @@ package by.gp.clinic.controller;
 import by.gp.clinic.dbo.AbstractDbo;
 import by.gp.clinic.dto.DoctorShiftDto;
 import by.gp.clinic.dto.PageDto;
-import by.gp.clinic.dto.SpecialDoctorShiftDto;
 import by.gp.clinic.mock.DoctorShiftMock;
 import by.gp.clinic.repository.CustomRepository;
 import by.gp.clinic.repository.DoctorShiftRepository;
 import by.gp.clinic.search.DoctorShiftSearchRequest;
 import com.fasterxml.jackson.core.type.TypeReference;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.web.servlet.MvcResult;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static by.gp.clinic.mock.SpecialDoctorShiftMock.getSpecialDoctorShiftSpecialityDtoMock;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class DoctorShiftControllerTest extends AbstractControllerTest {
 
@@ -36,7 +34,7 @@ public class DoctorShiftControllerTest extends AbstractControllerTest {
 
     @Test
     public void getDoctorShifts() {
-        final MvcResult result = getQuery(getUrl() + "/" + 1L);
+        final var result = getQuery(getUrl() + "/" + 1L);
         final Map shifts = getObjectFromResult(result, HashMap.class);
 
         assertNotNull(shifts);
@@ -51,7 +49,7 @@ public class DoctorShiftControllerTest extends AbstractControllerTest {
 
     @Test
     public void addSpecialShiftWithEmptyDoctorAndSpecialityTest() {
-        final SpecialDoctorShiftDto specialShift = getSpecialDoctorShiftSpecialityDtoMock();
+        final var specialShift = getSpecialDoctorShiftSpecialityDtoMock();
         specialShift.setSpecialityId(null);
         addEntityWithStatus(specialShift, 400, ERROR_MESSAGE, getUrl() + SPECIAL_URL);
     }

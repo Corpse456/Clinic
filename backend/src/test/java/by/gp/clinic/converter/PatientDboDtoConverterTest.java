@@ -1,13 +1,11 @@
 package by.gp.clinic.converter;
 
 import by.gp.clinic.AbstractSpringMvcTest;
-import by.gp.clinic.dbo.PatientDbo;
-import by.gp.clinic.dto.PatientDto;
 import by.gp.clinic.mock.PatientMock;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PatientDboDtoConverterTest extends AbstractSpringMvcTest {
 
@@ -16,8 +14,8 @@ public class PatientDboDtoConverterTest extends AbstractSpringMvcTest {
 
     @Test
     public void convertToDboTest() {
-        final PatientDto dto = PatientMock.getPatientDtoMock();
-        final PatientDbo dbo = converter.convertToDbo(dto);
+        final var dto = PatientMock.getPatientDtoMock();
+        final var dbo = converter.convertToDbo(dto);
 
         assertEquals(dto.getId(), dbo.getId());
         assertEquals(dto.getBirthDate(), dbo.getBirthDate());
@@ -28,8 +26,8 @@ public class PatientDboDtoConverterTest extends AbstractSpringMvcTest {
 
     @Test
     public void convertToDtoTest() {
-        final PatientDbo dbo = PatientMock.getPatientDboMock();
-        final PatientDto dto = converter.convertToDto(dbo);
+        final var dbo = PatientMock.getPatientDboMock();
+        final var dto = converter.convertToDto(dbo);
 
         assertEquals(dbo.getId(), dto.getId());
         assertEquals(dbo.getBirthDate(), dto.getBirthDate());

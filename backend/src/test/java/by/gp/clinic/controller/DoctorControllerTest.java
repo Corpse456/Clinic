@@ -6,7 +6,7 @@ import by.gp.clinic.dto.PageDto;
 import by.gp.clinic.repository.DoctorRepository;
 import by.gp.clinic.search.DoctorSearchRequest;
 import com.fasterxml.jackson.core.type.TypeReference;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static by.gp.clinic.mock.DoctorMock.getDoctorDtoMock;

@@ -1,10 +1,8 @@
 package by.gp.clinic.configuration;
 
-import by.gp.clinic.service.TokenAuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -17,7 +15,6 @@ import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-import javax.sql.DataSource;
 import java.util.List;
 
 import static by.gp.clinic.service.TokenAuthenticationService.HEADER_STRING;
@@ -27,10 +24,6 @@ import static com.google.common.collect.Lists.newArrayList;
 @EnableSwagger2
 @RequiredArgsConstructor
 public class SwaggerConfig {
-
-    private final Jackson2ObjectMapperBuilder objectMapperBuilder;
-    private final TokenAuthenticationService authenticationService;
-    private final DataSource dataSource;
 
     @Bean
     public Docket api() {
@@ -60,7 +53,8 @@ public class SwaggerConfig {
     }
 
     private List<SecurityReference> defaultAuth() {
-        final AuthorizationScope[] authorizationScopes = {new AuthorizationScope("global", "accessEverything")};
+        final var authorizationScopes = new AuthorizationScope[] {
+                new AuthorizationScope("global", "accessEverything") };
         return newArrayList(new SecurityReference("token", authorizationScopes));
     }
 

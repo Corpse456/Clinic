@@ -15,7 +15,7 @@ public class PatientMock {
     private static final LocalDate BIRTH_DATE = LocalDate.now().minusYears(50);
 
     public static PatientDto getPatientDtoMock() {
-        final PatientDto patient = new PatientDto();
+        final var patient = new PatientDto();
         patient.setBirthDate(BIRTH_DATE);
         patient.setGender(GENDER);
         patient.setName(PATIENT_NAME + new RandomString(3).nextString());
@@ -24,7 +24,7 @@ public class PatientMock {
     }
 
     public static PatientDbo getPatientDboMock() {
-        final PatientDbo patient = new PatientDbo();
+        final var patient = new PatientDbo();
         patient.setBirthDate(BIRTH_DATE);
         patient.setGender(GENDER);
         patient.setName(PATIENT_NAME + new RandomString(3).nextString());

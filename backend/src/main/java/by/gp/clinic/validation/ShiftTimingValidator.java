@@ -11,7 +11,7 @@ public class ShiftTimingValidator extends AbstractValidator<ShiftTiming, ShiftTi
 
     @Override
     protected boolean checkValid(final ShiftTimingDto value, final ConstraintValidatorContext context) {
-        boolean valid = true;
+        var valid = true;
 
         if (value.getEndTime().isBefore(value.getStartTime())) {
             addMessageToContext("startTime", "Start time must be before end time", context);

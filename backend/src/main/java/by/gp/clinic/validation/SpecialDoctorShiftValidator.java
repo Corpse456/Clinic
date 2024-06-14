@@ -13,7 +13,7 @@ public class SpecialDoctorShiftValidator extends AbstractValidator<SpecialDoctor
 
     @Override
     protected boolean checkValid(final SpecialDoctorShiftDto value, final ConstraintValidatorContext context) {
-        boolean valid = true;
+        var valid = true;
 
         if (value.getDoctorId() == null && value.getSpecialityId() == null) {
             addMessageToContext("doctorId", SpecialDoctorShiftValidator.MESSAGE, context);

@@ -1,9 +1,5 @@
 package by.gp.clinic.service;
 
-import static java.time.DayOfWeek.FRIDAY;
-import static java.time.DayOfWeek.MONDAY;
-import static java.time.temporal.TemporalAdjusters.next;
-
 import by.gp.clinic.converter.DoctorShiftDboDtoConverter;
 import by.gp.clinic.dbo.DoctorDbo;
 import by.gp.clinic.dbo.DoctorShiftDbo;
@@ -13,14 +9,18 @@ import by.gp.clinic.enumerated.ShiftOrder;
 import by.gp.clinic.factory.predicateFactory.DoctorShiftPredicateFactory;
 import by.gp.clinic.repository.DoctorShiftRepository;
 import by.gp.clinic.search.DoctorShiftSearchRequest;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
-import javax.transaction.Transactional;
-import org.springframework.stereotype.Service;
+
+import static java.time.DayOfWeek.FRIDAY;
+import static java.time.DayOfWeek.MONDAY;
+import static java.time.temporal.TemporalAdjusters.next;
 
 @Service
 public class DoctorShiftService
@@ -41,19 +41,20 @@ public class DoctorShiftService
         return repository.getAllByDoctorId(id);
     }
 
+    @Transactional
     public void createTimeTableForWeekAfterNextWeek(final DoctorDbo doctor,
                                                     final Map<DayOfWeek, ShiftTimingDbo> specialShifts) {
-        final LocalDate thisMonday = LocalDate.now().with(next(MONDAY));
-        final ShiftTimingDbo shiftTiming = getShiftByDoctorIDAndDate(doctor.getId(), thisMonday.with(next(FRIDAY)));
+        final var thisMonday = LocalDate.now().with(next(MONDAY));
+        final var shiftTiming = getShiftByDoctorIDAndDate(doctor.getId(), thisMonday.with(next(FRIDAY)));
         createTimeTableForNextWeek(doctor, thisMonday, shiftTiming.getOppositeShift(), specialShifts);
     }
 
-    @Transactional(rollbackOn = Exception.class)
+    @Transactional
     public void createTimeTableForNextWeek(final DoctorDbo doctor,
                                            final LocalDate from,
                                            ShiftTimingDbo preferredTiming,
                                            final Map<DayOfWeek, ShiftTimingDbo> specialShifts) {
-        LocalDate day = from.with(next(MONDAY));
+        var day = from.with(next(MONDAY));
 
         while (day.getDayOfWeek() != DayOfWeek.SATURDAY) {
             if (!isDoctorShiftExists(doctor.getId(), day)) {
@@ -66,7 +67,7 @@ public class DoctorShiftService
 
     @Transactional
     public void addDoctorShift(final DoctorDbo doctor, final ShiftTimingDbo shiftTiming, final LocalDate day) {
-        final DoctorShiftDbo doctorShift = new DoctorShiftDbo();
+        final var doctorShift = new DoctorShiftDbo();
         doctorShift.setDate(day);
         doctorShift.setDoctor(doctor);
         doctorShift.setShiftTiming(shiftTiming);
@@ -77,9 +78,10 @@ public class DoctorShiftService
         return repository.findShiftOrdersByDateAndSpeciality(date, specialityId);
     }
 
+    @Transactional
     public void postShiftForDate(final DoctorShiftDto doctorShift) {
-        final DoctorShiftDbo doctorShiftDbo = doctorShiftConverter.convertToDbo(doctorShift);
-        final Optional<DoctorShiftDbo> savedShift =
+        final var doctorShiftDbo = doctorShiftConverter.convertToDbo(doctorShift);
+        final var savedShift =
             repository.getByDoctorIdAndDate(doctorShift.getDoctorId(), doctorShift.getDate());
         if (savedShift.isPresent()) {
             savedShift.get().setShiftTiming(doctorShiftDbo.getShiftTiming());

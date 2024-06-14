@@ -13,7 +13,7 @@ import javax.persistence.Table;
 public class PatientDbo extends ManDbo {
 
     public static PatientDbo buildEmptyWithId(final Long id) {
-        final PatientDbo patient = new PatientDbo();
+        final var patient = new PatientDbo();
         patient.setId(id);
         return patient;
     }

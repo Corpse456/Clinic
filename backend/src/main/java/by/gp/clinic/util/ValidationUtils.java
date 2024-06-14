@@ -26,10 +26,10 @@ public class ValidationUtils {
     }
 
     public static boolean checkNotNullFields(final Object someObject, final ConstraintValidatorContext context) {
-        boolean flag = true;
-        final Class<?> someObjectClass = someObject.getClass();
-        final Field[] declaredFields = someObjectClass.getDeclaredFields();
-        for (final Field field : declaredFields) {
+        var flag = true;
+        final var someObjectClass = someObject.getClass();
+        final var declaredFields = someObjectClass.getDeclaredFields();
+        for (final var field : declaredFields) {
             if (field.isAnnotationPresent(NotNull.class) && getFieldValueIsNull(field, someObject)) {
                 addMessageToContext(field.getName(), field.getName() + " must be not null", context);
                 flag = false;

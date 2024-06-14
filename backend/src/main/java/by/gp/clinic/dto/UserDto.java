@@ -2,8 +2,10 @@ package by.gp.clinic.dto;
 
 import by.gp.clinic.enumerated.UserRole;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class UserDto extends AbstractDto {
 
     private String alias;

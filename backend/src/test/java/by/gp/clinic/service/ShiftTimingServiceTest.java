@@ -2,11 +2,10 @@ package by.gp.clinic.service;
 
 import by.gp.clinic.exception.ShiftTimingNotExistsException;
 import by.gp.clinic.repository.ShiftTimingRepository;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
 
 import java.time.LocalTime;
 import java.util.Optional;
@@ -14,7 +13,7 @@ import java.util.Optional;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class ShiftTimingServiceTest {
 
     private static final LocalTime WRONG_TIME = LocalTime.of(0, 0);

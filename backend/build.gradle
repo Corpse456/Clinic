@@ -1,6 +1,7 @@
 plugins {
     id "java"
     id "org.springframework.boot" version "$springBootVersion"
+    id "com.ewerk.gradle.plugins.querydsl" version "$querydslPluginVersion"
 }
 
 java {
@@ -14,6 +15,7 @@ repositories {
 dependencies {
     compileOnly "org.projectlombok:lombok:$lombokVersion"
     annotationProcessor "org.projectlombok:lombok:$lombokVersion"
+    annotationProcessor "com.querydsl:querydsl-apt:$querydslVersion"
 
     implementation "org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion"
     implementation "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
@@ -23,16 +25,17 @@ dependencies {
     implementation "com.auth0:auth0-spring-security-api:$auth0SpringVersion"
     implementation "io.jsonwebtoken:jjwt:$jjwtVersion"
     implementation "org.liquibase:liquibase-core:$liquibaseVersion"
-
     implementation "com.mysql:mysql-connector-j:$mysqlVersion"
     implementation "io.springfox:springfox-swagger-ui:$springfoxVersion"
     implementation "io.springfox:springfox-swagger2:$springfoxVersion"
     implementation "org.json:json:$jsonVersion"
     implementation "com.querydsl:querydsl-apt:$querydslVersion"
     implementation "com.querydsl:querydsl-jpa:$querydslVersion"
+    implementation "com.querydsl:querydsl-sql-codegen:$querydslVersion"
     implementation "net.sf.ehcache:ehcache:$ehcacheVersion"
     implementation "org.hibernate:hibernate-ehcache:$hibernateEhcacheVersion"
     implementation "com.google.guava:guava:$guavaVersion"
+    implementation "javax.validation:validation-api:$javaxVersion"
 
     testAnnotationProcessor "org.projectlombok:lombok:$lombokVersion"
     testCompileOnly "org.projectlombok:lombok:$lombokVersion"
@@ -53,4 +56,18 @@ bootJar {
 
 jar {
     enabled = true
+}
+
+querydsl {
+    jpa = true
+    querydslDefault = true
+    querydslSourcesDir = project.file('src/main/generated')
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/generated'
+        }
+    }
 }

@@ -13,7 +13,7 @@ import java.util.Optional;
 @Service
 public class DoctorService extends AbstractSearchService<DoctorDbo, DoctorDto, DoctorSearchRequest> {
 
-    private DoctorRepository repository;
+    private final DoctorRepository repository;
 
     public DoctorService(final DoctorPredicateFactory predicateFactory,
                          final DoctorDboDtoConverter converter,

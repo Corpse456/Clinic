@@ -49,7 +49,7 @@ public abstract class AbstractUITest {
 
     @Before
     public void initDriver() {
-        final ChromeOptions options = new ChromeOptions();
+        final var options = new ChromeOptions();
         options.addArguments("--incognito", "--start-maximized");
 
         driver = new ChromeDriver(options);
@@ -88,18 +88,18 @@ public abstract class AbstractUITest {
     }
 
     private List<WebElement> getWebElements(final String xPath, final String placeholder) {
-        final By by = By.xpath(xPath.replace(TEXT, placeholder));
+        final var by = By.xpath(xPath.replace(TEXT, placeholder));
         wait.until(ExpectedConditions.visibilityOfElementLocated(by));
         return driver.findElements(by);
     }
 
     private void fillInput(final String placeholder, final String value) {
-        final WebElement input = getInput(placeholder);
+        final var input = getInput(placeholder);
         fillInput(input, value);
     }
 
     private void fillInput(final WebElement input, final String value) {
-        final Actions actions = new Actions(driver);
+        final var actions = new Actions(driver);
         actions.moveToElement(input);
         actions.click();
         input.clear();

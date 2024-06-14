@@ -3,12 +3,13 @@ package by.gp.clinic.repository;
 import by.gp.clinic.dbo.DoctorShiftDbo;
 import by.gp.clinic.dbo.ShiftTimingDbo;
 import by.gp.clinic.enumerated.ShiftOrder;
+import org.springframework.data.jpa.repository.Query;
+
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
-import javax.transaction.Transactional;
-import org.springframework.data.jpa.repository.Query;
 
 @Transactional
 public interface DoctorShiftRepository extends CustomRepository<DoctorShiftDbo, Long> {

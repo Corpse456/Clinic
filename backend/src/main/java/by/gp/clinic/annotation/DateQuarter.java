@@ -1,7 +1,6 @@
 package by.gp.clinic.annotation;
 
 import by.gp.clinic.validation.DateQuarterValidator;
-import org.springframework.beans.factory.annotation.Value;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

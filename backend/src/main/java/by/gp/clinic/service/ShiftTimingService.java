@@ -1,6 +1,5 @@
 package by.gp.clinic.service;
 
-import by.gp.clinic.annotation.ShiftTiming;
 import by.gp.clinic.converter.ShiftTimingDboDtoConverter;
 import by.gp.clinic.dbo.ShiftTimingDbo;
 import by.gp.clinic.dto.ShiftTimingDto;
@@ -16,7 +15,6 @@ import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.TimeZone;
 
@@ -59,8 +57,8 @@ public class ShiftTimingService extends AbstractService<ShiftTimingDbo, ShiftTim
         log.info("country: {}, language: {}", System.getProperty("user.country"), System.getProperty("user.language"));
         log.info("TimeZone.getDefault(): {}", TimeZone.getDefault());
         // Пример проверки времени
-        LocalDateTime localDateTime = LocalDateTime.now();
-        ZonedDateTime zonedDateTime = localDateTime.atZone(ZoneId.systemDefault());
+        var localDateTime = LocalDateTime.now();
+        var zonedDateTime = localDateTime.atZone(ZoneId.systemDefault());
         log.info("Local DateTime: {}", localDateTime);
         log.info("Zoned DateTime: {}", zonedDateTime);
         return repository.getByStartTimeAndEndTime(startTime, endTime)
@@ -73,11 +71,11 @@ public class ShiftTimingService extends AbstractService<ShiftTimingDbo, ShiftTim
             final ShiftOrder shiftOrder) {
         return repository.getByStartTimeAndEndTime(startTime, endTime)
                 .orElseGet(() -> {
-                    final ShiftTimingDbo shiftTimingDbo = new ShiftTimingDbo();
+                    final var shiftTimingDbo = new ShiftTimingDbo();
                     shiftTimingDbo.setStartTime(startTime);
                     shiftTimingDbo.setEndTime(endTime);
                     shiftTimingDbo.setShiftOrder(shiftOrder);
-                    final ShiftTimingDbo saved = save(shiftTimingDbo);
+                    final var saved = save(shiftTimingDbo);
                     saved.setOppositeShift(saved);
                     return saved;
                 });
@@ -85,7 +83,7 @@ public class ShiftTimingService extends AbstractService<ShiftTimingDbo, ShiftTim
 
     public ShiftTimingDbo getPreferredShift(final List<ShiftOrder> shiftsForDay) throws ShiftTimingNotExistsException {
         int firstShifts = 0, secondShifts = 0;
-        for (final ShiftOrder shiftOrder : shiftsForDay) {
+        for (final var shiftOrder : shiftsForDay) {
             if (ShiftOrder.FIRST == shiftOrder) {
                 firstShifts++;
             }

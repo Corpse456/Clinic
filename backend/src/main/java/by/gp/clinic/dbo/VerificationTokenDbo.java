@@ -2,6 +2,7 @@ package by.gp.clinic.dbo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import java.time.LocalDate;
 @Table(name = "verification_token")
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class VerificationTokenDbo extends AbstractDbo {
 
     private String token;

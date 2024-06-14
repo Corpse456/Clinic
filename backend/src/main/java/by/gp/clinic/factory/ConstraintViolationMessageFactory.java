@@ -7,7 +7,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
-import javax.validation.Path;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,10 +29,10 @@ public class ConstraintViolationMessageFactory {
     }
 
     private ConstraintViolationDto build(final ConstraintViolation<?> constraintViolation) {
-        final String message = constraintViolation.getMessage();
-        final Path propertyPath = constraintViolation.getPropertyPath();
+        final var message = constraintViolation.getMessage();
+        final var propertyPath = constraintViolation.getPropertyPath();
 
-        final ConstraintViolationDto violation = new ConstraintViolationDto();
+        final var violation = new ConstraintViolationDto();
         violation.setField(propertyPath.toString());
         violation.setMessage(message);
 
@@ -41,7 +40,7 @@ public class ConstraintViolationMessageFactory {
     }
 
     private ConstraintViolationDto build(final FieldError fieldError) {
-        final ConstraintViolationDto constraintViolationDto = new ConstraintViolationDto();
+        final var constraintViolationDto = new ConstraintViolationDto();
 
         constraintViolationDto.setMessage(fieldError.getDefaultMessage());
         constraintViolationDto.setField(fieldError.getField());

@@ -22,7 +22,7 @@ public class DoctorDbo extends ManDbo {
     private String specialIdentifier;
 
     public static DoctorDbo buildEmptyWithId(final Long id) {
-        final DoctorDbo patient = new DoctorDbo();
+        final var patient = new DoctorDbo();
         patient.setId(id);
         return patient;
     }
