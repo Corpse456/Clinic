@@ -19,6 +19,7 @@ public abstract class AbstractSearchRequestPredicateFactory<T extends PageableSe
     private BooleanBuilder booleanBuilder;
 
     public Optional<Predicate> build(T searchRequest) {
+
         booleanBuilder = new BooleanBuilder();
         buildPredicates(searchRequest);
         return Optional.ofNullable(booleanBuilder.getValue());

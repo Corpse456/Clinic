@@ -10,10 +10,10 @@ import java.util.Optional;
 @Transactional
 public interface DoctorRepository extends NamedRepository<DoctorDbo, Long> {
 
-//    @Query("select s "
-//        + "from DoctorDbo d "
-//        + "join fetch SpecialityDbo s on d.speciality.id = s.id "
-//        + "where d.id = ?1")
+    @Query("select s "
+        + "from DoctorDbo d "
+        + "join fetch SpecialityDbo s on d.speciality.id = s.id "
+        + "where d.id = ?1")
     SpecialityDbo getSpecialityById(final Long id);
 
     Optional<DoctorDbo> getByNameAndLastNameAndSpecialIdentifier(final String name,
