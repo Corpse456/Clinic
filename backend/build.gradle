@@ -1,7 +1,7 @@
 plugins {
     id "java"
     id "org.springframework.boot" version "$springBootVersion"
-    id "com.ewerk.gradle.plugins.querydsl" version "$querydslPluginVersion"
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 }
 
 java {
@@ -13,9 +13,16 @@ repositories {
 }
 
 dependencies {
+    implementation "com.querydsl:querydsl-core:$querydslVersion"
+    implementation "com.querydsl:querydsl-jpa:$querydslVersion"
+    implementation "com.querydsl:querydsl-sql:$querydslVersion"
     compileOnly "org.projectlombok:lombok:$lombokVersion"
     annotationProcessor "org.projectlombok:lombok:$lombokVersion"
-    annotationProcessor "com.querydsl:querydsl-apt:$querydslVersion"
+    annotationProcessor "com.querydsl:querydsl-apt:$querydslVersion:general"
+
+    implementation "javax.annotation:javax.annotation-api:$javaxAnnotationVersion"
+    implementation "jakarta.servlet:jakarta.servlet-api:$jakartaVersion"
+    implementation 'javax.servlet:javax.servlet-api:4.0.1'
 
     implementation "org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion"
     implementation "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
@@ -29,7 +36,7 @@ dependencies {
     implementation "io.springfox:springfox-swagger-ui:$springfoxVersion"
     implementation "io.springfox:springfox-swagger2:$springfoxVersion"
     implementation "org.json:json:$jsonVersion"
-    implementation "com.querydsl:querydsl-apt:$querydslVersion"
+    implementation "org.projectlombok:lombok:$lombokVersion"
     implementation "com.querydsl:querydsl-jpa:$querydslVersion"
     implementation "com.querydsl:querydsl-sql-codegen:$querydslVersion"
     implementation "net.sf.ehcache:ehcache:$ehcacheVersion"
@@ -56,18 +63,4 @@ bootJar {
 
 jar {
     enabled = true
-}
-
-querydsl {
-    jpa = true
-    querydslDefault = true
-    querydslSourcesDir = project.file('src/main/generated')
-}
-
-sourceSets {
-    main {
-        java {
-            srcDir 'src/main/generated'
-        }
-    }
 }

@@ -8,6 +8,7 @@ import com.google.common.cache.CacheBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.security.Keys;
+import io.jsonwebtoken.security.SignatureException;
 import io.micrometer.common.util.StringUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -65,7 +66,7 @@ public class TokenAuthenticationService {
         }
 
         if (getVerificationTokenDbo(token) == null) {
-            throw new io.jsonwebtoken.security.SignatureException(
+            throw new SignatureException(
                     "This token can't be trusted as it was marked as logged out");
         }
         // parse the token.
@@ -73,7 +74,7 @@ public class TokenAuthenticationService {
         try {
             subject = decode(token);
         } catch (MalformedJwtException e) {
-            throw new io.jsonwebtoken.security.SignatureException("Wrong token format");
+            throw new SignatureException("Wrong token format");
         }
         final var user = subject.split(":")[0];
         final var roles = Arrays.asList(subject.substring(subject.lastIndexOf(':') + 1).split(","));

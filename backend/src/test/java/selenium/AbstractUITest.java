@@ -1,8 +1,8 @@
 package selenium;
 
 import lombok.Data;
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -14,6 +14,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -21,33 +22,51 @@ import java.util.List;
 @Data
 public abstract class AbstractUITest {
 
-    private static final int WAIT_SECONDS = 20;
+    private static final Duration WAIT_SECONDS = Duration.ofSeconds(20);
+
     static final String BASE_URL = "http://localhost/";
+
     static final String TEXT = "\\{0\\}";
+
     public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("MMddyyyy");
+
     public static final String BUTTON_XPATH = ".//button[contains(string(),'" + TEXT + "')]";
+
     public static final String INPUT_XPATH = ".//input[@placeholder='" + TEXT + "']";
+
     public static final String ADMIN = "admin";
+
     public static final String NAME = "name";
+
     public static final String LAST_NAME = "last name";
+
     public static final String ALIAS = "nick name";
+
     public static final String PASSWORD = "password";
+
     public static final String SIGN_UP = "SignUp";
+
     public static final String LOGIN = "Login";
+
     public static final String CREATE_PATIENT_CARD = "Create patient card";
+
     public static final String BIRTH_DATE = "birth date";
+
     public static final String SUBMIT = "Submit";
+
     public static final String LOGOUT = "Logout";
+
     public static final String SELECT = "//select";
 
     private WebDriver driver;
+
     private WebDriverWait wait;
 
     AbstractUITest() {
         System.setProperty("webdriver.chrome.driver", "C:\\chromedriver.exe");
     }
 
-    @Before
+    @BeforeEach
     public void initDriver() {
         final var options = new ChromeOptions();
         options.addArguments("--incognito", "--start-maximized");
@@ -58,7 +77,7 @@ public abstract class AbstractUITest {
         getDriver().get(BASE_URL);
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         driver.quit();
     }
