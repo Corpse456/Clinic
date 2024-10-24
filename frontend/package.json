@@ -10,7 +10,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "core-js": "^2.6.5",
-    "vue": "^2.6.10",
+    "vue": "^3.0.0",
     "vue-cookies": "^1.5.13",
     "vue-router": "^3.0.6",
     "vue-sweet-calendar": "^0.2.7",
