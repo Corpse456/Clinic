@@ -3,8 +3,8 @@ package by.gp.clinic.util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.validation.ConstraintValidatorContext;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.ConstraintValidatorContext;
+import jakarta.validation.constraints.NotNull;
 import java.lang.reflect.Field;
 
 public class ValidationUtils {

@@ -2,7 +2,7 @@ package by.gp.clinic.repository;
 
 import by.gp.clinic.dbo.SpecialDoctorShiftDbo;
 
-import javax.transaction.Transactional;
+import jakarta.transaction.Transactional;
 import java.util.List;
 
 @Transactional

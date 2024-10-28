@@ -25,6 +25,6 @@ public class SpecialDoctorShiftService extends AbstractService<SpecialDoctorShif
     public Map<DayOfWeek, ShiftTimingDbo> getSpecialShifts(final Long id, final Long specialityId) {
         return repository.findAllByDoctorIdOrSpecialityId(id, specialityId)
             .stream()
-            .collect(Collectors.toMap(SpecialDoctorShiftDbo::getDay, SpecialDoctorShiftDbo::getShiftTiming));
+            .collect(Collectors.toMap(SpecialDoctorShiftDbo::getWeekDay, SpecialDoctorShiftDbo::getShiftTiming));
     }
 }

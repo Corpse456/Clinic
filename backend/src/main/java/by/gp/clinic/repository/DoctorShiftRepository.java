@@ -5,7 +5,7 @@ import by.gp.clinic.dbo.ShiftTimingDbo;
 import by.gp.clinic.enumerated.ShiftOrder;
 import org.springframework.data.jpa.repository.Query;
 
-import javax.transaction.Transactional;
+import jakarta.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;

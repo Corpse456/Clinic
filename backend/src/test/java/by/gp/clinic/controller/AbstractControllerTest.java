@@ -7,6 +7,7 @@ import by.gp.clinic.dto.PageDto;
 import by.gp.clinic.repository.CustomRepository;
 import by.gp.clinic.search.PageableSearchRequest;
 import com.fasterxml.jackson.core.type.TypeReference;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MvcResult;
 
 import java.util.HashMap;
@@ -36,13 +37,14 @@ public abstract class AbstractControllerTest extends AbstractSpringMvcTest {
     }
 
     Long addEntity(final Object dto) {
-        return addEntity(dto, getUrl() + "");
+        return addEntity(dto, getUrl());
     }
 
     Long addEntity(final Object dto, final String url) {
         final var result = postQuery(url, dto);
 
         final var answer = getJsonFormString(getContentAsString(result));
+        System.out.println("answer = " + answer);
         final var id = getLongFromJson(answer, ID);
 
         assertNotNull(id);
@@ -51,7 +53,7 @@ public abstract class AbstractControllerTest extends AbstractSpringMvcTest {
     }
 
     void addEntityWithStatus(final AbstractDto dto, final int status, final String errorMessage) {
-        addEntityWithStatus(dto, status, errorMessage, getUrl() + "");
+        addEntityWithStatus(dto, status, errorMessage, getUrl());
     }
 
     void addEntityWithStatus(final Object dto,

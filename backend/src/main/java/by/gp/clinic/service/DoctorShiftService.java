@@ -11,7 +11,7 @@ import by.gp.clinic.repository.DoctorShiftRepository;
 import by.gp.clinic.search.DoctorShiftSearchRequest;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
+import jakarta.transaction.Transactional;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;

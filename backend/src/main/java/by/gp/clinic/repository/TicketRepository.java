@@ -3,7 +3,7 @@ package by.gp.clinic.repository;
 import by.gp.clinic.dbo.TicketDbo;
 import org.springframework.data.jpa.repository.Query;
 
-import javax.transaction.Transactional;
+import jakarta.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.Optional;
 

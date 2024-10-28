@@ -115,13 +115,13 @@
                              foreignKeyName="special_doctor_shift_fk_speciality_id"
                              deleteCascade="true"/>
             </column>
-            <column name="day" type="varchar(15)"/>
+            <column name="week_day" type="varchar(15)"/>
         </createTable>
 
         <addUniqueConstraint constraintName="unique_speciality" tableName="special_doctor_shift"
-                             columnNames="day, speciality_id"/>
+                             columnNames="week_day, speciality_id"/>
         <addUniqueConstraint constraintName="unique_doctor_id" tableName="special_doctor_shift"
-                             columnNames="day, doctor_id"/>
+                             columnNames="week_day, doctor_id"/>
     </changeSet>
 
     <changeSet id="add_ticket_table" author="neznaev">

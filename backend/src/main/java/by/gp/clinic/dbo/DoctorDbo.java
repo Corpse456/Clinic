@@ -23,8 +23,8 @@ public class DoctorDbo extends ManDbo {
     private String specialIdentifier;
 
     public static DoctorDbo buildEmptyWithId(final Long id) {
-        final var patient = new DoctorDbo();
-        patient.setId(id);
-        return patient;
+        final var doctor = new DoctorDbo();
+        doctor.setId(id);
+        return doctor;
     }
 }

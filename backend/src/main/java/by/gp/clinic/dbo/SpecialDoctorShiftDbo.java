@@ -33,7 +33,7 @@ public class SpecialDoctorShiftDbo extends AbstractDbo {
     private SpecialityDbo speciality;
 
     @Enumerated(EnumType.STRING)
-    private DayOfWeek day;
+    private DayOfWeek weekDay;
 
     @ManyToOne
     @JoinColumn(name = "shift_timing_id")

@@ -6,8 +6,8 @@ import by.gp.clinic.exception.EntityExistsException;
 import by.gp.clinic.exception.EntityNotExistsException;
 import by.gp.clinic.facade.PatientFacade;
 import by.gp.clinic.search.PatientSearchRequest;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONObject;
 import org.springframework.validation.annotation.Validated;
@@ -20,32 +20,32 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@Api(tags = "Patient Controller",
-    value = "API methods to work with patients")
+@Tag(name = "Patient Controller",
+    description = "API methods to work with patients")
 public class PatientController {
 
     private final PatientFacade patientFacade;
 
     @PostMapping("admin/patient")
-    @ApiOperation(value = "Create a patient card")
+    @Operation(summary = "Create a patient card")
     public String createPatient(@RequestBody @Validated PatientDto patient) throws EntityExistsException {
         return new JSONObject().put("id", patientFacade.createPatient(patient)).toString();
     }
 
     @GetMapping(value = "/patient/{id}")
-    @ApiOperation(value = "Get info about patient")
+    @Operation(summary = "Get info about patient")
     public PatientDto getPatient(@PathVariable("id") Long id) throws EntityNotExistsException {
         return patientFacade.getPatient(id);
     }
 
     @PostMapping(value = "/patient/search")
-    @ApiOperation(value = "Search patient")
+    @Operation(summary = "Search patient")
     public PageDto<PatientDto> searchPatients(@RequestBody final PatientSearchRequest searchRequest) {
         return patientFacade.search(searchRequest);
     }
 
     @DeleteMapping(value = "/patient/{id}")
-    @ApiOperation(value = "Burn patient card")
+    @Operation(summary = "Burn patient card")
     public void removePatient(@PathVariable("id") Long id) throws EntityNotExistsException {
         patientFacade.removePatient(id);
     }

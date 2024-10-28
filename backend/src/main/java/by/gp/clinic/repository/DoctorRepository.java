@@ -4,7 +4,7 @@ import by.gp.clinic.dbo.DoctorDbo;
 import by.gp.clinic.dbo.SpecialityDbo;
 import org.springframework.data.jpa.repository.Query;
 
-import javax.transaction.Transactional;
+import jakarta.transaction.Transactional;
 import java.util.Optional;
 
 @Transactional

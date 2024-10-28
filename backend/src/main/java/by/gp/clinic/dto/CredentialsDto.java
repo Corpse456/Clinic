@@ -3,7 +3,7 @@ package by.gp.clinic.dto;
 import by.gp.clinic.annotation.Password;
 import lombok.Data;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 @Data
 public class CredentialsDto {

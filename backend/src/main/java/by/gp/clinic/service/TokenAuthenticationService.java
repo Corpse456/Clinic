@@ -7,6 +7,7 @@ import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
 import io.micrometer.common.util.StringUtils;
@@ -19,7 +20,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
-import javax.transaction.Transactional;
+import jakarta.transaction.Transactional;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Date;
@@ -33,13 +35,13 @@ public class TokenAuthenticationService {
 
     private static final long EXPIRATION_TIME = 2_592_000_000L; // Month
 
-    private static final String SECRET = "D90#11%fhBpP";
+    private static final String SECRET = "D90#11%fhBpP+435dsg0923KJI*(&%$+";
 
     private static final String TOKEN_PREFIX = "Bearer ";
 
     public static final String HEADER_STRING = "Authorization";
 
-    private static final SecretKey KEY = Keys.hmacShaKeyFor(SECRET.getBytes());
+    private static final SecretKey KEY = Keys.hmacShaKeyFor(SECRET.getBytes(StandardCharsets.UTF_8));
 
     private final UserRepository userRepository;
 

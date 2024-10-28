@@ -25,27 +25,28 @@ dependencies {
     implementation("com.querydsl:querydsl-core:5.1.0")
     implementation("com.querydsl:querydsl-jpa:5.1.0:jakarta")
     annotationProcessor("com.querydsl:querydsl-apt:5.1.0:jakarta")
+
+    // Jakarta
     annotationProcessor("jakarta.persistence:jakarta.persistence-api:3.2.0")
     annotationProcessor("jakarta.annotation:jakarta.annotation-api:3.0.0")
-
     implementation "jakarta.servlet:jakarta.servlet-api:$jakartaServletVersion"
+    implementation "jakarta.validation:jakarta.validation-api:3.0.0"
 
     implementation "org.springframework.boot:spring-boot-starter-data-jpa"
     implementation "org.springframework.boot:spring-boot-starter-web"
     implementation "org.springframework.boot:spring-boot-starter-actuator"
     implementation "org.springframework.boot:spring-boot-starter-security"
     implementation "org.springframework.security.oauth:spring-security-oauth2:$springOauth2Version"
+    implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0"
     implementation "com.auth0:auth0-spring-security-api:$auth0SpringVersion"
     implementation "io.jsonwebtoken:jjwt:$jjwtVersion"
     implementation "org.liquibase:liquibase-core:$liquibaseVersion"
     implementation "com.mysql:mysql-connector-j:$mysqlVersion"
-    implementation "io.springfox:springfox-swagger-ui:$springfoxVersion"
-    implementation "io.springfox:springfox-swagger2:$springfoxVersion"
     implementation "org.json:json:$jsonVersion"
     implementation "net.sf.ehcache:ehcache:$ehcacheVersion"
     implementation "org.hibernate:hibernate-ehcache:$hibernateEhcacheVersion"
     implementation "com.google.guava:guava:$guavaVersion"
-    implementation "javax.validation:validation-api:$javaxVersion"
+    implementation "org.hibernate.validator:hibernate-validator:8.0.0.Final"
 
     testImplementation "org.springframework.boot:spring-boot-starter-test"
     testImplementation "org.springframework.security:spring-security-test:$springSecurityTestVersion"

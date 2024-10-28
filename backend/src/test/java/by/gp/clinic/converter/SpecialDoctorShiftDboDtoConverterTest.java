@@ -38,7 +38,7 @@ public class SpecialDoctorShiftDboDtoConverterTest extends AbstractSpringMvcTest
         final var dbo = converter.convertToDbo(dto);
 
         assertEquals(dto.getId(), dbo.getId());
-        assertEquals(dto.getDay(), dbo.getDay());
+        assertEquals(dto.getWeekDay(), dbo.getWeekDay());
         if (dbo.getDoctor() != null) {
             assertEquals(dto.getDoctorId(), dbo.getDoctor().getId());
         }
@@ -48,7 +48,7 @@ public class SpecialDoctorShiftDboDtoConverterTest extends AbstractSpringMvcTest
         final var dto = converter.convertToDto(dbo);
 
         assertEquals(dbo.getId(), dto.getId());
-        assertEquals(dbo.getDay(), dto.getDay());
+        assertEquals(dbo.getWeekDay(), dto.getWeekDay());
         if (dbo.getDoctor() != null) {
             assertEquals(dbo.getDoctor().getId(), dto.getDoctorId());
         }

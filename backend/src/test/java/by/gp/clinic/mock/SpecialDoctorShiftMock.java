@@ -25,7 +25,7 @@ public class SpecialDoctorShiftMock {
     private static SpecialDoctorShiftDto getSpecialDoctorShiftDto() {
         final var specialShift = new SpecialDoctorShiftDto();
         specialShift.setShiftTiming(ShiftTimingMock.getNotExistsShiftTimingDtoMock());
-        specialShift.setDay(DAY);
+        specialShift.setWeekDay(DAY);
         return specialShift;
     }
 
@@ -44,7 +44,7 @@ public class SpecialDoctorShiftMock {
     private static SpecialDoctorShiftDbo getSpecialDoctorShiftDbo() {
         final var specialShift = new SpecialDoctorShiftDbo();
         specialShift.setShiftTiming(ShiftTimingMock.getShiftTimingDboMock());
-        specialShift.setDay(DAY);
+        specialShift.setWeekDay(DAY);
         return specialShift;
     }
 }
