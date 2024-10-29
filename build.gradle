@@ -1,0 +1,29 @@
+plugins {
+    id "java"
+    id "org.springframework.boot" version "$springBootVersion"
+    id "io.spring.dependency-management" version "$dependencyManagementVersion"
+}
+
+subprojects {
+    apply plugin: "java"
+    apply plugin: "org.springframework.boot"
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+
+    repositories {
+        mavenCentral()
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+}
+
+
+bootJar {
+    enabled = false
+}
+
+jar {
+    enabled = false
+}

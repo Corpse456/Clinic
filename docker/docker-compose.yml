@@ -1,20 +1,14 @@
-version: "2.1"
+version: "2.29.6"
 services:
     db:
         build:
             context: ./mysql
             dockerfile: Dockerfile
         container_name: clinic_mysql
-        command: --default-authentication-plugin=caching_sha2_password
         ports:
             - '3307:3306'
         environment:
             MYSQL_ROOT_PASSWORD: root
-        healthcheck:
-            test: "/usr/bin/mysql --user=testuser --password=testpass --execute \"SHOW DATABASES;\""
-            interval: 10s
-            timeout: 5s
-            retries: 5
     frontend:
         build:
             context: ../frontend
@@ -31,8 +25,7 @@ services:
         container_name: clinic_backend
         restart: on-failure
         depends_on:
-            db:
-                condition: "service_healthy"
+            - db
         environment:
             mysql_host: "clinic_mysql"
             mysql_port: '3306'
