@@ -1,6 +1,6 @@
 package by.gp.clinic.service;
 
-import by.gp.clinic.converter.TicketDboDtoConverter;
+import by.gp.clinic.mapper.TicketDboDtoMapper;
 import by.gp.clinic.dbo.TicketDbo;
 import by.gp.clinic.dto.TicketDto;
 import by.gp.clinic.factory.predicateFactory.TicketPredicateFactory;
@@ -17,9 +17,9 @@ public class TicketService extends AbstractSearchService<TicketDbo, TicketDto, T
     private final TicketRepository repository;
 
     public TicketService(final TicketPredicateFactory predicateFactory,
-                         final TicketDboDtoConverter converter,
+                         final TicketDboDtoMapper mapper,
                          final TicketRepository repository) {
-        super(predicateFactory, converter, repository);
+        super(predicateFactory, mapper, repository);
         this.repository = repository;
     }
 

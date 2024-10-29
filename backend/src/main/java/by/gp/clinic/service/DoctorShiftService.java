@@ -1,6 +1,6 @@
 package by.gp.clinic.service;
 
-import by.gp.clinic.converter.DoctorShiftDboDtoConverter;
+import by.gp.clinic.mapper.DoctorShiftDboDtoMapper;
 import by.gp.clinic.dbo.DoctorDbo;
 import by.gp.clinic.dbo.DoctorShiftDbo;
 import by.gp.clinic.dbo.ShiftTimingDbo;
@@ -27,10 +27,10 @@ public class DoctorShiftService
     extends AbstractSearchService<DoctorShiftDbo, DoctorShiftDto, DoctorShiftSearchRequest> {
 
     private final DoctorShiftRepository repository;
-    private final DoctorShiftDboDtoConverter doctorShiftConverter;
+    private final DoctorShiftDboDtoMapper doctorShiftConverter;
 
     public DoctorShiftService(final DoctorShiftPredicateFactory predicateFactory,
-                              final DoctorShiftDboDtoConverter doctorShiftConverter,
+                              final DoctorShiftDboDtoMapper doctorShiftConverter,
                               final DoctorShiftRepository repository) {
         super(predicateFactory, doctorShiftConverter, repository);
         this.repository = repository;
@@ -80,7 +80,7 @@ public class DoctorShiftService
 
     @Transactional
     public void postShiftForDate(final DoctorShiftDto doctorShift) {
-        final var doctorShiftDbo = doctorShiftConverter.convertToDbo(doctorShift);
+        final var doctorShiftDbo = doctorShiftConverter.mapToDbo(doctorShift);
         final var savedShift =
             repository.getByDoctorIdAndDate(doctorShift.getDoctorId(), doctorShift.getDate());
         if (savedShift.isPresent()) {

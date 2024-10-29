@@ -1,4 +1,4 @@
-package by.gp.clinic.converter;
+package by.gp.clinic.mapper;
 
 import by.gp.clinic.AbstractSpringMvcTest;
 import by.gp.clinic.mock.PatientMock;
@@ -7,15 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class PatientDboDtoConverterTest extends AbstractSpringMvcTest {
+public class PatientDboDtoMapperTest extends AbstractSpringMvcTest {
 
     @Autowired
-    private PatientDboDtoConverter converter;
+    private PatientDboDtoMapper mapper;
 
     @Test
-    public void convertToDboTest() {
+    public void mapToDboTest() {
         final var dto = PatientMock.getPatientDtoMock();
-        final var dbo = converter.convertToDbo(dto);
+        final var dbo = mapper.mapToDbo(dto);
 
         assertEquals(dto.getId(), dbo.getId());
         assertEquals(dto.getBirthDate(), dbo.getBirthDate());
@@ -25,9 +25,9 @@ public class PatientDboDtoConverterTest extends AbstractSpringMvcTest {
     }
 
     @Test
-    public void convertToDtoTest() {
+    public void mapToDtoTest() {
         final var dbo = PatientMock.getPatientDboMock();
-        final var dto = converter.convertToDto(dbo);
+        final var dto = mapper.mapToDto(dbo);
 
         assertEquals(dbo.getId(), dto.getId());
         assertEquals(dbo.getBirthDate(), dto.getBirthDate());

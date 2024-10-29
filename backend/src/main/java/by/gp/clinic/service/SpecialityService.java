@@ -1,6 +1,6 @@
 package by.gp.clinic.service;
 
-import by.gp.clinic.converter.SpecialityDboDtoConverter;
+import by.gp.clinic.mapper.SpecialityDboDtoMapper;
 import by.gp.clinic.dbo.SpecialityDbo;
 import by.gp.clinic.dto.SpecialityDto;
 import by.gp.clinic.repository.SpecialityRepository;
@@ -22,9 +22,9 @@ public class SpecialityService extends AbstractService<SpecialityDbo, Speciality
         .expireAfterWrite(120, TimeUnit.MINUTES)
         .build();
 
-    public SpecialityService(final SpecialityDboDtoConverter converter,
+    public SpecialityService(final SpecialityDboDtoMapper mapper,
                              final SpecialityRepository repository) {
-        super(converter, repository);
+        super(mapper, repository);
         this.repository = repository;
     }
 

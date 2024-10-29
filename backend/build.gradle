@@ -17,11 +17,19 @@ dependencies {
     implementation "jakarta.servlet:jakarta.servlet-api:$jakartaServletVersion"
     implementation "jakarta.validation:jakarta.validation-api:$jakartaVersion"
 
+    // spring
     implementation "org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion"
     implementation "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
     implementation "org.springframework.boot:spring-boot-starter-actuator:$springBootVersion"
     implementation "org.springframework.boot:spring-boot-starter-security:$springBootVersion"
     implementation "org.springframework.security.oauth:spring-security-oauth2:$springOauth2Version"
+    testImplementation "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
+    testImplementation "org.springframework.security:spring-security-test:$springSecurityTestVersion"
+
+    //mapstruct
+    annotationProcessor "org.mapstruct:mapstruct-processor:$mapStructVersion"
+    implementation "org.mapstruct:mapstruct:$mapStructVersion"
+
     implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:$openApiVersion"
     implementation "com.auth0:auth0-spring-security-api:$auth0SpringVersion"
     implementation "io.jsonwebtoken:jjwt:$jjwtVersion"
@@ -33,12 +41,9 @@ dependencies {
     implementation "com.google.guava:guava:$guavaVersion"
     implementation "org.hibernate.validator:hibernate-validator:$hibernateValidatorVersion"
 
-    testImplementation "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
-    testImplementation "org.springframework.security:spring-security-test:$springSecurityTestVersion"
     testImplementation "com.h2database:h2:$h2Version"
     testImplementation "org.seleniumhq.selenium:selenium-java:$seleniumVersion"
 }
-
 
 bootJar {
     enabled = true

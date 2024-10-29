@@ -1,4 +1,4 @@
-package by.gp.clinic.converter;
+package by.gp.clinic.mapper;
 
 import by.gp.clinic.AbstractSpringMvcTest;
 import by.gp.clinic.dbo.SpecialityDbo;
@@ -9,28 +9,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class SpecialityDboDtoConverterTest extends AbstractSpringMvcTest {
+public class SpecialityDboDtoMapperTest extends AbstractSpringMvcTest {
 
     @Autowired
-    private SpecialityDboDtoConverter converter;
+    private SpecialityDboDtoMapper mapper;
 
     @Test
-    public void convertToDboTest() {
-        convertToDbo(SpecialityMock.getSpecialityDtoMock());
+    public void mapToDboTest() {
+        mapToDbo(SpecialityMock.getSpecialityDtoMock());
     }
 
     @Test
-    public void convertToDtoTest() {
-        convertToDto(SpecialityMock.getSpecialityDboMock());
+    public void mapToDtoTest() {
+        mapToDto(SpecialityMock.getSpecialityDboMock());
     }
 
-    private void convertToDbo(final SpecialityDto dto) {
-        final var dbo = converter.convertToDbo(dto);
+    private void mapToDbo(final SpecialityDto dto) {
+        final var dbo = mapper.mapToDbo(dto);
         checkConverting(dto, dbo);
     }
 
-    private void convertToDto(final SpecialityDbo dbo) {
-        final var dto = converter.convertToDto(dbo);
+    private void mapToDto(final SpecialityDbo dbo) {
+        final var dto = mapper.mapToDto(dbo);
         checkConverting(dto, dbo);
     }
 

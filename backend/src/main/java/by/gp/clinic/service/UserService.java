@@ -1,6 +1,6 @@
 package by.gp.clinic.service;
 
-import by.gp.clinic.converter.UserDboDtoConverter;
+import by.gp.clinic.mapper.UserDboDtoMapper;
 import by.gp.clinic.dbo.UserDbo;
 import by.gp.clinic.dto.UserDto;
 import by.gp.clinic.factory.predicateFactory.UserPredicateFactory;
@@ -24,16 +24,16 @@ public class UserService extends AbstractSearchService<UserDbo, UserDto, UserSea
         .build();
 
     public UserService(final UserPredicateFactory predicateFactory,
-                       final UserDboDtoConverter converter,
+                       final UserDboDtoMapper mapper,
                        final UserRepository repository) {
-        super(predicateFactory, converter, repository);
+        super(predicateFactory, mapper, repository);
         this.repository = repository;
     }
 
     @Override
     public UserDbo save(final UserDbo dbo) {
         final var savedUser = super.save(dbo);
-        cache.put(savedUser.getId(), convertToDto(savedUser));
+        cache.put(savedUser.getId(), mapToDto(savedUser));
         return savedUser;
     }
 

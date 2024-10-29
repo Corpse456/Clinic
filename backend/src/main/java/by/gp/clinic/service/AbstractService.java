@@ -1,8 +1,8 @@
 package by.gp.clinic.service;
 
-import by.gp.clinic.converter.AbstractDboDtoConverter;
 import by.gp.clinic.dbo.AbstractDbo;
 import by.gp.clinic.dto.AbstractDto;
+import by.gp.clinic.mapper.AbstractDboDtoMapper;
 import by.gp.clinic.repository.CustomRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,12 +12,12 @@ import java.util.List;
 @AllArgsConstructor
 public class AbstractService<Dbo extends AbstractDbo, Dto extends AbstractDto> {
 
-    AbstractDboDtoConverter<Dbo, Dto> converter;
+    AbstractDboDtoMapper<Dbo, Dto> mapper;
     CustomRepository<Dbo, Long> repository;
 
     @Transactional
     public Dbo post(final Dto dto) {
-        final var dbo = converter.convertToDbo(dto);
+        final var dbo = mapper.mapToDbo(dto);
         return save(dbo);
     }
 
@@ -28,7 +28,7 @@ public class AbstractService<Dbo extends AbstractDbo, Dto extends AbstractDto> {
 
     @Transactional
     public Dto get(final Long id) {
-        return converter.convertToDto(repository.getReferenceById(id));
+        return mapper.mapToDto(repository.getReferenceById(id));
     }
 
     @Transactional
@@ -38,12 +38,12 @@ public class AbstractService<Dbo extends AbstractDbo, Dto extends AbstractDto> {
     }
 
     @SuppressWarnings("unused")
-    public Dbo convertToDbo(final Dto dto) {
-        return converter.convertToDbo(dto);
+    public Dbo mapToDbo(final Dto dto) {
+        return mapper.mapToDbo(dto);
     }
 
-    public Dto convertToDto(final Dbo dbo) {
-        return converter.convertToDto(dbo);
+    public Dto mapToDto(final Dbo dbo) {
+        return mapper.mapToDto(dbo);
     }
 
     @Transactional
@@ -55,7 +55,7 @@ public class AbstractService<Dbo extends AbstractDbo, Dto extends AbstractDto> {
     @SuppressWarnings("unused")
     public List<Dto> findAll() {
         final var all = repository.findAll();
-        return converter.convertToDto(all);
+        return mapper.mapToDto(all);
     }
 
     @Transactional
