@@ -1,15 +1,16 @@
 package by.gp.clinic.dbo;
 
-import lombok.Data;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "doctor")
 @EqualsAndHashCode(callSuper = true)
@@ -22,8 +23,8 @@ public class DoctorDbo extends ManDbo {
     private String specialIdentifier;
 
     public static DoctorDbo buildEmptyWithId(final Long id) {
-        final DoctorDbo patient = new DoctorDbo();
-        patient.setId(id);
-        return patient;
+        final var doctor = new DoctorDbo();
+        doctor.setId(id);
+        return doctor;
     }
 }

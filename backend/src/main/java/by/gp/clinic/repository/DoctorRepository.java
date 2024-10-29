@@ -2,9 +2,10 @@ package by.gp.clinic.repository;
 
 import by.gp.clinic.dbo.DoctorDbo;
 import by.gp.clinic.dbo.SpecialityDbo;
-import java.util.Optional;
-import javax.transaction.Transactional;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.Query;
+
+import java.util.Optional;
 
 @Transactional
 public interface DoctorRepository extends NamedRepository<DoctorDbo, Long> {

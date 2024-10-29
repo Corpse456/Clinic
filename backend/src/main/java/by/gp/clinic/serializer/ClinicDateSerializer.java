@@ -16,8 +16,8 @@ public class ClinicDateSerializer extends JsonSerializer<LocalDate> {
     @Override
     public void serialize(final LocalDate value, final JsonGenerator gen, final SerializerProvider serializers)
         throws IOException {
-        final Date date = Date.valueOf(value);
-        final String formattedDate = new SimpleDateFormat(DATE_PATTERN).format(date);
+        final var date = Date.valueOf(value);
+        final var formattedDate = new SimpleDateFormat(DATE_PATTERN).format(date);
         gen.writeString(formattedDate);
     }
 }

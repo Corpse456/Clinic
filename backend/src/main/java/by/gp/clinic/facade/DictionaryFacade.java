@@ -22,7 +22,7 @@ public class DictionaryFacade {
     private final MessagesService messagesService;
 
     public DictionaryDto buildDictionaryData() {
-        final DictionaryDto dictionary = new DictionaryDto();
+        final var dictionary = new DictionaryDto();
         dictionary.setGenders(buildSimpleDictionaries(Gender.class));
         dictionary.setShiftOrders(buildSimpleDictionaries(ShiftOrder.class));
         dictionary.setSpecialities(specialityService.findAll());
@@ -38,7 +38,7 @@ public class DictionaryFacade {
 
     private <EnumType extends Enum<EnumType>>
     DictionaryEntryDto<EnumType> buildSimpleDictionaryEntry(final Enum<EnumType> enumElement) {
-        final String localizedValue = messagesService.get(enumElement);
+        final var localizedValue = messagesService.get(enumElement);
         return new DictionaryEntryDto<>(enumElement, localizedValue);
     }
 }

@@ -3,7 +3,6 @@ package by.gp.clinic.converter;
 import by.gp.clinic.dbo.DoctorDbo;
 import by.gp.clinic.dbo.SpecialDoctorShiftDbo;
 import by.gp.clinic.dbo.SpecialityDbo;
-import by.gp.clinic.dto.ShiftTimingDto;
 import by.gp.clinic.dto.SpecialDoctorShiftDto;
 import by.gp.clinic.service.ShiftTimingService;
 import lombok.RequiredArgsConstructor;
@@ -50,7 +49,7 @@ public class SpecialDoctorShiftDboDtoConverter
         if (sourceDto.getDoctorId() != null) {
             targetDbo.setDoctor(DoctorDbo.buildEmptyWithId(sourceDto.getDoctorId()));
         }
-        final ShiftTimingDto shiftTiming = sourceDto.getShiftTiming();
+        final var shiftTiming = sourceDto.getShiftTiming();
         targetDbo.setShiftTiming(shiftTimingService.getShiftTimingDboOrCreate(shiftTiming.getStartTime(),
                                                                               shiftTiming.getEndTime(),
                                                                               shiftTiming.getShiftOrder()));

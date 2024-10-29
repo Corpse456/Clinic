@@ -4,15 +4,13 @@ import by.gp.clinic.converter.AbstractDboDtoConverter;
 import by.gp.clinic.dbo.AbstractDbo;
 import by.gp.clinic.dto.AbstractDto;
 import by.gp.clinic.dto.PageDto;
+import by.gp.clinic.factory.predicateFactory.AbstractSearchRequestPredicateFactory;
 import by.gp.clinic.repository.CustomRepository;
 import by.gp.clinic.search.OffsetLimitRequest;
 import by.gp.clinic.search.PageableSearchRequest;
-import by.gp.clinic.factory.predicateFactory.AbstractSearchRequestPredicateFactory;
-import com.querydsl.core.types.Predicate;
 import org.springframework.data.domain.Page;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public abstract class AbstractSearchService<Dbo extends AbstractDbo, Dto extends AbstractDto, T extends PageableSearchRequest>
@@ -30,9 +28,9 @@ public abstract class AbstractSearchService<Dbo extends AbstractDbo, Dto extends
 
     @Transactional
     public PageDto<Dto> search(final T searchRequest) {
-        final Page<Dbo> page = searchDbo(searchRequest);
+        final var page = searchDbo(searchRequest);
 
-        final PageDto<Dto> pageDto = new PageDto<>();
+        final var pageDto = new PageDto<Dto>();
         pageDto.setTotalCount(page.getTotalElements());
         pageDto.setElements(converter.convertToDto(page.getContent(), Collectors.toList()));
 
@@ -41,8 +39,8 @@ public abstract class AbstractSearchService<Dbo extends AbstractDbo, Dto extends
 
     @Transactional
     public Page<Dbo> searchDbo(final T searchRequest) {
-        final OffsetLimitRequest offsetLimitRequest = new OffsetLimitRequest(searchRequest);
-        final Optional<Predicate> optionalPredicate = predicateFactory.build(searchRequest);
+        final var offsetLimitRequest = new OffsetLimitRequest(searchRequest);
+        final var optionalPredicate = predicateFactory.build(searchRequest);
 
         return optionalPredicate
             .map(predicate -> repository.findAll(predicate, offsetLimitRequest))

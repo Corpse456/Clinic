@@ -30,12 +30,12 @@ public class SpecialityService extends AbstractService<SpecialityDbo, Speciality
 
     @Override
     public List<SpecialityDto> findAll() {
-        final ImmutableCollection<SpecialityDto> allFromCache = getAllFromCache();
+        final var allFromCache = getAllFromCache();
         if (!Collections.isEmpty(allFromCache)) {
             return new ArrayList<>(allFromCache);
         }
 
-        final List<SpecialityDto> all = super.findAll();
+        final var all = super.findAll();
         all.forEach(speciality -> cache.put(speciality.getId(), speciality));
         return all;
     }

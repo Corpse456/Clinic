@@ -22,7 +22,7 @@ public class DoctorShiftFacade {
     private final DoctorShiftService doctorShiftService;
 
     public Map<LocalDate, ShiftTimingDto> getDoctorShift(final Long id) {
-        final DoctorShiftSearchRequest searchRequest = new DoctorShiftSearchRequest();
+        final var searchRequest = new DoctorShiftSearchRequest();
         searchRequest.setDoctorId(id);
 
         return doctorShiftService.search(searchRequest).getElements().stream()

@@ -1,7 +1,5 @@
 package by.gp.clinic.service.schedule;
 
-import by.gp.clinic.dbo.DoctorDbo;
-import by.gp.clinic.dbo.ShiftTimingDbo;
 import by.gp.clinic.service.DoctorService;
 import by.gp.clinic.service.DoctorShiftService;
 import by.gp.clinic.service.SpecialDoctorShiftService;
@@ -9,10 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-
-import java.time.DayOfWeek;
-import java.util.List;
-import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -26,10 +20,10 @@ public class TimeTableCreatingService implements WeeklyExecutable {
 
     @Override
     public void execute() {
-        final List<DoctorDbo> allDoctors = doctorService.findAllDbo();
+        final var allDoctors = doctorService.findAllDbo();
         allDoctors.forEach(d -> {
             try {
-                final Map<DayOfWeek, ShiftTimingDbo> specialShifts =
+                final var specialShifts =
                     specialDoctorShiftService.getSpecialShifts(d.getId(), d.getSpeciality().getId());
                 doctorShiftService.createTimeTableForWeekAfterNextWeek(d, specialShifts);
             } catch (final Exception e) {

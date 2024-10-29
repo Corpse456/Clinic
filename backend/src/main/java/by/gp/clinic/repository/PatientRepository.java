@@ -1,8 +1,8 @@
 package by.gp.clinic.repository;
 
 import by.gp.clinic.dbo.PatientDbo;
+import jakarta.transaction.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Transactional

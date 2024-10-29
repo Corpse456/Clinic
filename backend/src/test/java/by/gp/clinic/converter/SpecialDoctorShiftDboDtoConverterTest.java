@@ -4,10 +4,10 @@ import by.gp.clinic.AbstractSpringMvcTest;
 import by.gp.clinic.dbo.SpecialDoctorShiftDbo;
 import by.gp.clinic.dto.SpecialDoctorShiftDto;
 import by.gp.clinic.mock.SpecialDoctorShiftMock;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SpecialDoctorShiftDboDtoConverterTest extends AbstractSpringMvcTest {
 
@@ -35,20 +35,20 @@ public class SpecialDoctorShiftDboDtoConverterTest extends AbstractSpringMvcTest
     }
 
     private void covertToDbo(final SpecialDoctorShiftDto dto) {
-        final SpecialDoctorShiftDbo dbo = converter.convertToDbo(dto);
+        final var dbo = converter.convertToDbo(dto);
 
         assertEquals(dto.getId(), dbo.getId());
-        assertEquals(dto.getDay(), dbo.getDay());
+        assertEquals(dto.getWeekDay(), dbo.getWeekDay());
         if (dbo.getDoctor() != null) {
             assertEquals(dto.getDoctorId(), dbo.getDoctor().getId());
         }
     }
 
     private void convertToDbo(final SpecialDoctorShiftDbo dbo) {
-        final SpecialDoctorShiftDto dto = converter.convertToDto(dbo);
+        final var dto = converter.convertToDto(dbo);
 
         assertEquals(dbo.getId(), dto.getId());
-        assertEquals(dbo.getDay(), dto.getDay());
+        assertEquals(dbo.getWeekDay(), dto.getWeekDay());
         if (dbo.getDoctor() != null) {
             assertEquals(dbo.getDoctor().getId(), dto.getDoctorId());
         }

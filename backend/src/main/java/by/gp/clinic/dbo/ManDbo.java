@@ -1,15 +1,17 @@
 package by.gp.clinic.dbo;
 
 import by.gp.clinic.enumerated.Gender;
-import lombok.Data;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.MappedSuperclass;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.MappedSuperclass;
 import java.time.LocalDate;
 
-@Data
+@Getter
+@Setter
 @MappedSuperclass
 @EqualsAndHashCode(callSuper = true)
 public class ManDbo extends AbstractDbo {

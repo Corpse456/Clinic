@@ -2,8 +2,7 @@ package by.gp.clinic.validation;
 
 import by.gp.clinic.annotation.SpecialDoctorShift;
 import by.gp.clinic.dto.SpecialDoctorShiftDto;
-
-import javax.validation.ConstraintValidatorContext;
+import jakarta.validation.ConstraintValidatorContext;
 
 import static by.gp.clinic.util.ValidationUtils.addMessageToContext;
 
@@ -13,7 +12,7 @@ public class SpecialDoctorShiftValidator extends AbstractValidator<SpecialDoctor
 
     @Override
     protected boolean checkValid(final SpecialDoctorShiftDto value, final ConstraintValidatorContext context) {
-        boolean valid = true;
+        var valid = true;
 
         if (value.getDoctorId() == null && value.getSpecialityId() == null) {
             addMessageToContext("doctorId", SpecialDoctorShiftValidator.MESSAGE, context);

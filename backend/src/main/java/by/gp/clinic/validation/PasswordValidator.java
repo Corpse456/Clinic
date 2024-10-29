@@ -1,8 +1,7 @@
 package by.gp.clinic.validation;
 
 import by.gp.clinic.annotation.Password;
-
-import javax.validation.ConstraintValidatorContext;
+import jakarta.validation.ConstraintValidatorContext;
 
 import static by.gp.clinic.util.ValidationUtils.addMessageToContext;
 
@@ -13,7 +12,7 @@ public class PasswordValidator extends AbstractValidator<Password, String> {
 
     @Override
     protected boolean checkValid(final String value, final ConstraintValidatorContext context) {
-        boolean valid = true;
+        var valid = true;
         if (!value.matches(".*\\d.*")) {
             addMessageToContext(getClassName() + " must contains at least one digit", context);
             valid = false;

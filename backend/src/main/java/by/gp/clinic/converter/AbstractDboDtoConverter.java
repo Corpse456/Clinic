@@ -20,7 +20,7 @@ public abstract class AbstractDboDtoConverter<Dbo, Dto> {
             return null;
         }
 
-        final Dto dto = constructDto();
+        final var dto = constructDto();
 
         BeanUtils.copyProperties(dbo, dto, ignoreProperties);
 
@@ -33,7 +33,7 @@ public abstract class AbstractDboDtoConverter<Dbo, Dto> {
             return null;
         }
 
-        final Dbo dbo = constructDbo();
+        final var dbo = constructDbo();
 
         BeanUtils.copyProperties(dto, dbo, ignoreProperties);
 

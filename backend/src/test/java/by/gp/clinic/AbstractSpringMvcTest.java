@@ -4,25 +4,25 @@ import by.gp.clinic.dto.PageDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.transaction.Transactional;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.Before;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.web.context.WebApplicationContext;
 
-import javax.transaction.Transactional;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 import static java.util.Objects.requireNonNull;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -30,7 +30,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = ClinicApplication.class)
 @ActiveProfiles("test")
 @Transactional
@@ -43,7 +43,7 @@ public abstract class AbstractSpringMvcTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    @Before
+    @BeforeEach
     public void before() {
         mockMvc = webAppContextSetup(webApplicationContext).build();
     }
@@ -59,6 +59,7 @@ public abstract class AbstractSpringMvcTest {
         }
     }
 
+    @SuppressWarnings({"UnusedReturnValue", "SameParameterValue"})
     protected MvcResult postQuery(final String url) {
         try {
             return mockMvc.perform(post(url)).andDo(MockMvcResultHandlers.print()).andReturn();
@@ -68,6 +69,7 @@ public abstract class AbstractSpringMvcTest {
         }
     }
 
+    @SuppressWarnings("unused")
     protected MvcResult patchQuery(final String url, final Object object) {
         try {
             return mockMvc.perform(patch(url)

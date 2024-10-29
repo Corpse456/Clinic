@@ -3,12 +3,13 @@ package by.gp.clinic.repository;
 import by.gp.clinic.dbo.DoctorShiftDbo;
 import by.gp.clinic.dbo.ShiftTimingDbo;
 import by.gp.clinic.enumerated.ShiftOrder;
+import jakarta.transaction.Transactional;
+import org.springframework.data.jpa.repository.Query;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
-import javax.transaction.Transactional;
-import org.springframework.data.jpa.repository.Query;
 
 @Transactional
 public interface DoctorShiftRepository extends CustomRepository<DoctorShiftDbo, Long> {
@@ -16,7 +17,7 @@ public interface DoctorShiftRepository extends CustomRepository<DoctorShiftDbo, 
   @Query("select shift.shiftOrder "
       + "from DoctorShiftDbo s "
       + "join fetch ShiftTimingDbo shift on s.shiftTiming.id = shift.id "
-      + "join fetch DoctorDbo d on s.doctor.id = d.id "
+      + "join fetch DoctorDbo d on s.doctor.id= d.id "
       + "where s.date = ?1 "
       + "and d.speciality.id = ?2")
   List<ShiftOrder> findShiftOrdersByDateAndSpeciality(final LocalDate date, final Long specialityId);

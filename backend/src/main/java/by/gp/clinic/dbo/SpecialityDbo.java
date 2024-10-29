@@ -1,12 +1,13 @@
 package by.gp.clinic.dbo;
 
-import lombok.Data;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "speciality")
 @EqualsAndHashCode(callSuper = true)
@@ -15,7 +16,7 @@ public class SpecialityDbo extends AbstractDbo {
     private String name;
 
     public static SpecialityDbo buildEmptyWithId(final Long id) {
-        final SpecialityDbo speciality = new SpecialityDbo();
+        final var speciality = new SpecialityDbo();
         speciality.setId(id);
         return speciality;
     }

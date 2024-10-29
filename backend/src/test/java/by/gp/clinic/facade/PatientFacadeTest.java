@@ -4,17 +4,18 @@ import by.gp.clinic.dto.PatientDto;
 import by.gp.clinic.exception.PatientExistsException;
 import by.gp.clinic.exception.PatientNotExistsException;
 import by.gp.clinic.service.PatientService;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.doReturn;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class PatientFacadeTest {
 
     @InjectMocks
@@ -23,24 +24,30 @@ public class PatientFacadeTest {
     @Mock
     private PatientService patientService;
 
-    @Test(expected = PatientExistsException.class)
-    public void hirePatient() throws PatientExistsException {
-        doReturn(true).when(patientService).isExistsByNameAndLastName(any(), any());
+    @Test
+    public void hirePatient() {
+        assertThrows(PatientExistsException.class, () -> {
+            doReturn(true).when(patientService).isExistsByNameAndLastName(any(), any());
 
-        patientFacade.createPatient(new PatientDto());
+            patientFacade.createPatient(new PatientDto());
+        });
     }
 
-    @Test(expected = PatientNotExistsException.class)
-    public void firePatient() throws PatientNotExistsException {
-        doReturn(false).when(patientService).isExists(anyLong());
+    @Test
+    public void firePatient() {
+        assertThrows(PatientNotExistsException.class, () -> {
+            doReturn(false).when(patientService).isExists(anyLong());
 
-        patientFacade.removePatient(1L);
+            patientFacade.removePatient(1L);
+        });
     }
 
-    @Test(expected = PatientNotExistsException.class)
-    public void getPatient() throws PatientNotExistsException {
-        doReturn(false).when(patientService).isExists(anyLong());
+    @Test
+    public void getPatient() {
+        assertThrows(PatientNotExistsException.class, () -> {
+            doReturn(false).when(patientService).isExists(anyLong());
 
-        patientFacade.getPatient(1L);
+            patientFacade.getPatient(1L);
+        });
     }
 }

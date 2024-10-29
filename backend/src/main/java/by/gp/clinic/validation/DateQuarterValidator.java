@@ -1,11 +1,10 @@
 package by.gp.clinic.validation;
 
 import by.gp.clinic.annotation.DateQuarter;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Value;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
 import java.time.LocalDateTime;
 
 public class DateQuarterValidator implements ConstraintValidator<DateQuarter, LocalDateTime> {

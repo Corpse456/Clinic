@@ -3,7 +3,6 @@ package by.gp.clinic.converter;
 import by.gp.clinic.dbo.DoctorDbo;
 import by.gp.clinic.dbo.DoctorShiftDbo;
 import by.gp.clinic.dto.DoctorShiftDto;
-import by.gp.clinic.dto.ShiftTimingDto;
 import by.gp.clinic.service.ShiftTimingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -40,7 +39,7 @@ public class DoctorShiftDboDtoConverter extends AbstractDboDtoConverter<DoctorSh
     protected void convertComplexFieldsForDbo(final DoctorShiftDto sourceDto, final DoctorShiftDbo targetDbo) {
         targetDbo.setDoctor(DoctorDbo.buildEmptyWithId(sourceDto.getDoctorId()));
 
-        final ShiftTimingDto shiftTiming = sourceDto.getShiftTiming();
+        final var shiftTiming = sourceDto.getShiftTiming();
         targetDbo.setShiftTiming(shiftTimingService.getShiftTimingDboOrCreate(shiftTiming.getStartTime(),
                                                                               shiftTiming.getEndTime(),
                                                                               shiftTiming.getShiftOrder()));

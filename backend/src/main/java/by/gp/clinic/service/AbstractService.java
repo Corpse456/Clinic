@@ -17,7 +17,7 @@ public class AbstractService<Dbo extends AbstractDbo, Dto extends AbstractDto> {
 
     @Transactional
     public Dbo post(final Dto dto) {
-        final Dbo dbo = converter.convertToDbo(dto);
+        final var dbo = converter.convertToDbo(dto);
         return save(dbo);
     }
 
@@ -28,14 +28,16 @@ public class AbstractService<Dbo extends AbstractDbo, Dto extends AbstractDto> {
 
     @Transactional
     public Dto get(final Long id) {
-        return converter.convertToDto(repository.getOne(id));
+        return converter.convertToDto(repository.getReferenceById(id));
     }
 
     @Transactional
+    @SuppressWarnings("unused")
     public Dbo getDbo(final Long id) {
-        return repository.getOne(id);
+        return repository.getReferenceById(id);
     }
 
+    @SuppressWarnings("unused")
     public Dbo convertToDbo(final Dto dto) {
         return converter.convertToDbo(dto);
     }
@@ -50,8 +52,9 @@ public class AbstractService<Dbo extends AbstractDbo, Dto extends AbstractDto> {
     }
 
     @Transactional
+    @SuppressWarnings("unused")
     public List<Dto> findAll() {
-        final List<Dbo> all = repository.findAll();
+        final var all = repository.findAll();
         return converter.convertToDto(all);
     }
 

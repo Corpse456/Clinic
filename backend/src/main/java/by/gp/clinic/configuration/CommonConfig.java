@@ -28,7 +28,7 @@ public class CommonConfig {
 
     @Bean
     public ResourceBundleMessageSource messageSourceResourceBundle() {
-        final ResourceBundleMessageSource messageSourceResourceBundle = new ResourceBundleMessageSource();
+        final var messageSourceResourceBundle = new ResourceBundleMessageSource();
         messageSourceResourceBundle.setBasenames("properties/enum");
         return messageSourceResourceBundle;
     }
@@ -36,9 +36,9 @@ public class CommonConfig {
     @Bean
     @Primary
     public Jackson2ObjectMapperBuilder objectMapperBuilder() {
-        Jackson2ObjectMapperBuilder builder = new Jackson2ObjectMapperBuilder();
+        var builder = new Jackson2ObjectMapperBuilder();
         builder.simpleDateFormat(ClinicDateTimeSerializer.DATE_TIME_PATTERN);
-        final SimpleModule simpleModule = new SimpleModule();
+        final var simpleModule = new SimpleModule();
         simpleModule.addSerializer(LocalDate.class, new ClinicDateSerializer());
         simpleModule.addSerializer(LocalDateTime.class, new ClinicDateTimeSerializer());
         simpleModule.addDeserializer(LocalDate.class, new ClinicDateDeserializer());

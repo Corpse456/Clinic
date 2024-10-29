@@ -2,7 +2,6 @@ package by.gp.clinic.controller;
 
 import by.gp.clinic.dbo.AbstractDbo;
 import by.gp.clinic.dto.AbstractDto;
-import by.gp.clinic.dto.CredentialsDto;
 import by.gp.clinic.dto.PageDto;
 import by.gp.clinic.dto.UserDto;
 import by.gp.clinic.mock.CredentialsMock;
@@ -11,11 +10,10 @@ import by.gp.clinic.repository.CustomRepository;
 import by.gp.clinic.repository.UserRepository;
 import by.gp.clinic.search.UserSearchRequest;
 import com.fasterxml.jackson.core.type.TypeReference;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.web.servlet.MvcResult;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class UserControllerTest extends AbstractControllerTest {
 
@@ -35,7 +33,7 @@ public class UserControllerTest extends AbstractControllerTest {
 
     @Test
     public void createUserPatientTwiceTest() {
-        final CredentialsDto credentials = CredentialsMock.getCredentialsPatientDtoMock();
+        final var credentials = CredentialsMock.getCredentialsPatientDtoMock();
         addEntity(credentials, "/public" + getUrl());
         addEntityWithStatus(credentials, 400, "User Alias already exists", "/public" + getUrl());
     }
@@ -57,7 +55,7 @@ public class UserControllerTest extends AbstractControllerTest {
 
     @Test
     public void getUserNotExistsTest() {
-        final MvcResult result = getQuery(getUrl() + "/" + NOT_EXISTS_ID);
+        final var result = getQuery(getUrl() + "/" + NOT_EXISTS_ID);
         assertEquals(404, result.getResponse().getStatus());
     }
 

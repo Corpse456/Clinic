@@ -27,7 +27,7 @@ public class CredentialsMock {
     }
 
     private static CredentialsDto getCredentials(final String name, final String lastName, final String specialId) {
-        final CredentialsDto credentials = new CredentialsDto();
+        final var credentials = new CredentialsDto();
 
         credentials.setAlias(ALIAS);
         credentials.setName(name);

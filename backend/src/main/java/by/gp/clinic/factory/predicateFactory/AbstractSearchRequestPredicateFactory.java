@@ -8,18 +8,18 @@ import com.querydsl.core.types.dsl.DateTimePath;
 import com.querydsl.core.types.dsl.EnumPath;
 import com.querydsl.core.types.dsl.NumberPath;
 import com.querydsl.core.types.dsl.StringPath;
+import io.micrometer.common.util.StringUtils;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
-
-import static liquibase.util.StringUtils.isNotEmpty;
 
 public abstract class AbstractSearchRequestPredicateFactory<T extends PageableSearchRequest> {
 
     private BooleanBuilder booleanBuilder;
 
     public Optional<Predicate> build(T searchRequest) {
+
         booleanBuilder = new BooleanBuilder();
         buildPredicates(searchRequest);
         return Optional.ofNullable(booleanBuilder.getValue());
@@ -27,8 +27,9 @@ public abstract class AbstractSearchRequestPredicateFactory<T extends PageableSe
 
     abstract void buildPredicates(final T searchRequest);
 
+    @SuppressWarnings("unused")
     void addExpression(final StringPath field, final String value) {
-        if (isNotEmpty(value)) {
+        if (StringUtils.isNotEmpty(value)) {
             booleanBuilder.and(field.containsIgnoreCase(value));
         }
     }

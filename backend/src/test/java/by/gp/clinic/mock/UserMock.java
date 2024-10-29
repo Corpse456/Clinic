@@ -11,7 +11,7 @@ public class UserMock {
     private static final UserRole USER = UserRole.USER;
 
     public static UserDto getUserPatientDtoMock() {
-        final UserDto user = new UserDto();
+        final var user = new UserDto();
 
         user.setAlias(ALIAS);
         user.setName(NAME);

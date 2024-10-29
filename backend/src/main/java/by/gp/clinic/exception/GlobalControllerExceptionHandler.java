@@ -3,6 +3,7 @@ package by.gp.clinic.exception;
 import by.gp.clinic.dto.ConstraintViolationDto;
 import by.gp.clinic.dto.HttpExceptionAnswerDto;
 import by.gp.clinic.factory.ConstraintViolationMessageFactory;
+import jakarta.validation.ConstraintViolationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import javax.validation.ConstraintViolationException;
 import java.util.List;
 
 @ControllerAdvice

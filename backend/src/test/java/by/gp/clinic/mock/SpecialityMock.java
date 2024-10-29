@@ -9,14 +9,14 @@ public class SpecialityMock {
     private static final long ID = 1L;
 
     public static SpecialityDto getSpecialityDtoMock() {
-        final SpecialityDto speciality = new SpecialityDto();
+        final var speciality = new SpecialityDto();
         speciality.setId(ID);
         speciality.setName(NAME);
         return speciality;
     }
 
     public static SpecialityDbo getSpecialityDboMock() {
-        final SpecialityDbo speciality = new SpecialityDbo();
+        final var speciality = new SpecialityDbo();
         speciality.setId(ID);
         speciality.setName(NAME);
         return speciality;

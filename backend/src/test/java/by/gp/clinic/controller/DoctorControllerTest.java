@@ -6,12 +6,14 @@ import by.gp.clinic.dto.PageDto;
 import by.gp.clinic.repository.DoctorRepository;
 import by.gp.clinic.search.DoctorSearchRequest;
 import com.fasterxml.jackson.core.type.TypeReference;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static by.gp.clinic.mock.DoctorMock.getDoctorDtoMock;
 
 public class DoctorControllerTest extends AbstractControllerTest {
+
+    private static final String DOCTOR_URL = "/doctor";
 
     @Autowired
     private DoctorRepository doctorRepository;
@@ -28,13 +30,12 @@ public class DoctorControllerTest extends AbstractControllerTest {
 
     @Test
     public void removeDoctorTest() {
-        removeEntityTest(1L);
+        removeEntityTest(2L);
     }
 
     @Test
     public void findDoctorsTest() {
-        findEntitiesTest(new DoctorSearchRequest(), new TypeReference<PageDto<DoctorDto>>() {
-        });
+        findEntitiesTest(new DoctorSearchRequest(), new TypeReference<PageDto<DoctorDto>>() {});
     }
 
     @Override
@@ -49,6 +50,6 @@ public class DoctorControllerTest extends AbstractControllerTest {
 
     @Override
     protected String getUrl() {
-        return "/doctor";
+        return DOCTOR_URL;
     }
 }

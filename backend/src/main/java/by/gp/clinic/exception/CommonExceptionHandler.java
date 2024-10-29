@@ -16,24 +16,24 @@ public class CommonExceptionHandler {
     public ResponseEntity<String> handleCommonException(final Exception ex) {
         ex.printStackTrace();
 
-        final StringBuilder stringBuilder = new StringBuilder();
+        final var stringBuilder = new StringBuilder();
         appendException(stringBuilder, ex);
 
         return commonExceptionResponse(stringBuilder.toString());
     }
 
     private void appendException(final StringBuilder stringBuilder, final Throwable ex) {
-        final StackTraceElement[] stackTrace = ex.getStackTrace();
+        final var stackTrace = ex.getStackTrace();
 
-        final int max = 10;
-        final int limit = stackTrace.length > max ? stackTrace.length : max;
+        final var max = 10;
+        final var limit = Math.max(stackTrace.length, max);
 
-        stringBuilder.append(ex.toString());
+        stringBuilder.append(ex);
         stringBuilder.append(System.lineSeparator());
         stringBuilder.append(System.lineSeparator());
 
         Arrays.stream(stackTrace)
-            .limit(limit)
+            .limit((long) limit)
             .forEach(stackTraceElement -> {
                 stringBuilder.append(stackTraceElement.toString());
                 stringBuilder.append(System.lineSeparator());

@@ -16,23 +16,23 @@ public class DoctorMock {
     private static final LocalDate BIRTH_DATE = LocalDate.now().minusYears(18);
 
     public static ArrayList<DoctorDto> getListDoctorDtoMock() {
-        final ArrayList<DoctorDto> doctors = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        final var doctors = new ArrayList<DoctorDto>();
+        for (var i = 0; i < 10; i++) {
             doctors.add(getDoctorDtoMock());
         }
         return doctors;
     }
 
     public static ArrayList<DoctorDbo> getListDoctorDboMock() {
-        final ArrayList<DoctorDbo> doctors = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        final var doctors = new ArrayList<DoctorDbo>();
+        for (var i = 0; i < 10; i++) {
             doctors.add(getDoctorDboMock());
         }
         return doctors;
     }
 
     public static DoctorDto getDoctorDtoMock() {
-        final DoctorDto doctor = new DoctorDto();
+        final var doctor = new DoctorDto();
         doctor.setSpecialityId(SpecialityMock.getSpecialityDtoMock().getId());
         doctor.setBirthDate(BIRTH_DATE);
         doctor.setGender(GENDER);
@@ -42,7 +42,7 @@ public class DoctorMock {
     }
 
     public static DoctorDbo getDoctorDboMock() {
-        final DoctorDbo doctor = new DoctorDbo();
+        final var doctor = new DoctorDbo();
         doctor.setSpeciality(SpecialityMock.getSpecialityDboMock());
         doctor.setBirthDate(BIRTH_DATE);
         doctor.setGender(GENDER);

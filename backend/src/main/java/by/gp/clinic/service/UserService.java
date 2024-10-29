@@ -32,7 +32,7 @@ public class UserService extends AbstractSearchService<UserDbo, UserDto, UserSea
 
     @Override
     public UserDbo save(final UserDbo dbo) {
-        final UserDbo savedUser = super.save(dbo);
+        final var savedUser = super.save(dbo);
         cache.put(savedUser.getId(), convertToDto(savedUser));
         return savedUser;
     }
@@ -40,7 +40,7 @@ public class UserService extends AbstractSearchService<UserDbo, UserDto, UserSea
     @Override
     public UserDto get(final Long id) {
         return getFromCache(id).orElseGet(() -> {
-            final UserDto userDto = super.get(id);
+            final var userDto = super.get(id);
             cache.put(id, userDto);
             return userDto;
         });
@@ -51,7 +51,7 @@ public class UserService extends AbstractSearchService<UserDbo, UserDto, UserSea
     }
 
     public boolean isExists(final Long id) {
-        final UserDto user = cache.getIfPresent(id);
+        final var user = cache.getIfPresent(id);
         if (user != null) {
             return true;
         }

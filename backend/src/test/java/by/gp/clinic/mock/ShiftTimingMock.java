@@ -22,7 +22,7 @@ public class ShiftTimingMock {
     }
 
     private static ShiftTimingDto getShiftTimingDto(final LocalTime startTime, final LocalTime endTime) {
-        final ShiftTimingDto shiftTiming = new ShiftTimingDto();
+        final var shiftTiming = new ShiftTimingDto();
         shiftTiming.setId(1L);
         shiftTiming.setStartTime(startTime);
         shiftTiming.setEndTime(endTime);
@@ -35,7 +35,7 @@ public class ShiftTimingMock {
     }
 
     private static ShiftTimingDbo getShiftTimingDboMock(final LocalTime startTime, final LocalTime endTime) {
-        final ShiftTimingDbo shiftTiming = new ShiftTimingDbo();
+        final var shiftTiming = new ShiftTimingDbo();
         shiftTiming.setId(1L);
         shiftTiming.setStartTime(startTime);
         shiftTiming.setEndTime(endTime);

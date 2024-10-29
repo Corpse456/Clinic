@@ -4,10 +4,10 @@ import by.gp.clinic.AbstractSpringMvcTest;
 import by.gp.clinic.dbo.SpecialityDbo;
 import by.gp.clinic.dto.SpecialityDto;
 import by.gp.clinic.mock.SpecialityMock;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SpecialityDboDtoConverterTest extends AbstractSpringMvcTest {
 
@@ -25,12 +25,12 @@ public class SpecialityDboDtoConverterTest extends AbstractSpringMvcTest {
     }
 
     private void convertToDbo(final SpecialityDto dto) {
-        final SpecialityDbo dbo = converter.convertToDbo(dto);
+        final var dbo = converter.convertToDbo(dto);
         checkConverting(dto, dbo);
     }
 
     private void convertToDto(final SpecialityDbo dbo) {
-        final SpecialityDto dto = converter.convertToDto(dbo);
+        final var dto = converter.convertToDto(dbo);
         checkConverting(dto, dbo);
     }
 

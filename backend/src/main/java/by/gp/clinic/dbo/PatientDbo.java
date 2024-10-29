@@ -1,19 +1,20 @@
 package by.gp.clinic.dbo;
 
-import lombok.Data;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "patient")
 @EqualsAndHashCode(callSuper = true)
 public class PatientDbo extends ManDbo {
 
     public static PatientDbo buildEmptyWithId(final Long id) {
-        final PatientDbo patient = new PatientDbo();
+        final var patient = new PatientDbo();
         patient.setId(id);
         return patient;
     }

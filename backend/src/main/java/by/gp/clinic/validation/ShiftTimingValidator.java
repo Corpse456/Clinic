@@ -2,8 +2,7 @@ package by.gp.clinic.validation;
 
 import by.gp.clinic.annotation.ShiftTiming;
 import by.gp.clinic.dto.ShiftTimingDto;
-
-import javax.validation.ConstraintValidatorContext;
+import jakarta.validation.ConstraintValidatorContext;
 
 import static by.gp.clinic.util.ValidationUtils.addMessageToContext;
 
@@ -11,7 +10,7 @@ public class ShiftTimingValidator extends AbstractValidator<ShiftTiming, ShiftTi
 
     @Override
     protected boolean checkValid(final ShiftTimingDto value, final ConstraintValidatorContext context) {
-        boolean valid = true;
+        var valid = true;
 
         if (value.getEndTime().isBefore(value.getStartTime())) {
             addMessageToContext("startTime", "Start time must be before end time", context);

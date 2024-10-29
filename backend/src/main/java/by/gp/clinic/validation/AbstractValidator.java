@@ -1,7 +1,8 @@
 package by.gp.clinic.validation;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
+
 import java.lang.annotation.Annotation;
 
 import static by.gp.clinic.util.ValidationUtils.addMessageToContext;
@@ -16,7 +17,7 @@ public abstract class AbstractValidator<A extends Annotation, Dto> implements Co
             addMessageToContext(getClassName() + " must be not null", context);
             return false;
         }
-        boolean valid = checkNotNullFields(value, context);
+        var valid = checkNotNullFields(value, context);
 
         if (valid) {
             valid = checkValid(value, context);

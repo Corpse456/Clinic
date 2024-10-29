@@ -1,8 +1,8 @@
 package selenium;
 
 import net.bytebuddy.utility.RandomString;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.util.Random;
@@ -17,14 +17,14 @@ public class LoginTest extends AbstractUITest {
     private static final String SEX = new Random().nextBoolean() ? "Male" : "Female";
 
     @Test
-    @Ignore
+    @Disabled
     public void loginAsAdmin() {
         loginAsAdmin();
         logout();
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void createUser() {
         loginAsAdmin();
         createPatientLikeAdmin(FIRST_NAME, LAST_NAME, BIRTH_DATE, SEX);
@@ -32,7 +32,7 @@ public class LoginTest extends AbstractUITest {
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void sighUpAsUser() {
         loginAsAdmin();
         createPatientLikeAdmin(FIRST_NAME, LAST_NAME, BIRTH_DATE, SEX);
