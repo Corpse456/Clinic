@@ -1,11 +1,11 @@
 package by.gp.clinic.dto;
 
 import by.gp.clinic.enumerated.ShiftOrder;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-import jakarta.validation.constraints.NotNull;
 import java.time.LocalTime;
 
 @Data

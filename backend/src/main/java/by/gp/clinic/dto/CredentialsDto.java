@@ -1,9 +1,8 @@
 package by.gp.clinic.dto;
 
 import by.gp.clinic.annotation.Password;
-import lombok.Data;
-
 import jakarta.validation.constraints.NotNull;
+import lombok.Data;
 
 @Data
 public class CredentialsDto {

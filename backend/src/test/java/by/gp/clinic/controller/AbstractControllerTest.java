@@ -7,7 +7,6 @@ import by.gp.clinic.dto.PageDto;
 import by.gp.clinic.repository.CustomRepository;
 import by.gp.clinic.search.PageableSearchRequest;
 import com.fasterxml.jackson.core.type.TypeReference;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MvcResult;
 
 import java.util.HashMap;

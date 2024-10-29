@@ -12,11 +12,11 @@ import by.gp.clinic.service.DoctorService;
 import by.gp.clinic.service.DoctorShiftService;
 import by.gp.clinic.service.ShiftTimingService;
 import by.gp.clinic.service.SpecialDoctorShiftService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.stereotype.Service;
 
-import jakarta.transaction.Transactional;
 import java.time.LocalDate;
 
 import static java.time.DayOfWeek.MONDAY;

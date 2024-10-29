@@ -7,12 +7,12 @@ import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
 import io.micrometer.common.util.StringUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -20,7 +20,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
-import jakarta.transaction.Transactional;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -105,7 +104,7 @@ public class TokenAuthenticationService {
     }
 
     private static String encode(final String... fields) {
-        return TOKEN_PREFIX + " " + Jwts.builder()
+        return TOKEN_PREFIX + Jwts.builder()
                 .subject(String.join(":", fields))
                 .expiration(new Date(System.currentTimeMillis() + TokenAuthenticationService.EXPIRATION_TIME))
                 .signWith(KEY)

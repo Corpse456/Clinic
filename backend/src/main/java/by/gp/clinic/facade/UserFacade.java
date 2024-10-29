@@ -15,12 +15,11 @@ import by.gp.clinic.service.PatientService;
 import by.gp.clinic.service.TokenAuthenticationService;
 import by.gp.clinic.service.UserService;
 import io.micrometer.common.util.StringUtils;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import jakarta.transaction.Transactional;
 
 @Service
 @RequiredArgsConstructor

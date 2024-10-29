@@ -1,8 +1,8 @@
 package by.gp.clinic.facade;
 
 import by.gp.clinic.dto.PatientDto;
+import by.gp.clinic.exception.PatientExistsException;
 import by.gp.clinic.exception.PatientNotExistsException;
-import by.gp.clinic.exception.TicketAlreadyTakenException;
 import by.gp.clinic.service.PatientService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,7 +26,7 @@ public class PatientFacadeTest {
 
     @Test
     public void hirePatient() {
-        assertThrows(TicketAlreadyTakenException.class, () -> {
+        assertThrows(PatientExistsException.class, () -> {
             doReturn(true).when(patientService).isExistsByNameAndLastName(any(), any());
 
             patientFacade.createPatient(new PatientDto());

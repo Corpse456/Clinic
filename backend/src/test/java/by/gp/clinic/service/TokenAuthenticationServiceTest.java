@@ -5,7 +5,6 @@ import by.gp.clinic.repository.UserRepository;
 import by.gp.clinic.repository.VerificationTokenRepository;
 import com.google.common.cache.Cache;
 import io.jsonwebtoken.security.SignatureException;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -38,11 +37,6 @@ public class TokenAuthenticationServiceTest {
 
     @Mock
     private VerificationTokenRepository repository;
-
-    @BeforeEach
-    public void init() {
-        doReturn(1L).when(userRepository).getIdByAlias(ALIAS);
-    }
 
     @Test
     public void addAuthenticationTest() {
@@ -86,6 +80,7 @@ public class TokenAuthenticationServiceTest {
     }
 
     private String addAuthentication() {
+        doReturn(1L).when(userRepository).getIdByAlias(ALIAS);
         final var response = new MockHttpServletResponse();
         service.addAuthentication(response, ALIAS, "USER");
         final var token = response.getHeader(AUTHORIZATION);

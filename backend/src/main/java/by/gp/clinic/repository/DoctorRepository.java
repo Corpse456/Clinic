@@ -2,9 +2,9 @@ package by.gp.clinic.repository;
 
 import by.gp.clinic.dbo.DoctorDbo;
 import by.gp.clinic.dbo.SpecialityDbo;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.Query;
 
-import jakarta.transaction.Transactional;
 import java.util.Optional;
 
 @Transactional

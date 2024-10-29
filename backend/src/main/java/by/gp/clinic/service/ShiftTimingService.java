@@ -6,12 +6,12 @@ import by.gp.clinic.dto.ShiftTimingDto;
 import by.gp.clinic.enumerated.ShiftOrder;
 import by.gp.clinic.exception.ShiftTimingNotExistsException;
 import by.gp.clinic.repository.ShiftTimingRepository;
+import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import jakarta.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;

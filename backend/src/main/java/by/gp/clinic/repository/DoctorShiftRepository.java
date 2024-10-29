@@ -3,9 +3,9 @@ package by.gp.clinic.repository;
 import by.gp.clinic.dbo.DoctorShiftDbo;
 import by.gp.clinic.dbo.ShiftTimingDbo;
 import by.gp.clinic.enumerated.ShiftOrder;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.Query;
 
-import jakarta.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;

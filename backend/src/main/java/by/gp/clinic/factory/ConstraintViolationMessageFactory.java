@@ -1,12 +1,12 @@
 package by.gp.clinic.factory;
 
 import by.gp.clinic.dto.ConstraintViolationDto;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
-import jakarta.validation.ConstraintViolation;
-import jakarta.validation.ConstraintViolationException;
 import java.util.List;
 import java.util.stream.Collectors;
 

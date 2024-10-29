@@ -8,16 +8,15 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-import jakarta.validation.constraints.NotNull;
-
 @Getter
 @Setter
 @Entity
-@Table(name = "user")
+@Table(name = "\"user\"")
 @EqualsAndHashCode(callSuper = true)
 public class UserDbo extends AbstractDbo {
 
