@@ -1,10 +1,10 @@
 package by.gp.clinic.service;
 
-import by.gp.clinic.converter.AbstractDboDtoConverter;
 import by.gp.clinic.dbo.AbstractDbo;
 import by.gp.clinic.dto.AbstractDto;
 import by.gp.clinic.dto.PageDto;
 import by.gp.clinic.factory.predicateFactory.AbstractSearchRequestPredicateFactory;
+import by.gp.clinic.mapper.AbstractDboDtoMapper;
 import by.gp.clinic.repository.CustomRepository;
 import by.gp.clinic.search.OffsetLimitRequest;
 import by.gp.clinic.search.PageableSearchRequest;
@@ -19,9 +19,9 @@ public abstract class AbstractSearchService<Dbo extends AbstractDbo, Dto extends
     private final AbstractSearchRequestPredicateFactory<T> predicateFactory;
 
     AbstractSearchService(AbstractSearchRequestPredicateFactory<T> predicateFactory,
-                          final AbstractDboDtoConverter<Dbo, Dto> converter,
+                          final AbstractDboDtoMapper<Dbo, Dto> mapper,
                           final CustomRepository<Dbo, Long> repository) {
-        super(converter, repository);
+        super(mapper, repository);
         this.predicateFactory = predicateFactory;
     }
 
@@ -32,7 +32,7 @@ public abstract class AbstractSearchService<Dbo extends AbstractDbo, Dto extends
 
         final var pageDto = new PageDto<Dto>();
         pageDto.setTotalCount(page.getTotalElements());
-        pageDto.setElements(converter.convertToDto(page.getContent(), Collectors.toList()));
+        pageDto.setElements(mapper.mapToDto(page.getContent(), Collectors.toList()));
 
         return pageDto;
     }

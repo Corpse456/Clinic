@@ -46,8 +46,8 @@ public class UserController {
     @PostMapping(value = "/admin/user")
     @Operation(summary = "Create a new admin")
     public String createAdmin(@RequestBody @Validated CredentialsDto credentials) throws UserExistsException {
-        final var user = userFacade.createAdmin(credentials);
-        return new JSONObject().put("id", user.getId()).toString();
+        final var userId = userFacade.createAdmin(credentials);
+        return new JSONObject().put("id", userId).toString();
     }
 
     @GetMapping(value = "/user/{id}")

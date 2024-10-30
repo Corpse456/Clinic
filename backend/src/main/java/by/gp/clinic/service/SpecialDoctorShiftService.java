@@ -1,9 +1,9 @@
 package by.gp.clinic.service;
 
-import by.gp.clinic.converter.SpecialDoctorShiftDboDtoConverter;
 import by.gp.clinic.dbo.ShiftTimingDbo;
 import by.gp.clinic.dbo.SpecialDoctorShiftDbo;
 import by.gp.clinic.dto.SpecialDoctorShiftDto;
+import by.gp.clinic.mapper.SpecialDoctorShiftDboDtoMapper;
 import by.gp.clinic.repository.SpecialDoctorShiftRepository;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +16,9 @@ public class SpecialDoctorShiftService extends AbstractService<SpecialDoctorShif
 
     private final SpecialDoctorShiftRepository repository;
 
-    public SpecialDoctorShiftService(final SpecialDoctorShiftDboDtoConverter converter,
+    public SpecialDoctorShiftService(final SpecialDoctorShiftDboDtoMapper mapper,
                                      final SpecialDoctorShiftRepository repository) {
-        super(converter, repository);
+        super(mapper, repository);
         this.repository = repository;
     }
 

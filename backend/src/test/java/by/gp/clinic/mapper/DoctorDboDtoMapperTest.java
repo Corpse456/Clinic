@@ -1,4 +1,4 @@
-package by.gp.clinic.converter;
+package by.gp.clinic.mapper;
 
 import by.gp.clinic.AbstractSpringMvcTest;
 import by.gp.clinic.dbo.DoctorDbo;
@@ -13,39 +13,39 @@ import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class DoctorDboDtoConverterTest extends AbstractSpringMvcTest {
+public class DoctorDboDtoMapperTest extends AbstractSpringMvcTest {
 
     @Autowired
-    private DoctorDboDtoConverter converter;
+    private DoctorDboDtoMapper mapper;
 
     @Test
-    public void convertToDboTest() {
-        convertToDbo(DoctorMock.getDoctorDtoMock());
+    public void mapToDboTest() {
+        mapToDbo(DoctorMock.getDoctorDtoMock());
     }
 
     @Test
-    public void convertToDtoTest() {
-        convertToDto(DoctorMock.getDoctorDboMock());
+    public void mapToDtoTest() {
+        mapToDto(DoctorMock.getDoctorDboMock());
     }
 
     @Test
     public void convertListToDboTest() {
         final var dtoList = DoctorMock.getListDoctorDtoMock();
-        final var dboList = converter.convertToDbo(dtoList);
+        final var dboList = mapper.mapToDbo(dtoList);
         checkCollection(dtoList, dboList);
     }
 
     @Test
     public void convertListToDtoTest() {
         final var dboList = DoctorMock.getListDoctorDboMock();
-        final var dtoList = converter.convertToDto(dboList);
+        final var dtoList = mapper.mapToDto(dboList);
         checkCollection(dtoList, dboList);
     }
 
     @Test
     public void convertSetToDboTest() {
         final List<DoctorDto> dtoList = DoctorMock.getListDoctorDtoMock();
-        final var dboList = converter.convertToDbo(dtoList, Collectors.toSet());
+        final var dboList = mapper.mapToDbo(dtoList, Collectors.toSet());
 
         assertEquals(dtoList.size(), dboList.size());
     }
@@ -53,7 +53,7 @@ public class DoctorDboDtoConverterTest extends AbstractSpringMvcTest {
     @Test
     public void convertSetToSetDtoTest() {
         final List<DoctorDbo> dboList = DoctorMock.getListDoctorDboMock();
-        final var dtoList = converter.convertToDto(dboList, Collectors.toSet());
+        final var dtoList = mapper.mapToDto(dboList, Collectors.toSet());
 
         assertEquals(dboList.size(), dtoList.size());
     }
@@ -63,13 +63,13 @@ public class DoctorDboDtoConverterTest extends AbstractSpringMvcTest {
         dtoList.forEach(dto -> checkConverting(dto, dboIterator.next()));
     }
 
-    private void convertToDbo(final DoctorDto dto) {
-        final var dbo = converter.convertToDbo(dto);
+    private void mapToDbo(final DoctorDto dto) {
+        final var dbo = mapper.mapToDbo(dto);
         checkConverting(dto, dbo);
     }
 
-    private void convertToDto(final DoctorDbo dbo) {
-        final var dto = converter.convertToDto(dbo);
+    private void mapToDto(final DoctorDbo dbo) {
+        final var dto = mapper.mapToDto(dbo);
         checkConverting(dto, dbo);
     }
 

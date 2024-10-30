@@ -1,4 +1,4 @@
-package by.gp.clinic.converter;
+package by.gp.clinic.mapper;
 
 import by.gp.clinic.AbstractSpringMvcTest;
 import by.gp.clinic.mock.TicketMock;
@@ -7,15 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TicketDboDtoConverterTest extends AbstractSpringMvcTest {
+public class TicketDboDtoMapperTest extends AbstractSpringMvcTest {
 
     @Autowired
-    private TicketDboDtoConverter converter;
+    private TicketDboDtoMapper mapper;
 
     @Test
-    public void convertToDboTest() {
+    public void mapToDboTest() {
         final var dto = TicketMock.getTicketDtoMock();
-        final var dbo = converter.convertToDbo(dto);
+        final var dbo = mapper.mapToDbo(dto);
 
         assertEquals(dto.getId(), dbo.getId());
         assertEquals(dto.getNumber(), dbo.getNumber());
@@ -25,9 +25,9 @@ public class TicketDboDtoConverterTest extends AbstractSpringMvcTest {
     }
 
     @Test
-    public void convertToDtoTest() {
+    public void mapToDtoTest() {
         final var dbo = TicketMock.getTicketDboMock();
-        final var dto = converter.convertToDto(dbo);
+        final var dto = mapper.mapToDto(dbo);
 
         assertEquals(dbo.getId(), dto.getId());
         assertEquals(dbo.getNumber(), dto.getNumber());
