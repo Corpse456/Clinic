@@ -1,9 +1,9 @@
 package by.gp.clinic.service;
 
-import by.gp.clinic.mapper.DoctorDboDtoMapper;
 import by.gp.clinic.dbo.DoctorDbo;
 import by.gp.clinic.dto.DoctorDto;
 import by.gp.clinic.factory.predicateFactory.DoctorPredicateFactory;
+import by.gp.clinic.mapper.DoctorDboDtoMapper;
 import by.gp.clinic.repository.DoctorRepository;
 import by.gp.clinic.search.DoctorSearchRequest;
 import org.springframework.stereotype.Service;

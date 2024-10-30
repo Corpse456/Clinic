@@ -1,9 +1,9 @@
 package by.gp.clinic.service;
 
-import by.gp.clinic.mapper.TicketDboDtoMapper;
 import by.gp.clinic.dbo.TicketDbo;
 import by.gp.clinic.dto.TicketDto;
 import by.gp.clinic.factory.predicateFactory.TicketPredicateFactory;
+import by.gp.clinic.mapper.TicketDboDtoMapper;
 import by.gp.clinic.repository.TicketRepository;
 import by.gp.clinic.search.TicketSearchRequest;
 import org.springframework.stereotype.Service;

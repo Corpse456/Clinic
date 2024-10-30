@@ -17,7 +17,6 @@ import by.gp.clinic.service.UserService;
 import io.micrometer.common.util.StringUtils;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.BeanUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -43,24 +42,9 @@ public class UserFacade {
         userDbo.setPassword(passwordEncoder.encode(credentials.getPassword()));
 
         if (StringUtils.isNotEmpty(credentials.getSpecialIdentifier())) {
-            final var doctor = doctorService
-                .getDoctor(credentials.getName(), credentials.getLastName(), credentials.getSpecialIdentifier())
-                .orElseThrow(() -> new DoctorNotExistsException(credentials.getName(), credentials.getLastName(),
-                                                                credentials.getSpecialIdentifier()));
-            if (userService.existsByDoctorId(doctor.getId())) {
-                throw new UserExistsException(doctor.getName() + " " + doctor.getLastName());
-            }
-            userDbo.setDoctor(doctor);
-            userDbo.setRole(UserRole.DOCTOR);
+            bindDoctorToUser(credentials, userDbo);
         } else {
-            final var patient = patientService
-                .getPatient(credentials.getName(), credentials.getLastName())
-                .orElseThrow(() -> new PatientNotExistsException(credentials.getName(), credentials.getLastName()));
-            if (userService.existsByPatientId(patient.getId())) {
-                throw new UserExistsException(patient.getName() + " " + patient.getLastName());
-            }
-            userDbo.setPatient(patient);
-            userDbo.setRole(UserRole.USER);
+            bindPatientToUser(credentials, userDbo);
         }
 
         return userService.save(userDbo);
@@ -78,20 +62,38 @@ public class UserFacade {
     }
 
     @Transactional
-    public UserDbo createAdmin(final CredentialsDto credentials) throws UserExistsException {
+    public Long createAdmin(final CredentialsDto credentials) throws UserExistsException {
         if (userService.existsByAlias(credentials.getAlias())) {
             throw new UserExistsException(credentials.getAlias());
         }
-        final var user = new UserDbo();
-        //TODO update with mapstruct
-        BeanUtils.copyProperties(credentials, user, "password");
-        user.setPassword(passwordEncoder.encode(credentials.getPassword()));
-        user.setRole(UserRole.ADMIN);
 
-        return userService.save(user);
+        return userService.postAdmin(credentials).getId();
     }
 
     public void logout(final String token) {
         authenticationService.logout(token);
+    }
+
+    private void bindDoctorToUser(final CredentialsDto credentials, final UserDbo userDbo) {
+        final var doctor = doctorService
+                .getDoctor(credentials.getName(), credentials.getLastName(), credentials.getSpecialIdentifier())
+                .orElseThrow(() -> new DoctorNotExistsException(credentials.getName(), credentials.getLastName(),
+                        credentials.getSpecialIdentifier()));
+        if (userService.existsByDoctorId(doctor.getId())) {
+            throw new UserExistsException(doctor.getName() + " " + doctor.getLastName());
+        }
+        userDbo.setDoctor(doctor);
+        userDbo.setRole(UserRole.DOCTOR);
+    }
+
+    private void bindPatientToUser(final CredentialsDto credentials, final UserDbo userDbo) {
+        final var patient = patientService
+                .getPatient(credentials.getName(), credentials.getLastName())
+                .orElseThrow(() -> new PatientNotExistsException(credentials.getName(), credentials.getLastName()));
+        if (userService.existsByPatientId(patient.getId())) {
+            throw new UserExistsException(patient.getName() + " " + patient.getLastName());
+        }
+        userDbo.setPatient(patient);
+        userDbo.setRole(UserRole.USER);
     }
 }

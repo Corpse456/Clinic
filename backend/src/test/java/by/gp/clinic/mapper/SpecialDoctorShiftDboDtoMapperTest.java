@@ -42,6 +42,9 @@ public class SpecialDoctorShiftDboDtoMapperTest extends AbstractSpringMvcTest {
         if (dbo.getDoctor() != null) {
             assertEquals(dto.getDoctorId(), dbo.getDoctor().getId());
         }
+        if (dbo.getSpeciality() != null) {
+            assertEquals(dto.getSpecialityId(), dbo.getSpeciality().getId());
+        }
     }
 
     private void mapToDbo(final SpecialDoctorShiftDbo dbo) {
@@ -51,6 +54,9 @@ public class SpecialDoctorShiftDboDtoMapperTest extends AbstractSpringMvcTest {
         assertEquals(dbo.getWeekDay(), dto.getWeekDay());
         if (dbo.getDoctor() != null) {
             assertEquals(dbo.getDoctor().getId(), dto.getDoctorId());
+        }
+        if (dbo.getSpeciality() != null) {
+            assertEquals(dbo.getSpeciality().getId(), dto.getSpecialityId());
         }
     }
 }

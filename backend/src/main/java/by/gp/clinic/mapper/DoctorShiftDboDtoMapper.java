@@ -11,7 +11,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.springframework.beans.factory.annotation.Autowired;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", imports = DoctorDbo.class)
 public abstract class DoctorShiftDboDtoMapper implements AbstractDboDtoMapper<DoctorShiftDbo, DoctorShiftDto> {
 
     @Autowired
@@ -21,20 +21,14 @@ public abstract class DoctorShiftDboDtoMapper implements AbstractDboDtoMapper<Do
     protected ShiftTimingService shiftTimingService;
 
     @Override
-    @Mapping(target = "doctor", source = "doctorId", qualifiedByName = "buildEmptyDoctor")
+    @Mapping(target = "doctor", expression = "java(DoctorDbo.buildEmptyWithId(sourceDto.getDoctorId()))")
     @Mapping(target = "shiftTiming", source = "shiftTiming", qualifiedByName = "getShiftTimingDbo")
-    public abstract DoctorShiftDbo mapToDbo(DoctorShiftDto doctorShiftDto);
+    public abstract DoctorShiftDbo mapToDbo(DoctorShiftDto sourceDto);
 
     @Override
-    @Mapping(target = "doctorId", expression = "java(doctorShiftDbo.getDoctor().getId())")
-    @Mapping(target = "shiftTiming",
-            expression = "java(shiftTimingDboDtoMapper.mapToDto(doctorShiftDbo.getShiftTiming()))")
-    public abstract DoctorShiftDto mapToDto(DoctorShiftDbo doctorShiftDbo);
-
-    @Named("buildEmptyDoctor")
-    protected DoctorDbo buildEmptyDoctor(Long doctorId) {
-        return DoctorDbo.buildEmptyWithId(doctorId);
-    }
+    @Mapping(target = "doctorId", expression = "java(sourceDbo.getDoctor().getId())")
+    @Mapping(target = "shiftTiming", expression = "java(shiftTimingDboDtoMapper.mapToDto(sourceDbo.getShiftTiming()))")
+    public abstract DoctorShiftDto mapToDto(DoctorShiftDbo sourceDbo);
 
     @Named("getShiftTimingDbo")
     protected ShiftTimingDbo getShiftTimingDbo(ShiftTimingDto shiftTiming) {

@@ -1,9 +1,9 @@
 package by.gp.clinic.service;
 
-import by.gp.clinic.mapper.SpecialDoctorShiftDboDtoMapper;
 import by.gp.clinic.dbo.ShiftTimingDbo;
 import by.gp.clinic.dbo.SpecialDoctorShiftDbo;
 import by.gp.clinic.dto.SpecialDoctorShiftDto;
+import by.gp.clinic.mapper.SpecialDoctorShiftDboDtoMapper;
 import by.gp.clinic.repository.SpecialDoctorShiftRepository;
 import org.springframework.stereotype.Service;
 

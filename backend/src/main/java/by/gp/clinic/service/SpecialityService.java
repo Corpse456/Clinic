@@ -1,8 +1,8 @@
 package by.gp.clinic.service;
 
-import by.gp.clinic.mapper.SpecialityDboDtoMapper;
 import by.gp.clinic.dbo.SpecialityDbo;
 import by.gp.clinic.dto.SpecialityDto;
+import by.gp.clinic.mapper.SpecialityDboDtoMapper;
 import by.gp.clinic.repository.SpecialityRepository;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
