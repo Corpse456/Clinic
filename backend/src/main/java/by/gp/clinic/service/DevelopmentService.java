@@ -6,6 +6,7 @@ import by.gp.clinic.dto.PatientDto;
 import by.gp.clinic.dto.SpecialityDto;
 import by.gp.clinic.dto.TicketDto;
 import by.gp.clinic.enumerated.Gender;
+import by.gp.clinic.enumerated.UserRole;
 import by.gp.clinic.exception.DoctorExistsException;
 import by.gp.clinic.exception.DoctorNotExistsException;
 import by.gp.clinic.exception.PatientExistsException;
@@ -83,7 +84,7 @@ public class DevelopmentService {
 
     public void addTickets() {
         final var patients = patientFacade.search(new PatientSearchRequest()).getElements();
-        final var doctors = (List<DoctorDto>) doctorFacade.search(new DoctorSearchRequest()).getElements();
+        final var doctors = (List<DoctorDto>) doctorFacade.search(new DoctorSearchRequest(), UserRole.USER).getElements();
 
         patients.forEach(p -> {
             for (var i = 0; i < 50; i++) {

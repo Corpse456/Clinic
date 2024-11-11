@@ -146,7 +146,7 @@
                 return new Map(this.specialities.map(el => [el.id, el.name])).get(specialityId);
             },
             fillDoctorsTable() {
-                axios.post('/backend/doctor/search', {}, {
+                axios.post('/backend/admin/doctor/search', {}, {
                     headers: {
                         Authorization: VueCookies.get('authorization')
                     }

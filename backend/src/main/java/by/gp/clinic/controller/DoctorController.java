@@ -2,6 +2,7 @@ package by.gp.clinic.controller;
 
 import by.gp.clinic.dto.DoctorDto;
 import by.gp.clinic.dto.PageDto;
+import by.gp.clinic.enumerated.UserRole;
 import by.gp.clinic.exception.EntityExistsException;
 import by.gp.clinic.exception.EntityNotExistsException;
 import by.gp.clinic.exception.ShiftTimingNotExistsException;
@@ -47,7 +48,13 @@ public class DoctorController {
     @PostMapping(value = "/doctor/search")
     @Operation(summary = "Search doctors")
     public PageDto<DoctorDto> searchDoctors(@RequestBody final DoctorSearchRequest searchRequest) {
-        return doctorFacade.search(searchRequest);
+        return doctorFacade.search(searchRequest, UserRole.USER);
+    }
+
+    @PostMapping(value = "/admin/doctor/search")
+    @Operation(summary = "Search doctors")
+    public PageDto<DoctorDto> searchDoctorsByAdmin(@RequestBody final DoctorSearchRequest searchRequest) {
+        return doctorFacade.search(searchRequest, UserRole.ADMIN);
     }
 
     @DeleteMapping(value = "/doctor/{id}")

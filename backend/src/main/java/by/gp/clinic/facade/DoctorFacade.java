@@ -4,6 +4,7 @@ import by.gp.clinic.dbo.DoctorDbo;
 import by.gp.clinic.dbo.ShiftTimingDbo;
 import by.gp.clinic.dto.DoctorDto;
 import by.gp.clinic.dto.PageDto;
+import by.gp.clinic.enumerated.UserRole;
 import by.gp.clinic.exception.DoctorExistsException;
 import by.gp.clinic.exception.DoctorNotExistsException;
 import by.gp.clinic.exception.ShiftTimingNotExistsException;
@@ -14,7 +15,7 @@ import by.gp.clinic.service.ShiftTimingService;
 import by.gp.clinic.service.SpecialDoctorShiftService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import net.bytebuddy.utility.RandomString;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -26,6 +27,8 @@ import static java.time.temporal.TemporalAdjusters.next;
 @RequiredArgsConstructor
 public class DoctorFacade {
 
+    public static final int SPECIAL_IDENTIFIER_LENGTH = 10;
+
     private final DoctorService doctorService;
     private final DoctorShiftService doctorShiftService;
     private final SpecialDoctorShiftService specialDoctorShiftService;
@@ -36,7 +39,7 @@ public class DoctorFacade {
         if (doctorService.isExistsByNameAndLastName(doctor.getName(), doctor.getLastName())) {
             throw new DoctorExistsException(doctor.getName(), doctor.getLastName());
         }
-        doctor.setSpecialIdentifier(new RandomString(10).nextString());
+        doctor.setSpecialIdentifier(RandomStringUtils.randomAlphanumeric(SPECIAL_IDENTIFIER_LENGTH));
         final var savedDoctor = doctorService.post(doctor);
         addNewDoctorToTimeTable(savedDoctor);
         return savedDoctor;
@@ -58,8 +61,12 @@ public class DoctorFacade {
         }
     }
 
-    public PageDto<DoctorDto> search(final DoctorSearchRequest searchRequest) {
-        return doctorService.search(searchRequest);
+    public PageDto<DoctorDto> search(final DoctorSearchRequest searchRequest, final UserRole userRole) {
+        final var doctors = doctorService.search(searchRequest);
+        if (userRole != UserRole.ADMIN) {
+            doctors.getElements().forEach(doctor -> doctor.setSpecialIdentifier(null));
+        }
+        return doctors;
     }
 
     private void addNewDoctorToTimeTable(final DoctorDbo doctor) throws ShiftTimingNotExistsException {
